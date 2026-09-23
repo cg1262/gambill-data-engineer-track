@@ -1,0 +1,100 @@
+<title>Sharpen · Close your DE gaps</title>
+<style>
+:root{--bg:#EFF2F5;--surface:#FFFFFF;--surface-2:#E7ECF0;--ink:#101922;--ink-2:#2C3A47;--muted:#5C6B78;--faint:#8494A1;--line:#D3DBE2;--line-strong:#B7C2CC;--accent:#E8842A;--accent-strong:#A65210;--accent-soft:#FBEAD6;--accent-ink:#7E3D0D;--blue:#6FA3D2;--blue-strong:#3F73A8;--blue-soft:#E9F1F9;--bronze:#A26B37;--silver:#7C8894;--gold:#B08A2A;--good:#3C8C5C;--good-soft:#DCEDE2;--warn:#B0791F;--warn-soft:#F3E8D2;--skip:#97A3AD;--skip-soft:#E6EAED;--font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--font-mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;--maxw:1120px;--radius:4px;--radius-lg:8px}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1118;--surface:#101B24;--surface-2:#16232E;--ink:#E9EFF4;--ink-2:#C4D0DA;--muted:#92A1AE;--faint:#6E7E8B;--line:#22333F;--line-strong:#2E4351;--accent:#F0954A;--accent-strong:#F4A860;--accent-soft:#3A2413;--accent-ink:#F7C08A;--blue:#83B4DE;--blue-strong:#ACCDEC;--blue-soft:#172836;--bronze:#C79357;--silver:#9EAAB6;--gold:#D2AC4E;--good:#5DB77C;--good-soft:#16281D;--warn:#D2A040;--warn-soft:#2A2211;--skip:#7C8994;--skip-soft:#1A252E}}
+:root[data-theme="light"]{--bg:#EFF2F5;--surface:#FFFFFF;--surface-2:#E7ECF0;--ink:#101922;--ink-2:#2C3A47;--muted:#5C6B78;--faint:#8494A1;--line:#D3DBE2;--line-strong:#B7C2CC;--accent:#E8842A;--accent-strong:#A65210;--accent-soft:#FBEAD6;--accent-ink:#7E3D0D;--blue:#6FA3D2;--blue-strong:#3F73A8;--blue-soft:#E9F1F9;--bronze:#A26B37;--silver:#7C8894;--gold:#B08A2A;--good:#3C8C5C;--good-soft:#DCEDE2;--warn:#B0791F;--warn-soft:#F3E8D2;--skip:#97A3AD;--skip-soft:#E6EAED}
+:root[data-theme="dark"]{--bg:#0A1118;--surface:#101B24;--surface-2:#16232E;--ink:#E9EFF4;--ink-2:#C4D0DA;--muted:#92A1AE;--faint:#6E7E8B;--line:#22333F;--line-strong:#2E4351;--accent:#F0954A;--accent-strong:#F4A860;--accent-soft:#3A2413;--accent-ink:#F7C08A;--blue:#83B4DE;--blue-strong:#ACCDEC;--blue-soft:#172836;--bronze:#C79357;--silver:#9EAAB6;--gold:#D2AC4E;--good:#5DB77C;--good-soft:#16281D;--warn:#D2A040;--warn-soft:#2A2211;--skip:#7C8994;--skip-soft:#1A252E}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.01em}p{margin:0}
+a{color:var(--accent-strong);text-decoration:none}a:hover{text-decoration:underline}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-strong);font-weight:600}
+.mono{font-family:var(--font-mono)}.tnum{font-variant-numeric:tabular-nums}
+.hero{border-bottom:1px solid var(--line);background:radial-gradient(120% 100% at 85% -10%,var(--accent-soft) 0%,transparent 55%),var(--surface);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.35;-webkit-mask-image:radial-gradient(120% 90% at 80% 0%,#000 0%,transparent 60%);mask-image:radial-gradient(120% 90% at 80% 0%,#000 0%,transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding-top:54px;padding-bottom:44px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px}.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:800;letter-spacing:-.03em;margin:16px 0 0;max-width:18ch}
+h1 .thin{color:var(--muted);font-weight:300}
+.lede{font-size:clamp(1rem,2vw,1.22rem);color:var(--ink-2);max-width:64ch;margin-top:18px;line-height:1.5}
+.backlinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.backlinks a{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:5px 12px;text-decoration:none}
+.backlinks a:hover{border-color:var(--accent);color:var(--accent-strong)}
+.backlinks a.home{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent;font-weight:700}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:30px}.sec-head h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:750;margin-top:10px}
+.sec-head p{color:var(--muted);max-width:70ch;margin-top:12px}
+.mchip{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 9px;text-decoration:none;line-height:1.3}
+.mchip b{font-family:var(--font-mono);font-size:11px;color:var(--accent-strong)}
+.mchip .wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);margin-left:2px}
+.mchip:hover{border-color:var(--accent);text-decoration:none}
+.chipwrap{display:flex;flex-wrap:wrap;gap:6px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.variant{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;position:relative;overflow:hidden}
+.variant::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.variant.a::before{background:var(--blue)}.variant.s::before{background:var(--accent)}
+.variant h3{font-size:1.2rem;font-weight:760}.variant .who{font-size:13px;color:var(--muted);margin-top:4px}
+.variant .meta{display:flex;gap:16px;margin:14px 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.variant .meta .mv{font-family:var(--font-mono);font-weight:600;font-size:1.05rem}.variant .meta .ml{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.haveskip{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.row{display:flex;gap:10px;font-size:13px;align-items:baseline}
+.row .lab{flex:none;width:64px;font-family:var(--font-mono);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.lab.have{color:var(--good)}.lab.skip{color:var(--skip)}
+.stage{margin-top:14px}.stage .st{font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong);margin-bottom:8px;display:flex;justify-content:space-between}
+.stage .st .wks{color:var(--faint)}
+.converge{margin-top:18px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;font-size:13.5px;color:var(--ink-2)}
+.diag{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 24px}
+.diag h3{font-size:1.05rem;font-weight:730;margin-bottom:6px}.diag p{color:var(--muted);font-size:13.5px}
+.diag ol{margin:14px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:9px}
+.diag li{font-size:13.5px;color:var(--ink-2)}.diag li .mono{color:var(--muted);font-size:12px}
+.diag.cols ol{columns:2;column-gap:36px}
+.bundles{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.bundle{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px}
+.bundle h4{font-size:1.02rem;font-weight:720}.bundle .gr{font-family:var(--font-mono);font-size:11px;color:var(--blue-strong);margin-top:3px}
+.bundle p{font-size:12.5px;color:var(--muted);margin:10px 0}.bundle .chipwrap{margin-top:8px}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.pcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.pcard.launch::before{background:linear-gradient(90deg,var(--bronze),var(--silver),var(--gold))}
+.pcard.bridge::before{background:var(--blue)}.pcard.sharpen::before{background:linear-gradient(90deg,var(--accent),var(--blue))}
+.pcard .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pcard h3{font-size:1.3rem;font-weight:760;margin-top:8px}.pcard .for{font-size:13px;color:var(--accent-ink);font-weight:600;margin-top:6px}
+.pcard p{font-size:13.5px;color:var(--ink-2);margin-top:10px;flex:1}
+.pcard .go{margin-top:16px;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-strong)}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.phcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.phcard::before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px}
+.phcard.b::before{background:var(--bronze)}.phcard.s::before{background:var(--silver)}.phcard.g::before{background:var(--gold)}.phcard.l::before{background:var(--accent)}
+.phcard:hover{border-color:var(--accent);text-decoration:none}
+.phcard .pk{font-family:var(--font-mono);font-size:11px;color:var(--muted)}.phcard h4{font-size:1.02rem;font-weight:720;margin-top:6px}.phcard .pd{font-size:12.5px;color:var(--muted);margin-top:6px}
+.gaps{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.gap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:13px 15px;display:flex;gap:10px;align-items:flex-start}
+.gap .idx{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--accent-strong);background:var(--accent-soft);border-radius:4px;padding:2px 6px;flex:none}
+.gap .gt{font-weight:640;font-size:13.5px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.hcard .hn{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-strong);background:var(--accent-soft);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hcard h4{font-size:1rem;font-weight:710;margin-top:12px}.hcard p{font-size:13px;color:var(--muted);margin-top:6px}
+footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
+</style>
+
+<div class="hero"><div class="wrap">
+  <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 03 — Sharpen</span>
+  <h1>Close the gaps. <span class="thin">On your schedule.</span></h1>
+  <p class="lede">Sharpen is for working data engineers who "missed things along the way." Start with the self-diagnostic against the ten recurring gaps, then take individual modules or a pre-built bundle. Every unit stands alone and links straight to its lesson — no need to have done the earlier modules.</p>
+  <div class="backlinks"><a class="home" href="index.html">Course home</a><a href="https://claude.ai/code/artifact/085627d8-ff0b-4b9a-a7cf-c83107cb71bf">Curriculum overview</a><a href="phase-1.html">Phase 1</a><a href="phase-2.html">Phase 2</a><a href="phase-3.html">Phase 3</a><a href="phase-4.html">Phase 4</a></div>
+</div></div>
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Start here</span><h2>Self-diagnostic — rate yourself 1–5 on each gap</h2>
+  <p>Each gap maps to the modules that close it. Pick the ones you score low on; the module codes link to their lessons.</p></div>
+  <div class="diag cols"><ol><li><b>G1</b> Can you explain <em>why</em> you built something the way you did? <span class="mono">→ M32 M34 M36</span></li><li><b>G2</b> Do you choose grain deliberately? <span class="mono">→ M08 M09 M10 M11</span></li><li><b>G3</b> Is overwrite ever your bronze strategy? <span class="mono">→ M15 M16</span></li><li><b>G4</b> Do you have a real testing taxonomy? <span class="mono">→ M24 M25 M26</span></li><li><b>G5</b> Could you dedup a composite key in a stream? <span class="mono">→ M23</span></li><li><b>G6</b> Do manual workspace changes ever survive deploy? <span class="mono">→ M27 M28 M29</span></li><li><b>G7</b> Can you read a Spark UI and act on it? <span class="mono">→ M17 M18 M19</span></li><li><b>G8</b> Is governance designed in, or bolted on? <span class="mono">→ M21 M30</span></li><li><b>G9</b> Can you defend an architecture, not just name tools? <span class="mono">→ M32</span></li><li><b>G10</b> Can you narrate your work to a stakeholder? <span class="mono">→ M34 M35 M36</span></li></ol></div>
+</div></section>
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Pre-built bundles</span><h2>Or grab a bundle</h2>
+  <p>Eight curated gap-clusters. Each chip opens the real lesson week in the Launch phase pages.</p></div>
+  <div class="bundles"><div class="bundle"><h4>Incremental &amp; CDC Mastery</h4><div class="gr">closes G3</div><p>Kill the full-refresh habit: watermarks, snapshots, backfills, idempotency.</p><div class="chipwrap"><a class="mchip" href="phase-2.html#w20"><b>M13</b> ETL vs ELT, batch vs incremental <span class="wk">W20</span></a><a class="mchip" href="phase-2.html#w22"><b>M15</b> Medallion architecture <span class="wk">W22</span></a><a class="mchip" href="phase-2.html#w23"><b>M16</b> CDC, watermarks &amp; backfills <span class="wk">W23–24</span></a><a class="mchip" href="phase-3.html#w35"><b>M23</b> Structured Streaming <span class="wk">W35–36</span></a></div></div><div class="bundle"><h4>Spark Performance &amp; Cost</h4><div class="gr">closes G7</div><p>Build the scale/shuffle instinct and know when tuning is actually worth it.</p><div class="chipwrap"><a class="mchip" href="phase-2.html#w25"><b>M17</b> Spark &amp; PySpark <span class="wk">W25–26</span></a><a class="mchip" href="phase-2.html#w27"><b>M18</b> Spark internals <span class="wk">W27</span></a><a class="mchip" href="phase-3.html#w31"><b>M19</b> Performance tuning &amp; cost <span class="wk">W31</span></a></div></div><div class="bundle"><h4>Modeling Depth</h4><div class="gr">closes G2</div><p>Grain, history, semantic layer, MDM, and Data Vault when it earns its place.</p><div class="chipwrap"><a class="mchip" href="phase-2.html#w14"><b>M08</b> Dimensional modeling <span class="wk">W14–15</span></a><a class="mchip" href="phase-2.html#w16"><b>M09</b> SCD &amp; history tracking <span class="wk">W16</span></a><a class="mchip" href="phase-2.html#w17"><b>M10</b> Lakehouse / gold modeling <span class="wk">W17</span></a><a class="mchip" href="phase-2.html#w18"><b>M11</b> MDM &amp; entity resolution <span class="wk">W18–19</span></a><a class="mchip" href="phase-4.html#w45"><b>M12</b> Data Vault (elective) <span class="wk">W45</span></a></div></div><div class="bundle"><h4>DQ, Testing &amp; Observability</h4><div class="gr">closes G4</div><p>Expectations, quarantine, reconciliation, and the full test taxonomy.</p><div class="chipwrap"><a class="mchip" href="phase-2.html#w28"><b>M24</b> Data quality &amp; quarantine <span class="wk">W28</span></a><a class="mchip" href="phase-2.html#w30"><b>M25</b> Testing taxonomy <span class="wk">W30</span></a><a class="mchip" href="phase-3.html#w37"><b>M26</b> Observability &amp; lineage <span class="wk">W37</span></a></div></div><div class="bundle"><h4>DevOps for Data</h4><div class="gr">closes G6</div><p>Git → DABs → CI/CD with no manual drift and clean env promotion.</p><div class="chipwrap"><a class="mchip" href="phase-3.html#w38"><b>M27</b> Git deep <span class="wk">W38</span></a><a class="mchip" href="phase-3.html#w39"><b>M28</b> CI/CD for data <span class="wk">W39</span></a><a class="mchip" href="phase-3.html#w40"><b>M29</b> DABs &amp; IaC <span class="wk">W40</span></a></div></div><div class="bundle"><h4>Governance &amp; Security</h4><div class="gr">closes G8</div><p>Unity Catalog design, RBAC, masking/hashing, PII/PHI, service identities.</p><div class="chipwrap"><a class="mchip" href="phase-3.html#w32"><b>M21</b> Databricks &amp; Unity Catalog <span class="wk">W32</span></a><a class="mchip" href="phase-3.html#w41"><b>M30</b> Governance &amp; security <span class="wk">W41</span></a></div></div><div class="bundle"><h4>Streaming Semantics</h4><div class="gr">closes G5</div><p>Triggers, state, keys, idempotency — and why streaming is not real-time.</p><div class="chipwrap"><a class="mchip" href="phase-3.html#w35"><b>M23</b> Structured Streaming <span class="wk">W35–36</span></a><a class="mchip" href="phase-2.html#w23"><b>M16</b> CDC, watermarks &amp; backfills <span class="wk">W23–24</span></a></div></div><div class="bundle"><h4>Architecture &amp; Communication</h4><div class="gr">closes G1 · G9 · G10</div><p>Choose and defend approaches; narrate the work to any audience.</p><div class="chipwrap"><a class="mchip" href="phase-4.html#w44"><b>M32</b> Architecture decision-making <span class="wk">W44</span></a><a class="mchip" href="phase-4.html#w46"><b>M34</b> Communicating your work <span class="wk">W46</span></a><a class="mchip" href="phase-4.html#w46"><b>M35</b> Portfolio engineering <span class="wk">W46</span></a><a class="mchip" href="phase-4.html#w46"><b>M36</b> Interview prep <span class="wk">W46–47</span></a></div></div></div>
+</div></section>
+<footer><div class="wrap"><div class="foot-note">
+  <span>The Gambill Data Engineer Track · Sharpen — gap-fill for working DEs.</span>
+  <span class="mono">Gambill Data Engineering</span></div></div></footer>

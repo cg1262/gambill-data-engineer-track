@@ -1,0 +1,126 @@
+<title>The Gambill Data Engineer Track</title>
+<style>
+:root{--bg:#EFF2F5;--surface:#FFFFFF;--surface-2:#E7ECF0;--ink:#101922;--ink-2:#2C3A47;--muted:#5C6B78;--faint:#8494A1;--line:#D3DBE2;--line-strong:#B7C2CC;--accent:#E8842A;--accent-strong:#A65210;--accent-soft:#FBEAD6;--accent-ink:#7E3D0D;--blue:#6FA3D2;--blue-strong:#3F73A8;--blue-soft:#E9F1F9;--bronze:#A26B37;--silver:#7C8894;--gold:#B08A2A;--good:#3C8C5C;--good-soft:#DCEDE2;--warn:#B0791F;--warn-soft:#F3E8D2;--skip:#97A3AD;--skip-soft:#E6EAED;--font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--font-mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;--maxw:1120px;--radius:4px;--radius-lg:8px}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1118;--surface:#101B24;--surface-2:#16232E;--ink:#E9EFF4;--ink-2:#C4D0DA;--muted:#92A1AE;--faint:#6E7E8B;--line:#22333F;--line-strong:#2E4351;--accent:#F0954A;--accent-strong:#F4A860;--accent-soft:#3A2413;--accent-ink:#F7C08A;--blue:#83B4DE;--blue-strong:#ACCDEC;--blue-soft:#172836;--bronze:#C79357;--silver:#9EAAB6;--gold:#D2AC4E;--good:#5DB77C;--good-soft:#16281D;--warn:#D2A040;--warn-soft:#2A2211;--skip:#7C8994;--skip-soft:#1A252E}}
+:root[data-theme="light"]{--bg:#EFF2F5;--surface:#FFFFFF;--surface-2:#E7ECF0;--ink:#101922;--ink-2:#2C3A47;--muted:#5C6B78;--faint:#8494A1;--line:#D3DBE2;--line-strong:#B7C2CC;--accent:#E8842A;--accent-strong:#A65210;--accent-soft:#FBEAD6;--accent-ink:#7E3D0D;--blue:#6FA3D2;--blue-strong:#3F73A8;--blue-soft:#E9F1F9;--bronze:#A26B37;--silver:#7C8894;--gold:#B08A2A;--good:#3C8C5C;--good-soft:#DCEDE2;--warn:#B0791F;--warn-soft:#F3E8D2;--skip:#97A3AD;--skip-soft:#E6EAED}
+:root[data-theme="dark"]{--bg:#0A1118;--surface:#101B24;--surface-2:#16232E;--ink:#E9EFF4;--ink-2:#C4D0DA;--muted:#92A1AE;--faint:#6E7E8B;--line:#22333F;--line-strong:#2E4351;--accent:#F0954A;--accent-strong:#F4A860;--accent-soft:#3A2413;--accent-ink:#F7C08A;--blue:#83B4DE;--blue-strong:#ACCDEC;--blue-soft:#172836;--bronze:#C79357;--silver:#9EAAB6;--gold:#D2AC4E;--good:#5DB77C;--good-soft:#16281D;--warn:#D2A040;--warn-soft:#2A2211;--skip:#7C8994;--skip-soft:#1A252E}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.01em}p{margin:0}
+a{color:var(--accent-strong);text-decoration:none}a:hover{text-decoration:underline}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-strong);font-weight:600}
+.mono{font-family:var(--font-mono)}.tnum{font-variant-numeric:tabular-nums}
+.hero{border-bottom:1px solid var(--line);background:radial-gradient(120% 100% at 85% -10%,var(--accent-soft) 0%,transparent 55%),var(--surface);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.35;-webkit-mask-image:radial-gradient(120% 90% at 80% 0%,#000 0%,transparent 60%);mask-image:radial-gradient(120% 90% at 80% 0%,#000 0%,transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding-top:54px;padding-bottom:44px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px}.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:800;letter-spacing:-.03em;margin:16px 0 0;max-width:18ch}
+h1 .thin{color:var(--muted);font-weight:300}
+.lede{font-size:clamp(1rem,2vw,1.22rem);color:var(--ink-2);max-width:64ch;margin-top:18px;line-height:1.5}
+.backlinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.backlinks a{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:5px 12px;text-decoration:none}
+.backlinks a:hover{border-color:var(--accent);color:var(--accent-strong)}
+.backlinks a.home{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent;font-weight:700}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:30px}.sec-head h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:750;margin-top:10px}
+.sec-head p{color:var(--muted);max-width:70ch;margin-top:12px}
+.mchip{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 9px;text-decoration:none;line-height:1.3}
+.mchip b{font-family:var(--font-mono);font-size:11px;color:var(--accent-strong)}
+.mchip .wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);margin-left:2px}
+.mchip:hover{border-color:var(--accent);text-decoration:none}
+.chipwrap{display:flex;flex-wrap:wrap;gap:6px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.variant{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;position:relative;overflow:hidden}
+.variant::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.variant.a::before{background:var(--blue)}.variant.s::before{background:var(--accent)}
+.variant h3{font-size:1.2rem;font-weight:760}.variant .who{font-size:13px;color:var(--muted);margin-top:4px}
+.variant .meta{display:flex;gap:16px;margin:14px 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.variant .meta .mv{font-family:var(--font-mono);font-weight:600;font-size:1.05rem}.variant .meta .ml{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.haveskip{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.row{display:flex;gap:10px;font-size:13px;align-items:baseline}
+.row .lab{flex:none;width:64px;font-family:var(--font-mono);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.lab.have{color:var(--good)}.lab.skip{color:var(--skip)}
+.stage{margin-top:14px}.stage .st{font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong);margin-bottom:8px;display:flex;justify-content:space-between}
+.stage .st .wks{color:var(--faint)}
+.converge{margin-top:18px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;font-size:13.5px;color:var(--ink-2)}
+.diag{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 24px}
+.diag h3{font-size:1.05rem;font-weight:730;margin-bottom:6px}.diag p{color:var(--muted);font-size:13.5px}
+.diag ol{margin:14px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:9px}
+.diag li{font-size:13.5px;color:var(--ink-2)}.diag li .mono{color:var(--muted);font-size:12px}
+.diag.cols ol{columns:2;column-gap:36px}
+.bundles{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.bundle{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px}
+.bundle h4{font-size:1.02rem;font-weight:720}.bundle .gr{font-family:var(--font-mono);font-size:11px;color:var(--blue-strong);margin-top:3px}
+.bundle p{font-size:12.5px;color:var(--muted);margin:10px 0}.bundle .chipwrap{margin-top:8px}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.pcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.pcard.launch::before{background:linear-gradient(90deg,var(--bronze),var(--silver),var(--gold))}
+.pcard.bridge::before{background:var(--blue)}.pcard.sharpen::before{background:linear-gradient(90deg,var(--accent),var(--blue))}
+.pcard .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pcard h3{font-size:1.3rem;font-weight:760;margin-top:8px}.pcard .for{font-size:13px;color:var(--accent-ink);font-weight:600;margin-top:6px}
+.pcard p{font-size:13.5px;color:var(--ink-2);margin-top:10px;flex:1}
+.pcard .go{margin-top:16px;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-strong)}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.phcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.phcard::before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px}
+.phcard.b::before{background:var(--bronze)}.phcard.s::before{background:var(--silver)}.phcard.g::before{background:var(--gold)}.phcard.l::before{background:var(--accent)}
+.phcard:hover{border-color:var(--accent);text-decoration:none}
+.phcard .pk{font-family:var(--font-mono);font-size:11px;color:var(--muted)}.phcard h4{font-size:1.02rem;font-weight:720;margin-top:6px}.phcard .pd{font-size:12.5px;color:var(--muted);margin-top:6px}
+.gaps{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.gap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:13px 15px;display:flex;gap:10px;align-items:flex-start}
+.gap .idx{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--accent-strong);background:var(--accent-soft);border-radius:4px;padding:2px 6px;flex:none}
+.gap .gt{font-weight:640;font-size:13.5px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.hcard .hn{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-strong);background:var(--accent-soft);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hcard h4{font-size:1rem;font-weight:710;margin-top:12px}.hcard p{font-size:13px;color:var(--muted);margin-top:6px}
+footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
+</style>
+
+<div class="hero"><div class="wrap">
+  <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineering</span>
+  <h1>The Data Engineer Track. <span class="thin">Zero to hired.</span></h1>
+  <p class="lede">A modular curriculum that takes you from no data experience to a job-ready data engineer — self-paced, with a weekly live review and a portfolio built on real, messy public data. Three ways in depending on where you start. The spine throughout: data engineering is not "writing pipelines," it is designing reliable <b>data products</b> you can defend in an interview.</p>
+  <div class="backlinks">
+    <a href="https://claude.ai/code/artifact/085627d8-ff0b-4b9a-a7cf-c83107cb71bf">Curriculum architecture</a>
+    <a href="https://claude.ai/code/artifact/18e529a8-700b-447d-bae8-c4c0a3035e94">Weekly build plan</a>
+  </div>
+</div></div>
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Choose your path</span><h2>Three ways in</h2>
+  <p>One shared module catalog, sequenced for where you are today.</p></div>
+  <div class="paths">
+    <div class="pcard launch"><span class="k">Path 01 — Launch</span><h3>Ground up</h3><div class="for">No data experience (maybe Excel)</div>
+      <p>The full ~50-week course across four phases, ending on a governed capstone. This is where all the weekly lessons live.</p>
+      <a class="go" href="phase-1.html">Start at Phase 1 →</a></div>
+    <div class="pcard bridge"><span class="k">Path 02 — Bridge</span><h3>Cross over</h3><div class="for">Analysts &amp; software engineers</div>
+      <p>A 4–6 month crossover. A placement diagnostic routes you to the analyst or SWE variant; skip what you own, go deep on the rest.</p>
+      <a class="go" href="bridge.html">See the Bridge path →</a></div>
+    <div class="pcard sharpen"><span class="k">Path 03 — Sharpen</span><h3>Fill the gaps</h3><div class="for">Working data engineers</div>
+      <p>A self-diagnostic against the ten gaps, plus eight pre-built bundles. Every unit stands alone and links straight to its lesson.</p>
+      <a class="go" href="sharpen.html">See the Sharpen path →</a></div>
+  </div>
+</div></section>
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">The Launch path</span><h2>Phase by phase</h2>
+  <p>Bronze → silver → gold → launch. Each phase ends in a portfolio artifact; the whole path ends in a defensible, governed data product.</p></div>
+  <div class="phases"><a class="phcard b" href="phase-1.html"><div class="pk">Phase 1</div><h4>Foundations</h4><div class="pd">Weeks 1–13 · bronze</div><div class="pd" style="color:var(--ink-2);margin-top:8px">CLI/Git, Python, SQL, relational modeling — real-data labs from day one.</div></a><a class="phcard s" href="phase-2.html"><div class="pk">Phase 2</div><h4>Core data engineering</h4><div class="pd">Weeks 14–30 · silver</div><div class="pd" style="color:var(--ink-2);margin-top:8px">One running medallion pipeline → SCD2, MDM golden records, incremental, DQ.</div></a><a class="phcard g" href="phase-3.html"><div class="pk">Phase 3</div><h4>Platform &amp; production</h4><div class="pd">Weeks 31–43 · gold</div><div class="pd" style="color:var(--ink-2);margin-top:8px">Unity Catalog, Lakeflow, streaming, DABs/CI-CD, PHI governance — productionized.</div></a><a class="phcard l" href="phase-4.html"><div class="pk">Phase 4</div><h4>Advanced &amp; launch</h4><div class="pd">Weeks 44–50</div><div class="pd" style="color:var(--ink-2);margin-top:8px">Architecture, elective, interview prep, and your own independent capstone.</div></a></div>
+</div></section>
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Why it's built this way</span><h2>Ten gaps, closed on purpose</h2>
+  <p>The curriculum was engineered backward from where people with certs and theory still stall — mined from hundreds of real coaching calls. Every module is tagged to the gap it closes.</p></div>
+  <div class="gaps"><div class="gap"><span class="idx">G1</span><div class="gt">Explaining &amp; defending your own work</div></div><div class="gap"><span class="idx">G2</span><div class="gt">Modeling fundamentals — grain, facts, dims</div></div><div class="gap"><span class="idx">G3</span><div class="gt">Incremental, CDC &amp; history</div></div><div class="gap"><span class="idx">G4</span><div class="gt">Data quality &amp; the testing taxonomy</div></div><div class="gap"><span class="idx">G5</span><div class="gt">Streaming semantics (≠ real-time)</div></div><div class="gap"><span class="idx">G6</span><div class="gt">Dev workflow — Git → CI/CD → DABs</div></div><div class="gap"><span class="idx">G7</span><div class="gt">Spark intuition — scale, shuffles, skew</div></div><div class="gap"><span class="idx">G8</span><div class="gt">Governance designed in, not bolted on</div></div><div class="gap"><span class="idx">G9</span><div class="gt">Architecture decisions you can defend</div></div><div class="gap"><span class="idx">G10</span><div class="gt">Communicating the work to stakeholders</div></div></div>
+</div></section>
+<section style="border-bottom:none"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">How it works</span><h2>Self-paced, with accountability</h2></div>
+  <div class="how">
+    <div class="hcard"><div class="hn">1</div><h4>Build every week</h4><p>Short lessons scaffold a hands-on lab on real, deliberately-messy public data. The lab is the point.</p></div>
+    <div class="hcard"><div class="hn">2</div><h4>Defend it live</h4><p>A weekly live review with a "defend your decision" hot seat — where theory becomes something you can articulate under questioning.</p></div>
+    <div class="hcard"><div class="hn">3</div><h4>Ship a portfolio</h4><p>Each phase produces a shippable artifact; the course ends on a governed medallion project → golden records, with a recorded walkthrough.</p></div>
+  </div>
+</div></section>
+<footer><div class="wrap"><div class="foot-note">
+  <span>The Gambill Data Engineer Track · 0 → job-ready · self-paced with weekly live review.</span>
+  <span class="mono">Gambill Data Engineering</span></div></div></footer>

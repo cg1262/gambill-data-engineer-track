@@ -1,0 +1,515 @@
+[
+ {
+  "week": "W2",
+  "module": "M01",
+  "title": "The DE mental model & the data lifecycle",
+  "gaps": [
+   "G1",
+   "G9",
+   "G10"
+  ],
+  "objectives": [
+   "trace a real dataset end-to-end \u2014 source system \u2192 ingest \u2192 store \u2192 transform \u2192 consumer \u2014 naming what happens at each hop and where the data physically lives",
+   "reframe a raw dataset as a DATA PRODUCT by declaring its grain, owner, consumers, freshness/SLA, and quality expectations",
+   "write a one-page data contract (schema, grain, nullability, freshness, semantics, ownership) for a real public dataset",
+   "explain why operational (source) and analytical (consumer) systems keep separate copies and how data changes shape between them"
+  ],
+  "lessons": [
+   "what a data product is (grain, owner, consumers, contract) vs. the common trap of calling the pipeline itself 'the product'",
+   "the data lifecycle: source \u2192 ingest \u2192 store \u2192 transform \u2192 serve \u2192 consume, with a light bronze/silver/gold intuition (no tooling yet)",
+   "operational vs. analytical systems (OLTP vs. OLAP intuition) and why copies of data exist at all",
+   "anatomy of a data contract: schema & types, grain, freshness/SLA, nullability, business semantics, and named ownership",
+   "reading a source's API docs / schema to infer the true grain and meaning of a row before you trust it"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Pick the NYC 311 Service Requests dataset, explore its live schema via the Socrata API preview and the dataset's data dictionary, then produce three artifacts committed to your course repo: (1) an end-to-end lifecycle diagram mapping the data from the city's 311 intake system \u2192 Open Data portal/API \u2192 your ingest \u2192 storage \u2192 a transformed table \u2192 at least two named consumers; (2) a one-page data contract (schema with types & nullability, freshness/SLA, business semantics, owner); (3) a single-sentence declared grain plus 2+ consumers and the distinct question each one answers. No heavy code \u2014 inspect ~50 sample rows via the API/CSV, reason about them, and write it up in Markdown with a Mermaid (or drawn) diagram.",
+   "dataset": "NYC 311 Service Requests \u2014 NYC Open Data (Socrata), dataset id erm2-nwe9, JSON/CSV via https://data.cityofnewyork.us/resource/erm2-nwe9.json (no auth for low-volume access) plus the portal's published data dictionary",
+   "tools": [
+    "curl or browser (Socrata API preview)",
+    "Markdown",
+    "Mermaid (or draw.io / Excalidraw)",
+    "Git (commit + PR into the W1 course repo)"
+   ],
+   "hours": 5
+  },
+  "deliverable": "A Markdown design doc committed via a PR into the course repo, containing: the source\u2192consumer lifecycle diagram (every hop labeled), the one-page data contract, the declared grain in one sentence, and 2+ named consumers with their questions \u2014 plus a 3-sentence \"why\" note explaining the chosen grain and exactly who breaks if that grain is wrong.",
+  "acceptance": "Diagram names every hop from source system to consumer (nothing is a mystery box); the contract specifies grain, schema with types & nullability, freshness/SLA, and a named owner; the grain is stated as one defensible sentence that matches the actual rows; at least two consumers with genuinely distinct needs are identified; doc is committed and merged via PR.",
+  "liveRecap": "what makes a dataset a data PRODUCT \u2014 grain, owner, consumers, and a contract \u2014 rather than just a pipeline or a table of rows.",
+  "liveMisconception": "believing \"the pipeline is the product\" and treating a data contract as just a list of column names \u2014 missing that grain, freshness, semantics, and ownership are the actual promises being made.",
+  "liveHotSeat": "\"State the grain of your dataset in one sentence \u2014 then tell me exactly who breaks, and how, if that grain is wrong or silently changes.\"",
+  "portfolio": "This data-product map + contract becomes the opening design artifact of the Phase 1 portfolio \u2014 the framing document that every later week's model, incremental load, and quality check is built against and can be traced back to.",
+  "prereqs": "Assumes W1 (filesystem, Git, repo hygiene) \u2014 the deliverable is authored in Markdown and merged via a PR into the existing course repo. Uses no Python yet (that's W3), so the API is inspected via curl/browser, not scripted. The grain and contract vocabulary introduced here is the foundation later weeks build on directly: relational modeling (grain of a table), CDC/incremental (grain + change detection), and data quality/testing (contract expectations become tests)."
+ },
+ {
+  "week": "W3",
+  "module": "M02",
+  "title": "Python I \u2014 control flow & functions",
+  "gaps": [
+   "G1",
+   "G6"
+  ],
+  "objectives": [
+   "Declare Python's core types (int/float/str/bool/None) and predict truthiness and coercion behavior before running the code",
+   "Direct program flow over a collection of records using if/elif/else, for/while, and break/continue to produce a correct summary",
+   "Decompose a task into small single-purpose functions with explicit parameters and return values, and explain local vs global scope",
+   "Write and run a procedural CLI script that reads an argument and processes a real public dataset top to bottom",
+   "Trace any line of your own script aloud and say what it does and why (return vs print, = vs ==)"
+  ],
+  "lessons": [
+   "Types & variables: int/float/str/bool/None, truthiness, and implicit vs explicit coercion (int(x), str(x))",
+   "Control flow: conditionals, boolean logic, for/while loops, break/continue, and guarding against bad rows",
+   "Functions: def, positional/default parameters, return vs print, and local vs global scope",
+   "Structuring a procedural script: a main() entry point, reading sys.argv, and clean top-to-bottom flow",
+   "Just enough data-in: reading a CSV with the stdlib csv module (deep file I/O & error handling comes in W4)"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Build quakestats.py, a CLI that ingests the USGS all-day earthquake CSV feed and prints a summary report. It takes a magnitude threshold as a command-line argument (sys.argv), loops over every row, and uses at least three single-purpose functions: one to parse a row's magnitude (handling blank/missing mag without crashing), one to classify a quake into a bucket (minor <2 / light 2-4 / moderate 4-6 / strong 6+) via if/elif/else, and one to summarize \u2014 counting quakes per bucket plus total, max, and average magnitude above the threshold. Print a formatted report. Run it twice with two different thresholds to show the flow reacts to the argument.",
+   "dataset": "USGS Earthquakes real-time feed, all_day CSV (https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv) \u2014 no auth, columns include time, mag, place",
+   "tools": [
+    "Python 3",
+    "stdlib csv",
+    "stdlib sys/urllib (or requests)",
+    "Git",
+    "venv"
+   ],
+   "hours": 5
+  },
+  "deliverable": "quakestats.py committed to the course repo on a feature branch and merged via a PR (atomic commits), with a saved sample run output and a 3-sentence why note explaining why you split the logic into functions and how you chose your magnitude buckets and handled missing values.",
+  "acceptance": "Script runs from the CLI with a threshold argument and reacts to it; buckets and counts are correct against a hand-checked sample; each function does one thing and uses an explicit return (not print) for its result; rows with blank/missing magnitude are skipped without crashing; merged via PR with atomic commits and the repo still clones & runs from the W1 manifest.",
+  "liveRecap": "Decomposing a procedural task into small functions, and how control flow walks a collection of records",
+  "liveMisconception": "Confusing return with print \u2014 believing a function that prints a value has therefore 'given back' a usable result to the caller (also = vs ==)",
+  "liveHotSeat": "\"Defend how you split this into functions: pick one function, walk me through exactly what it takes in and what it returns, tell me where that value goes next, and justify why that logic isn't just inlined in your main loop \u2014 then show me what happens when a row's magnitude is blank.\"",
+  "portfolio": "First real Python artifact in the portfolio repo: a documented, argument-driven script that ingests a live public dataset and emits a clean summary \u2014 the seed of the reusable ingestion scripts refactored and tested in later phases.",
+  "prereqs": "Assumes W1 (Git branch/PR workflow, venv, repo hygiene) and W2 (DE mental model \u2014 records as rows, grain). Deliberately stays procedural: data structures, comprehensions, robust file I/O and error handling are W4 (Python II), which refactors these very functions; SQL modeling begins W5."
+ },
+ {
+  "week": "W4",
+  "module": "M02",
+  "title": "Python II \u2014 data structures & files",
+  "gaps": [
+   "G1",
+   "G6",
+   "G4"
+  ],
+  "objectives": [
+   "choose the right built-in collection (list/tuple/set/dict) for a task and justify it by mutability, ordering, and membership cost",
+   "iterate over nested JSON with loops, enumerate/zip, and comprehensions to extract and reshape records",
+   "read and write CSV and JSON safely with context managers, converting types explicitly and handling missing/empty values",
+   "handle malformed records with targeted try/except so one bad row never crashes the run \u2014 route rejects to a quarantine log with a reason",
+   "dedupe records with a set and aggregate metrics into a dict, and explain why each structure fits"
+  ],
+  "lessons": [
+   "the four core collections and when to reach for each: list vs tuple (mutability/intent), set (membership & dedupe, O(1) lookup), dict (keyed aggregation)",
+   "iteration patterns: for-loops, enumerate/zip, and list/dict/set comprehensions for reshaping data",
+   "file I/O with context managers: the csv module (DictReader/DictWriter) and the json module (load/loads/dump/dumps)",
+   "error handling: try/except/else/finally, catching specific exceptions, EAFP vs LBYL, and logging vs silently swallowing",
+   "type conversion & missing data: None vs empty string, safe casting, and deciding reject-vs-default per field"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Build a file-processing script that ingests the raw USGS earthquake GeoJSON feed (saved locally), iterates the nested features, and for each event: validates/cleans it, casts time/mag/coords, dedupes by event id using a set, and handles missing mag/place/time gracefully by routing bad records to a rejects file with a reason. Aggregate count and max magnitude per region into a dict, then write a clean flat CSV plus a JSON run-summary. Inject a handful of malformed records (null mag, truncated JSON object, missing id) and prove the script runs to completion without crashing.",
+   "dataset": "USGS Earthquakes GeoJSON feed \u2014 all_month.geojson from earthquake.usgs.gov/earthquakes/feed/v1.0/summary/ (real, free, no auth)",
+   "tools": [
+    "Python 3",
+    "json (stdlib)",
+    "csv (stdlib)",
+    "Git"
+   ],
+   "hours": 6
+  },
+  "deliverable": "A file-processing script plus its outputs \u2014 cleaned CSV, a rejects/quarantine log (one row per bad record with a reason), and a JSON run-summary \u2014 merged via a feature-branch PR into main (continuing W1 Git hygiene). Include a 3-sentence why note: why a set for dedupe and a dict for aggregation, and why malformed records are quarantined rather than dropped or allowed to crash the run.",
+  "acceptance": "Script runs to completion on both the raw feed and a version seeded with injected malformed records without crashing; every rejected record is written to the quarantine log with a reason; output CSV has no duplicate event ids; and the counts reconcile (clean + rejected = total records read).",
+  "liveRecap": "Which collection for which job (list/tuple/set/dict) and the try/except handling model \u2014 handled-and-logged vs silently ignored.",
+  "liveMisconception": "Using a bare `except:` that swallows every error silently, and conflating \"handled\" with \"ignored\" \u2014 instead of catching specific exceptions and logging each reject with context.",
+  "liveHotSeat": "\"Walk me through what happens to a single malformed record end to end \u2014 which exception fires, where you catch it, and why you chose to quarantine it instead of dropping it or letting the run crash. Then defend using a set for dedupe over just checking a list.\"",
+  "portfolio": "Produces the repo's first reusable ingestion/validation module \u2014 the clean-plus-quarantine pattern (read, validate, cast, dedupe, aggregate, reject-with-reason) that later bronze ingestion and data-quality labs build directly on, and a portfolio piece showing robust, defensible file handling.",
+  "prereqs": "Assumes W3 Python I (variables, functions, control flow, running scripts) and the course repo + venv and Git/PR workflow from W1. Later weeks build on it: W5 Python III refactors this script into tested, importable modules, and the clean+quarantine pattern seeds G4 data quality and the incremental bronze loads in later phases."
+ },
+ {
+  "week": "W5",
+  "module": "M02",
+  "title": "Python III \u2014 modules, environments & OOP basics",
+  "gaps": [
+   "G1",
+   "G6"
+  ],
+  "objectives": [
+   "organize code into an importable package (dirs with __init__, absolute imports, an `if __name__ == \"__main__\"` guard) and run it as both `python -m` and via imported functions",
+   "design one small class with a single responsibility \u2014 __init__/self, methods, a __repr__ \u2014 and articulate when a class beats a plain function or dict",
+   "split a script into modules by concern (fetch / parse / report) so each file does one job with no circular imports",
+   "build a fresh virtual env and install your own project editable (`pip install -e .`) so it imports by name anywhere",
+   "rebuild the whole environment from the manifest and prove the package still imports and runs end to end"
+  ],
+  "lessons": [
+   "modules & packages: the import system, __init__.py, module vs package, absolute vs relative imports, and the `__name__ == \"__main__\"` guard",
+   "classes & OOP basics: attributes vs methods, __init__/self, __repr__, and the decision rule for class vs function vs dict",
+   "packaging & editable installs: src/ project layout, a minimal pyproject, `pip install -e .`, and running with `python -m pkg`",
+   "virtual envs revisited: why per-project isolation matters, pinning deps, and rebuilding cleanly from the manifest",
+   "structuring a small codebase: separation of concerns, module boundaries, and keeping data flow one-directional to avoid circular imports"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Refactor last week's loose scripts into an installable, multi-module package `quakes/`: a `client.py` holding a small `QuakeClient` class that fetches the feed, a `parse.py` that turns raw GeoJSON into clean record dicts, a `report.py` that computes summaries (count, max magnitude, top-N by magnitude), and a `__main__.py` CLI so `python -m quakes` runs the whole flow. Stand up a fresh venv, add a minimal pyproject, install the package editable, and confirm it both imports (`from quakes.report import summarize`) and runs as a module.",
+   "dataset": "USGS Earthquakes GeoJSON feed (earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson) \u2014 public, no auth",
+   "tools": [
+    "Python stdlib (urllib, json)",
+    "venv",
+    "pip (editable install)",
+    "pyproject.toml"
+   ],
+   "hours": 5
+  },
+  "deliverable": "An installable multi-module package (`quakes/` with client/parse/report/__main__, a pyproject, and a pinned env manifest) that installs via `pip install -e .` and runs via `python -m quakes`, committed on a feature branch and merged by PR \u2014 plus a 3-sentence why note naming the one place you used a class (and why that data+behavior earned one) and how you drew the module boundaries.",
+  "acceptance": "Fresh venv + `pip install -e .` rebuilds from the manifest and `import quakes` succeeds; `python -m quakes` fetches, parses, and prints a summary end to end; each module has one clear job and imports resolve with no circular imports; the class has a real __init__ and at least one method (not a namespace of static functions); the why note defends the class-vs-function split.",
+  "liveRecap": "The Python import path \u2014 module (a file) vs package (a directory with __init__), why `python -m pkg` and editable installs make your code importable by name.",
+  "liveMisconception": "Thinking OOP means \"wrap everything in a class,\" and conflating a module with a package / running a file directly with running it as a module.",
+  "liveHotSeat": "\"Point to exactly one place you used a class and one where you kept a plain function \u2014 defend each. What state or behavior made that thing deserve a class, and what would break if you'd done the opposite?\"",
+  "portfolio": "Converts the throwaway scripts from Weeks 3\u20134 into a reusable, installable code package \u2014 the importable backbone that later pandas/ETL weeks pull functions from instead of copy-pasting, and the first piece of the portfolio repo that looks like real engineering.",
+  "prereqs": "Assumes W4 Python II (functions, error handling, file/JSON I/O \u2014 the scripts being refactored here) and W1's Git + venv workflow. W6 (pandas) and later ETL modules import from this package layout and extend the module/class pattern rather than writing standalone scripts."
+ },
+ {
+  "week": "W6",
+  "module": "M03 \u00b7 Python for data I \u2014 pandas",
+  "title": "DataFrames: select, clean, transform, group & merge",
+  "gaps": [
+   "G1",
+   "G4",
+   "G2"
+  ],
+  "objectives": [
+   "load a messy real-world CSV into a DataFrame and profile it (dtypes, null counts, cardinality, duplicates) to write a cleaning plan before touching data",
+   "select and filter rows/columns with .loc and boolean masks, and coerce types correctly (datetimes, categoricals, numerics) without triggering chained-assignment bugs",
+   "clean systematically \u2014 impute vs drop missing values, de-duplicate, normalize categorical/string and timestamp columns \u2014 and justify each choice against downstream trust",
+   "aggregate with groupby to an explicitly stated grain, then merge to a reference table while validating join keys so rows don't silently multiply",
+   "produce a reproducible cleaning notebook that runs top-to-bottom and ties every transformation decision to a documented output grain"
+  ],
+  "lessons": [
+   "the DataFrame/Series mental model: the index, dtypes, and why vectorized ops beat Python loops",
+   "selection & filtering: .loc vs .iloc, boolean masks, and the copy-vs-view / SettingWithCopy trap",
+   "cleaning toolkit: missing data (fillna/dropna), duplicates, type coercion, and string/datetime normalization",
+   "transformation: derived columns, map/apply vs vectorized ops, and binning",
+   "split-apply-combine with groupby to a grain, plus merge/join semantics (how=, key uniqueness, row-count validation)"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "In a Jupyter notebook, ingest a raw 311 CSV subset and profile it (row count, null counts per column, dtype table, duplicate check) and write a 5-line cleaning plan. Execute the plan: parse Created Date to datetime, standardize Borough/Complaint Type text, drop/impute nulls per your justified rule, and de-duplicate on the unique key. Aggregate to a stated grain \u2014 complaint_type \u00d7 borough \u00d7 month \u2014 as a request count, then merge that to the borough population reference to compute requests-per-10k residents. Validate the merge: assert output row count equals the grain cardinality, report any unmatched borough keys, and confirm no row inflation. Export the clean aggregate to parquet and print before/after row & null counts to prove the cleaning.",
+   "dataset": "NYC 311 Service Requests (NYC Open Data, Socrata dataset erm2-nwe9, no-auth CSV export \u2014 pull one month) merged to a NYC borough population reference table (US Census / NYC DCP, small CSV)",
+   "tools": [
+    "Python",
+    "pandas",
+    "Jupyter notebook",
+    "venv",
+    "Git"
+   ],
+   "hours": 5
+  },
+  "deliverable": "A cleaning notebook committed to the course repo that ingests raw 311, cleans it, aggregates to a documented grain, merges to the borough-population reference, and exports a clean parquet file \u2014 plus a 4-sentence \"why\" note stating the output grain, one column you imputed vs one you dropped (and why), and how you confirmed the merge didn't duplicate rows.",
+  "acceptance": "Notebook runs top-to-bottom on a fresh kernel; a before/after profile shows nulls and duplicates resolved; the groupby output is at the stated grain with zero duplicate grain rows; the merge is validated (output row count == grain cardinality, unmatched keys reported, no row inflation); the clean parquet is written and re-loadable.",
+  "liveRecap": "split-apply-combine (groupby changes the grain) and merge semantics (how= and key uniqueness govern the row count)",
+  "liveMisconception": "that a merge is inherently \"safe\" and can't change the row count \u2014 not realizing a non-unique join key silently multiplies rows, and conflating a groupby result's grain with the source table's grain",
+  "liveHotSeat": "\"Defend your cleaning decisions and your output grain: for one column, why did you impute where you dropped elsewhere? State the grain of your final table, prove each key in it is unique, and show me the check that proves your merge didn't silently duplicate rows.\"",
+  "portfolio": "This clean notebook and its exported grain-level parquet become the ingestion-and-cleaning stage of the Phase 1 portfolio pipeline; the reusable cleaning steps and the explicitly documented grain feed directly into the later relational-modeling weeks.",
+  "prereqs": "Assumes W5 Python (functions, comprehensions, file I/O, error handling) and W1 repo hygiene (venv, atomic commits) to keep the notebook reproducible and committed. W7 builds on this by pulling the same domain from a live API and reconciling it against this cleaned baseline; the groupby-to-a-grain habit seeds the G2 dimensional-modeling weeks."
+ },
+ {
+  "week": "W7",
+  "module": "M03",
+  "title": "Python for data II \u2014 APIs & reconciliation",
+  "gaps": [
+   "G1",
+   "G4"
+  ],
+  "objectives": [
+   "make HTTP GET requests from Python and parse JSON into tidy records, handling status codes, timeouts, and error responses",
+   "page through a paginated API to collect a complete result set while respecting rate limits with backoff/retry",
+   "reconcile two independent sources on a shared key: quantify matched, source-only, and value-discrepant rows against a stated tolerance",
+   "produce one clean reconciled table carrying provenance (source + as-of) plus a documented reconciliation rule you can defend"
+  ],
+  "lessons": [
+   "HTTP/REST basics: methods, status codes, headers, query params, JSON payloads \u2014 the request/response mental model",
+   "calling APIs from Python with requests: params, timeouts, raise_for_status, turning nested JSON into flat rows",
+   "pagination patterns (offset/limit, page/per_page, cursor) and rate limits: 429, Retry-After, and simple exponential backoff",
+   "reconciliation concepts: join keys, match vs source-only vs value-mismatch, numeric tolerance, and why provenance/as-of matter"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Pull country total-population from the World Bank Indicators API \u2014 page through ALL results (page/per_page), back off on 429/timeouts, and normalize the nested JSON into a tidy frame keyed by ISO3 + year. Separately load the Our World in Data population CSV. Align keys, then outer-join and classify every key as matched / api-only / csv-only; compare the population values with a stated tolerance and flag discrepancies. Write ONE clean reconciled table with a source/as-of provenance column, plus a short reconciliation summary (row counts per class + the top value discrepancies).",
+   "dataset": "World Bank Indicators API (indicator SP.POP.TOTL, JSON, page/per_page pagination, no auth, rate-limited) reconciled against the Our World in Data population CSV (population.csv, free public download)",
+   "tools": [
+    "Python",
+    "requests",
+    "pandas",
+    "json",
+    "time (backoff)",
+    "Git"
+   ],
+   "hours": 6
+  },
+  "deliverable": "A script/notebook that pulls + paginates the API and reconciles it against the CSV, the reconciled output table (parquet or CSV) with a provenance/as-of column, a reconciliation summary (counts per class + top discrepancies), and a 3-sentence why note: why this join key, why this tolerance, and what a value-mismatch actually means.",
+  "acceptance": "Pagination returns the complete set (row count matches the API's reported total, no duplicates); every key is classified matched/api-only/csv-only and the class counts sum to the union; value discrepancies are flagged against the stated tolerance; the output table carries source + as-of provenance; the run is deterministic on re-execution and handles a 429/timeout without crashing.",
+  "liveRecap": "Reconciliation as a data-quality gate: matched vs source-only vs value-mismatch, plus provenance \u2014 turning two disagreeing sources into one trustworthy table.",
+  "liveMisconception": "Thinking a join IS reconciliation \u2014 an inner join silently drops non-matching rows and hides the exact discrepancies you're paid to surface; and assuming two 'authoritative' sources will agree exactly.",
+  "liveHotSeat": "\"Defend your join key and your tolerance: when the two sources disagree on a country's population, how do you decide which is right \u2014 and what would you do to reconcile them if there were no shared code to join on?\"",
+  "portfolio": "Becomes the Phase 1 'ingestion + reconciliation' artifact: a repeatable, rate-limit-aware API pull plus a documented reconciliation that fuses two messy sources into one clean, provenance-tagged table \u2014 pairs with the W6 cleaning work to complete the 'raw \u2192 clean data product' story.",
+  "prereqs": "Assumes W6 pandas (frames, merge/joins, dtypes, cleaning) and W1 Git/env hygiene. Produces the clean multi-source table that W8 SE hygiene refactors into tested, modular functions, and seeds later ingestion/CDC weeks \u2014 a paginated pull is the shape of an incremental source."
+ },
+ {
+  "week": "W8",
+  "module": "M04 \u00b7 Software engineering hygiene",
+  "title": "Typed, tested, packaged: turning a script into a data product component",
+  "gaps": [
+   "G6",
+   "G1",
+   "G4"
+  ],
+  "objectives": [
+   "annotate every function with type hints and pass a static type check (mypy/pyright) with zero errors",
+   "write pytest unit tests for the reconciliation logic \u2014 happy path plus edge cases (empty feed, duplicate ids, missing field, count mismatch) \u2014 using fixtures so tests run offline and deterministically",
+   "refactor a monolithic script into a clean src-layout package that separates pure logic from side-effecting I/O and the CLI",
+   "build and pip-install a wheel into a fresh venv that exposes a working console entry point",
+   "write docstrings that state each function's contract (args/returns/raises) so the signature, docstring, and tests agree"
+  ],
+  "lessons": [
+   "type hints & static checking: annotating params/returns, list[dict]/Optional/TypedDict & dataclasses, running mypy or pyright, and why hints are checked statically not at runtime",
+   "docstrings as contracts: Google/NumPy style, documenting args/returns/raises, and keeping the docstring honest against the signature",
+   "unit testing with pytest: assert, arrange-act-assert, fixtures, @parametrize, and testing boundaries not just the happy path \u2014 tests as an executable spec",
+   "modular structure & separation of concerns: pure functions vs I/O, why testability is a consequence of structure, the src layout",
+   "packaging: pyproject.toml, building a wheel, editable vs regular installs, and a console_scripts entry point"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Harden last week's reconciliation script into a real package. Refactor into a src-layout package with three seams \u2014 an io module (fetch/read), a pure reconcile module (compare two record sets, flag count drift and duplicate ids), and a cli module wiring them together. Add type hints throughout and get mypy to zero errors. Add contract docstrings. Write a pytest suite that loads a committed sample JSON fixture and parametrizes edge cases: empty feed, duplicate event ids, a record missing a key field, and a metadata-count vs actual-feature-count mismatch \u2014 all asserted against the pure reconcile function so tests run offline. Author pyproject.toml, build a wheel, pip-install it into a clean venv, and run the reconciliation via its console command.",
+   "dataset": "USGS Earthquake GeoJSON feed (earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson, no auth) \u2014 reconcile the feed's metadata.count against the actual number of features and detect duplicate ids across two overlapping pulls; a saved sample response is committed as a pytest fixture for deterministic offline tests",
+   "tools": [
+    "Python",
+    "pytest",
+    "pytest fixtures/parametrize",
+    "mypy (or pyright)",
+    "build + hatchling/setuptools",
+    "pip",
+    "coverage"
+   ],
+   "hours": 6
+  },
+  "deliverable": "A pip-installable package repo: src-layout modules (io / reconcile / cli), full type hints, contract docstrings, a passing pytest suite with committed fixtures, a built wheel, and a README with install/run steps \u2014 plus a 3-sentence \"why\" note explaining why the pure reconcile logic was split from I/O and why that split is what makes the code testable.",
+  "acceptance": "The built wheel pip-installs into a fresh venv and its console command runs end-to-end; pytest passes including all four edge-case tests; mypy/pyright reports zero errors; the reconcile logic is exercised by tests (not just imported); docstrings match their signatures.",
+  "liveRecap": "separation of concerns \u2014 pure functions vs side-effecting I/O \u2014 and why that boundary is what makes code unit-testable",
+  "liveMisconception": "believing a green test run (or a high coverage number) proves the code is correct \u2014 that a line executed is the same as a behavior asserted, and that type hints are enforced at runtime",
+  "liveHotSeat": "\"Walk me to the seam between your pure reconcile function and your I/O \u2014 why did you cut it there, show me the one test that only exists because of that cut, and tell me what a passing test suite does NOT prove about your package.\"",
+  "portfolio": "Produces the first genuinely engineered Phase 1 artifact: the W7 script becomes a typed, tested, pip-installable component with a documented contract \u2014 a reusable quality-checked building block the capstone imports, and concrete evidence of dev hygiene (G6) an interviewer can clone, install, and run.",
+  "prereqs": "Assumes W1 (Git, venv, repo hygiene) and W7 (the API-fetching reconciliation script and its data model). Later weeks build on it by treating typed, modular, pytest-covered packages as the baseline for all pipeline code \u2014 the seed for data-quality testing (G4) and for Git\u2192DABs deployment (G6) in later phases."
+ },
+ {
+  "week": "W9",
+  "module": "M05",
+  "title": "SQL I \u2014 joins & filtering",
+  "gaps": [
+   "G1",
+   "G2"
+  ],
+  "objectives": [
+   "write a SELECT that projects specific columns and filters rows with WHERE (=, IN, BETWEEN, LIKE, IS NULL) then ORDER BY / LIMIT to answer a stated business question",
+   "read an ERD, identify each table's primary key and the foreign keys that connect two tables, and predict the join path BEFORE writing SQL",
+   "choose and justify the correct join type (INNER, LEFT, RIGHT, FULL OUTER, CROSS, self) for a given relationship and explain what each keeps or drops",
+   "state the grain of a join result and explain how a join fans out rows (one-to-many) or drops them (unmatched), and how NULLs behave in filters and join keys",
+   "prove a LEFT JOIN surfaces unmatched parent rows and recognize when a WHERE on the right table silently collapses it to an INNER JOIN"
+  ],
+  "lessons": [
+   "projection & the SELECT/WHERE/ORDER BY/LIMIT skeleton; predicates: comparison, IN, BETWEEN, LIKE, IS NULL",
+   "keys as the contract of a relational model: primary vs foreign keys, and how a relationship encodes grain",
+   "join types and their set semantics: INNER, LEFT/RIGHT OUTER, FULL OUTER, CROSS, and self-joins \u2014 what each row set means",
+   "NULL & three-valued logic: how NULLs disappear from filters, behave in join keys, and appear from unmatched outer rows",
+   "reading an ERD and planning a query: trace the join path before typing SQL"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Attach the Chinook database in DuckDB (no server) and write a suite of 8-10 queries answering stated business questions that force every skill: filtering (IN/BETWEEN/LIKE/IS NULL), single- and multi-hop INNER JOINs across the artist\u2192album\u2192track\u2192invoice_item\u2192invoice\u2192customer chain, a LEFT JOIN that surfaces parent rows with no children (e.g. artists with zero tracks sold, customers with no invoices), a self-join (e.g. employee\u2192reports-to manager), and one query that demonstrates row fan-out (row count before vs after a one-to-many join). Each query carries a comment naming the join type and why it is correct; one deliverable query is written twice (INNER vs LEFT) to show exactly which rows and counts change.",
+   "dataset": "Chinook sample database (public-domain digital-media store; ~11 related tables \u2014 artists\u2192albums\u2192tracks\u2192invoice_items\u2192invoices\u2192customers, plus employees with a self-referencing manager FK), loaded locally into DuckDB from the published Chinook SQLite/Parquet files (no auth, offline).",
+   "tools": [
+    "DuckDB (CLI or Python)",
+    "SQL",
+    "Git",
+    "Python (optional, for load script)"
+   ],
+   "hours": 5
+  },
+  "deliverable": "A committed queries.sql (or DuckDB notebook) in the course repo with 8-10 documented queries \u2014 each query commented with its join type and one-line justification \u2014 including the paired INNER-vs-LEFT query and the fan-out demonstration, plus a 3-sentence note on how you read the ERD to pick each join path and where NULLs came from.",
+  "acceptance": "All queries run against DuckDB and return correct rows; the LEFT JOIN returns parent rows with NULL child columns that the INNER version drops (and the note states the exact count difference); the fan-out query shows the row count rising after the one-to-many join; the self-join resolves employees to their manager; each join choice is justified in a comment.",
+  "liveRecap": "Join types as set operations over keys \u2014 what INNER, LEFT, and FULL OUTER each keep and drop, and how PK/FK relationships determine the join path and the result grain.",
+  "liveMisconception": "Believing a LEFT JOIN always preserves all left-hand rows even when a WHERE predicate references the right table (the NULLs fail the filter and silently turn it into an INNER JOIN), and conflating \"no matching row\" with a NULL value.",
+  "liveHotSeat": "\"Show me your query listing customers and their invoice totals: defend why you used LEFT vs INNER, tell me exactly which rows appear or vanish if I swap it, and predict how the row count changes \u2014 then run it and show me you were right.\"",
+  "portfolio": "Adds a documented SQL query suite to the Phase 1 data-product repo, proving the learner can navigate a real relational schema, reason about keys and grain, and defend join choices \u2014 the query/analysis layer that later weeks (W10 aggregation, then modeling) build the modeled data product on top of.",
+  "prereqs": "Assumes W8 software-engineering hygiene (working repo, venv, running scripts, atomic commits) and comfort at the CLI to load and query DuckDB locally. Introduces keys/grain and NULL/join semantics that W10 (SQL II \u2014 GROUP BY, subqueries, CTEs) and the relational-modeling weeks depend on directly; the join-path-before-SQL habit seeds G1 (defend your query) and G2 (modeling fundamentals)."
+ },
+ {
+  "week": "W10",
+  "module": "M05",
+  "title": "SQL II \u2014 aggregation & subqueries",
+  "gaps": [
+   "G1",
+   "G10"
+  ],
+  "objectives": [
+   "summarize data with GROUP BY + aggregate functions (COUNT/SUM/AVG/MIN/MAX) and state the grain of every grouped result set",
+   "filter groups with HAVING and explain why it differs from WHERE (group filter vs row filter) using the logical order of evaluation",
+   "combine result sets with UNION / UNION ALL / INTERSECT / EXCEPT and pick the correct one for a given question",
+   "write scalar, IN/EXISTS, and derived-table (FROM) subqueries to answer questions a single flat query can't",
+   "translate a plain-English analytical question into correct SQL and defend why the returned numbers are right"
+  ],
+  "lessons": [
+   "aggregate functions & GROUP BY: the grain of a grouped result, NULL handling, and COUNT(*) vs COUNT(col) vs COUNT(DISTINCT)",
+   "WHERE vs HAVING and the logical order of evaluation (FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY) \u2014 why you can't filter an aggregate in WHERE",
+   "set operations: UNION vs UNION ALL, INTERSECT, EXCEPT, and the column-count / type-compatibility rules",
+   "subqueries: scalar subqueries, IN/NOT IN vs EXISTS/NOT EXISTS, derived tables in FROM, and correlated vs uncorrelated",
+   "reading results critically: sanity-checking totals against a known number and the NOT IN + NULL trap"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Load the Chinook sample database into DuckDB and build an analytical query pack: answer ~10 business questions, each requiring aggregation, HAVING, a set operation, or a subquery \u2014 e.g. revenue per genre, customers whose total spend exceeds the average, top country by invoice count with HAVING thresholds, tracks that appear in playlists but were never purchased (EXCEPT / NOT EXISTS), and per-customer averages via a derived table. For each query write a 1\u20132 sentence explanation stating the grain of the result and why the number is correct, and flag one query where NOT IN would break on NULLs.",
+   "dataset": "Chinook sample database (public/open, chinook.db loaded into DuckDB or SQLite)",
+   "tools": [
+    "DuckDB (CLI or Python)",
+    "Chinook DB",
+    "SQL",
+    "Git"
+   ],
+   "hours": 5
+  },
+  "deliverable": "A committed .sql (or notebook) query pack answering ~10 analytical questions against Chinook, each with its result and a 1\u20132 sentence explanation of the result's grain and why it's correct, using at least one each of GROUP BY+HAVING, a set operation, and a subquery \u2014 plus a 3-sentence \"why\" note explaining one place you chose HAVING over WHERE and one place a subquery beat a join.",
+  "acceptance": "Every query runs against a fresh Chinook load and returns the stated answer; each explanation names the grain (what one row represents) and is factually correct; the pack demonstrates GROUP BY+HAVING, a set operation, and a subquery; and the learner correctly identifies the NOT IN + NULL trap and its EXISTS fix.",
+  "liveRecap": "WHERE vs HAVING and the logical order of evaluation, and how to name the grain of a grouped result set.",
+  "liveMisconception": "Treating WHERE and HAVING as interchangeable (or trying to filter an aggregate in WHERE), and assuming COUNT(col) counts every row when it silently skips NULLs.",
+  "liveHotSeat": "\"Point at one row of your GROUP BY result and tell me exactly what it represents \u2014 then defend that your COUNT/SUM is counting the right thing and isn't silently dropping NULLs or double-counting from a join.\"",
+  "portfolio": "Adds a reproducible \"analytics query pack\" to the course repo \u2014 real business questions turned into defensible SQL with grain-level explanations \u2014 the first evidence in the Phase 1 SQL/modeling portfolio artifact that the learner can answer questions with data and justify the numbers, not just run queries.",
+  "prereqs": "Assumes W9 SQL I (SELECT/WHERE, single-table filtering, JOINs, ORDER BY) and the W1 Git workflow for committing the pack. W11 Advanced SQL I builds window functions and CTEs directly on top of this week's aggregation, grouping, and subquery foundations \u2014 so grain-awareness and the logical evaluation order established here are prerequisites."
+ },
+ {
+  "week": "W11",
+  "module": "M06",
+  "title": "Advanced SQL I \u2014 window functions & CTEs",
+  "gaps": [
+   "G1",
+   "G10"
+  ],
+  "objectives": [
+   "choose correctly among row_number/rank/dense_rank for per-group top-N and explain how each handles ties",
+   "use lag/lead to compute period-over-period change and inter-event gaps without a self-join",
+   "compute running totals and moving averages with an explicit frame clause, and explain ROWS vs RANGE",
+   "refactor a nested subquery stack into named CTEs that a reviewer can read top-to-bottom",
+   "state when a window (PARTITION BY, keeps every row) is the right tool vs GROUP BY (collapses rows)"
+  ],
+  "lessons": [
+   "window function anatomy: OVER, PARTITION BY, ORDER BY, and why rows are not collapsed",
+   "ranking family \u2014 row_number vs rank vs dense_rank and how ties differ",
+   "offset functions \u2014 lag/lead for deltas, gaps, and prev/next comparisons",
+   "frame clauses \u2014 running totals & moving averages with ROWS BETWEEN vs RANGE, and the default-frame trap",
+   "CTEs for layered, readable logic \u2014 naming steps, chaining, and when a CTE beats a subquery"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Load one month of NYC TLC Yellow Taxi trips into DuckDB and answer four business questions with a single, CTE-structured analytical query per question: (1) rank the top-5 pickup zones by trip count per day (defend your ranking function on tie days); (2) using lag over daily totals, compute day-over-day % change in revenue and flag the biggest drop; (3) a 7-day moving average of daily fare revenue with an explicit ROWS frame; (4) a running cumulative total of trips within each day partitioned by hour. Every query must be built from named CTEs (no nested subquery pyramids), and each window must have an intentional PARTITION BY / ORDER BY / frame you can justify.",
+   "dataset": "NYC TLC Yellow Taxi Trip Records \u2014 public monthly Parquet (e.g. yellow_tripdata_2024-01.parquet from nyc.gov TLC), loaded directly into DuckDB via read_parquet; join to the TLC taxi_zone_lookup.csv for zone names",
+   "tools": [
+    "DuckDB",
+    "SQL",
+    "Python (optional loader)",
+    "Git"
+   ],
+   "hours": 6
+  },
+  "deliverable": "A .sql file (or DuckDB notebook) with the four CTE-structured queries plus their output snapshots, committed on a feature branch and merged via PR, with a 4-sentence why note: why each ranking function was chosen for its question, and why one frame clause was written as ROWS rather than the default.",
+  "acceptance": "Each query returns correct results and is composed of named CTEs (no query has a subquery nested more than one level); the ranking query breaks ties the way the note claims; the lag query shows day-over-day change with the first day correctly NULL; the moving-average query uses an explicit ROWS BETWEEN 6 PRECEDING AND CURRENT ROW frame; the running total resets per day partition; the why note names the ranking-function and frame choices.",
+  "liveRecap": "the window-function mental model \u2014 OVER/PARTITION BY/ORDER BY/frame \u2014 and that a window annotates rows instead of collapsing them like GROUP BY",
+  "liveMisconception": "assuming a window function collapses rows like GROUP BY, and treating rank/dense_rank/row_number as interchangeable; also forgetting that adding ORDER BY silently changes the default frame",
+  "liveHotSeat": "\"Defend your ranking function: you used rank() (or row_number) for top-5 zones \u2014 what happens on a day where two zones tie for 5th, who shows up in your output, and would your stakeholder's answer change if you'd picked a different function?\"",
+  "portfolio": "Adds a readable 'analytical SQL' module to the portfolio repo \u2014 CTE-structured window queries over a real public dataset \u2014 evidence the candidate can express layered business logic clearly and defend function/frame choices, the analysis layer that Phase 1's modeling and quality work will later feed.",
+  "prereqs": "Assumes W10 SQL II (joins, aggregation, GROUP BY/HAVING, subqueries) and a working DuckDB + Git/PR workflow from earlier weeks. W12 Advanced SQL II builds on these window/CTE foundations (recursive CTEs, more advanced windowing and query-shaping); this week deliberately stops at single-level window functions and non-recursive CTEs."
+ },
+ {
+  "week": "W12",
+  "module": "M06",
+  "title": "Advanced SQL II \u2014 query plans & tuning",
+  "gaps": [
+   "G1",
+   "G7"
+  ],
+  "objectives": [
+   "read an EXPLAIN / EXPLAIN ANALYZE plan top-to-bottom and name the driving cost (seq scan, sort, nested loop) and where estimated rows diverge from actual",
+   "define sargability and rewrite a non-sargable predicate (function-on-column, leading wildcard, implicit cast) so an index can be used",
+   "add the right index (single, composite with correct column order, or covering) and quantify the before/after runtime and I/O",
+   "reason about when an index does NOT help \u2014 low selectivity, tiny table, write cost \u2014 and defend that call"
+  ],
+  "lessons": [
+   "how a planner works: logical vs physical plan, cost model, and the table statistics it depends on",
+   "reading EXPLAIN vs EXPLAIN ANALYZE \u2014 estimated vs actual rows, BUFFERS, and per-node timing",
+   "scan & join operators: seq scan, index scan, bitmap heap scan; nested loop vs hash join and when each wins",
+   "indexes in depth: B-tree, composite column order, covering (INCLUDE) indexes, and selectivity",
+   "sargability \u2014 the predicate patterns that silently disable an index and how to rewrite them"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Load one month of NYC TLC yellow taxi trips (~3M rows) into local PostgreSQL, then tune a provided slow analytical query (date-range + pickup-zone filter feeding an aggregation). Capture an EXPLAIN (ANALYZE, BUFFERS) baseline; identify the bottleneck operator; apply fixes \u2014 add/compose an index, rewrite the non-sargable datetime predicate, fix composite key order; re-measure. Prove each change against the plan, not by guessing.",
+   "dataset": "NYC TLC yellow taxi trip records (public Parquet, one month, ~3M rows) loaded into local PostgreSQL",
+   "tools": [
+    "PostgreSQL",
+    "psql",
+    "EXPLAIN (ANALYZE, BUFFERS)",
+    "DuckDB or pandas (Parquet load)"
+   ],
+   "hours": 6
+  },
+  "deliverable": "A tuning report: baseline EXPLAIN ANALYZE plan, a diagnosis of the bottleneck operator, the change(s) applied, the after plan, and a before/after runtime + rows-scanned table \u2014 plus a 3-4 sentence \"why\" note stating which operator was the bottleneck, why the fix works, and one index you deliberately did NOT add and why.",
+  "acceptance": "Both plans are included; the tuned query shows a material, measured speedup (seq scan \u2192 index/bitmap scan, runtime down \u22655x or the gap explained); at least one non-sargable predicate is rewritten; every index added is justified by selectivity; no change merely hides cost or breaks the result set (row counts match baseline).",
+  "liveRecap": "how the planner chooses a physical plan and how to read it top-to-bottom",
+  "liveMisconception": "that adding an index always makes a query faster \u2014 ignoring selectivity, sargability, and the fact that an index can exist yet be correctly skipped by the planner",
+  "liveHotSeat": "\"Walk me through your plan: which operator was the bottleneck, why does your index fix it, and name a query where this same index would be ignored or would actually hurt.\"",
+  "portfolio": "Adds a performance-tuning case study (read a plan \u2192 diagnose \u2192 optimize \u2192 defend) to the SQL portfolio \u2014 a direct proxy for the query-optimization whiteboard task interviewers use.",
+  "prereqs": "Assumes W11 Advanced SQL I (window functions, CTEs, multi-join/subquery fluency) so learners can read and reason about the non-trivial query being tuned, plus a working local Postgres from earlier SQL weeks. Feeds W13 relational theory (keys/normalization inform which indexes make sense) and plants G7 seeds \u2014 physical operators, partitioning, and cost intuition reused when reading Spark plans in the lakehouse phase."
+ },
+ {
+  "week": "W13",
+  "module": "M07 \u00b7 Relational theory & normalization",
+  "title": "Relational theory & normalization: keys, FDs, 1NF\u21923NF",
+  "gaps": [
+   "G2",
+   "G1",
+   "G10"
+  ],
+  "objectives": [
+   "identify candidate, primary & foreign keys (natural vs surrogate) and write the functional dependencies that actually hold in a real flat dataset",
+   "decompose a denormalized table to 3NF, justifying each split by the specific normal-form rule (partial vs transitive dependency) it removes",
+   "enforce referential integrity with PK/FK constraints and prove that orphan/duplicate inserts are rejected",
+   "decide when to denormalize and articulate the read-vs-write / redundancy tradeoff in writing",
+   "assemble the Phase 1 portfolio: an ERD + normalized schema wrapping the SQL + Python analytics work into one defensible project"
+  ],
+  "lessons": [
+   "keys: super/candidate/primary/foreign, natural vs surrogate \u2014 and why every table needs a declared PK",
+   "functional dependencies: what X\u2192Y means and how to detect them by profiling data",
+   "normal forms: 1NF (atomicity/no repeating groups), 2NF (no partial deps), 3NF (no transitive deps), with the decomposition procedure; a nod to BCNF",
+   "referential integrity: PK/FK constraints, orphan rows, and cascade/restrict behavior",
+   "denormalization: the update/insert/delete anomalies 3NF prevents vs the read-speed reasons to deliberately break it"
+  ],
+  "lessonHours": 4,
+  "lab": {
+   "summary": "Take a wide, denormalized real flat file. In Python/pandas, profile it to discover the functional dependencies and redundancy (e.g. restaurant name/address repeated on every inspection row; cuisine and borough repeating). Draw an ERD, then design a 3NF schema \u2014 restaurant, inspection, violation, and cuisine/boro lookup tables. Write DDL with declared PKs and FK constraints in DuckDB (or Postgres), load the flat file into a staging table, and split it into the normalized tables with SQL. Prove referential integrity by attempting one insert that violates an FK (an inspection for a non-existent restaurant) and showing it is rejected, and one duplicate-PK insert that is rejected. Finally, add ONE deliberate denormalization (e.g. a reporting view or column) and defend it in writing. Produce a rationale doc listing the FDs found and justifying every 1NF\u21923NF decision.",
+   "dataset": "NYC DOHMH Restaurant Inspection Results (data.cityofnewyork.us, Socrata, no-auth CSV/JSON export) \u2014 a classically denormalized flat file where restaurant, inspection, and violation facts are all mashed into one wide row",
+   "tools": [
+    "Python",
+    "pandas",
+    "DuckDB",
+    "SQL (DDL/constraints)",
+    "dbdiagram.io or Mermaid for the ERD"
+   ],
+   "hours": 6
+  },
+  "deliverable": "A repo folder containing: (1) an ERD of the normalized schema, (2) normalized DDL with declared PKs and FK constraints, (3) the SQL/Python that loads the flat file and splits it into 3NF tables, (4) a rationale doc that lists the discovered functional dependencies, justifies each 1NF\u21923NF split by the anomaly it removes, and defends the one deliberate denormalization, and (5) the assembled Phase 1 portfolio README stitching this schema together with the W12 SQL analytics + Python work. Include a 3-sentence \"why\" note on why this grain and these tables (not more, not fewer).",
+  "acceptance": "Every table declares a PK and the schema is in 3NF (no partial or transitive dependencies) or documents each exception with a reason; FK constraints demonstrably reject an orphan insert and a duplicate-PK insert; the rationale lists the actual FDs found in the data and ties each table split to a specific normal-form rule; the denormalization decision is justified in read/write terms; the portfolio project runs end-to-end from its README on a fresh clone.",
+  "liveRecap": "functional dependencies as the engine of normalization \u2014 how X\u2192Y drives 1NF\u21923NF and why 3NF removes update/insert/delete anomalies",
+  "liveMisconception": "believing a surrogate id alone makes a table \"normalized\" \u2014 conflating \"has a unique key\" with 3NF, and blurring 2NF (partial dependency on part of a composite key) with 3NF (transitive dependency through a non-key column)",
+  "liveHotSeat": "\"Walk me through one table you normalized: name the exact functional dependency that forced the split, the specific anomaly it prevents, and then defend one place where you chose NOT to normalize.\"",
+  "portfolio": "Caps Phase 1: the normalized schema, ERD, and rationale become the modeling backbone of the flagship 'SQL + Python analytics' portfolio project \u2014 wrapping the W12 advanced-SQL queries and earlier Python profiling into one clonable, documented, defensible repo that demonstrates keys, FDs, integrity, and a reasoned tradeoff.",
+  "prereqs": "Assumes W12 Advanced SQL II (joins, aggregation, window functions, CTEs) to write the split/validation queries, plus Python/pandas and Git/repo hygiene from M00. Deliberately stops at 3NF/BCNF and normalized OLTP-style modeling; W14 (Phase 2, dimensional modeling) builds directly on these keys and FDs by intentionally denormalizing into star-schema facts and dimensions."
+ }
+]

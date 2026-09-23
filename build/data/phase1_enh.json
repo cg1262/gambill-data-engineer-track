@@ -1,0 +1,664 @@
+[
+ {
+  "week": "Week 1",
+  "module": "M00 \u00b7 Dev environment, the command line & Git",
+  "businessFraming": "On real teams, an un-versioned \"final_analysis_v3_ACTUAL.ipynb\" folder is how a company loses a week of work, ships a number nobody can reproduce, and can't answer \"who changed this and why\" during an audit. The Git repo you stand up this week is the foundation every future pipeline, model, and dashboard gets committed into \u2014 reproducibility and traceability start here, not later.",
+  "labSummary": "Stand up the course's foundational Git repository the way a real data team would: a Python virtual environment, one installed dependency pinned in requirements.txt, a tiny runnable script, a .gitignore that keeps secrets and the venv out of history, and a clear README. You practice the everyday DE workflow \u2014 feature branch, at least three small atomic commits, and a pull request you open, review, and merge \u2014 so the mechanics are muscle memory before any data is involved.",
+  "labSteps": [
+   "Create the repo skeleton locally: make the folder tree shown in the scaffold (src/, data/raw/, data/processed/, notes/, README.md, .gitignore, requirements.txt), then run `git init` and confirm `git status` shows the untracked files.",
+   "Create and activate a virtual environment (`python -m venv .venv` then `source .venv/bin/activate`, or the Windows equivalent), install ONE package (e.g. `pip install requests`), and freeze it with `pip freeze > requirements.txt`. Verify `.venv/` is ignored by confirming it does NOT appear in `git status`.",
+   "Write the small script `src/check_env.py` from the starter scaffold: complete the TODOs so it prints the Python version and confirms the installed package imports \u2014 this is your proof the environment is reproducible from requirements.txt alone.",
+   "Make your FIRST commit on `main` containing only the baseline: .gitignore, README skeleton, and requirements.txt (do not commit .venv or data files). Confirm with `git log --oneline` that exactly one commit exists.",
+   "Create and switch to a feature branch (`git switch -c feature/env-setup`), then build up the work in at least THREE atomic commits \u2014 e.g. (a) add `src/check_env.py`, (b) fill in the README run instructions, (c) add a `notes/decisions.md` entry. Each commit message states WHAT changed and WHY in the imperative mood.",
+   "Push the branch to GitHub (`git push -u origin feature/env-setup`) and open a Pull Request whose description explains what the repo is for and lists the acceptance items as a checklist a reviewer can tick off.",
+   "Self-review the PR diff in the GitHub UI as if you were a teammate: confirm no secrets, no .venv, and no large data files leaked into the diff; leave at least one review comment on your own PR, then merge it (squash or merge-commit, chosen deliberately) and delete the branch.",
+   "Prove idempotency of your setup: on a clean checkout (or after `git switch main && git pull`), recreate the venv from scratch and run `pip install -r requirements.txt` followed by `python src/check_env.py` \u2014 it must succeed with no manual fixes. Record this in `notes/decisions.md`.",
+   "Write a 4-6 line `notes/decisions.md` reflection: which files you deliberately kept OUT of Git and why, why you chose squash vs merge-commit, and what a teammate would need to reproduce your environment."
+  ],
+  "labHours": 3,
+  "datasets": [
+   {
+    "name": "None \u2014 you build your own course repository",
+    "url": "\u2014",
+    "whatsMessy": "n/a \u2014 this foundational week has no external dataset. The 'mess' being prevented is the real one: un-versioned work, secrets committed to history, a 200 MB venv or raw data file bloating the repo, and setups that only run on the author's machine. You practice the hygiene (.gitignore, pinned requirements, reproducible venv) that keeps later weeks' messy real data out of trouble."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "Pro Git book (esp. ch. 2 Git Basics & ch. 3 Branching)",
+    "url": "https://git-scm.com/book/en/v2"
+   },
+   {
+    "title": "GitHub Docs: About pull requests",
+    "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+   },
+   {
+    "title": "Python docs: venv \u2014 Creation of virtual environments",
+    "url": "https://docs.python.org/3/library/venv.html"
+   },
+   {
+    "title": "Python Packaging: Installing packages with pip & requirements files",
+    "url": "https://pip.pypa.io/en/stable/user_guide/#requirements-files"
+   }
+  ],
+  "sampleScript": {
+   "filename": "src/check_env.py",
+   "language": "python",
+   "code": "\"\"\"check_env.py \u2014 proves this repo's environment is reproducible.\n\nRun after: python -m venv .venv && source .venv/bin/activate\n           pip install -r requirements.txt\nUsage:     python src/check_env.py\n\nThis is a STARTER SCAFFOLD. Fill in the TODOs \u2014 do not just run it as-is.\n\"\"\"\nimport sys\n\n\ndef report_python_version() -> None:\n    # Print the running interpreter version so a teammate can confirm\n    # they're on a compatible Python (this course assumes 3.10+).\n    print(f\"Python: {sys.version.split()[0]}\")\n    # TODO: exit non-zero (sys.exit(1)) if the major.minor is below 3.10,\n    #       so a broken env fails loudly instead of silently.\n\n\ndef check_dependency() -> None:\n    # TODO: import the ONE package you installed and pinned in\n    #       requirements.txt (e.g. `requests`). Wrap it in try/except\n    #       ImportError and print a clear message telling the user to run\n    #       `pip install -r requirements.txt` if the import fails.\n    # TODO: print the package's __version__ so the output is proof the\n    #       pinned dependency is actually present.\n    pass\n\n\ndef main() -> None:\n    report_python_version()\n    check_dependency()\n    # TODO: print a final one-line 'environment OK' banner ONLY if both\n    #       checks passed \u2014 this line is what your README tells a reviewer\n    #       to look for.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "note": "Also create a starter .gitignore ( .venv/  __pycache__/  *.pyc  .env  data/raw/*  data/processed/*  .DS_Store ) and a README skeleton with sections: Purpose, Setup (venv + pip install -r requirements.txt), Run (python src/check_env.py), Repo layout. Recommended tree: repo/ \u251c\u2500 src/  \u251c\u2500 data/raw/  data/processed/  \u251c\u2500 notes/decisions.md  \u251c\u2500 README.md  \u251c\u2500 requirements.txt  \u2514\u2500 .gitignore. The scaffold intentionally leaves the version-gate and dependency-import logic as TODOs \u2014 the learner writes the real checks."
+  },
+  "deliverable": "A public GitHub repository (the course repo everything else will build on) containing: a working Python venv workflow captured in a pinned requirements.txt, a completed `src/check_env.py` that runs green, a real .gitignore (excluding .venv, secrets/.env, and data files), a README with Setup/Run/Layout sections, and a `notes/decisions.md`. Git history shows at least three atomic commits on a `feature/env-setup` branch merged into `main` via a Pull Request you opened, reviewed, and merged. Submit the repo URL and the merged PR link.",
+  "acceptance": "Verified when: (1) a fresh clone runs `python -m venv .venv`, `pip install -r requirements.txt`, `python src/check_env.py` and the script prints the Python version, the pinned package version, and an 'environment OK' banner with no manual fixes; (2) `git log --oneline` on main shows a merged PR whose feature branch has \u22653 atomic commits with imperative WHAT+WHY messages; (3) neither `.venv/`, `.env`/secrets, nor raw data files appear anywhere in the Git history (`git log --all --stat` is clean of them); (4) the README documents setup+run and the repo tree; (5) `notes/decisions.md` states which files were kept out of Git and why, and the squash-vs-merge choice."
+ },
+ {
+  "week": "Week 2",
+  "module": "M01 \u00b7 The DE mental model & the data lifecycle",
+  "businessFraming": "NYC agencies dispatch crews (potholes, downed trees, heat/hot-water complaints) off dashboards fed by 311. When a complaint type is quietly renamed or a request lands with a null borough/lat-long, those rows drop out of the filtered view and the crew never gets routed \u2014 the outage is invisible because the dashboard still renders. A stated grain and a one-page data contract are the cheapest insurance against that silent failure.",
+  "labSummary": "Pull a live sample of NYC 311 Service Requests from the Socrata API, inspect the real mess (drifting complaint types, null locations, late-closed tickets), then map the record's end-to-end lifecycle as a Mermaid diagram and write a one-page data contract that declares the grain, the required fields, the known failure modes, and the downstream consumers who break when the data drifts. Deliverable is documentation, not a pipeline \u2014 but every claim in it must be backed by something you actually observed in the sample.",
+  "labSteps": [
+   "Land the data: run the provided curl scaffold to pull ~50 live rows from https://data.cityofnewyork.us/resource/erm2-nwe9.json into sample_311.json, then open it and skim the raw JSON so you see the actual field names (e.g. unique_key, complaint_type, descriptor, borough, latitude, incident_zip, created_date, closed_date, status).",
+   "Profile the mess concretely: for your sample, count how many rows have a null borough, latitude, or incident_zip; list the distinct complaint_type values; and find at least one record that is 'closed' but has no closed_date (or a closed_date before created_date). Record the exact counts and one example unique_key for each problem \u2014 these become your evidence.",
+   "Identify the grain in one sentence: state what exactly one row represents (one service request identified by unique_key) and name the column that makes it unique. Verify it by checking that unique_key has no duplicates in your sample; note what you'd do if it did.",
+   "Map the lifecycle: starting from the Mermaid skeleton, draw the record's journey from citizen intake (call/app/web) through the 311 system, the Socrata/Open Data publication layer, ingestion, storage, and the two or three dashboards/consumers at the end. On the edges where the data can silently break, annotate the failure (e.g. 'complaint_type renamed upstream', 'null borough -> dropped by borough filter', 'late closed_date -> SLA metric wrong').",
+   "Write the one-page data contract (Markdown) with these sections: Grain; Source & refresh cadence; Required (non-null) fields and their types; Known failure modes with the evidence counts from step 2; Idempotency/rerun policy (state how a re-pull must not create duplicate rows \u2014 merge on unique_key); and Consumers (who reads it and what breaks for them when a field drifts or goes null).",
+   "Declare consumers explicitly: name at least two downstream consumers (e.g. 'crew-routing dashboard filters on borough + complaint_type', 'SLA report aggregates closed_date - created_date') and, for each, write the one sentence describing the concrete harm when the contract is violated.",
+   "Write a short 'why' note (3-5 sentences): defend one real decision you made \u2014 for example, why you chose unique_key as the merge key for idempotent reloads, or why you treat null borough as a quarantine-worthy reject rather than a silent drop. This note is your interview answer.",
+   "Assemble README.md containing the business framing, the embedded Mermaid diagram, the data contract, the consumer list, and the why-note; commit sample_311.json alongside it as the evidence the numbers came from."
+  ],
+  "labHours": 4,
+  "datasets": [
+   {
+    "name": "NYC 311 Service Requests (NYC Open Data / Socrata)",
+    "url": "https://data.cityofnewyork.us/resource/erm2-nwe9.json (API) \u00b7 dataset page https://data.cityofnewyork.us/Social-Services/311-Service-Requests/erm2-nwe9",
+    "whatsMessy": "Free-text and drifting complaint_type/descriptor values (categories are renamed and added over time), nulls in location fields (borough, latitude/longitude, incident_zip), and late-arriving/inconsistent lifecycle timestamps (status='Closed' with missing closed_date, or closed_date earlier than created_date)."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "Socrata SODA API \u2014 Getting Started & query basics ($limit, $where, $select)",
+    "url": "https://dev.socrata.com/docs/endpoints.html"
+   },
+   {
+    "title": "Socrata SODA API \u2014 Filtering & querying data with SoQL",
+    "url": "https://dev.socrata.com/docs/queries/"
+   },
+   {
+    "title": "Mermaid \u2014 Flowchart syntax (nodes, edges, edge labels)",
+    "url": "https://mermaid.js.org/syntax/flowchart.html"
+   },
+   {
+    "title": "NYC 311 Service Requests \u2014 dataset page & column dictionary",
+    "url": "https://data.cityofnewyork.us/Social-Services/311-Service-Requests/erm2-nwe9"
+   }
+  ],
+  "sampleScript": {
+   "filename": "pull_and_map_311.sh",
+   "language": "bash",
+   "code": "#!/usr/bin/env bash\n# Week 2 starter scaffold \u2014 LANDS the raw data only. You build the analysis + contract.\nset -euo pipefail\n\n# --- 1. Pull ~50 live rows from the NYC 311 Socrata endpoint ------------------\n# $limit caps the rows. No app token is needed for small pulls (you may get\n# throttled/429 if you hammer it \u2014 that throttling IS one of the messes you\n# should note in your contract).\nAPI=\"https://data.cityofnewyork.us/resource/erm2-nwe9.json\"\ncurl -s \"${API}?\\$limit=50\" -o sample_311.json\necho \"Wrote sample_311.json ($(wc -c < sample_311.json) bytes)\"\n\n# TODO(you): profile the mess. Suggested one-liners (needs jq):\n#   jq '[.[] | select(.borough==null)] | length' sample_311.json      # null boroughs\n#   jq -r '[.[].complaint_type] | unique[]' sample_311.json           # distinct categories\n#   jq '[.[] | select(.status==\"Closed\" and (.closed_date==null))]|length' sample_311.json\n# Record the COUNTS + one example unique_key each \u2014 that is your evidence.\n\n# TODO(you): confirm the grain \u2014 prove unique_key is unique in the sample:\n#   jq -r '.[].unique_key' sample_311.json | sort | uniq -d   # should print nothing\n\n# --- 2. Mermaid lifecycle SKELETON \u2014 copy into your README and finish it ------\n# Replace the ??? edge labels with the SPECIFIC failure you observed, and add\n# the real downstream consumers at the end.\ncat <<'MERMAID'\n```mermaid\nflowchart LR\n  A[Citizen: call / app / web] --> B[NYC 311 intake system]\n  B --> C[Socrata Open Data publish]\n  C -->|??? category drift?| D[Ingest / pull]\n  D -->|??? null borough?| E[(Storage table)]\n  E --> F[Crew-routing dashboard]\n  E --> G[SLA / closure-time report]\n  %% TODO(you): add a quarantine path for rejected rows (reason + timestamp)\n  %% TODO(you): label every edge where data can SILENTLY break\n```\nMERMAID\n",
+   "note": "Scaffold only: it lands 50 rows and hands you a diagram stub. You must run the profiling queries, fill in the real counts/failure labels, add the quarantine path, and write the contract + why-note yourself. jq is optional but recommended (sudo apt install jq)."
+  },
+  "deliverable": "A README.md in a Git repo containing: (1) the 1-2 sentence business framing, (2) an embedded Mermaid flowchart of the 311 record lifecycle with failure-mode annotations on the edges, (3) a one-page data contract (grain, source/cadence, required non-null fields + types, known failure modes with observed counts, idempotency/rerun policy keyed on unique_key), (4) a named list of at least two downstream consumers and the concrete harm each suffers when the contract is violated, and (5) a 3-5 sentence why-note defending one design decision. The raw sample_311.json is committed as evidence.",
+  "acceptance": "Accepted when: the grain is stated as one row = one service request and unique_key is named as the identity/merge key; the Mermaid diagram renders and labels at least two specific silent-failure points (category drift and null location) plus a quarantine path for rejected rows; the contract's 'known failure modes' section cites at least three real numbers pulled from sample_311.json (e.g. count of null boroughs, count of Closed-with-no-closed_date); at least two consumers are named with a concrete per-consumer harm; the idempotency policy explicitly says a re-pull merges/overwrites on unique_key so reruns create no duplicates; and the why-note defends one decision specifically rather than generically."
+ },
+ {
+  "week": "Week 3",
+  "module": "M02 \u2014 Python I: control flow & functions",
+  "businessFraming": "Ops and monitoring teams live or die by threshold alerting on live feeds: page someone at M5.0, stay quiet at M2.0. If a single blank or malformed record crashes the alerting job, the whole feed goes dark and a real event slips past unnoticed \u2014 a trust and safety failure. This week you build that alerting loop against a real seismic feed that changes every minute and ships dirty rows.",
+  "labSummary": "Build quakestats.py, a command-line tool that reads the live USGS all_day earthquake CSV, filters events above a magnitude threshold passed on the command line, and prints a summary \u2014 while surviving blank/missing magnitudes and malformed place strings instead of crashing. You will structure the logic into parse, classify, and summarize functions and prove robustness by running it twice with different thresholds.",
+  "labSteps": [
+   "Fetch a snapshot: download the all_day CSV once to a local file (e.g. `curl -sL https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv -o all_day.csv`) so you develop against a stable copy, then open it and note the columns (time, latitude, longitude, depth, mag, place, ...) and confirm some `mag` fields are blank.",
+   "Parse argv: read the magnitude threshold from sys.argv[1], convert it to float, and exit with a clear usage message and non-zero status if it is missing or non-numeric (fail loud on operator error, not silently).",
+   "Write parse_row(row): given a csv.DictReader row, return a clean dict with a float magnitude and a safe place string \u2014 but when `mag` is blank or non-numeric, do NOT default it to 0.0; instead flag the row as unparseable and return it (or None) so the caller can quarantine it. Handle malformed/missing place with a fallback like 'unknown location'.",
+   "Quarantine bad records: collect every row that fails magnitude parsing into a rejected list with the reason (e.g. 'blank mag', 'non-numeric mag') and the event id, and write them to rejected.csv with a reason column \u2014 never let a bad row silently vanish or crash the loop.",
+   "Write classify(mag): using if/elif/else control flow, bucket a magnitude into a severity label (e.g. minor < 3.0, light 3.0\u20134.9, moderate 5.0\u20135.9, strong 6.0+); write summarize(events) to count how many valid events cleared the threshold, group counts by severity, and track the single strongest quake and its place.",
+   "Loop and filter: iterate the CSV with csv.DictReader, call parse_row on each, skip+quarantine failures, keep only events with mag >= threshold, and feed survivors to classify/summarize. Print a readable report: total rows read, count above threshold, counts per severity, the strongest event, and how many rows were rejected and why.",
+   "Run it twice against the same snapshot with different thresholds (e.g. `python quakestats.py 2.0` then `python quakestats.py 4.5`) and confirm the above-threshold count drops while the rejected count stays identical \u2014 the dirty-data handling is threshold-independent.",
+   "Write a 4\u20136 sentence NOTES.md: state exactly what you did with blank magnitudes and why (quarantine vs. drop vs. default-to-zero \u2014 and why defaulting to 0.0 would silently hide real events), and note that re-running overwrites rejected.csv rather than appending, so reruns stay idempotent."
+  ],
+  "labHours": 4,
+  "datasets": [
+   {
+    "name": "USGS Earthquakes \u2014 all_day CSV (real-time feed)",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv",
+    "whatsMessy": "The `mag` column has blank/missing values on some rows, `place` strings are occasionally malformed or empty, and the feed regenerates every minute \u2014 so the exact rows change between downloads and your script cannot assume a fixed row count or that every magnitude is a valid number."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "USGS Real-time GeoJSON/CSV Feeds \u2014 documentation & feed formats",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/"
+   },
+   {
+    "title": "Python docs \u2014 csv module (DictReader, DictWriter)",
+    "url": "https://docs.python.org/3/library/csv.html"
+   },
+   {
+    "title": "Python docs \u2014 sys.argv (command-line arguments)",
+    "url": "https://docs.python.org/3/library/sys.html#sys.argv"
+   },
+   {
+    "title": "USGS \u2014 magnitude / event terminology reference",
+    "url": "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
+   }
+  ],
+  "sampleScript": {
+   "filename": "quakestats.py",
+   "language": "python",
+   "note": "Starter scaffold only. It parses argv and stubs the fetch/read and the three functions with TODO markers. You write the real parse/classify/summarize logic, the quarantine of blank-magnitude rows, and the report output.",
+   "code": "#!/usr/bin/env python3\n\"\"\"quakestats.py \u2014 threshold alerting over the USGS all_day earthquake feed.\n\nUsage:  python quakestats.py <magnitude_threshold>\nExample: python quakestats.py 4.5\n\"\"\"\nimport csv\nimport sys\n\nFEED_URL = \"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv\"\nLOCAL_CSV = \"all_day.csv\"      # download once with curl, develop against this snapshot\nREJECTED_CSV = \"rejected.csv\"  # bad rows land here with a reason\n\n\ndef parse_args(argv):\n    \"\"\"Return the float threshold from argv, or exit with a usage message.\"\"\"\n    # TODO: require exactly one argument; convert to float.\n    # TODO: on missing/non-numeric input, print usage to stderr and sys.exit(1).\n    ...\n\n\ndef read_rows(path):\n    \"\"\"Yield dict rows from the local CSV snapshot.\"\"\"\n    with open(path, newline=\"\", encoding=\"utf-8\") as f:\n        reader = csv.DictReader(f)\n        for row in reader:\n            yield row\n    # NOTE: the live feed changes every minute \u2014 download once, then read the file.\n\n\ndef parse_row(row):\n    \"\"\"Return (event, reason). event is a clean dict, or None if unparseable.\n\n    reason is None on success, else a short string like 'blank mag'.\n    \"\"\"\n    # TODO: pull row['mag']; if blank or non-numeric, return (None, '<reason>').\n    #       Do NOT default a missing magnitude to 0.0 \u2014 that hides real gaps.\n    # TODO: build a clean dict: {'id':..., 'mag': float, 'place': ...}\n    #       with a fallback place string when row['place'] is missing/malformed.\n    ...\n\n\ndef classify(mag):\n    \"\"\"Return a severity label for a magnitude using if/elif/else.\"\"\"\n    # TODO: minor / light / moderate / strong buckets.\n    ...\n\n\ndef summarize(events):\n    \"\"\"Return a summary of events that cleared the threshold.\"\"\"\n    # TODO: total count, counts per severity label, and the strongest event.\n    ...\n\n\ndef main():\n    threshold = parse_args(sys.argv)\n    kept, rejected = [], []\n\n    for row in read_rows(LOCAL_CSV):\n        event, reason = parse_row(row)\n        if event is None:\n            # TODO: append (id, reason) to rejected \u2014 quarantine, don't crash.\n            continue\n        # TODO: keep only events with event['mag'] >= threshold.\n\n    # TODO: write rejected rows to REJECTED_CSV (overwrite, not append -> idempotent).\n    # TODO: call summarize(kept) and print a readable report:\n    #       rows read, count above threshold, per-severity counts,\n    #       strongest event + place, and rejected count with reasons.\n\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  "deliverable": "quakestats.py (a CLI taking a magnitude threshold as argv), a rejected.csv produced by a run showing quarantined blank/malformed-magnitude rows with a reason column, and a short NOTES.md explaining the blank-magnitude decision and rerun idempotency. Committed to the learner's portfolio repo with a README snippet showing the two example runs and their differing above-threshold counts.",
+  "acceptance": "Passing means: (1) `python quakestats.py 2.0` and `python quakestats.py 4.5` both run to completion on the real all_day snapshot without crashing, and the higher threshold reports fewer above-threshold events; (2) rows with blank or non-numeric magnitudes are written to rejected.csv with a reason column rather than dropped silently or defaulted to 0.0, and the rejected count is identical across both threshold runs; (3) logic is split into parse_row, classify, and summarize functions and the threshold comes from sys.argv with a clear usage error on bad input; (4) re-running overwrites rejected.csv instead of appending (no duplicate rejected rows); (5) NOTES.md states specifically what happened to blank magnitudes and why."
+ },
+ {
+  "week": "Week 4",
+  "module": "M02 \u2014 Python II: data structures & files",
+  "businessFraming": "When a monitoring pipeline ingests a live seismic feed, one truncated or null-magnitude record can crash the whole run or silently vanish \u2014 and a dropped M5.8 event is a missed alert, an audit gap, and a \"why didn't we catch this?\" postmortem. Routing bad records to a quarantine with a reason and timestamp (instead of crashing or dropping) is the single most-asked \"what happens when the data is bad?\" interview moment.",
+  "labSummary": "Ingest the live USGS all_month earthquake GeoJSON, iterate its nested features, and for each one validate/cast the fields, dedupe by event id with a set, and aggregate event counts and max magnitude per region into a dict. Every record that fails a check is written to a quarantine file with a specific reason and a timestamp rather than crashing the run \u2014 then you deliberately inject malformed records and prove the run finishes clean.",
+  "labSteps": [
+   "Download the feed: fetch https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson and save it locally as all_month.geojson so your run is reproducible and you are not re-hitting the API on every rerun; open it and note the top-level 'features' array and the nested 'properties'/'geometry' shape.",
+   "Load the file with the json module inside a try/except and iterate the 'features' list; for each feature pull id, properties.mag, properties.place, and geometry.coordinates, wrapping the access so a truncated/missing-key object raises a caught exception instead of stopping the loop.",
+   "Write validation rules that decide good vs. bad: id must be present and non-empty; mag must be castable to float and non-null; place must be a non-empty string; coordinates must be a 3-element list. Each failing rule produces a specific reason string (e.g. 'null_mag', 'missing_id', 'bad_coordinates').",
+   "Dedupe by id using a set of seen ids: the first time you see an id you process it, and any later feature with the same id is skipped (or sent to quarantine with reason 'duplicate_id') so overlapping pulls never double-count.",
+   "Derive a region key from place (e.g. the text after the last comma, or 'unknown' when place is null) and aggregate into a dict per region: increment an event count and track the running max magnitude.",
+   "For every rejected record, call your quarantine writer to append one JSON line to rejects.jsonl containing the raw record (or its id), the reason, and a UTC timestamp \u2014 so a reviewer can see what was dropped and why.",
+   "Inject failure on purpose: append 3\u20134 hand-crafted malformed features to a copy of the input (a null mag, a missing id, a truncated object cut mid-field, a duplicate id) and rerun; confirm the program finishes without crashing and each bad record lands in rejects.jsonl with the right reason.",
+   "Prove idempotency: run the whole script twice against the same input and show the region aggregates are identical and rejects.jsonl is not double-appended \u2014 pick and document your strategy (truncate/overwrite the rejects file at start of run, and dedupe by id so counts don't grow).",
+   "Write a short DECISIONS.md: state your validation rules, why bad records are quarantined rather than dropped, your dedupe key, and your rerun strategy \u2014 these are your interview answers."
+  ],
+  "labHours": 5,
+  "datasets": [
+   {
+    "name": "USGS Earthquakes \u2014 all_month GeoJSON",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+    "whatsMessy": "Deeply nested JSON (features[].properties / features[].geometry.coordinates); null 'mag' and null/empty 'place' values; duplicate event ids across overlapping time-window pulls; occasional truncated/incomplete feature objects that break naive key access."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "GeoJSON format specification (geojson.org)",
+    "url": "https://geojson.org/"
+   },
+   {
+    "title": "Python docs \u2014 json module",
+    "url": "https://docs.python.org/3/library/json.html"
+   },
+   {
+    "title": "Python docs \u2014 Errors and Exceptions (try/except)",
+    "url": "https://docs.python.org/3/tutorial/errors.html"
+   },
+   {
+    "title": "USGS Earthquake GeoJSON feed \u2014 field/format documentation",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php"
+   }
+  ],
+  "sampleScript": {
+   "filename": "ingest_quakes.py",
+   "language": "python",
+   "note": "Scaffold only: it lands the raw GeoJSON, iterates features, and gives you a quarantine-writer stub. The validation rules, dedupe set, per-region aggregation, and idempotent-rerun choice are yours to build where the TODOs are.",
+   "code": "\"\"\"Week 4 lab scaffold: ingest USGS all_month GeoJSON, quarantine bad records.\nStdlib only. Fill in every TODO. This is a starting structure, NOT a solution.\n\"\"\"\nimport json\nimport datetime\nimport urllib.request\n\nFEED_URL = \"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson\"\nINPUT_FILE = \"all_month.geojson\"\nREJECTS_FILE = \"rejects.jsonl\"\n\n\ndef download_feed(url=FEED_URL, dest=INPUT_FILE):\n    \"\"\"Land the raw feed locally so reruns don't re-hit the API.\"\"\"\n    urllib.request.urlretrieve(url, dest)\n    print(f\"saved feed -> {dest}\")\n\n\ndef quarantine(record, reason, rejects_path=REJECTS_FILE):\n    \"\"\"Append one bad record to the rejects file with a reason + UTC timestamp.\n    STUB: keep this shape. A reviewer must be able to answer 'what was dropped and why?'\n    \"\"\"\n    row = {\n        \"ts\": datetime.datetime.now(datetime.timezone.utc).isoformat(),\n        \"reason\": reason,\n        \"record\": record,  # TODO: consider storing just the id if records are large\n    }\n    with open(rejects_path, \"a\", encoding=\"utf-8\") as f:\n        f.write(json.dumps(row) + \"\\n\")\n\n\ndef main():\n    # download_feed()  # uncomment once, then work off the local file\n\n    # TODO: decide your idempotent-rerun strategy. e.g. truncate REJECTS_FILE here\n    #       so a second run doesn't append duplicate reject rows.\n\n    with open(INPUT_FILE, encoding=\"utf-8\") as f:\n        data = json.load(f)\n\n    seen_ids = set()          # TODO: use this to dedupe by event id\n    regions = {}              # TODO: {region_key: {\"count\": int, \"max_mag\": float}}\n\n    for feature in data.get(\"features\", []):\n        try:\n            # TODO: safely pull id, properties.mag, properties.place,\n            #       geometry.coordinates. A truncated object should raise here\n            #       and be caught below -> quarantine, NOT crash.\n\n            # TODO: validation rules. On each failure call:\n            #       quarantine(feature, \"<specific_reason>\"); then skip this feature.\n            #       reasons to cover: missing_id, null_mag, bad_mag_cast,\n            #       empty_place, bad_coordinates, duplicate_id\n\n            # TODO: dedupe with seen_ids\n\n            # TODO: derive region key from place, then aggregate count + max_mag\n            pass\n        except Exception as e:\n            quarantine(feature, f\"parse_error:{type(e).__name__}\")\n            continue\n\n    # TODO: print the per-region summary (count + max magnitude) sorted by count\n\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  "deliverable": "A runnable ingest_quakes.py that turns the live USGS all_month GeoJSON into a per-region aggregate dict (event count + max magnitude), a rejects.jsonl quarantine file where every bad record carries a specific reason and UTC timestamp, and a short DECISIONS.md explaining the validation rules, dedupe key, quarantine choice, and idempotent-rerun strategy.",
+  "acceptance": "The script runs to completion on the real feed AND on a copy seeded with injected malformed records (null mag, missing id, truncated object, duplicate id) without ever crashing; every injected bad record appears in rejects.jsonl with a correct reason and timestamp; duplicate ids are counted once; running the script twice on the same input produces identical per-region aggregates and does not double-append the rejects file; DECISIONS.md names each validation rule and the rerun strategy."
+ },
+ {
+  "week": "Week 5",
+  "module": "M02 \u2014 Python III: modules, environments & OOP basics",
+  "businessFraming": "On a real team, the difference between \"a script that ran on my laptop once\" and code the company can deploy, test, and trust is whether it's an installable, importable package \u2014 copy-pasted one-off scripts are how pipelines silently rot and break in production. A hiring manager skimming your GitHub decides in 30 seconds whether you look like an engineer or a tutorial-follower, and a clean `pip install -e .` + `python -m quakes` is the single clearest signal you cross that line.",
+  "labSummary": "Refactor your Week 3\u20134 USGS earthquake scripts into a proper installable Python package, quakes/, with a QuakeClient class (client.py), pure parsing functions (parse.py), a report writer (report.py), and a CLI entry point (__main__.py). You'll create a fresh virtual environment, write a minimal pyproject.toml, install the package editable with pip install -e ., and prove it works end-to-end via both import quakes and python -m quakes.",
+  "labSteps": [
+   "Create the target package tree exactly as scaffolded: a project root holding pyproject.toml, README.md, and a quakes/ package directory containing __init__.py, client.py, parse.py, report.py, and __main__.py. Confirm quakes/ has an __init__.py so Python treats it as a real package, not a loose folder of scripts.",
+   "Create and activate a FRESH virtual environment at the project root (python -m venv .venv then source .venv/bin/activate on macOS/Linux or .venv\\Scripts\\activate on Windows). Confirm you are isolated by running which python (or where python) and pip list \u2014 the list should be nearly empty. Add .venv/ to .gitignore.",
+   "Fill in pyproject.toml from the scaffold: set name, version, requires-python, dependencies (requests), and a [project.scripts] entry so quakes maps to quakes.__main__:main. Read the Packaging User Guide section on pyproject.toml before choosing setuptools vs hatchling as your build backend, and write one sentence in your notes on why you picked it.",
+   "Refactor your Week 3\u20134 fetch logic into the QuakeClient class in client.py: the class holds the feed URL and a requests.Session, and exposes a fetch_all_day() method that returns the parsed GeoJSON dict. Move the fielding-out logic (pulling id, place, mag, time from each feature) into pure, side-effect-free functions in parse.py that take data in and return rows out \u2014 no network, no printing.",
+   "Wire report.py to take the parsed rows and write a deterministic output (CSV or a summary text file), and wire __main__.py to define main() that instantiates QuakeClient, calls fetch, passes results through parse, then report. Make the run idempotent: writing to a fixed output path must OVERWRITE, not append, so re-running python -m quakes twice produces one identical file, not duplicated rows.",
+   "Install the package in editable mode from the project root: pip install -e . . Confirm it landed by running pip list (you should see quakes) and pip show quakes.",
+   "Prove importability two ways: (a) open a Python REPL and run import quakes; from quakes.client import QuakeClient and confirm no ImportError; (b) run python -m quakes from a DIFFERENT working directory (e.g. your home folder) and confirm it still fetches and writes the report \u2014 this proves the package is installed, not just found because you happened to be in its folder.",
+   "Write a short DECISIONS.md (5\u20138 lines) answering: which build backend you chose and why, why the network code lives in a class but parsing lives in plain functions (testability), and how you made reruns idempotent. Commit the whole package to a GitHub repo with a README showing the install + run commands."
+  ],
+  "labHours": 5,
+  "datasets": [
+   {
+    "name": "USGS Earthquakes \u2014 all_day GeoJSON feed",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
+    "whatsMessy": "Same live feed as Weeks 3\u20134 \u2014 the data mess is unchanged and already handled; this week the deliberate challenge is CODE structure, not new data mess. The subtle trap: your parsing must stay pure (no live network call baked in) so the package is importable and testable offline, and your CLI must remain idempotent even though the feed's contents change every time you fetch."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "Python Packaging User Guide \u2014 Packaging Python Projects tutorial",
+    "url": "https://packaging.python.org/en/latest/tutorials/packaging-projects/"
+   },
+   {
+    "title": "Writing your pyproject.toml (setuptools & hatchling build backends)",
+    "url": "https://packaging.python.org/en/latest/guides/writing-pyproject-toml/"
+   },
+   {
+    "title": "Python docs \u2014 Modules and Packages",
+    "url": "https://docs.python.org/3/tutorial/modules.html"
+   },
+   {
+    "title": "pip \u2014 Editable installs (pip install -e .)",
+    "url": "https://pip.pypa.io/en/stable/topics/local-project-installs/"
+   }
+  ],
+  "sampleScript": {
+   "filename": "quakes-package-scaffold.txt",
+   "language": "text",
+   "code": "# ============================================================\n# STARTER SCAFFOLD ONLY \u2014 sets up the package skeleton.\n# You write the real fetch / parse / report logic (see TODOs).\n# ============================================================\n\n# ---- Target package tree (create these files) ----\n# quakes-project/\n# |- pyproject.toml\n# |- README.md\n# |- .gitignore          # add: .venv/\n# `- quakes/\n#    |- __init__.py       # can be empty (marks it a package)\n#    |- client.py         # QuakeClient class (network lives here)\n#    |- parse.py          # PURE functions (no network, no print)\n#    |- report.py         # write rows -> file (overwrite = idempotent)\n#    `- __main__.py       # main(): wires client -> parse -> report\n\n\n# ================= pyproject.toml =================\n# [build-system]\n# requires = [\"setuptools>=68\"]        # TODO: or swap to hatchling\n# build-backend = \"setuptools.build_meta\"\n#\n# [project]\n# name = \"quakes\"\n# version = \"0.1.0\"\n# requires-python = \">=3.9\"\n# dependencies = [\"requests\"]\n#\n# [project.scripts]\n# quakes = \"quakes.__main__:main\"      # lets `quakes` run from shell too\n\n\n# ================= quakes/client.py =================\nimport requests\n\nALL_DAY_URL = (\n    \"https://earthquake.usgs.gov/earthquakes/feed/\"\n    \"v1.0/summary/all_day.geojson\"\n)\n\nclass QuakeClient:\n    \"\"\"Owns the feed URL + an HTTP session. Network belongs HERE only.\"\"\"\n\n    def __init__(self, url=ALL_DAY_URL, session=None):\n        self.url = url\n        self.session = session or requests.Session()\n\n    def fetch_all_day(self):\n        # TODO: GET self.url, raise_for_status(), return response.json()\n        # TODO: (reuse your Week 3-4 error handling / timeout here)\n        raise NotImplementedError\n\n\n# ================= quakes/parse.py =================\ndef feature_to_row(feature):\n    \"\"\"PURE: one GeoJSON feature dict -> a flat dict. No I/O.\"\"\"\n    # TODO: pull id, place, mag, time from feature['properties'] / ['id']\n    raise NotImplementedError\n\ndef rows_from_geojson(data):\n    \"\"\"PURE: full feed dict -> list of rows. No network, no printing.\"\"\"\n    # TODO: iterate data['features'], call feature_to_row on each\n    raise NotImplementedError\n\n\n# ================= quakes/report.py =================\ndef write_report(rows, path=\"quakes_report.csv\"):\n    # TODO: OVERWRITE path (mode 'w') so a rerun does NOT duplicate rows\n    # TODO: write a header + one line per row (csv module is fine)\n    raise NotImplementedError\n\n\n# ================= quakes/__main__.py =================\nfrom quakes.client import QuakeClient\nfrom quakes.parse import rows_from_geojson\nfrom quakes.report import write_report\n\ndef main():\n    # TODO: client = QuakeClient(); data = client.fetch_all_day()\n    # TODO: rows = rows_from_geojson(data); write_report(rows)\n    # TODO: print a one-line summary (count of quakes written)\n    raise NotImplementedError\n\nif __name__ == \"__main__\":\n    main()\n",
+   "note": "Every function raises NotImplementedError on purpose \u2014 this is a skeleton, not a solution. Reuse your Week 3-4 logic to fill the TODOs. After building the tree, run: python -m venv .venv && source .venv/bin/activate && pip install -e . && python -m quakes"
+  },
+  "deliverable": "A GitHub repository containing an installable Python package quakes/ (with client.py exposing a QuakeClient class, pure parse.py functions, report.py, __main__.py, and __init__.py), a minimal working pyproject.toml, a README with copy-paste install+run instructions, and a short DECISIONS.md. The package must install cleanly into a fresh venv via pip install -e . and run via both import quakes and python -m quakes.",
+  "acceptance": "Graded pass requires: (1) pip install -e . succeeds in a fresh venv and pip show quakes lists it; (2) import quakes and from quakes.client import QuakeClient both succeed in a REPL with no ImportError; (3) python -m quakes run from a directory OUTSIDE the project folder fetches the all_day feed and writes a report file; (4) running python -m quakes twice yields one identical report (no duplicated rows), proving idempotent overwrite; (5) network code lives only in QuakeClient while parse.py functions are pure (no requests import, no print); and (6) DECISIONS.md states the chosen build backend and why, and how reruns were made idempotent."
+ },
+ {
+  "week": "Week 6",
+  "module": "M03 \u2014 pandas: DataFrames \u2014 select, clean, transform, group & merge",
+  "businessFraming": "A city agency publishes a \"311 requests per 10,000 residents\" dashboard to decide where to send inspectors and budget. If the borough population join key isn't unique, the merge silently multiplies request rows and one borough's rate comes out 2\u20133x too high \u2014 inspectors get sent to the wrong place and the public dashboard misleads. The merge-validation check, not the chart, is the real deliverable.",
+  "labSummary": "Pull one real month of NYC 311 service requests via Socrata, profile its dtypes/nulls/duplicate keys, write and execute a short cleaning plan (normalize borough casing, parse created_date, quarantine rejects), aggregate to complaint_type x borough x month, then merge to a tiny borough-population reference to compute per-10k rates. Prove the merge did not inflate rows (output row count == grain cardinality) and export a validated parquet.",
+  "labSteps": [
+   "LAND the raw data: query the Socrata endpoint for exactly one month using a $where on created_date (e.g. created_date between '2023-06-01' and '2023-07-01') plus $limit=200000, and save the CSV locally so reruns don't re-hit the API.",
+   "PROFILE the raw frame: print shape, df.dtypes, per-column null counts (df.isna().sum()), unique_key duplicate count (df['unique_key'].duplicated().sum()), and value_counts() on the borough column so you SEE the mixed casing ('BROOKLYN', 'Brooklyn', 'Unspecified') and datetime stored as object.",
+   "WRITE a cleaning plan as a short markdown/comment block BEFORE coding it: which columns you keep, how you parse created_date (pd.to_datetime, errors='coerce'), how you normalize borough (strip + str.upper or title-case to one canonical form), your rule for rows failing the id/date null check, and your dedup rule on unique_key (keep first). Decisions become interview answers.",
+   "EXECUTE cleaning and QUARANTINE bad records: send rows that fail the checks (null unique_key, unparseable created_date, borough not in the 5 canonical boroughs / 'Unspecified') to a rejected DataFrame with a reject_reason column and a rejected_at timestamp, write it to rejected_311.parquet, and keep only clean rows in the main frame.",
+   "TRANSFORM + AGGREGATE: derive a month period column from created_date, then groupby(['complaint_type','borough','month']).size() (or .agg) to build the request_count fact at that exact grain; confirm the grain is unique with an assertion on the groupby keys.",
+   "PREP + INSPECT the population reference: load the borough population table, normalize its borough key with the SAME normalization function, and PROVE the join key is unique (assert pop['borough'].is_unique) \u2014 this is the guard against silent row multiplication.",
+   "MERGE and VALIDATE: left-merge the aggregate to population on the normalized borough key, then assert the merged row count == the pre-merge aggregate row count (no inflation) and assert there are no null population values (every borough matched). Compute requests_per_10k = request_count / population * 10000.",
+   "MAKE THE RERUN IDEMPOTENT and EXPORT: write the final table to parquet with overwrite semantics (or partition by month) so a second run reproduces the same file instead of appending duplicates, and export requests_per_10k_by_type_borough_month.parquet.",
+   "WRITE the why-note (5\u20138 sentences): state your normalization choice, your reject rule, and specifically how you detected/prevented merge inflation (the row-count-equality and unique-key assertions), plus what the rate would have looked like if the key had been non-unique."
+  ],
+  "labHours": 6,
+  "datasets": [
+   {
+    "name": "NYC 311 Service Requests (Socrata Open Data API)",
+    "url": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv?$limit=200000",
+    "whatsMessy": "Real 311 export: null unique_key/borough values, borough stored in mixed case ('BROOKLYN' vs 'Brooklyn') plus 'Unspecified', created_date arrives as a string needing to_datetime with coercion, and duplicate unique_key rows. Scope to one month by appending a $where on created_date (e.g. &$where=created_date between '2023-06-01' and '2023-07-01')."
+   },
+   {
+    "name": "NYC Population by Borough (NYC DCP / US Census reference)",
+    "url": "https://data.cityofnewyork.us/City-Government/New-York-City-Population-by-Borough-1950-2040/xywu-7bv9",
+    "whatsMessy": "Tiny 5-row reference table with borough names whose casing/spelling won't match the 311 borough column out of the box; the join key must be normalized with the exact same function used on the 311 side, and the reference must be proven unique per borough before merging."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "pandas User Guide \u2014 Merge, join, concatenate and compare",
+    "url": "https://pandas.pydata.org/docs/user_guide/merging.html"
+   },
+   {
+    "title": "pandas User Guide \u2014 Working with missing data",
+    "url": "https://pandas.pydata.org/docs/user_guide/missing_data.html"
+   },
+   {
+    "title": "Socrata SoQL \u2014 $where and $limit query parameters",
+    "url": "https://dev.socrata.com/docs/queries/"
+   },
+   {
+    "title": "pandas.DataFrame.merge \u2014 validate and indicator parameters",
+    "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html"
+   }
+  ],
+  "sampleScript": {
+   "filename": "profile_and_validate_311.py",
+   "language": "python",
+   "note": "Scaffold only: it lands one month of raw 311 data, gives you a profiling helper and a merge-validation assertion helper. The cleaning plan, quarantine logic, aggregation, normalization, and rate calc are yours to build at the TODO markers.",
+   "code": "import pandas as pd\n\n# --- 1. LAND one month of raw 311 (scope with a SoQL $where so you don't pull everything) ---\nSTART, END = \"2023-06-01\", \"2023-07-01\"  # TODO: pick your month\nBASE = \"https://data.cityofnewyork.us/resource/erm2-nwe9.csv\"\nWHERE = f\"created_date >= '{START}' AND created_date < '{END}'\"\nURL = f\"{BASE}?$limit=200000&$where={WHERE}\"\n# Tip: download once, then read the local file on reruns so you don't re-hit the API (429s).\nraw = pd.read_csv(URL, low_memory=False)\n# raw.to_csv('raw_311_month.csv', index=False)  # cache it\n\n\ndef profile(df):\n    \"\"\"Print the mess so your cleaning plan is evidence-based.\"\"\"\n    print(\"shape:\", df.shape)\n    print(\"\\ndtypes:\\n\", df.dtypes)\n    print(\"\\nnull counts:\\n\", df.isna().sum().sort_values(ascending=False).head(15))\n    print(\"\\nduplicate unique_key rows:\", df['unique_key'].duplicated().sum())\n    print(\"\\nborough value_counts (look at the CASING):\\n\", df['borough'].value_counts(dropna=False))\n    # TODO: also inspect created_date dtype \u2014 is it object (string) or datetime?\n\n\nprofile(raw)\n\n# --- 2. TODO: write your cleaning plan (comment block), then execute it ---\n# TODO: parse created_date with pd.to_datetime(..., errors='coerce')\n# TODO: normalize borough to ONE canonical form (define borough_norm() and reuse it on BOTH frames)\n# TODO: quarantine rows failing null/date/borough checks into a rejected frame with\n#       reject_reason + rejected_at columns, write rejected_311.parquet, keep clean rows only\n# TODO: dedup on unique_key (decide keep='first' and say why in the note)\n# TODO: derive month, then groupby(['complaint_type','borough','month']).size() -> agg fact\n\n\ndef assert_no_merge_inflation(left, merged, on):\n    \"\"\"The validation IS the deliverable. Call this right after your merge.\"\"\"\n    # A unique key on the RIGHT table is what prevents row multiplication.\n    assert len(merged) == len(left), (\n        f\"MERGE INFLATED ROWS: left={len(left)} -> merged={len(merged)}. \"\n        f\"Your right-side '{on}' key is probably non-unique.\"\n    )\n    # TODO: also assert every left row matched (no null population after merge)\n    # TODO: also assert pop_ref[on].is_unique BEFORE you merge\n    print(\"merge OK: no inflation, grain preserved\")\n\n\n# --- 3. TODO: load population ref, normalize its borough with the SAME borough_norm(),\n#             assert it's unique, left-merge, call assert_no_merge_inflation(),\n#             compute requests_per_10k, and export the parquet idempotently (overwrite). ---\n"
+  },
+  "deliverable": "A validated parquet (requests_per_10k_by_type_borough_month.parquet) at the complaint_type x borough x month grain with a requests_per_10k column, plus a rejected_311.parquet (quarantined rows with reject_reason + rejected_at), the executed cleaning script, and a short why-note documenting the normalization choice, reject rule, and the merge-inflation guard.",
+  "acceptance": "Reviewer can rerun the script and get byte-stable output (no duplicate rows, idempotent overwrite). The merged output row count equals the pre-merge aggregate grain cardinality (assertion passes \u2014 no inflation), the population reference key is proven unique before the merge, and no borough is left with a null population. Bad records land in rejected_311.parquet with a reason and timestamp rather than silently dropped, and the why-note explicitly explains how a non-unique join key would have inflated the per-10k rate and how the validation caught it."
+ },
+ {
+  "week": "Week 7",
+  "module": "M03 \u2014 Python for data II: APIs & reconciliation",
+  "businessFraming": "Two \"authoritative\" population sources will disagree, and an inner join silently deletes exactly the rows where they diverge \u2014 the discrepancies a data engineer is paid to surface for finance, grants allocation, or regulatory reporting. When a per-capita metric is off because two feeds used different population denominators, someone signs off on wrong money; reconciliation with provenance is the control that catches it before the sign-off.",
+  "labSummary": "Paginate the World Bank population API (SP.POP.TOTL) with exponential backoff on 429/timeouts, normalize its nested JSON into rows keyed by ISO3+year, load the OWID population CSV, then outer-join the two and classify every key as matched / api-only / csv-only. Compare overlapping values against a tolerance to flag agreements vs. real discrepancies, and emit one reconciled table where every row carries source and as-of provenance.",
+  "labSteps": [
+   "Set up: create a fresh virtualenv, `pip install requests pandas`, and read the three reference docs (World Bank Developer Information, requests timeouts/raise_for_status, MDN 429/Retry-After) so you know the pagination contract and the retry rules before writing code.",
+   "Build `paginate()`: call the World Bank endpoint, read `page`, `pages`, and `total` from the metadata object at `response[0]` (element 0 is the header, element 1 is the data array), and loop `page=1..pages`. Wrap each request with a connect+read `timeout` and `raise_for_status()`; on a 429 or timeout, back off exponentially (e.g. 1s, 2s, 4s, capped) and honor the `Retry-After` header when present, giving up after N tries.",
+   "Normalize the API payload into flat records keyed by ISO3 + year: pull `countryiso3code`, `date` (year), and `value`. Drop rows where `countryiso3code` is empty (World Bank returns aggregates like regions with blank/2-letter codes) and quarantine rows where `value` is null into a `rejected` list with a reason ('null_value') and a UTC `rejected_at` timestamp rather than silently dropping them.",
+   "Load the OWID population CSV with pandas. Reconcile its `Entity` names / `Code` column to ISO3: keep rows that have a real 3-letter ISO3 `Code`, and quarantine the aggregate 'regions' (e.g. 'World', 'Africa', income groups whose Code is blank or non-ISO3) to the same rejected table with reason 'not_a_country' \u2014 do NOT let them collide with country keys.",
+   "Implement `reconcile(api_df, csv_df)`: outer-join on (iso3, year) and label each key `matched` (in both), `api_only` (World Bank has it, OWID doesn't), or `csv_only` (OWID has it, World Bank doesn't). Return counts per class so you can prove the inner join would have hidden the api_only + csv_only rows.",
+   "For `matched` keys, compare the two population values with a relative tolerance (e.g. abs(a-b)/max(a,b) <= 0.005 = 0.5%). Add a `discrepancy` flag and a `pct_diff` column so within-tolerance agreements are distinguished from genuine disagreements you must explain.",
+   "Write ONE reconciled table (Parquet or CSV) with columns: iso3, year, wb_value, owid_value, match_class, pct_diff, discrepancy, plus provenance columns `source_wb`, `source_owid` (the URLs), and `as_of` (UTC run timestamp). Make the write idempotent \u2014 overwrite the output file (or replace by run key) so a rerun does not append duplicates.",
+   "Write a short DECISIONS.md: your tolerance and why, how you keyed and why blank ISO3 rows are rejected not dropped, your backoff/Retry-After policy, and 2\u20133 concrete discrepancies you found (country+year+pct_diff) with a hypothesis for why the sources disagree."
+  ],
+  "labHours": 6,
+  "datasets": [
+   {
+    "name": "World Bank Indicators API \u2014 Total Population (SP.POP.TOTL)",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=1000",
+    "whatsMessy": "Paginated: page/total metadata live in element[0] of the JSON array, data in element[1]; many country/year cells are null; 'country/all' mixes real countries with aggregate regions that have blank or non-ISO3 codes; the endpoint rate-limits (429) and can time out, so you must back off and retry."
+   },
+   {
+    "name": "Our World in Data \u2014 Population (population.csv)",
+    "url": "https://ourworldindata.org/population-growth",
+    "whatsMessy": "Entity is a human-readable name, not an ISO3 code, and the Code column is blank for aggregates like 'World', 'Africa', and income groups \u2014 these must not be joined against country keys; year coverage and exact values differ from the World Bank feed, which is the whole point of reconciling."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "World Bank Indicators API \u2014 Developer Information (Basic Call Structures, pagination, format=json)",
+    "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures"
+   },
+   {
+    "title": "requests \u2014 timeouts and Response.raise_for_status()",
+    "url": "https://requests.readthedocs.io/en/latest/user/quickstart/#timeouts"
+   },
+   {
+    "title": "MDN \u2014 HTTP 429 Too Many Requests & Retry-After header",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+   },
+   {
+    "title": "pandas \u2014 merge/join (how='outer', indicator=True)",
+    "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html"
+   }
+  ],
+  "sampleScript": {
+   "filename": "reconcile_population.py",
+   "language": "python",
+   "note": "Starter scaffold only: paginate() has the backoff skeleton and reconcile() returns match classes. Normalization, tolerance comparison, quarantine, and the provenance write are yours to build (see TODOs).",
+   "code": "import time\nfrom datetime import datetime, timezone\nimport requests\nimport pandas as pd\n\nWB_URL = \"https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL\"\nAS_OF = datetime.now(timezone.utc).isoformat()\n\n\ndef paginate(per_page=1000, max_retries=5, timeout=(5, 30)):\n    \"\"\"Yield the data array from every page, backing off on 429/timeouts.\"\"\"\n    page = 1\n    while True:\n        params = {\"format\": \"json\", \"per_page\": per_page, \"page\": page}\n        delay = 1.0\n        for attempt in range(max_retries):\n            try:\n                r = requests.get(WB_URL, params=params, timeout=timeout)\n                if r.status_code == 429:\n                    # TODO: honor Retry-After header if present, else use `delay`\n                    time.sleep(delay); delay *= 2; continue\n                r.raise_for_status()\n                break\n            except (requests.Timeout, requests.ConnectionError):\n                if attempt == max_retries - 1:\n                    raise\n                time.sleep(delay); delay *= 2  # exponential backoff\n        meta, data = r.json()  # element[0]=metadata, element[1]=rows\n        yield data\n        if page >= meta[\"pages\"]:  # meta also has total/per_page\n            break\n        page += 1\n\n\ndef normalize_wb(pages):\n    \"\"\"TODO: flatten rows to dicts keyed by (iso3, year) with value.\n    - use countryiso3code + date + value\n    - DROP blank/non-ISO3 codes (aggregates)\n    - QUARANTINE null value -> rejected list w/ reason + rejected_at (UTC)\n    Return (clean_df, rejected_df).\"\"\"\n    raise NotImplementedError\n\n\ndef load_owid(csv_path):\n    \"\"\"TODO: read population.csv; keep real ISO3 `Code` rows;\n    quarantine aggregates (blank/non-ISO3 Code) with reason 'not_a_country'.\"\"\"\n    raise NotImplementedError\n\n\ndef reconcile(api_df, csv_df, tol=0.005):\n    \"\"\"Outer-join and classify each (iso3, year) key.\"\"\"\n    merged = api_df.merge(csv_df, on=[\"iso3\", \"year\"], how=\"outer\", indicator=True)\n    merged[\"match_class\"] = merged[\"_merge\"].map({\n        \"both\": \"matched\", \"left_only\": \"api_only\", \"right_only\": \"csv_only\"})\n    # TODO: for matched rows compute pct_diff and set discrepancy = pct_diff > tol\n    # TODO: attach provenance columns source_wb, source_owid, as_of = AS_OF\n    return merged\n\n\nif __name__ == \"__main__\":\n    pages = list(paginate())\n    # api_clean, api_rejected = normalize_wb(pages)\n    # owid_clean, owid_rejected = load_owid(\"population.csv\")\n    # out = reconcile(api_clean, owid_clean)\n    # TODO: idempotent write (overwrite) of reconciled + rejected tables\n    print(\"pages fetched:\", len(pages))\n"
+  },
+  "deliverable": "A runnable `reconcile_population.py` plus its outputs: one reconciled table (Parquet/CSV) keyed by iso3+year with columns wb_value, owid_value, match_class (matched/api_only/csv_only), pct_diff, discrepancy, and provenance (source_wb, source_owid, as_of); a `rejected` table capturing quarantined rows (null values, non-country aggregates) each with a reason and UTC timestamp; and a DECISIONS.md explaining tolerance, keying, retry/backoff policy, and 2\u20133 real discrepancies found.",
+  "acceptance": "paginate() fetches all pages by reading `pages` from element[0] and provably retries with exponential backoff on 429/timeouts (honoring Retry-After). The output distinguishes matched, api_only, and csv_only keys, and the counts demonstrate what an inner join would have dropped. Every matched row carries pct_diff and a discrepancy flag against the stated tolerance; every output row carries source + as_of provenance. Aggregate/region rows and null values appear in the rejected table with a reason (never silently dropped), and rerunning the script overwrites (does not duplicate) the outputs. DECISIONS.md names at least 2 concrete country+year discrepancies with a hypothesis."
+ },
+ {
+  "week": "Week 8",
+  "module": "M04 \u00b7 Software engineering hygiene \u2014 typed, tested, packaged",
+  "businessFraming": "When a data component silently double-counts or drops records, the downstream number a director trusts in a board deck is wrong, and no one knows for days. A typed, tested, pip-installable reconciler with a documented contract is the artifact that lets an on-call engineer clone your repo, run one command, and trust the count in 30 seconds \u2014 the difference between a component a team can own and a script no one dares to touch.",
+  "labSummary": "Harden your Week 7 USGS earthquake reconciliation into a proper src-layout Python package with clean io/reconcile/cli seams, full type hints that pass mypy with zero errors, and a pytest suite (parametrized over a committed GeoJSON fixture) covering the ugly cases \u2014 empty feed, duplicate ids across overlapping pulls, a missing field, and a metadata.count vs. actual-feature-count mismatch. Then build a wheel, install it into a clean venv, and run the whole thing through a console entry point exactly as a stranger cloning your repo would.",
+  "labSteps": [
+   "Capture the raw feed once and commit it as a frozen fixture: download https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson to tests/fixtures/all_day.geojson, and make a second edited copy (tests/fixtures/all_day_overlap.geojson) that repeats 2-3 feature ids from the first pull so you have a real duplicate-id scenario committed to the repo (never fetch the network inside a test).",
+   "Scaffold the package with a src/ layout: create src/quake_recon/{__init__.py, io.py, reconcile.py, cli.py} and a pyproject.toml. Move your W7 logic into seams \u2014 io.py only loads/parses GeoJSON (and writes the rejected file), reconcile.py holds pure functions (no I/O), cli.py wires argparse to those functions and exposes a main().",
+   "Write the reconcile contract as typed pure functions: e.g. reconcile(features: list[Feature], reported_count: int) -> ReconcileResult that returns the actual feature count, the metadata.count delta, and a list of duplicate ids. Add type hints everywhere (use TypedDict or a dataclass for the GeoJSON feature shape) and run `mypy src/` until it reports zero errors.",
+   "Implement build-for-failure behavior: dedupe features on the feature id, and route any feature failing a null-id check to a rejected table/file (data/rejected/*.jsonl) with a `reason` column and an ISO `rejected_at` timestamp. Make the run idempotent \u2014 a rerun over the same pulls must merge/dedupe on id, not append duplicates.",
+   "Write a parametrized pytest suite in tests/test_reconcile.py that loads the committed fixtures and covers, as separate cases: empty feed (zero features), duplicate ids across the two overlapping pulls, a feature with a missing/null id field, and a metadata.count vs. actual-count mismatch \u2014 asserting the reconcile result and that bad records land in the rejected file with a reason.",
+   "Add a console_scripts entry point in pyproject.toml (e.g. `quake-recon = quake_recon.cli:main`) so the tool runs as a command, not `python somefile.py`. Run `pytest` and `mypy` together and get both green.",
+   "Build the distributable: `python -m build` to produce a wheel in dist/. Confirm the wheel filename and that it includes your package (not the tests).",
+   "Create a clean throwaway venv, `pip install dist/quake_recon-*.whl` into it (nothing else from your source tree on the path), and run `quake-recon --input tests/fixtures/all_day.geojson` via the entry point to prove it works as an installed component.",
+   "Write a short README contract (inputs, outputs, exit codes, where rejected records go) plus a WHY.md decisions note answering: why dedupe on id vs. drop, why null-id rows are quarantined instead of failing the whole run, and why you chose overwrite/merge for idempotency \u2014 these are your interview answers."
+  ],
+  "labHours": 7,
+  "datasets": [
+   {
+    "name": "USGS Earthquakes \u2014 all_day GeoJSON (committed test fixture)",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
+    "whatsMessy": "metadata.count in the header frequently disagrees with the actual number of features in the array, so you must reconcile the reported count against the real count; and when you save two overlapping pulls of the rolling window, the same earthquake feature id appears in both \u2014 you have to dedupe on id idempotently rather than double-count. Some features also carry null/missing ids that must be quarantined, not silently kept."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "pytest \u2014 fixtures and parametrize (how to use)",
+    "url": "https://docs.pytest.org/en/stable/how-to/fixtures.html"
+   },
+   {
+    "title": "pytest \u2014 parametrizing tests",
+    "url": "https://docs.pytest.org/en/stable/how-to/parametrize.html"
+   },
+   {
+    "title": "mypy \u2014 getting started with static typing",
+    "url": "https://mypy.readthedocs.io/en/stable/getting_started.html"
+   },
+   {
+    "title": "Python Packaging \u2014 entry points / console_scripts",
+    "url": "https://packaging.python.org/en/latest/specifications/entry-points/"
+   }
+  ],
+  "sampleScript": {
+   "filename": "quake_recon_starter/",
+   "language": "python",
+   "note": "A src-layout scaffold with a pyproject entry point and ONE parametrized pytest example over a fixture. It defines the seams and types but leaves the real reconcile/dedupe/quarantine logic as TODOs \u2014 you build that. Create the files at the paths shown in each header comment.",
+   "code": "# ============================================================\n# FILE: pyproject.toml\n# ============================================================\n# [build-system]\n# requires = [\"setuptools>=68\"]\n# build-backend = \"setuptools.build_meta\"\n#\n# [project]\n# name = \"quake_recon\"\n# version = \"0.1.0\"\n# requires-python = \">=3.10\"\n#\n# [project.scripts]\n# quake-recon = \"quake_recon.cli:main\"   # <- console entry point\n#\n# [tool.setuptools.packages.find]\n# where = [\"src\"]\n\n\n# ============================================================\n# FILE: src/quake_recon/io.py   (I/O seam \u2014 only place that touches disk)\n# ============================================================\nfrom __future__ import annotations\nimport json\nfrom pathlib import Path\nfrom typing import TypedDict\n\n\nclass Feature(TypedDict):\n    id: str | None          # USGS feature id; can be missing/null in the wild\n    properties: dict\n    geometry: dict\n\n\ndef load_feed(path: Path) -> tuple[list[Feature], int]:\n    \"\"\"Return (features, reported_count) from a committed GeoJSON file.\n    NOTE: read from disk only. Tests must never hit the network.\n    \"\"\"\n    data = json.loads(path.read_text())\n    reported_count = data[\"metadata\"][\"count\"]  # may disagree with len(features)!\n    features: list[Feature] = data[\"features\"]\n    return features, reported_count\n\n\ndef write_rejected(rows: list[dict], out: Path) -> None:\n    # TODO: append each rejected row as JSONL with a `reason` and ISO `rejected_at`.\n    # TODO: make this idempotent-safe (dedupe on id) so reruns don't pile up dups.\n    raise NotImplementedError\n\n\n# ============================================================\n# FILE: src/quake_recon/reconcile.py   (pure logic \u2014 NO I/O here)\n# ============================================================\nfrom __future__ import annotations\nfrom dataclasses import dataclass, field\nfrom .io import Feature\n\n\n@dataclass\nclass ReconcileResult:\n    actual_count: int\n    reported_count: int\n    count_delta: int                       # reported - actual\n    duplicate_ids: list[str] = field(default_factory=list)\n    rejected: list[dict] = field(default_factory=list)  # null/missing-id rows + reason\n\n\ndef reconcile(features: list[Feature], reported_count: int) -> ReconcileResult:\n    \"\"\"THE CONTRACT. Given features + the header count, return a ReconcileResult.\n    TODO: count actual features.\n    TODO: find ids that appear more than once (the overlapping-pull dup case).\n    TODO: quarantine features whose id is None/missing into `rejected` with a reason.\n    TODO: compute count_delta = reported_count - actual_count.\n    Keep this function pure: no printing, no file writes.\n    \"\"\"\n    raise NotImplementedError\n\n\n# ============================================================\n# FILE: src/quake_recon/cli.py   (wiring seam \u2014 argparse -> functions)\n# ============================================================\nfrom __future__ import annotations\nimport argparse\nfrom pathlib import Path\nfrom .io import load_feed\nfrom .reconcile import reconcile\n\n\ndef main(argv: list[str] | None = None) -> int:\n    parser = argparse.ArgumentParser(prog=\"quake-recon\")\n    parser.add_argument(\"--input\", required=True, type=Path)\n    args = parser.parse_args(argv)\n\n    features, reported = load_feed(args.input)\n    result = reconcile(features, reported)\n    # TODO: print a human-readable summary (actual vs reported, dup count).\n    # TODO: write rejected rows via io.write_rejected(...).\n    # TODO: return a non-zero exit code if count_delta != 0 (documented contract).\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n\n\n# ============================================================\n# FILE: tests/test_reconcile.py   (ONE parametrized example \u2014 add the rest)\n# ============================================================\nimport json\nfrom pathlib import Path\nimport pytest\nfrom quake_recon.reconcile import reconcile\nfrom quake_recon.io import load_feed\n\nFIXTURES = Path(__file__).parent / \"fixtures\"\n\n\n@pytest.fixture\ndef all_day() -> tuple[list, int]:\n    return load_feed(FIXTURES / \"all_day.geojson\")\n\n\n# Starter parametrization skeleton. Fill in expected values for each edge case,\n# and add cases for: empty feed, missing/null id, count mismatch.\n@pytest.mark.parametrize(\n    \"fixture_name, expect_duplicate_ids\",\n    [\n        (\"all_day.geojson\", False),          # baseline single pull\n        (\"all_day_overlap.geojson\", True),   # TODO: overlapping pull w/ repeated ids\n    ],\n)\ndef test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -> None:\n    features, reported = load_feed(FIXTURES / fixture_name)\n    result = reconcile(features, reported)\n    # TODO: assert bool(result.duplicate_ids) == expect_duplicate_ids\n    # TODO: assert result.actual_count == <the number you counted by hand>\n    raise NotImplementedError\n"
+  },
+  "deliverable": "A src-layout Python package (quake_recon) with io/reconcile/cli seams that reconciles the USGS all_day feed's metadata.count against the actual feature count, dedupes duplicate ids across overlapping pulls, and quarantines null-id records to a rejected JSONL file with a reason + timestamp. Ships with: committed GeoJSON fixtures, a parametrized pytest suite (empty feed, dup ids, missing field, count mismatch), zero mypy errors, a pyproject with a console_scripts entry point, a built wheel in dist/, a README documenting the contract (inputs/outputs/exit codes), and a WHY.md decisions note.",
+  "acceptance": "Graded by a 30-second clone-and-run: `mypy src/` reports zero errors; `pytest` passes with the parametrized suite covering empty feed, duplicate ids, missing/null id field, and count mismatch, all reading committed fixtures (no network in tests); `python -m build` produces a wheel; that wheel installs into a fresh empty venv and the `quake-recon --input tests/fixtures/all_day.geojson` console command runs end-to-end, printing actual vs. reported counts and writing quarantined records to a rejected file with reason + timestamp. Rerunning the command over overlapping pulls produces no duplicate output rows (idempotent). README states the contract and WHY.md explains the dedupe, quarantine, and idempotency choices."
+ },
+ {
+  "week": "Week 9",
+  "module": "M05 \u2014 SQL I: joins & filtering",
+  "businessFraming": "When a revenue dashboard silently drops customers with no orders, or double-counts sales because an invoice fanned out across its line items, leadership makes decisions on wrong numbers and trust in the data team evaporates. Being able to read an ERD and predict exactly which rows an INNER vs LEFT join keeps, drops, or duplicates is the daily reasoning that keeps report totals correct.",
+  "labSummary": "Load the Chinook sample database into DuckDB and write 8\u201310 documented SQL queries that exercise filtering, multi-hop INNER JOINs, a LEFT JOIN that surfaces parentless rows, an employee\u2192manager self-join, and a fan-out that inflates a total. Chinook is intentionally clean so you can isolate join and grain mechanics; the point is to predict row counts before you run and explain every delta.",
+  "labSteps": [
+   "Install DuckDB (`pip install duckdb`), download `Chinook_Sqlite.sqlite` from the Chinook releases page, and run the starter scaffold to ATTACH the SQLite file and confirm the tables (Artist, Album, Track, Invoice, InvoiceLine, Customer, Employee) are visible.",
+   "Before writing joins, print the schema of the core tables and sketch the ERD on paper: mark each primary key and each foreign key (Album.ArtistId, Track.AlbumId, InvoiceLine.InvoiceId, Invoice.CustomerId, Customer.SupportRepId, Employee.ReportsTo). You will predict row counts from this sketch.",
+   "Write 2 FILTER queries: customers in one Country sorted by name, and tracks whose Name matches a LIKE pattern with a price threshold. Add a one-line comment stating the grain (one row per ___).",
+   "Write the multi-hop INNER JOIN: Artist \u2192 Album \u2192 Track \u2192 InvoiceLine \u2192 Invoice \u2192 Customer to answer 'which customers bought music by a given artist?'. Comment which rows this silently drops (artists never purchased, customers with no invoices).",
+   "Write the LEFT JOIN Artist \u2192 Album filtered to `WHERE Album.AlbumId IS NULL` to surface parentless rows \u2014 artists with zero albums \u2014 the exact rows the INNER version hid.",
+   "Write the self-join Employee e \u2192 Employee m ON `e.ReportsTo = m.EmployeeId`; use a LEFT join so the top manager (ReportsTo IS NULL) is not dropped, and output each employee next to their manager's name.",
+   "Demonstrate fan-out: join Invoice to InvoiceLine, show that one invoice becomes many rows, and prove that naively SUM-ing Invoice.Total after the join inflates revenue; then write the correct grain-aware aggregation.",
+   "Pick one pair of tables and write the SAME query twice \u2014 once INNER, once LEFT \u2014 capture both row counts, and write a 3\u20135 sentence note explaining the exact delta and which real report bug each version would cause.",
+   "Save each query as a numbered .sql file with a header comment stating its result grain and expected vs actual row count; commit the folder plus the WHY note as your deliverable."
+  ],
+  "labHours": 5,
+  "datasets": [
+   {
+    "name": "Chinook sample database (Chinook_Sqlite.sqlite / Parquet)",
+    "url": "https://github.com/lerocha/chinook-database",
+    "whatsMessy": "Intentionally CLEAN by design \u2014 no nulls in keys, no schema drift. This week isolates join and grain mechanics (fan-out, parentless rows, self-referencing FKs) so the only 'mess' is the reasoning trap: an INNER join quietly dropping rows and a fan-out quietly double-counting. Real messy data (429s, late records, mixed dates) returns in W11\u201313."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "DuckDB \u2014 SQL Introduction",
+    "url": "https://duckdb.org/docs/sql/introduction"
+   },
+   {
+    "title": "DuckDB \u2014 SQLite extension (ATTACH / read .sqlite)",
+    "url": "https://duckdb.org/docs/extensions/sqlite"
+   },
+   {
+    "title": "DuckDB \u2014 Reading and writing Parquet files",
+    "url": "https://duckdb.org/docs/data/parquet/overview"
+   },
+   {
+    "title": "Chinook database schema & ERD (lerocha/chinook-database)",
+    "url": "https://github.com/lerocha/chinook-database"
+   }
+  ],
+  "sampleScript": {
+   "filename": "load_chinook.py",
+   "language": "python",
+   "code": "\"\"\"\nWeek 9 starter scaffold \u2014 LAND the Chinook data in DuckDB, then STOP.\nThis file only opens a connection and exposes the tables. The queries are YOUR job.\n\nSetup (once):\n    pip install duckdb\n    # Download Chinook_Sqlite.sqlite from:\n    #   https://github.com/lerocha/chinook-database/releases\n    # and put it next to this file.\n\"\"\"\n\nimport duckdb\n\nDB_PATH = \"chinook.duckdb\"          # persistent DuckDB file (so your work survives reruns)\nSQLITE_FILE = \"Chinook_Sqlite.sqlite\"\n\ncon = duckdb.connect(DB_PATH)\n\n# The sqlite extension lets DuckDB read a .sqlite file directly.\ncon.execute(\"INSTALL sqlite; LOAD sqlite;\")\n\n# ATTACH mounts the SQLite DB read-only under the alias `chinook`.\n# You can now query e.g.  chinook.Artist, chinook.Customer, chinook.Employee ...\ncon.execute(f\"ATTACH '{SQLITE_FILE}' AS chinook (TYPE sqlite);\")\n\n# Sanity check \u2014 confirm tables are visible before you write real queries.\nprint(con.execute(\"SELECT name FROM (SHOW ALL TABLES) WHERE database = 'chinook'\").fetchdf())\n\n# ------------------------------------------------------------------\n# TODO 1: Print the schema of Artist, Album, Track, InvoiceLine,\n#         Invoice, Customer, Employee. Sketch the ERD before querying.\n# TODO 2: FILTER \u2014 customers in a single Country, sorted; add a WHERE + LIKE.\n# TODO 3: Multi-hop INNER JOIN artist -> album -> track -> invoiceline ->\n#         invoice -> customer. Which customers bought a given artist?\n# TODO 4: LEFT JOIN Artist -> Album to surface artists with NO albums\n#         (the parentless rows: WHERE Album.AlbumId IS NULL).\n# TODO 5: SELF-JOIN Employee e -> Employee m ON e.ReportsTo = m.EmployeeId.\n#         Use LEFT so the top manager (ReportsTo IS NULL) is not dropped.\n# TODO 6: FAN-OUT \u2014 join Invoice to InvoiceLine and show how one invoice\n#         row becomes many; prove it inflates SUM(Total) if you double-count.\n# TODO 7: Write ONE query twice (INNER vs LEFT on the same tables) and\n#         record the row-count delta + WHY those rows differ.\n# TODO 8: Save each query as a numbered .sql file with a comment header\n#         stating the grain of the result (one row per ___).\n# ------------------------------------------------------------------\n\ncon.close()\n",
+   "note": "Scaffold only: it lands the data via ATTACH and prints the table list. It writes zero business queries \u2014 every JOIN, filter, and the INNER-vs-LEFT delta note are the learner's work at the TODO markers."
+  },
+  "deliverable": "A `week09-sql-joins/` folder containing 8\u201310 numbered `.sql` files (each with a header comment stating its result grain and expected vs actual row count) plus a `WHY.md` note. The queries must cover: 2 filtering queries, a multi-hop INNER JOIN artist\u2192\u2026\u2192customer, a LEFT JOIN surfacing parentless (album-less) artists, an employee\u2192manager self-join that retains the top manager, a fan-out demonstration with the grain-correct fix, and one query written twice (INNER vs LEFT) with the row-count delta recorded.",
+  "acceptance": "Running the queries against the attached Chinook DB reproduces the row counts documented in each file's header. The LEFT JOIN returns at least one parentless row that the INNER version omits; the self-join output includes the top-level manager (ReportsTo IS NULL) rather than dropping them; the fan-out query visibly turns one invoice into multiple rows and the WHY.md explains why naive SUM(Total) over-counts revenue and how the corrected aggregation fixes it. WHY.md states the exact INNER-vs-LEFT row-count delta for the paired query and names, in one sentence each, the real report bug each variant would cause."
+ },
+ {
+  "week": "Week 10",
+  "module": "M05 \u2014 SQL II \u2014 aggregation & subqueries",
+  "businessFraming": "Every number you put in front of finance or a skeptical PM \u2014 \"revenue per country,\" \"active customers per genre\" \u2014 is an aggregation with a grain and a NULL-handling choice baked in. The day someone asks \"does this COUNT include the customers with no state on file?\" and you can't answer, the whole report loses trust; a COUNT that silently drops NULLs understates a churn or coverage metric and can send money and headcount to the wrong place.",
+  "labSummary": "On the Chinook database in DuckDB, build a ~10-query analytical pack covering GROUP BY+HAVING, set operations (EXCEPT/INTERSECT), and scalar/EXISTS/derived-table subqueries. Every query is annotated with its exact result grain (\"one row per country-genre pair\") and a one-line correctness proof, and the pack includes a deliberate NOT IN + NULL trap that returns the wrong answer plus its NOT EXISTS fix.",
+  "labSteps": [
+   "Get the data: install the DuckDB CLI (or the Python `duckdb` package), clone https://github.com/lerocha/chinook-database, and load the Chinook schema into a local `chinook.duckdb` file \u2014 either by running the SQLite/SQL build script through DuckDB or by `INSTALL sqlite; LOAD sqlite; ATTACH 'Chinook_Sqlite.sqlite' AS chinook (TYPE sqlite);`. Run 2-3 `SELECT count(*)` checks against `invoices`, `invoice_items`/`InvoiceLine`, `tracks`, and `customers` and record the counts as your sanity baseline.",
+   "Write 3 GROUP BY + HAVING queries whose grain you can name in one sentence each: (a) total revenue per billing country, (b) revenue per genre, (c) customers per country having more than N invoices. For each, add a comment line stating the exact result grain \u2014 e.g. `-- grain: one row per BillingCountry; measure = SUM(Total)` \u2014 and confirm HAVING filters groups, not rows.",
+   "Prove your COUNT isn't lying about NULLs: pick a nullable column (e.g. `customers.Company` or `State`) and run `COUNT(*)` vs `COUNT(<column>)` side by side in one query. Comment the delta \u2014 `-- COUNT(*)=59, COUNT(State)=30 -> 29 customers have NULL State and are excluded by COUNT(col)` \u2014 so you can defend exactly what each number represents.",
+   "Write 2 set-operation queries against the same-shaped column lists: use EXCEPT to find customers who bought from genre A but never genre B, and INTERSECT to find tracks appearing in two different playlists (or customers active in two years). Note in a comment that set ops dedupe by default (vs UNION ALL) and why that matches the question's grain.",
+   "Write 3 subquery queries \u2014 one of each kind: a scalar subquery (e.g. each customer's spend vs the overall average in a `WHERE` or `SELECT`), an EXISTS/correlated subquery (customers who have at least one invoice over $X), and a derived-table subquery (aggregate in a subquery, then filter/join the result \u2014 e.g. per-customer totals wrapped as a derived table). Annotate the grain each one returns.",
+   "Build the NOT IN + NULL trap deliberately: write a `WHERE col NOT IN (SELECT nullable_col FROM ...)` where the subquery contains at least one NULL, and show it returns zero/too-few rows (three-valued logic makes the whole predicate never TRUE). Then write the correct version with `NOT EXISTS` (or add `WHERE nullable_col IS NOT NULL`) and show the row counts differ. Comment both with the row counts as evidence.",
+   "Assemble all queries into a single `analytics_pack.sql` file in run order, each block preceded by: a plain-English question, a `-- grain:` line, and a `-- why correct:` line. Ensure the file runs top-to-bottom idempotently (read-only SELECTs; if you materialize anything use `CREATE OR REPLACE VIEW`/`TABLE` so a rerun produces no duplicates and no errors).",
+   "Write a short `NOTES.md` (the interview-answer file): for the NOT IN trap, state the specific failure (NULL in the subquery -> NOT IN predicate evaluates to UNKNOWN -> row excluded) and your fix; and for one GROUP BY row, write the sentence you'd say to a stakeholder about exactly what that row counts and how NULLs were handled."
+  ],
+  "labHours": 4.5,
+  "datasets": [
+   {
+    "name": "Chinook sample database",
+    "url": "https://github.com/lerocha/chinook-database",
+    "whatsMessy": "A clean, well-normalized learning schema \u2014 so the 'mess' here is not dirty data but aggregation-grain and subquery-correctness traps: nullable columns (customer State/Company, some track composers) that make COUNT(col) silently drop rows and make NOT IN return wrong answers, plus fan-out risk when joining invoices to invoice lines before aggregating. The lab forces you to name the grain and prove the NULL handling on every number."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "DuckDB \u2014 Aggregate functions (COUNT, SUM, and NULL handling)",
+    "url": "https://duckdb.org/docs/stable/sql/functions/aggregates"
+   },
+   {
+    "title": "DuckDB \u2014 GROUP BY and HAVING clauses",
+    "url": "https://duckdb.org/docs/stable/sql/query_syntax/groupby"
+   },
+   {
+    "title": "DuckDB \u2014 Set operations (UNION / EXCEPT / INTERSECT)",
+    "url": "https://duckdb.org/docs/stable/sql/query_syntax/setops"
+   },
+   {
+    "title": "PostgreSQL \u2014 Subquery expressions (IN / NOT IN / EXISTS and the NULL pitfall)",
+    "url": "https://www.postgresql.org/docs/current/functions-subquery.html"
+   }
+  ],
+  "sampleScript": null,
+  "deliverable": "An `analytics_pack.sql` file (~10 queries) run against Chinook in DuckDB, where each query is preceded by a plain-English question, a `-- grain:` line naming exactly what one result row represents, and a `-- why correct:` line \u2014 plus one worked NOT IN + NULL trap alongside its NOT EXISTS fix with the differing row counts shown. A companion `NOTES.md` records the NULL/COUNT decision and the sentence you'd use to defend one GROUP BY row to a stakeholder.",
+  "acceptance": "The full `analytics_pack.sql` runs top-to-bottom in DuckDB with no errors and is idempotent on rerun (read-only SELECTs, or CREATE OR REPLACE for any materialized object \u2014 no duplicates, no failures). It contains at least: 3 GROUP BY+HAVING queries, one EXCEPT and one INTERSECT, and one each of scalar / EXISTS / derived-table subqueries \u2014 every block carrying a grain line and a why-correct line. The COUNT(*) vs COUNT(col) query demonstrates a real NULL delta with the number commented, and the NOT IN trap and its NOT EXISTS fix show different row counts as evidence. `NOTES.md` states the specific NOT IN + NULL failure mechanism, the chosen fix, and one stakeholder-facing sentence describing exactly what a named GROUP BY row counts and how NULLs were treated."
+ },
+ {
+  "week": "Week 11",
+  "module": "M06 \u2014 Advanced SQL I: window functions & CTEs",
+  "businessFraming": "Climate, energy-load, and agriculture teams live on rolling-window and period-over-period math run on messy sensor feeds \u2014 a wrong 7-day average or a missed temperature swing feeds directly into demand forecasts, crop-loss claims, and grid-capacity decisions worth millions. The hard part is never the SQL; it is the -9999 missing readings and quality-control flags that silently poison a moving average if you don't handle them before the window ever runs.",
+  "labSummary": "Load a subset of NOAA GHCN-Daily observations for a handful of weather stations into DuckDB, quarantine bad readings (-9999 sentinels and failed QC flags) into a rejected table with reasons, then answer four business questions \u2014 top-N ranking per month, day-over-day change detection, a 7-day moving average, and a running cumulative total \u2014 each written as a single, named-CTE-structured query with no nested subquery pyramids.",
+  "labSteps": [
+   "Pick 4-6 stations and pull their data: either download a couple of per-station CSVs from the /access/ folder or grab a recent year file from /by_year/ (long format: ID, DATE, ELEMENT, VALUE, M-FLAG, Q-FLAG, S-FLAG, OBS-TIME). Note in your README exactly which stations/years you chose and why (e.g. mix of stations that start/stop reporting mid-period).",
+   "Start from the starter scaffold: use DuckDB read_csv to load the raw files into a `raw_obs` table, keeping only ELEMENT in ('TMAX','TMIN','PRCP') and casting DATE properly. Do NOT drop bad rows yet \u2014 you inspect them first.",
+   "Build a quarantine step: write rows to a `rejected_obs` table with a `reason` column and a `rejected_at` timestamp for (a) VALUE = -9999 sentinels and (b) any non-blank Q-FLAG (failed a QC check). Everything clean lands in a `clean_obs` table with VALUE scaled to real units (TMAX/TMIN are tenths of degrees C, PRCP is tenths of mm). Record the reject count per reason in your notes.",
+   "Q1 \u2014 Ranking: in ONE query using named CTEs, aggregate a monthly metric per station (e.g. total PRCP or avg TMAX per station-month) and rank top-N stations within each month. Choose RANK vs DENSE_RANK vs ROW_NUMBER deliberately and write one sentence defending your choice on ties (e.g. two stations with identical monthly rainfall).",
+   "Q2 \u2014 Period-over-period: in ONE CTE-structured query use LAG() over (PARTITION BY station, element ORDER BY date) to compute day-over-day change in TMAX and PRCP, then flag the single biggest swing per station. Handle the gap where a station skipped a day so the lag does not silently compare non-adjacent dates.",
+   "Q3 \u2014 Moving average: compute a 7-day moving average of TMAX per station using an explicit window frame `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW`. In your notes, state what your frame does when fewer than 7 readings exist (leading edge / gaps) and why you chose ROWS over RANGE.",
+   "Q4 \u2014 Running total: compute a running cumulative PRCP total within each station partition (PARTITION BY station ORDER BY date, default frame) to model season-to-date accumulation. Confirm the total resets per station and never bleeds across partitions.",
+   "Make it idempotent: wrap the load in CREATE OR REPLACE TABLE (or DELETE-then-INSERT on the station+date+element key) so rerunning the whole script twice yields identical row counts \u2014 no duplicates. Verify with a COUNT(*) before and after a second run.",
+   "Write a short DECISIONS.md: which ranking function and why, how you defined an 'adjacent' day for LAG, your ROWS-frame edge behavior, your reject rules, and your idempotency strategy \u2014 these are your interview answers."
+  ],
+  "labHours": 6,
+  "datasets": [
+   {
+    "name": "NOAA GHCN-Daily (Global Historical Climatology Network \u2014 Daily)",
+    "url": "https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/",
+    "whatsMessy": "-9999 missing-value sentinels that will wreck an average or sum if cast as real numbers; quality-control flags (Q-FLAG) marking failed checks that must be quarantined, not trusted; multiple elements (TMAX/TMIN/PRCP) stacked per station/day in long format that you must normalize; and stations that start or stop reporting mid-period, leaving date gaps that break naive LAG() and moving-window assumptions. Per-station CSVs live under /access/, yearly long-format files under /by_year/, and element codes + flags are documented under /doc/GHCND_documentation.pdf."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "GHCN-Daily documentation (readme, element codes, QC & source flags, units)",
+    "url": "https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/doc/GHCND_documentation.pdf"
+   },
+   {
+    "title": "DuckDB \u2014 Window Functions",
+    "url": "https://duckdb.org/docs/sql/functions/window_functions"
+   },
+   {
+    "title": "DuckDB \u2014 WITH clause (Common Table Expressions)",
+    "url": "https://duckdb.org/docs/sql/query_syntax/with"
+   },
+   {
+    "title": "DuckDB \u2014 read_csv / CSV import",
+    "url": "https://duckdb.org/docs/data/csv/overview"
+   }
+  ],
+  "sampleScript": {
+   "filename": "load_ghcn.sql",
+   "language": "sql",
+   "code": "-- Starter scaffold: land raw GHCN-Daily long-format data into DuckDB and\n-- set up the normalize + quarantine split. This ONLY stages data.\n-- You write the QC/quarantine logic and all four analytical queries.\n--\n-- Run with:  duckdb climate.duckdb < load_ghcn.sql\n-- by_year files are long format with NO header, columns are:\n--   ID, DATE(YYYYMMDD), ELEMENT, VALUE, M_FLAG, Q_FLAG, S_FLAG, OBS_TIME\n\n-- 1) Land the raw rows. Point read_csv at your downloaded file(s).\n--    (A glob like '2023.csv' or a couple of /access/ station files also works\n--     but /access/ files are WIDE format -- adjust columns if you use those.)\nCREATE OR REPLACE TABLE raw_obs AS\nSELECT *\nFROM read_csv(\n    '2023.csv',                 -- TODO: your downloaded GHCN file(s) / glob\n    header = false,\n    columns = {\n        'ID': 'VARCHAR',\n        'OBS_DATE': 'VARCHAR',  -- keep as text for now, cast below\n        'ELEMENT': 'VARCHAR',\n        'VALUE': 'INTEGER',     -- tenths of units; -9999 = missing\n        'M_FLAG': 'VARCHAR',\n        'Q_FLAG': 'VARCHAR',    -- non-blank = failed a QC check\n        'S_FLAG': 'VARCHAR',\n        'OBS_TIME': 'VARCHAR'\n    }\n);\n\n-- 2) Narrow to your stations + the 3 elements you care about.\n--    TODO: replace with the station IDs you selected (see docs for ID format).\nCREATE OR REPLACE VIEW obs_scoped AS\nSELECT\n    ID                                   AS station,\n    strptime(OBS_DATE, '%Y%m%d')::DATE   AS obs_date,\n    ELEMENT                              AS element,\n    VALUE                               AS raw_value,\n    Q_FLAG                               AS q_flag\nFROM raw_obs\nWHERE ELEMENT IN ('TMAX','TMIN','PRCP')\n  AND ID IN ( 'USW00094728' /* TODO: add your 3-5 other station IDs */ );\n\n-- 3) QUARANTINE: split bad rows out WITH A REASON + timestamp.\n--    TODO: insert rows where raw_value = -9999 (reason 'missing_sentinel')\n--          and rows where q_flag <> '' (reason 'failed_qc_' || q_flag)\n--          into rejected_obs(station, obs_date, element, raw_value, reason, rejected_at).\nCREATE OR REPLACE TABLE rejected_obs (\n    station VARCHAR, obs_date DATE, element VARCHAR,\n    raw_value INTEGER, reason VARCHAR, rejected_at TIMESTAMP\n);\n-- INSERT INTO rejected_obs SELECT ... ;   -- <-- your logic here\n\n-- 4) CLEAN table: only rows that pass, with VALUE scaled to real units.\n--    TMAX/TMIN are in tenths of degC; PRCP is in tenths of mm.\n--    TODO: exclude anything you quarantined above, then divide by 10.0.\nCREATE OR REPLACE TABLE clean_obs AS\nSELECT\n    station,\n    obs_date,\n    element,\n    raw_value / 10.0 AS value      -- TODO: confirm scaling per element\nFROM obs_scoped\nWHERE 1 = 0;                       -- TODO: replace with your real WHERE (drop rejects)\n\n-- 5) Sanity check before you build the 4 window queries.\nSELECT 'clean' t, count(*) n FROM clean_obs\nUNION ALL SELECT 'rejected', count(*) FROM rejected_obs;\n\n-- ---- Your four named-CTE queries go in separate files (q1..q4.sql):\n-- Q1 rank top-N stations per month  (defend RANK vs DENSE_RANK vs ROW_NUMBER)\n-- Q2 LAG() day-over-day change + flag biggest swing (mind date gaps)\n-- Q3 7-day moving avg with ROWS BETWEEN 6 PRECEDING AND CURRENT ROW\n-- Q4 running cumulative PRCP within each station partition\n",
+   "note": "Scaffold only: it stages raw rows and stubs the normalize/quarantine split. You write the QC filters, the unit scaling, idempotent reruns, and all four single-query named-CTE analyses. Verify the by_year column order and the -9999 sentinel against GHCND_documentation.pdf before trusting any number."
+  },
+  "deliverable": "A DuckDB database (or reproducible .sql script set) that: (1) loads a subset of NOAA GHCN-Daily observations for 4-6 named stations from long format into a normalized `clean_obs` table with values scaled to real units; (2) quarantines -9999 sentinels and QC-flagged rows into a `rejected_obs` table with a reason and timestamp; and (3) answers the four business questions as four separate single queries, each built ONLY from named CTEs (no nested subquery pyramids) \u2014 top-N stations per month, LAG() day-over-day change with the biggest swing flagged, a 7-day moving average using an explicit ROWS frame, and a running cumulative total per station partition. Include a DECISIONS.md explaining the ranking-function choice on ties, the adjacent-day handling for LAG, the ROWS-frame edge behavior, the reject rules, and the idempotency strategy.",
+  "acceptance": "Passing means: rerunning the load script twice produces identical row counts in clean_obs and rejected_obs (idempotent, no duplicates); zero -9999 values and zero non-blank-Q-FLAG rows remain in clean_obs, and every rejected row carries a non-null reason and rejected_at; each of the four analytical queries uses named CTEs with no nested subqueries and runs on clean_obs; Q1 uses a ranking function whose tie behavior is justified in one sentence; Q2's LAG() does not compare non-adjacent dates across a station's reporting gap; Q3 uses an explicit ROWS BETWEEN 6 PRECEDING AND CURRENT ROW frame; Q4's running total resets per station partition; and DECISIONS.md documents each of those choices with specific rules, not generic statements."
+ },
+ {
+  "week": "Week 12",
+  "module": "M06 \u2014 Advanced SQL II: query plans & tuning",
+  "businessFraming": "When a climate dashboard or a regulatory report times out on a multi-year weather query, the on-call data engineer is expected to open the query plan, name the operator that is burning the time, and defend exactly one index change on a whiteboard \u2014 including which index they refused to add. That \"read the plan and justify the index\" moment is a near-verbatim data-engineering interview task and a real cost/latency lever in production.",
+  "labSummary": "Load a multi-million-row slice of NOAA GHCN-Daily (one by_year file) into local PostgreSQL, then tune a provided slow date-range + station-filter aggregation: capture an EXPLAIN (ANALYZE, BUFFERS) baseline, pinpoint the bottleneck operator, rewrite the non-sargable date predicate, add one composed index, and prove each change against the plan \u2014 ending with a written decision note on the index you added and the one you deliberately did not.",
+  "labSteps": [
+   "1. Download one by_year file from NOAA GHCN-Daily (e.g. 2020.csv.gz \u2014 tens of millions of global rows), gunzip it, and inspect the 8 comma-separated columns (ID, YYYYMMDD date, ELEMENT, VALUE, M/Q/S flags, OBS-TIME) \u2014 note there is no header row and the date arrives as an 8-digit string.",
+   "2. Create the raw table and bulk-load with COPY exactly as in the scaffold, loading obs_date as TEXT on purpose (this is what forces the non-sargable predicate you will fix). Confirm the row count is in the millions with SELECT count(*).",
+   "3. Run the provided intentionally-slow query and capture the baseline with EXPLAIN (ANALYZE, BUFFERS). Save the full plan text to a file (baseline_plan.txt) \u2014 record total time, the top-cost operator (expect a Parallel Seq Scan), rows removed by filter, and shared buffers hit/read.",
+   "4. Diagnose why it is slow: identify that the Seq Scan reads every row and that to_date(obs_date,'YYYYMMDD') in the WHERE clause is non-sargable, so no index on the date could even be used. Write down the bottleneck operator and the reason in your decision note.",
+   "5. Make the predicate sargable: rewrite the date filter to compare obs_date against literal text bounds ('20200601' AND '20200831') OR add a computed date column / expression index \u2014 choose one deliberately. Re-run EXPLAIN (ANALYZE, BUFFERS) and diff against baseline.",
+   "6. Add ONE index that serves the filter + aggregation (compose station_id, element, and the sargable date column; consider column order and whether an index-only scan is achievable by INCLUDE-ing value). Run ANALYZE, re-EXPLAIN, and confirm the plan switched to an Index/Index-Only Scan with fewer buffers.",
+   "7. Prove idempotence of your tuning artifacts: make the load rerunnable without duplicates (TRUNCATE-then-COPY, or COPY into a staging table then INSERT on a unique key), and guard index creation with CREATE INDEX IF NOT EXISTS so a rerun of your tuning script is safe.",
+   "8. Write the decision note (tuning.md): the operator you fixed, the predicate rewrite, the index you added and its column order rationale, and \u2014 critically \u2014 one index you deliberately did NOT add (e.g. a single-column index on element with tiny cardinality, or a redundant index the planner would ignore) and why."
+  ],
+  "labHours": 6,
+  "datasets": [
+   {
+    "name": "NOAA GHCN-Daily \u2014 by_year slice (one year, millions of rows)",
+    "url": "https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/by_year/",
+    "whatsMessy": "Headerless comma-separated long-format files where each row is one station/element/day; the date is an 8-digit YYYYMMDD string (not a DATE), VALUE is an integer in tenths (tenths of degrees C / tenths of mm), and there are sentinel M/Q/S flag columns plus a frequently-empty OBS-TIME. One year is tens of millions of global rows \u2014 realistic size where a full scan actually hurts and index/plan choices are visible in EXPLAIN."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "PostgreSQL Documentation \u2014 Using EXPLAIN",
+    "url": "https://www.postgresql.org/docs/current/using-explain.html"
+   },
+   {
+    "title": "PostgreSQL Documentation \u2014 Indexes (B-tree, multicolumn, index-only scans)",
+    "url": "https://www.postgresql.org/docs/current/indexes.html"
+   },
+   {
+    "title": "PostgreSQL Documentation \u2014 COPY (bulk load)",
+    "url": "https://www.postgresql.org/docs/current/sql-copy.html"
+   },
+   {
+    "title": "PostgreSQL Documentation \u2014 Row Estimation & the Planner (why predicates must be sargable)",
+    "url": "https://www.postgresql.org/docs/current/row-estimation-examples.html"
+   }
+  ],
+  "sampleScript": {
+   "filename": "load_and_slow_query.sql",
+   "language": "sql",
+   "code": "-- ============================================================\n-- Week 12 STARTER SCAFFOLD \u2014 GHCN-Daily bulk load + slow query\n-- Fills in the SETUP only. You build the tuning. Look for TODO.\n-- ============================================================\n\n-- 1) Raw table. NOTE: obs_date is TEXT on purpose (YYYYMMDD).\n--    That choice is what makes the date filter non-sargable later.\nCREATE TABLE IF NOT EXISTS ghcn_raw (\n    station_id text,\n    obs_date   text,      -- 8-digit YYYYMMDD string, e.g. '20200615'\n    element    text,      -- 'TMAX','TMIN','PRCP',...\n    value      integer,   -- tenths of a unit (deg C / mm)\n    m_flag     text,\n    q_flag     text,\n    s_flag     text,\n    obs_time   text\n);\n\n-- 2) Bulk load one by_year file with COPY (headerless CSV).\n--    Download + gunzip first, e.g.:\n--      curl -O https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/by_year/2020.csv.gz\n--      gunzip 2020.csv.gz\n--    IDEMPOTENCY: uncomment TRUNCATE so a rerun does NOT duplicate rows.\n-- TRUNCATE ghcn_raw;\nCOPY ghcn_raw FROM '/absolute/path/to/2020.csv' WITH (FORMAT csv);\n\n-- Sanity check: expect millions of rows.\n-- SELECT count(*) FROM ghcn_raw;\n\nANALYZE ghcn_raw;\n\n-- 3) THE INTENTIONALLY-SLOW QUERY. Do NOT edit it yet \u2014 baseline it first.\n--    Summer daily-high averages for US stations.\nSELECT station_id, element, avg(value) / 10.0 AS avg_deg_c\nFROM   ghcn_raw\nWHERE  to_date(obs_date, 'YYYYMMDD') BETWEEN DATE '2020-06-01' AND DATE '2020-08-31'  -- non-sargable!\n  AND  station_id LIKE 'US%'\n  AND  element = 'TMAX'\nGROUP  BY station_id, element;\n\n-- TODO(a): capture the baseline plan and save it:\n--   EXPLAIN (ANALYZE, BUFFERS) <the query above>;\n--   -> record total time, the top operator (Seq Scan?), rows removed by filter, buffers.\n\n-- TODO(b): rewrite the date predicate to be SARGABLE.\n--   Hint: obs_date is text in YYYYMMDD, which sorts lexically like dates.\n--   Compare obs_date to text bounds instead of wrapping it in to_date(...).\n\n-- TODO(c): add exactly ONE composed index to serve filter + aggregation.\n--   Think about column order (equality cols first, range last) and whether\n--   INCLUDE (value) lets you get an INDEX-ONLY scan.\n--   CREATE INDEX IF NOT EXISTS ... ;  ANALYZE ghcn_raw;\n\n-- TODO(d): re-run EXPLAIN (ANALYZE, BUFFERS) after (b) and again after (c).\n--   Prove each change: operator switched, time dropped, buffers dropped.\n\n-- TODO(e): in tuning.md, name ONE index you deliberately did NOT add and why.\n",
+   "note": "Scaffold only: it lands the raw data and hands you the slow query. You write the baseline capture, the sargable rewrite, the single composed index, and the before/after plan proof. Do not replace the provided query until you have saved its baseline plan."
+  },
+  "deliverable": "A tuning package for the GHCN-Daily slice containing: (1) load_and_slow_query.sql extended with your sargable predicate rewrite and your CREATE INDEX IF NOT EXISTS statement; (2) three saved plan files \u2014 baseline_plan.txt, after_rewrite_plan.txt, after_index_plan.txt \u2014 each from EXPLAIN (ANALYZE, BUFFERS); and (3) tuning.md documenting the bottleneck operator, the predicate rewrite, the index you added with its column-order rationale, and one index you deliberately did NOT add and why.",
+  "acceptance": "Accepted when: the table is loaded with a verifiable multi-million row count via COPY; baseline_plan.txt shows a sequential scan as the dominant operator on the original query; the rewritten predicate is sargable (no function wrapping obs_date in the WHERE clause) and after_index_plan.txt shows the planner using an Index Scan or Index-Only Scan with a measurable drop in both execution time and shared buffers versus baseline; the load and index creation are idempotent (rerunning produces no duplicate rows and no error); and tuning.md explicitly names the index added, its column order rationale, and at least one index deliberately not added with justification."
+ },
+ {
+  "week": "Week 13",
+  "module": "M07 \u2014 Relational theory & normalization (keys, FDs, 1NF\u21923NF)",
+  "businessFraming": "NYC's restaurant-inspection feed repeats a venue's name, address, borough, and cuisine on every single inspection and violation row \u2014 so when a restaurant changes its name or moves, you either update dozens of rows correctly or silently corrupt your data, and a brand-new venue with no inspection yet can't even be recorded. Those are the exact update, delete, and insert anomalies that normalization exists to kill, and getting them wrong is how a public health dashboard shows a shuttered address as \"grade pending.\"",
+  "labSummary": "Profile the wide, denormalized NYC DOHMH inspection flat file in pandas to empirically discover functional dependencies and quantify redundancy, then design and build a 3NF schema in DuckDB (restaurant / inspection / violation + cuisine/borough lookups) with real PRIMARY KEY and FOREIGN KEY constraints. Split the flat file into the normalized tables idempotently, then PROVE integrity by watching DuckDB reject an FK-violating insert and a duplicate-PK insert, add one deliberately justified denormalization, and ship the whole thing as your Phase 1 capstone README.",
+  "labSteps": [
+   "LAND THE DATA: page the Socrata API at https://data.cityofnewyork.us/resource/43nn-pn8j.json using $limit/$offset (pull ~50k rows) into a raw DataFrame, and write it verbatim to a local raw_inspections.parquet so every rerun starts from the same immutable snapshot (no re-hitting the API).",
+   "PROFILE FOR FDs: in pandas, quantify the redundancy \u2014 e.g. groupby('camis') and confirm dba/building/street/boro/cuisine_description are (nearly) constant per CAMIS; count how many times each restaurant's name+address is physically repeated across rows; flag the CAMIS values where the 'constant' columns actually disagree (schema drift / late edits) as candidate dirty keys.",
+   "DISCOVER KEYS & ANOMALIES: verify candidate keys empirically \u2014 test whether camis alone, (camis, inspection_date, inspection_type), and (camis, inspection_date, inspection_type, violation_code) are unique; write down which grain each represents (restaurant vs inspection vs violation) and note the nulls in violation_code/grade/inspection_date that break naive keys.",
+   "MODEL THE ERD: draw the target 3NF schema as a Mermaid erDiagram (or dbdiagram.io) \u2014 restaurant (PK camis), inspection (PK inspection_id derived from camis+date+type), violation (PK/composite FK to inspection + violation_code), plus cuisine and boro lookup tables \u2014 showing every FK relationship and cardinality; commit the .mmd/source into the repo.",
+   "WRITE DDL: fill in the starter scaffold to CREATE the staging table plus the five target tables in DuckDB with explicit PRIMARY KEY and FOREIGN KEY constraints, choosing column types deliberately (dates as DATE, score as INTEGER) and documenting why each PK was chosen in a comment.",
+   "SPLIT IDEMPOTENTLY: load raw_inspections.parquet into staging, then run INSERT ... SELECT DISTINCT statements (lookups first, then restaurant, inspection, violation) to populate the normalized tables; make reruns safe by using CREATE OR REPLACE / DELETE-before-load / anti-join so a second run produces zero duplicate rows \u2014 state which idempotency strategy you chose and why.",
+   "QUARANTINE BAD ROWS: before the FK-constrained inserts, route rows that would violate integrity (null camis, unparseable inspection_date, violation_code not tied to a valid inspection) into a rejected_rows table with a reason column and a load timestamp instead of dropping them silently.",
+   "PROVE INTEGRITY: run two inserts that MUST fail and capture the DuckDB error text in your README \u2014 (a) an INSERT into violation referencing a camis/inspection_id that does not exist (FK violation), and (b) an INSERT into restaurant reusing an existing camis (duplicate PK); show that both are rejected and explain in one line what each proves.",
+   "JUSTIFY ONE DENORMALIZATION + SHIP README: add exactly one deliberate denormalization (e.g. carry cuisine_description onto inspection, or store latest_grade on restaurant) and write 2-3 sentences on the read/query win vs the update-anomaly risk you re-accepted; then assemble the Phase 1 portfolio README (business framing, ERD image, DDL, the two rejected inserts, the why-notes) so a hiring manager can clone and read it in 30 seconds."
+  ],
+  "labHours": 7,
+  "datasets": [
+   {
+    "name": "NYC DOHMH Restaurant Inspection Results (Socrata)",
+    "url": "https://data.cityofnewyork.us/resource/43nn-pn8j.json (API) \u00b7 dataset page https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j",
+    "whatsMessy": "The textbook denormalized flat file: restaurant name (dba), building/street, borough, and cuisine_description are repeated on EVERY inspection and violation row, so one venue appears hundreds of times; a single inspection fans out into multiple rows (one per violation_code); inspection_date, grade, violation_code, and score contain nulls; the same CAMIS occasionally carries slightly different name/address strings across rows (edits over time); and the API paginates at 1,000 rows per request so you must loop $limit/$offset to assemble a real dataset."
+   }
+  ],
+  "referenceMaterials": [
+   {
+    "title": "DuckDB \u2014 CREATE TABLE, PRIMARY KEY & FOREIGN KEY constraints",
+    "url": "https://duckdb.org/docs/sql/statements/create_table"
+   },
+   {
+    "title": "DuckDB \u2014 Constraints (primary/foreign/unique/not null) reference",
+    "url": "https://duckdb.org/docs/sql/constraints"
+   },
+   {
+    "title": "Normalization: 1NF \u2192 2NF \u2192 3NF \u2192 BCNF explained",
+    "url": "https://en.wikipedia.org/wiki/Database_normalization"
+   },
+   {
+    "title": "Mermaid Entity-Relationship Diagram syntax",
+    "url": "https://mermaid.js.org/syntax/entityRelationshipDiagram.html"
+   }
+  ],
+  "sampleScript": {
+   "filename": "build_normalized.sql",
+   "language": "sql",
+   "note": "A DuckDB DDL + split SKELETON, not a solution. It creates staging + the target 3NF tables with PK/FK constraints and stubs the INSERT...SELECT split. You must: derive a stable inspection_id, choose DISTINCT/anti-join logic that makes reruns idempotent, add the rejected_rows quarantine, and pick your one justified denormalization. Run with: duckdb nyc.duckdb < build_normalized.sql",
+   "code": "-- ============================================================\n-- Week 13 \u2014 Normalize the NYC DOHMH flat file into 3NF (DuckDB)\n-- Load raw_inspections.parquet (landed in the pandas step) first.\n-- ============================================================\n\n-- 0) STAGING: mirror the wide flat file exactly, no constraints.\nCREATE OR REPLACE TABLE stg_inspections AS\nSELECT * FROM read_parquet('raw_inspections.parquet');\n-- TODO: sanity-check row count + peek at columns (camis, dba, boro,\n--       cuisine_description, inspection_date, inspection_type,\n--       violation_code, score, grade).\n\n-- 1) LOOKUP TABLES (small dimensions the fact rows repeat endlessly)\nCREATE OR REPLACE TABLE boro (\n    boro_name TEXT PRIMARY KEY\n);\nCREATE OR REPLACE TABLE cuisine (\n    cuisine_description TEXT PRIMARY KEY\n);\n-- TODO: INSERT ... SELECT DISTINCT the non-null values from staging.\n--       Decide how to treat '' / '0' / NULL boro codes.\n\n-- 2) RESTAURANT  (grain = one row per CAMIS)\nCREATE OR REPLACE TABLE restaurant (\n    camis               TEXT PRIMARY KEY,\n    dba                 TEXT,\n    building            TEXT,\n    street              TEXT,\n    zipcode             TEXT,\n    boro_name           TEXT REFERENCES boro(boro_name),\n    cuisine_description TEXT REFERENCES cuisine(cuisine_description)\n    -- TODO (denormalization decision): should latest_grade live here?\n    --      If you add it, justify the update-anomaly risk in the README.\n);\n-- TODO: INSERT ... SELECT \u2014 collapse many rows per camis to ONE.\n--       A restaurant can have conflicting name/address strings across\n--       rows: pick a rule (e.g. most recent inspection_date wins) and\n--       write down why. Rows with NULL camis must NOT land here.\n\n-- 3) INSPECTION (grain = one visit: camis + date + type)\nCREATE OR REPLACE TABLE inspection (\n    inspection_id   TEXT PRIMARY KEY,          -- TODO: derive a stable id\n    camis           TEXT NOT NULL REFERENCES restaurant(camis),\n    inspection_date DATE,\n    inspection_type TEXT,\n    score           INTEGER,\n    grade           TEXT\n    -- TODO: pick your ONE justified denormalization if it belongs here\n    --       (e.g. carry cuisine_description for fast filtering).\n);\n-- TODO: build inspection_id (e.g. hash/concat of camis||date||type),\n--       CAST inspection_date TEXT -> DATE, and INSERT SELECT DISTINCT.\n--       Idempotency: use CREATE OR REPLACE or an anti-join so a rerun\n--       adds zero duplicates \u2014 state your choice.\n\n-- 4) VIOLATION (grain = one violation on one inspection)\nCREATE OR REPLACE TABLE violation (\n    inspection_id  TEXT NOT NULL REFERENCES inspection(inspection_id),\n    violation_code TEXT NOT NULL,\n    description    TEXT,\n    critical_flag  TEXT,\n    PRIMARY KEY (inspection_id, violation_code)   -- TODO: verify unique\n);\n-- TODO: INSERT SELECT \u2014 rows with NULL violation_code are not violations;\n--       route them (and orphan inspection_ids) to rejected_rows instead.\n\n-- 5) QUARANTINE\n-- CREATE OR REPLACE TABLE rejected_rows (\n--     reason        TEXT,\n--     rejected_at   TIMESTAMP DEFAULT now(),\n--     raw_camis     TEXT,\n--     raw_row       TEXT\n-- );\n-- TODO: before the FK inserts, capture null-key / bad-date / orphan rows.\n\n-- 6) PROVE INTEGRITY (these two statements MUST fail \u2014 paste errors in README)\n-- INSERT INTO violation VALUES ('does-not-exist','10F','x','N');   -- FK reject\n-- INSERT INTO restaurant (camis) VALUES ('<an-existing-camis>');   -- dup PK reject\n"
+  },
+  "deliverable": "A Git repo Phase 1 capstone: (1) a pandas profiling notebook/script that lands raw_inspections.parquet and prints the discovered functional dependencies + redundancy counts; (2) an ERD (Mermaid/dbdiagram source + rendered image) of the 3NF design; (3) build_normalized.sql producing a DuckDB database with 5 constrained tables (restaurant, inspection, violation, boro, cuisine), a rejected_rows quarantine table, and idempotent INSERT...SELECT splits; (4) a README.md with the business framing, the ERD, the FD/anomaly findings, the two rejected-insert error outputs (FK + duplicate PK), and a short write-up of the one justified denormalization and the idempotency strategy chosen.",
+  "acceptance": "A grader who clones the repo and runs `duckdb nyc.duckdb < build_normalized.sql` gets a fully populated 3NF database with enforced PK/FK constraints; running it a SECOND time yields identical row counts (proven idempotent, no duplicates). The README shows (a) at least three empirically discovered functional dependencies from the flat file with redundancy counts, (b) the ERD, (c) captured DuckDB errors for both a FK-violating insert and a duplicate-PK insert, (d) evidence that bad rows (null camis / unparseable date / orphan violation) landed in rejected_rows with a reason + timestamp rather than being dropped, and (e) 2-3 sentences justifying exactly one denormalization by naming the query win and the re-accepted update-anomaly risk. The 30-second README skim makes the business consequence (update/insert/delete anomalies on repeated restaurant facts) obvious."
+ }
+]

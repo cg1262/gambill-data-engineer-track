@@ -1,0 +1,633 @@
+<title>Launch · Phase 4 — Advanced & Launch</title>
+<style>
+  :root {
+    --bg: #EFF2F5; --surface: #FFFFFF; --surface-2: #E7ECF0; --surface-3: #DCE3E9;
+    --ink: #101922; --ink-2: #2C3A47; --muted: #5C6B78; --faint: #8494A1;
+    --line: #D3DBE2; --line-strong: #B7C2CC;
+    --accent: #E8842A; --accent-strong: #A65210; --accent-soft: #FBEAD6; --accent-ink: #7E3D0D;
+    --blue: #6FA3D2; --blue-strong: #3F73A8; --blue-soft: #E9F1F9;
+    --bronze: #A26B37; --silver: #7C8894; --gold: #B08A2A; --bronze-soft: #F0E4D6;
+    --good: #3C8C5C; --good-soft: #DCEDE2; --warn: #B0791F; --warn-soft: #F3E8D2;
+    --code-bg: #F5F1EC;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --maxw: 1120px; --radius: 4px; --radius-lg: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0A1118; --surface: #101B24; --surface-2: #16232E; --surface-3: #1D2E3A;
+      --ink: #E9EFF4; --ink-2: #C4D0DA; --muted: #92A1AE; --faint: #6E7E8B;
+      --line: #22333F; --line-strong: #2E4351;
+      --accent: #F0954A; --accent-strong: #F4A860; --accent-soft: #3A2413; --accent-ink: #F7C08A;
+      --blue: #83B4DE; --blue-strong: #ACCDEC; --blue-soft: #172836;
+      --bronze: #C79357; --silver: #9EAAB6; --gold: #D2AC4E; --bronze-soft: #2A2117;
+      --good: #5DB77C; --good-soft: #16281D; --warn: #D2A040; --warn-soft: #2A2211;
+      --code-bg: #0D1620;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #EFF2F5; --surface: #FFFFFF; --surface-2: #E7ECF0; --surface-3: #DCE3E9;
+    --ink: #101922; --ink-2: #2C3A47; --muted: #5C6B78; --faint: #8494A1;
+    --line: #D3DBE2; --line-strong: #B7C2CC;
+    --accent: #E8842A; --accent-strong: #A65210; --accent-soft: #FBEAD6; --accent-ink: #7E3D0D;
+    --blue: #6FA3D2; --blue-strong: #3F73A8; --blue-soft: #E9F1F9;
+    --bronze: #A26B37; --silver: #7C8894; --gold: #B08A2A; --bronze-soft: #F0E4D6;
+    --good: #3C8C5C; --good-soft: #DCEDE2; --warn: #B0791F; --warn-soft: #F3E8D2;
+    --code-bg: #F5F1EC;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A1118; --surface: #101B24; --surface-2: #16232E; --surface-3: #1D2E3A;
+    --ink: #E9EFF4; --ink-2: #C4D0DA; --muted: #92A1AE; --faint: #6E7E8B;
+    --line: #22333F; --line-strong: #2E4351;
+    --accent: #F0954A; --accent-strong: #F4A860; --accent-soft: #3A2413; --accent-ink: #F7C08A;
+    --blue: #83B4DE; --blue-strong: #ACCDEC; --blue-soft: #172836;
+    --bronze: #C79357; --silver: #9EAAB6; --gold: #D2AC4E; --bronze-soft: #2A2117;
+    --good: #5DB77C; --good-soft: #16281D; --warn: #D2A040; --warn-soft: #2A2211;
+    --code-bg: #0D1620;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  h1,h2,h3,h4 { text-wrap: balance; margin: 0; line-height: 1.15; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  a { color: var(--accent-strong); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-strong); font-weight: 600; }
+  .mono { font-family: var(--font-mono); }
+
+  .hero { border-bottom: 1px solid var(--line); background: radial-gradient(120% 100% at 85% -10%, var(--accent-soft) 0%, transparent 55%), var(--surface); position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 44px 44px; opacity: 0.35; -webkit-mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, transparent 60%); mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 1; padding-top: 52px; padding-bottom: 40px; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  h1 { font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin: 16px 0 0; max-width: 20ch; }
+  h1 .thin { color: var(--muted); font-weight: 300; }
+  .lede { font-size: clamp(1rem, 2vw, 1.16rem); color: var(--ink-2); max-width: 66ch; margin-top: 18px; line-height: 1.5; }
+  .sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .src { font-family: var(--font-mono); font-size: 11.5px; color: var(--blue-strong); background: var(--blue-soft); border: 1px solid var(--line); border-radius: 20px; padding: 4px 11px; }
+
+  .platform-note { margin-top: 22px; background: var(--surface-2); border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 16px; font-size: 13px; color: var(--ink-2); line-height: 1.5; max-width: 82ch; }
+  .platform-note b { color: var(--ink); }
+  .platform-note .pn-cav { margin-top: 8px; font-size: 12px; color: var(--muted); }
+  .platform-note .pn-cav b { color: var(--blue-strong); font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+
+  .weeknav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .weeknav .wrap { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; padding-bottom: 10px; align-items: center; }
+  .weeknav .nl { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); margin-right: 4px; }
+  .weeknav a { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 4px 8px; text-decoration: none; }
+  .weeknav a:hover { border-color: var(--accent); color: var(--accent-strong); text-decoration: none; }
+  .weeknav .navhome { color: var(--accent-strong); background: var(--accent-soft); border-color: transparent; font-weight: 700; }
+  .weeknav .navsep { width: 1px; align-self: stretch; background: var(--line); margin: 2px 4px; }
+
+  main { padding: 34px 0 20px; display: flex; flex-direction: column; gap: 22px; }
+
+  .wk-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; scroll-margin-top: 64px; }
+  .wk-head { padding: 18px 22px; position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; }
+  .wk-head::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--bronze); }
+  .wk-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #fff; background: var(--bronze); border-radius: 4px; padding: 3px 8px; letter-spacing: 0.03em; }
+  .wk-title { font-size: 1.12rem; font-weight: 730; flex: 1 1 260px; }
+  .wk-mod { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+  .wk-gaps { display: inline-flex; gap: 4px; }
+  .gtag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; color: var(--blue-strong); background: var(--blue-soft); border-radius: 3px; padding: 2px 6px; }
+  .gtag.f { color: var(--muted); background: var(--surface-2); }
+
+  .framing { margin: 0 22px 4px; padding: 12px 15px; background: var(--blue-soft); border-left: 3px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .framing .fl { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue-strong); margin-right: 6px; }
+
+  .project-role { margin: 8px 22px 2px; padding: 12px 15px; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; color: var(--accent-ink); line-height: 1.5; }
+  .project-role .pl { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-strong); margin-right: 6px; }
+
+  .wk-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin-top: 14px; }
+  .blk { padding: 17px 22px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .blk:nth-child(even) { border-right: none; }
+  .blk.full { grid-column: 1 / -1; border-right: none; }
+  .wk-grid > .blk:last-child { border-bottom: none; }
+  .bh { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent-strong); display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .bh .hrs { color: var(--faint); font-weight: 600; }
+  .blk ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .blk li { font-size: 13.5px; color: var(--ink-2); padding-left: 17px; position: relative; line-height: 1.45; }
+  .blk ul li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.55; }
+  .blk p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .blk p + p { margin-top: 8px; }
+
+  .lab .lab-sub { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin: 16px 0 8px; }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 8px; }
+  ol.steps li { counter-increment: step; position: relative; padding-left: 30px; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  ol.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 21px; height: 21px; border-radius: 5px; background: var(--accent-soft); color: var(--accent-strong); font-family: var(--font-mono); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+  .ds-list { display: flex; flex-direction: column; gap: 10px; }
+  .ds { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 11px 13px; }
+  .ds-name { font-weight: 660; font-size: 13.5px; color: var(--ink); }
+  .ds-url { font-family: var(--font-mono); font-size: 11.5px; margin-top: 4px; word-break: break-word; line-height: 1.5; }
+  .ds-url a { color: var(--blue-strong); }
+  .ds-mess { font-size: 12.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+  .ds-mess .ml, .sc-note .ml { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--warn); margin-right: 5px; }
+
+  ul.refs { gap: 6px !important; }
+  ul.refs li { padding-left: 17px; }
+  ul.refs li::before { content: "\2197"; position: absolute; left: 0; top: 0; color: var(--blue-strong); font-size: 12px; background: none !important; width: auto !important; height: auto !important; border-radius: 0 !important; }
+  ul.refs li a { font-size: 13px; }
+
+  details.script { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
+  details.script summary { cursor: pointer; padding: 10px 13px; font-size: 12.5px; color: var(--ink-2); list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+  details.script summary::-webkit-details-marker { display: none; }
+  details.script summary:hover { color: var(--accent-strong); }
+  .sc-ic { font-family: var(--font-mono); font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border-radius: 3px; padding: 1px 5px; font-size: 11px; }
+  .sc-lang { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; margin-left: auto; }
+  details.script[open] summary { border-bottom: 1px solid var(--line); }
+  details.script pre { margin: 0; padding: 14px 15px; overflow-x: auto; background: var(--code-bg); }
+  details.script code { font-family: var(--font-mono); font-size: 12px; line-height: 1.55; color: var(--ink); white-space: pre; }
+  .sc-note { padding: 10px 13px; font-size: 12px; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--line); }
+
+  .mirror { margin-top: 14px; padding: 10px 13px; border: 1px dashed var(--line-strong); border-radius: var(--radius); font-size: 12.5px; color: var(--muted); line-height: 1.5; background: var(--surface-2); }
+  .mirror .ml2 { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--silver); margin-right: 6px; }
+
+  .deliver { background: var(--accent-soft); border-radius: var(--radius); padding: 11px 13px; font-size: 13px; color: var(--accent-ink); line-height: 1.5; }
+  .accept { font-size: 12.5px; color: var(--muted); margin-top: 9px; line-height: 1.5; }
+  .accept b { color: var(--ink-2); font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .live b { color: var(--accent-ink); font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+  .live .hot { margin-top: 8px; padding: 9px 11px; border-left: 2px solid var(--accent); background: var(--surface-2); border-radius: 0 var(--radius) var(--radius) 0; font-style: italic; color: var(--ink-2); }
+
+  .foot { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; background: var(--surface-2); }
+  .foot .pf { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .foot .fl2 { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); display: block; margin-bottom: 4px; }
+
+  footer { padding: 20px 0 60px; }
+  .foot-note { font-size: 13px; color: var(--faint); border-top: 1px solid var(--line); padding-top: 18px; margin-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 820px) {
+    .wk-grid { grid-template-columns: 1fr; }
+    .blk { border-right: none; }
+    .foot { grid-template-columns: 1fr; gap: 14px; }
+    .framing, .project-role { margin-left: 18px; margin-right: 18px; }
+  }
+
+.wk-head::before{background:var(--accent)}.wk-num{background:var(--accent)}.mirror .ml2{color:var(--accent-strong)}.src.launch{color:var(--accent-strong);background:var(--accent-soft)}
+</style>
+<div class="hero"><div class="wrap">
+    <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 4 of 4</span>
+    <h1>Advanced &amp; launch, <span class="thin">ship your own.</span></h1>
+    <p class="lede">Weeks 44–50 take the learner <b>solo</b>: design and ship an <b>independent, governed capstone</b> on their own industry, and get interview-ready. Final portfolio = the healthcare Project 1 (productionized) <b>+</b> the learner's own capstone — a two-project story that ends on golden records.</p>
+    <div class="sources"><span class="src">Your own industry &amp; data</span><span class="src">Architecture Decision Records</span><span class="src">Interview prep · "why not what"</span><span class="src">Capstone + recorded walkthrough</span><span class="src launch">Portfolio · 2 projects</span></div>
+    
+  </div></div>
+<nav class="weeknav"><div class="wrap"><a class="navhome" href="index.html">← Course home</a><a href="curriculum.html">Curriculum</a><a href="phase-3.html">← Phase 3</a><span class="navsep"></span><span class="nl">Weeks</span><a href="#w44">W44</a><a href="#w45">W45</a><a href="#w46">W46</a><a href="#w47">W47</a><a href="#w48">W48</a></div></nav>
+<main class="wrap">
+
+  <article class="wk-card" id="w44">
+    <div class="wk-head">
+      <span class="wk-num">W44</span>
+      <span class="wk-title">Architecture decision-making — design &amp; defend your capstone</span>
+      <span class="wk-mod">M32 · Phase 4 · launch</span>
+      <span class="wk-gaps"><span class="gtag">G9</span><span class="gtag">G1</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> You are the founding data engineer for a company in your target industry. Leadership has funded exactly one data product and wants to know, before a single line of code is written, what it will be, who decides differently because of it, and why your architecture is the right bet — because rework after go-live is expensive and your job is on the line. This week you earn the right to build by designing something you can defend to a skeptical senior in 30 seconds.</div>
+    <div class="project-role"><span class="pl">Launch · this week</span> Launch gate for the solo capstone: this is the design-before-code week where the learner locks their own industry, validates a real messy source, and commits the charter + 4-part architecture + 3 ADRs that every subsequent capstone-build week (W46+) executes against. Getting this right is what makes the later build fast and the final GitHub read as senior.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Write a one-page capstone project charter that names the problem, the decision-making persona, the data-product grain, and 3 measurable KPIs — such that a reviewer can restate the business problem in one sentence without reading the code.</li><li>Produce a 4-part architecture document (context/C4-lite, medallion data flow with grain per layer, governance &amp; security model, deployment/CI-CD topology) that a senior reviewer can trace end-to-end from source to golden record.</li><li>Author 3 Architecture Decision Records (ADRs) for pivotal choices (e.g., batch vs streaming, star vs Data Vault, exact vs fuzzy matching) that each state the context, the options considered, what was given up, and the revisit trigger.</li><li>Validate the chosen real public source by profiling it (volume, refresh cadence, messiness, licence/ToS) and defending in writing why it is rich enough to reach golden records.</li><li>Defend the design verbally in a trade-off shape (‘I chose X over Y because Z, which cost me A, and I would revisit via B’) tied to a named persona, not a tool.</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Design before code: why the charter comes first (‘slow on the front end, fast on the back end’). Grain, persona, and KPI as the three things that make a data product defensible. Recognition before evaluation — the 1–2 sentence business framing that opens every artifact. (0.75 hr)</li><li>The 4-part architecture doc as a senior signal: (1) context/C4-lite system diagram, (2) medallion data flow with the declared grain at bronze/silver/gold, (3) Unity Catalog governance &amp; security model, (4) DABs/CI-CD deployment topology. What a 30-second GitHub skim must reveal. (1.0 hr)</li><li>Architecture Decision Records: the Nygard format (context → decision → status → consequences). Writing the option you REJECTED as carefully as the one you chose; the ‘what I gave up’ and the ‘revisit trigger’ as interview gold. (1.0 hr)</li><li>The three pivotal capstone decisions in depth: batch vs micro-batch/streaming; dimensional star vs Data Vault vs one-big-table; exact vs fuzzy (blocking + similarity) entity matching for MDM. Cost, latency, and maintainability trade-offs of each. (0.75 hr)</li><li>Source selection &amp; feasibility: profiling a real public source for volume, refresh cadence, natural keys, duplication/messiness, and licence/ToS before you commit 6 weeks to it. Red flags that kill a capstone source. (0.5 hr)</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~6h</span></div>
+        <p>A pure design-before-code week: you stand up your capstone repository skeleton and fill it with decision artifacts — a project charter, a 4-part architecture document, and 3 ADRs — anchored to a real, profiled public source in your own target industry. No pipeline code ships this week; the deliverable is a defensible design a reviewer can trace from source to golden record. You are proving a human made judgment calls and wrote down why.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Pick your industry and shortlist 2 candidate real public sources (from data.gov, SEC EDGAR, CoinGecko, ReliefWeb, NOAA, CMS/HealthData.gov, or Faker for locked-down/fraud domains). For each, open the actual portal and note volume, refresh cadence, format, and licence/ToS.</li><li>Profile your top candidate for 30–60 min: pull a sample, count rows, inspect natural keys, spot duplicates/nulls/format drift, and confirm it is messy enough and rich enough to reach golden records. Write a 5-line ‘source feasibility’ note and commit the sample profile.</li><li>Scaffold the capstone repo from the starter template: create /docs (charter.md, architecture.md), /docs/adr (0001–0003), /src, /tests, /resources placeholders, and a README stub. Do NOT write pipeline code — leave TODO markers.</li><li>Write charter.md: 1–2 sentence business framing, the problem, the named decision-making persona, the data-product grain (one row = ?), and 3 measurable KPIs the product moves. Restate the problem in one sentence at the top.</li><li>Write architecture.md Part 1 (context/C4-lite diagram: source → Databricks → consumer) and Part 2 (medallion data flow) — declare the explicit grain at bronze, silver, and gold, and where CDC/idempotency and quarantine live.</li><li>Write architecture.md Part 3 (Unity Catalog governance: catalogs/schemas, ownership, access grants, PII handling) and Part 4 (deployment: DABs bundle layout, CI-CD stages, environments).</li><li>Author 3 ADRs using the template — one each for a batch-vs-streaming choice, a modeling choice (star vs Data Vault vs OBT), and a matching choice (exact vs fuzzy). In each, record options considered, the decision, what you gave up, and the revisit trigger.</li><li>Do a ‘30-second skim’ self-audit: open only the README + top of each doc and check a stranger could name the problem, the grain, and the 3 decisions. Fix anything that fails the skim.</li><li>Record a 3–5 minute Loom walking a reviewer through the charter and one ADR in trade-off shape (‘I chose X over Y because Z, which cost me A, I’d revisit via B’), tying the decision to your persona. Commit and push everything with a clean history.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">data.gov (US open data catalog — pick your industry vertical)</div><div class="ds-url"><a href="https://catalog.data.gov/dataset" target="_blank" rel="noopener">https://catalog.data.gov/dataset</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Inconsistent schemas across agencies, stale refresh dates, mixed CSV/JSON/API formats, and free-text fields with no natural key — you must declare grain and keys yourself.</div></div><div class="ds"><div class="ds-name">SEC EDGAR full-text &amp; financial statement data sets (finance/regtech)</div><div class="ds-url"><a href="https://www.sec.gov/dre/searchedgar/companysearch" target="_blank" rel="noopener">https://www.sec.gov/dre/searchedgar/companysearch</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Company identity drift (CIK vs ticker vs legal name), amended filings, and duplicate/superseded submissions — a natural MDM golden-record and fuzzy-matching problem.</div></div><div class="ds"><div class="ds-name">CoinGecko API (crypto/markets)</div><div class="ds-url"><a href="https://www.coingecko.com/en/api" target="_blank" rel="noopener">https://www.coingecko.com/en/api</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> High-velocity intraday data, rate limits forcing incremental/CDC design, coin-ID vs symbol collisions, and gaps/duplicates on retries — forces a real batch-vs-streaming ADR.</div></div><div class="ds"><div class="ds-name">ReliefWeb API (humanitarian/NGO)</div><div class="ds-url"><a href="https://reliefweb.int/help/api" target="_blank" rel="noopener">https://reliefweb.int/help/api</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Multilingual free text, inconsistent country/location tagging, and duplicated reports across sources — strong entity-resolution and quality-quarantine case.</div></div><div class="ds"><div class="ds-name">NOAA Climate Data Online (climate/energy/agri)</div><div class="ds-url"><a href="https://www.ncei.noaa.gov/cdo-web/" target="_blank" rel="noopener">https://www.ncei.noaa.gov/cdo-web/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Station-level gaps, unit and timezone inconsistencies, sensor changeovers, and huge historical volume — a grain-and-late-arriving-data design challenge.</div></div><div class="ds"><div class="ds-name">Faker (locked-down/fraud/payments domains where public data is unavailable)</div><div class="ds-url"><a href="https://faker.readthedocs.io/en/master/" target="_blank" rel="noopener">https://faker.readthedocs.io/en/master/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> You must intentionally seed the mess — duplicate identities, typos, format drift, and CDC change streams — and document your seeding so the golden-record logic is testable.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank" rel="noopener">Michael Nygard — Documenting Architecture Decisions (the original ADR post)</a></li><li><a href="https://adr.github.io/" target="_blank" rel="noopener">adr.github.io — Architecture Decision Records (templates &amp; tooling)</a></li><li><a href="https://docs.databricks.com/en/lakehouse-architecture/index.html" target="_blank" rel="noopener">Databricks Well-Architected Lakehouse framework</a></li><li><a href="https://c4model.com/" target="_blank" rel="noopener">The C4 model for visualising software architecture (context/container diagrams)</a></li><li><a href="https://docs.databricks.com/en/dev-tools/bundles/index.html" target="_blank" rel="noopener">Databricks Asset Bundles (DABs) — project structure &amp; deployment</a></li><li><a href="https://www.databricks.com/glossary/data-vault" target="_blank" rel="noopener">Data Vault vs. dimensional (star) modeling — trade-offs overview</a></li><li><a href="https://docs.databricks.com/en/data-governance/unity-catalog/index.html" target="_blank" rel="noopener">Unity Catalog — governance model for the lakehouse</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">docs/adr/0001-batch-vs-streaming.md</span> <span class="sc-lang">markdown</span></summary><pre><code># ADR 0001: &lt;TODO short decision title, e.g. Batch vs. streaming ingestion&gt;
+
+- Status: Proposed            &lt;!-- TODO: Proposed | Accepted | Superseded by ADR-#### --&gt;
+- Date: 2026-09-23
+- Deciders: &lt;TODO your name&gt;
+- Persona affected: &lt;TODO the named decision-maker this serves, NOT a tool&gt;
+
+## Context
+&lt;!-- TODO: 3-5 sentences. What business/technical forces make this decision necessary?
+     Tie it to the persona and a KPI from the charter. Recognition before evaluation. --&gt;
+
+## Options considered
+
+### Option A — &lt;TODO name&gt;
+- Pros: &lt;TODO&gt;
+- Cons: &lt;TODO&gt;
+
+### Option B — &lt;TODO name&gt;  (the one you will REJECT — write it just as carefully)
+- Pros: &lt;TODO&gt;
+- Cons: &lt;TODO&gt;
+
+### Option C — &lt;TODO optional third&gt;
+- &lt;TODO or delete&gt;
+
+## Decision
+&lt;!-- TODO: One sentence in trade-off shape:
+     &quot;I chose X over Y because Z.&quot; --&gt;
+
+## Consequences
+- What this costs me (A): &lt;TODO the price you knowingly pay&gt;
+- What I gave up: &lt;TODO the capability the rejected option would have given&gt;
+- Revisit trigger (B): &lt;TODO the concrete signal/metric that would make me reopen this&gt;
+
+## Links
+- Charter: ../charter.md
+- Architecture: ../architecture.md#&lt;TODO section&gt;
+</code></pre><div class="sc-note"><span class="ml">Note</span> A starter ADR scaffold, not a solution. Copy it to 0001/0002/0003 and fill every TODO. The rejected option must be written as carefully as the chosen one — that is the interview signal.</div></details>
+        <div class="mirror"><span class="ml2">Adapt to your industry</span> This entire phase IS the learner&#x27;s own industry — there is no separate mirror. The healthcare Project 1 charter and architecture doc from Phases 1–3 are your reference exemplar only: open them side-by-side and match their rigor, but every artifact this week describes YOUR chosen industry and YOUR real source. Reuse the structure, not the content.</div>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A capstone repository (pushed, clean history) containing: (1) docs/charter.md with business framing, persona, grain, and 3 measurable KPIs; (2) docs/architecture.md with all 4 parts including declared grain per medallion layer; (3) three completed ADRs (batch-vs-streaming, modeling, matching) each naming the rejected option, the cost, and the revisit trigger; (4) a committed source-feasibility note + sample profile of the real public source; and (5) a 3–5 minute recorded walkthrough defending one ADR in trade-off shape. No pipeline code required this week.</div>
+        <div class="accept"><b>Pass when</b> PASS if a senior reviewer doing a 30-second skim can, from the README and doc headers alone, restate the business problem in one sentence, name the data-product grain (one row = ?), and identify the 3 pivotal decisions. Each ADR must state the option NOT chosen and a concrete revisit trigger — an ADR that only justifies the winner fails. The architecture doc must trace unbroken from the real source to a gold-layer golden record, with grain declared at bronze/silver/gold and quarantine/idempotency located. The source-feasibility note must cite actual volume, cadence, and licence/ToS. FAIL if the source is not real/profiled, if any decision is tied to a tool instead of a person, or if the walkthrough sounds too-rehearsed rather than explainable.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Open by projecting your charter and having a peer read it cold — can they restate your problem and grain in one sentence? Then whiteboard your 4-part architecture from source to golden record in under 3 minutes. Recap the shift from Phase 3 (executing a given design) to Phase 4 (owning the design): you are now the person who has to defend why, not just show what.</p>
+        <p><b>Misconception</b> ‘A good architecture doc is the one that shows my chosen design.’ Wrong — the senior signal is the rejected option written as carefully as the winner. Learners default to justifying their pick and hand-wave the alternatives, which reads as never having considered them. An ADR without a real ‘what I gave up’ and a concrete revisit trigger is a decision you can’t defend when an interviewer pushes. Also common: choosing streaming/Data Vault/fuzzy matching because they sound advanced rather than because a named persona needs them.</p>
+        <p class="hot"><b>Hot seat</b> "Each learner is put on the spot: ‘Defend your hardest ADR in trade-off shape — I chose X over Y because Z, which cost me A, and I’d revisit via B — and tie it to the person who cares, not the tool.’ The room then plays skeptical senior: ‘Why not the option you rejected?’ and ‘What signal would make you tear this up?’ You pass the seat only if your answer is explainable and un-rehearsed, not perfect — you do not need perfect decisions, you need decisions you can defend."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> The capstone&#x27;s design spine — charter, 4-part architecture doc, and 3 ADRs — becomes the top of the capstone README and the first thing an interviewer or 30-second GitHub skimmer reads. Paired with the productionized healthcare Project 1, it opens the two-project story: ‘here is how I decide,’ before ‘here is how I build.’ The recorded ADR defense is reusable directly as an interview trade-off answer.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Completed Phases 1–3 (healthcare Project 1 productionized in W43), including its charter and architecture doc as reference exemplars. Working Databricks workspace with Unity Catalog and a DABs/CI-CD setup from Phase 3. A GitHub account and repo tooling. A chosen target industry (or the willingness to lock one this week) and access to at least one real public source from the learner-sources list. Comfort with git history hygiene and writing markdown docs.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w45">
+    <div class="wk-head">
+      <span class="wk-num">W45</span>
+      <span class="wk-title">Elective deep-dive — Data Vault 2.0 OR AI-assisted DE (choose one)</span>
+      <span class="wk-mod">M12 / M33 · Phase 4 · launch</span>
+      <span class="wk-gaps"><span class="gtag">G2</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> Your capstone works, but every mature data platform eventually faces one of two pressures a hiring manager will probe: &#x27;How would you make this auditable and agile when the source systems multiply?&#x27; (Data Vault) or &#x27;Where would you responsibly put AI in this pipeline without it becoming a liability?&#x27; (AI-assisted DE). This week you add ONE of those capabilities to your toolkit and, ideally, to the capstone — chosen for a real reader, not for résumé decoration — so you can speak to it with judgment instead of hype.</div>
+    <div class="project-role"><span class="pl">Launch · this week</span> Adds exactly one advanced, interview-defensible capability to the toolkit and, where it fits, to the capstone. Just as important, it trains the senior instinct to SCOPE: the learner practices choosing one capability for a real reader and consciously declining the other — the anti-over-engineering muscle that W46 interview prep will draw on directly.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Given your capstone model, DECIDE between two advanced capabilities and write a 1-paragraph rationale tying the choice to a real reader (hiring manager, future maintainer) — not to novelty.</li><li>TRACK A: Model a subject area of your capstone as Data Vault 2.0 (hub / link / satellite), define hash keys and load-date/record-source columns, and explain in writing exactly WHEN Data Vault beats a star schema and what auditability/agility you buy for the added join cost.</li><li>TRACK B: Wire ONE narrowly-scoped LLM step into a Databricks pipeline (classify / extract / standardize) behind a deterministic contract, with a semantic/context layer, input+output guardrails, and a repeatable eval harness with a measured pass rate.</li><li>For EITHER track, produce an ADR that states the trade-off in interview-ready form: &#x27;I chose X over Y because Z, which cost me A, and I would revisit via B.&#x27;</li><li>Prove the human-in-the-loop: show at least one decision point where YOU overrode or bounded the tool, and record why over-engineering the other track would have been the wrong call this week.</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~7.5h</span></div><ul><li>Why an elective, and how to choose (0.5 hr): &#x27;add one advanced capability, not five.&#x27; Over-engineering is the trap this week is designed to expose. Read the two track summaries, then write your choice + reader-first rationale BEFORE any code (recognition before evaluation).</li><li>TRACK A concepts — Data Vault 2.0 core (2.0 hr): hubs (business keys), links (relationships/transactions), satellites (context + history), hash keys vs. sequence keys, load_date and record_source as first-class lineage, insert-only/idempotent loads. Where it sits relative to your medallion: raw vault in silver, business vault + star-schema marts in gold.</li><li>TRACK A concepts — when Data Vault beats a star (1.0 hr): many source systems, changing relationships, hard auditability/regulatory lineage, parallel loads. The cost: more joins, more objects, a mart layer still needed for consumers. Star schema remains right for a single stable source and BI-first grain. Decide with your capstone in hand.</li><li>TRACK B concepts — LLMs/agents in the pipeline (2.0 hr): the ONLY safe pattern is a narrow, bounded step behind a deterministic contract (typed output, allowed-value set). Semantic/context layer = the curated facts + schema + business glossary you feed the model so it answers about YOUR data, not the internet. Cost, latency, and non-determinism as engineering constraints.</li><li>TRACK B concepts — guardrails, evals, human-in-the-loop (1.5 hr): input validation + output schema enforcement + confidence/abstain path + quarantine on low confidence (same quarantine discipline as Phases 1-3). Build a labeled gold set, measure pass rate/precision, and log every call for audit. &#x27;The human in the loop&#x27; = you own the eval bar and the override.</li><li>Both tracks — interview framing (0.5 hr): how to tell this as a trade-off story (&#x27;why not what&#x27;), and why &#x27;I deliberately did NOT do X&#x27; is a senior signal on a 30-second skim.</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~9h</span></div>
+        <p>A mini-project in your chosen track, applied to the capstone where possible. TRACK A: re-model one subject area of your capstone (or Project 1) as a Data Vault 2.0 raw vault — hubs, links, satellites with hash keys and lineage columns — load it idempotently in Databricks, then build a small star-schema mart on top and write the ADR on when this earns its keep. TRACK B: add one bounded LLM step to your capstone&#x27;s bronze/silver flow (e.g., standardize messy free-text categories, extract fields from unstructured source, or classify records), wrap it in a semantic/context layer plus input/output guardrails and a quarantine-on-low-confidence path, then build and run an eval harness against a hand-labeled gold set and report the pass rate. Both tracks end with the same deliverables: working code, an ADR, and a documented human-in-the-loop override.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>CHOOSE (both tracks): In your capstone repo, create docs/adr/ADR-00X-elective.md. Write your track choice and a reader-first rationale (2-4 sentences). State what you are deliberately NOT building this week and why (over-engineering guard). Commit before writing any code.</li><li>TRACK A — Step 1: Pick ONE subject area from your capstone/Project-1 silver model (e.g., provider–payer–price, or customer–order–product). Sketch the vault on paper: identify business keys (hubs), relationships/transactions (links), and descriptive/historical attributes (satellites). Save the sketch as an image in docs/.</li><li>TRACK A — Step 2: In a Databricks notebook, build the hub tables: compute a deterministic hash key over the business key, add load_date and record_source. Load insert-only and idempotent (re-running adds no duplicates). Repeat for link tables (hash of the parent business keys).</li><li>TRACK A — Step 3: Build satellite tables: hash-diff the descriptive columns so only CHANGED context inserts a new row (recoverable history). Verify by loading the same batch twice and a modified batch once; confirm row counts prove idempotency + change capture.</li><li>TRACK A — Step 4: Build a small star-schema mart (one fact + 2-3 dims) as a gold view/table ON TOP of the vault, to prove the vault still serves consumers. Then write the ADR body: when Data Vault beats a star here, the join/complexity cost, and your revisit trigger.</li><li>TRACK B — Step 1: Pick ONE narrow, bounded task on your real source (standardize free-text categories, extract fields from unstructured text, OR classify records into an allowed set). Define a DETERMINISTIC contract: exact output schema + the closed set of allowed values. Write it down first.</li><li>TRACK B — Step 2: Build the semantic/context layer: assemble the schema, business glossary, and allowed-value list you will inject into the prompt so the model reasons over YOUR data. Call the LLM via Databricks ai_query / an LLM API from a notebook on a small batch.</li><li>TRACK B — Step 3: Add guardrails: validate/normalize input, enforce the output schema, and route low-confidence or off-contract responses to a QUARANTINE table (reuse your Phase 1-3 quarantine pattern) instead of silently accepting them. Log every call (input, output, confidence) for audit.</li><li>TRACK B — Step 4: Hand-label a gold set (30-100 rows), run the eval harness (MLflow evaluate or a simple accuracy/precision script), record the pass rate, and pick ONE case where you override the model — document it. Write the ADR: why a bounded LLM step here, cost/latency/non-determinism, and your revisit trigger.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">Your capstone source + Project 1 (Provider Pricing Integrity) model — reuse for TRACK A</div><div class="ds-url"><a href="https://data.cms.gov/provider-data/" target="_blank" rel="noopener">https://data.cms.gov/provider-data/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> TRACK A reuses your existing silver model, so no new source: the challenge is that business keys are inconsistent across systems (NPI vs. internal IDs), relationships change over time, and you must derive stable hash keys and pick a defensible record_source for lineage.</div></div><div class="ds"><div class="ds-name">Your capstone&#x27;s real messy source (data.gov / CMS / SEC EDGAR / CoinGecko / ReliefWeb / NOAA / Faker) — for TRACK B</div><div class="ds-url"><a href="https://catalog.data.gov/dataset" target="_blank" rel="noopener">https://catalog.data.gov/dataset</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> TRACK B needs genuinely unstructured or free-text fields: inconsistent category spellings, embedded notes, mixed formats, and no ground-truth labels — so you must hand-label a gold set and cannot trust the LLM output without an eval bar.</div></div><div class="ds"><div class="ds-name">SEC EDGAR full-text search (strong free-text source for TRACK B extraction/classification)</div><div class="ds-url"><a href="https://efts.sec.gov/LATEST/search-index?q=" target="_blank" rel="noopener">https://efts.sec.gov/LATEST/search-index?q=</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Filing text is long, boilerplate-heavy, and semi-structured; extracting a clean typed field (e.g., a risk category or a monetary figure) forces a strict output contract and a quarantine path for ambiguous cases.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://www.databricks.com/blog/2022/06/24/prescriptive-guidance-for-implementing-a-data-vault-model-on-the-databricks-lakehouse-platform.html" target="_blank" rel="noopener">Databricks — Data Vault best practices on the Lakehouse</a></li><li><a href="https://automate-dv.readthedocs.io/en/latest/" target="_blank" rel="noopener">AutomateDV (dbtvault) — Data Vault 2.0 hub/link/satellite reference &amp; hashing</a></li><li><a href="https://www.scalefree.com/blog/data-vault/" target="_blank" rel="noopener">Scalefree — Data Vault 2.0 concepts (hubs, links, satellites, hash keys)</a></li><li><a href="https://docs.databricks.com/en/large-language-models/ai-functions.html" target="_blank" rel="noopener">Databricks — ai_query / AI Functions for batch LLM inference in SQL &amp; Python</a></li><li><a href="https://mlflow.org/docs/latest/llms/llm-evaluate/index.html" target="_blank" rel="noopener">MLflow — LLM evaluation (mlflow.evaluate) for building an eval harness</a></li><li><a href="https://docs.databricks.com/en/data-governance/unity-catalog/index.html" target="_blank" rel="noopener">Databricks — Unity Catalog governance for AI/model + data assets</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">elective_deep_dive_scaffold.py</span> <span class="sc-lang">python</span></summary><pre><code># Week 45 elective scaffold. Choose ONE track. Delete the other block.
+# Deliverables for BOTH tracks: working code + ADR + documented human-in-the-loop override.
+
+from pyspark.sql import functions as F
+
+CATALOG = &quot;&lt;your_capstone_catalog&gt;&quot;   # TODO: set
+SCHEMA  = &quot;&lt;your_schema&gt;&quot;            # TODO: set
+RECORD_SOURCE = &quot;&lt;source_system_name&gt;&quot;  # TODO: e.g. &#x27;cms_provider_data&#x27;
+
+# ============================================================
+# TRACK A — DATA VAULT 2.0 (hub / link / satellite)
+# ============================================================
+
+def hash_key(*cols):
+    # TODO: normalize (trim/upper/null-handling) BEFORE hashing so keys are stable.
+    # Standard is sha256 over business key(s) with a separator.
+    concatenated = F.concat_ws(&quot;||&quot;, *[F.upper(F.trim(F.col(c).cast(&quot;string&quot;))) for c in cols])
+    return F.sha2(concatenated, 256)
+
+def load_hub(src_df, business_keys, hub_table):
+    # Insert-only + idempotent: only NEW business keys land.
+    staged = (src_df
+        .withColumn(&quot;hub_hk&quot;, hash_key(*business_keys))
+        .withColumn(&quot;load_date&quot;, F.current_timestamp())
+        .withColumn(&quot;record_source&quot;, F.lit(RECORD_SOURCE))
+        .select(&quot;hub_hk&quot;, *business_keys, &quot;load_date&quot;, &quot;record_source&quot;)
+        .dropDuplicates([&quot;hub_hk&quot;]))
+    # TODO: MERGE into hub_table ON hub_hk WHEN NOT MATCHED INSERT.
+    # TODO: assert re-running this batch adds 0 rows (idempotency proof).
+    raise NotImplementedError(&quot;TODO: implement idempotent hub MERGE&quot;)
+
+def load_satellite(src_df, hub_keys, context_cols, sat_table):
+    # Only insert a new row when the descriptive context CHANGED (hash-diff).
+    staged = (src_df
+        .withColumn(&quot;hub_hk&quot;, hash_key(*hub_keys))
+        .withColumn(&quot;hash_diff&quot;, hash_key(*context_cols))
+        .withColumn(&quot;load_date&quot;, F.current_timestamp())
+        .withColumn(&quot;record_source&quot;, F.lit(RECORD_SOURCE)))
+    # TODO: compare hash_diff to the latest sat row per hub_hk; insert only on change.
+    # TODO: prove recoverable history: load same batch twice (no new rows),
+    #       then a modified batch once (exactly the changed rows appear).
+    raise NotImplementedError(&quot;TODO: implement hash-diff satellite load&quot;)
+
+# TODO: load_link() for the relationship/transaction (hash of parent business keys).
+# TODO: build a small star-schema mart (1 fact + 2-3 dims) as a gold view ON TOP.
+# TODO: ADR — when Data Vault beats a star HERE, the join cost, your revisit trigger.
+
+# ============================================================
+# TRACK B — AI-ASSISTED DE (one bounded LLM step)
+# ============================================================
+
+ALLOWED_VALUES = [&quot;&lt;value_1&gt;&quot;, &quot;&lt;value_2&gt;&quot;, &quot;&lt;UNKNOWN&gt;&quot;]  # TODO: closed set = your contract
+
+def build_context(row):
+    # Semantic/context layer: inject YOUR schema + glossary + allowed values.
+    # TODO: return a compact prompt grounded in the row + the allowed set only.
+    raise NotImplementedError(&quot;TODO: assemble context-grounded prompt&quot;)
+
+def call_llm(prompt):
+    # TODO: call via Databricks ai_query OR your LLM API (load Claude API skill for Anthropic).
+    # Return dict: {&quot;value&quot;: ..., &quot;confidence&quot;: ...}
+    raise NotImplementedError(&quot;TODO: single bounded call, typed output&quot;)
+
+def guarded_infer(row):
+    result = call_llm(build_context(row))
+    # GUARDRAILS:
+    # TODO: enforce result[&#x27;value&#x27;] in ALLOWED_VALUES (else route to quarantine).
+    # TODO: if confidence &lt; THRESHOLD -&gt; quarantine table, do NOT accept silently.
+    # TODO: log (input, output, confidence) to an audit table for lineage.
+    raise NotImplementedError(&quot;TODO: enforce output contract + quarantine path&quot;)
+
+# TODO: hand-label a gold set (30-100 rows) -&gt; gold_labels table.
+# TODO: eval harness (mlflow.evaluate or accuracy/precision script); record PASS RATE.
+# TODO: pick ONE case you OVERRIDE the model; document why (human-in-the-loop).
+# TODO: ADR — why a bounded LLM step here; cost/latency/non-determinism; revisit trigger.
+</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — TODO markers, not a solution. Keep the ONE track block you chose; delete the other. Databricks notebook. Runs on your capstone catalog.</div></details>
+        <div class="mirror"><span class="ml2">Adapt to your industry</span> This entire phase is the learner&#x27;s own industry: apply the chosen track to YOUR capstone&#x27;s domain and source. Track A re-models one of your capstone subject areas as a vault (falling back to the Project 1 healthcare model only if your source lacks the relationship complexity to make vaulting meaningful); Track B runs the LLM step against your own real messy source. Either way the artifact lands in your capstone repo, not a throwaway.</div>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">One of: (A) a Data Vault 2.0 raw vault for one capstone subject area — hubs, links, satellites with hash keys, load_date, record_source, loaded idempotently — plus a small star-schema mart built on top; OR (B) one bounded LLM step in the capstone pipeline behind a deterministic output contract, with a semantic/context layer, input+output guardrails, a quarantine-on-low-confidence path, an audit log, and an eval harness with a reported pass rate. BOTH tracks also ship an ADR (trade-off in &#x27;I chose X over Y because Z, cost A, revisit via B&#x27; form) and a written, documented human-in-the-loop override.</div>
+        <div class="accept"><b>Pass when</b> Choice + reader-first rationale committed BEFORE code, and it names what was deliberately NOT built. TRACK A: re-loading an identical batch adds zero rows (idempotency proven), a modified batch inserts only the changed satellite rows (recoverable history proven), and a working star-schema mart reads off the vault. TRACK B: 100% of accepted outputs are within the allowed-value set, off-contract/low-confidence rows land in quarantine (none silently accepted), every call is logged for audit, and the eval harness reports a real pass rate against a hand-labeled gold set. Both: ADR states the trade-off and a concrete revisit trigger, and at least one human-in-the-loop override is documented.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Each learner states in 30 seconds: which track, and the reader they chose it for. Then a rapid-fire round: name one thing you deliberately did NOT build this week and why that was the right call (not laziness).</p>
+        <p><b>Misconception</b> &#x27;More advanced = more hireable, so I should add both / the fanciest option.&#x27; The trap: over-engineering. A hiring manager reads an unnecessary Data Vault or a gratuitous LLM step as poor judgment, not sophistication. Seniority is choosing the ONE capability a real reader needs and being able to defend why you stopped there — &#x27;you do not need perfect decisions, you need explainable ones.&#x27;</p>
+        <p class="hot"><b>Hot seat</b> "Trade-off drill on the chosen track. TRACK A: &#x27;You added a Data Vault. My BI team just wants a star schema off one stable source — justify the extra joins, or tell me when you&#x27;d walk it back.&#x27; TRACK B: &#x27;You put an LLM in a data pipeline. It&#x27;s non-deterministic and costs money per row — why isn&#x27;t that a liability, where&#x27;s your eval bar, and where did YOU override it?&#x27; Answer in the trade-off shape: I chose X over Y because Z, which cost me A, and I would revisit via B — no too-clean, no too-rehearsed."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> A new capstone-repo folder (docs/adr/ + the track notebook + eval or idempotency proof) that reads as senior on a 30-second GitHub skim: a titled ADR showing a deliberate, bounded choice, plus evidence (idempotency counts or an eval pass rate). This becomes a concrete trade-off story to tell in W46 interview prep and in the recorded walkthrough.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> W44 capstone architecture doc complete (charter + 4-part architecture + ADR log) with a working silver model to build on. Databricks workspace with Unity Catalog and your capstone catalog/schema from Phase 3. For Track B: an available LLM endpoint (Databricks ai_query or an LLM API key). Comfort with the Phase 1-3 quarantine + idempotency patterns, which both tracks reuse.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w46">
+    <div class="wk-head">
+      <span class="wk-num">W46</span>
+      <span class="wk-title">Interview prep I — technical (SQL, pipeline &amp; system design)</span>
+      <span class="wk-mod">M36 / M35 · Phase 4 · launch</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> A hiring manager has 45 minutes and six candidates who all say they &#x27;built a pipeline&#x27;; the person across the table has to be able to defend hiring you to THEIR boss the next morning. This week you make your judgment legible fast — so a stranger skimming your repo for 30 seconds and quizzing you for 45 minutes leaves able to repeat back your grain, your golden records, and one tradeoff you owned.</div>
+    <div class="project-role"><span class="pl">Launch · this week</span> Converts the finished two-project portfolio from an artifact into interview performance. This is the first of two interview-prep weeks: it drills the technical rounds (SQL, pipeline/system-design, take-home grading) and hardens portfolio engineering (README, architecture doc, repo hygiene) so both projects survive a 30-second GitHub skim and a 45-minute technical loop — always narrated through the learner&#x27;s OWN capstone rather than generic problems.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Solve a 10-problem timed SQL set (window functions, dedup-to-grain, gap-and-island, as-of/temporal joins, anti-joins) under a 25-minute clock, narrating approach aloud, at &gt;=8/10 correctness with the grain named for every answer.</li><li>Whiteboard a batch + incremental medallion pipeline for a novel prompt in 20 minutes using a repeatable 6-box frame (grain -&gt; source/CDC -&gt; medallion -&gt; idempotency -&gt; quality/quarantine -&gt; serve/govern), anchored to your own capstone as the reference implementation.</li><li>Score a take-home submission (your own or a peer&#x27;s) against a written rubric and name the 3 highest-leverage gaps plus the fix for each.</li><li>Refactor your two-project README + architecture doc so a cold reviewer can state the grain, the two golden-record outputs, and the deployment story within a 30-second skim.</li><li>Deliver one 2-minute spoken system-design tradeoff in the &#x27;I chose X over Y because Z, which cost A, and I would revisit via B&#x27; shape, tied to a person (not a tool).</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4.5h</span></div><ul><li>The technical loop, decoded (0.5 hr): what the SQL, pipeline, and system-design rounds actually score — judgment, grain-thinking, and failure-awareness, not syntax recall. Walk the real rubric each interviewer fills in, and where a two-project portfolio lets you answer &#x27;have you done this?&#x27; with &#x27;yes, twice.&#x27;</li><li>SQL under a clock (1.25 hr): a pattern catalog you can recognize on sight — ROW_NUMBER dedup-to-grain, running/lag windows, gap-and-island, as-of and SCD-2 temporal joins, anti-joins for reconciliation. The narrate-while-you-type method: state the grain, restate the ask, name the pattern, then type.</li><li>The pipeline/system-design whiteboard (1.25 hr): the 6-box frame (grain -&gt; source &amp; CDC/incremental -&gt; bronze/silver/gold -&gt; idempotency &amp; reprocessing -&gt; tests/quarantine -&gt; serve &amp; Unity Catalog governance). How to drive the whiteboard from your capstone so every box has a real story instead of a diagram.</li><li>Take-home like a senior (0.75 hr): reading the hidden rubric behind a prompt, scoping to a defensible thin slice, writing the decision log/ADRs that prove a human made choices, and the README that makes a graded submission read senior in 30 seconds.</li><li>Portfolio engineering for the 30-second skim (0.75 hr): repo hygiene (structure, .gitignore, no secrets, meaningful commit history), README-as-architecture, ADRs, and the concrete diff between a tutorial repo and a data-product repo a reviewer trusts.</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~6.5h</span></div>
+        <p>A full technical-interview simulation run entirely on your existing two-project portfolio (Project 1 healthcare + your capstone) — no new data. You build and run timed SQL drills against your own silver/gold tables, construct and cold-run a system-design whiteboard, grade a take-home against a rubric, then harden the portfolio&#x27;s README, architecture doc, and repo hygiene so it survives the 30-second skim. Output is a reusable interview-prep dossier plus a measurably cleaner repo.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Assemble your SQL drill deck: from the 6-pattern catalog, write 10 problem PROMPTS (not solutions) that target your own silver/gold tables — e.g., &#x27;return one row per provider per effective period&#x27; (SCD-2), &#x27;find the longest run of days a price stayed unchanged&#x27; (gap-and-island), &#x27;rows in bronze with no matching gold key&#x27; (anti-join). Store each with the expected grain and a one-line expected-shape assertion.</li><li>Run three timed 25-minute SQL sets using the starter harness: solve against your real tables, speak the grain + pattern aloud before typing (record yourself), and log per-problem: solved/not, time, and where you stalled. Target &gt;=8/10 by set three.</li><li>Build your capstone&#x27;s 6-box whiteboard one-pager: fill every box (grain, source &amp; CDC/incremental strategy, bronze/silver/gold, idempotency &amp; reprocessing, tests/quarantine, serve &amp; Unity Catalog governance) with a specific fact from YOUR build, plus the golden-record output at the end.</li><li>Cold whiteboard a NOVEL prompt in 20 minutes on the clock (use an unfamiliar public schema, e.g. NYC TLC trips): drive the same 6 boxes, then explicitly map each box back to how you solved the equivalent in your capstone. Record the audio; note where you froze.</li><li>Grade a take-home against the rubric: take your own capstone (or a peer&#x27;s) submission and score it on grain correctness, idempotency, tests/quarantine, docs/ADRs, and repo hygiene. Write the 3 highest-leverage gaps and the concrete fix for each.</li><li>Refactor the portfolio README + architecture doc: lead with a one-line &#x27;what data product / what grain / two golden-record outputs&#x27;, embed the architecture diagram, link the 4-part architecture doc and ADRs, and add a &#x27;skim in 30 seconds&#x27; section. Test it by having someone read for 30s and repeat it back.</li><li>Repo hygiene pass: verify structure, .gitignore, zero secrets/credentials in history, a real commit story, pinned deps, and that the DABs/CI-CD config and tests are visible from the root. Fix anything a reviewer would flag.</li><li>Record a 2-minute spoken tradeoff narration on one real capstone decision using the &#x27;X over Y because Z, cost A, revisit via B&#x27; shape, tied to a named stakeholder — not too clean, not rehearsed.</li><li>Assemble the Interview Prep I dossier: SQL scorecard, whiteboard one-pager, cold-prompt notes, graded take-home rubric, and links to the refactored README/architecture doc and the recorded tradeoff.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">Your two-project portfolio (Project 1 healthcare gold/silver + your capstone gold/silver)</div><div class="ds-url">none — your own Databricks Unity Catalog tables + GitHub repo (no new data this week)</div><div class="ds-mess"><span class="ml">Mess to handle</span> The gold layer is clean by design, so for SQL drills you deliberately query the SILVER layer — real dedup-to-grain, late-arriving rows, and SCD-2 effective periods give the drills genuine texture instead of toy uniformity; that messiness is the point.</div></div><div class="ds"><div class="ds-name">NYC TLC Trip Record Data (cold-start / novel-schema practice for the whiteboard and unfamiliar-SQL round)</div><div class="ds-url"><a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page" target="_blank" rel="noopener">https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> An unfamiliar schema you have NOT modeled: ambiguous grain (trip vs. segment), zone lookup joins, negative/zero fares and impossible timestamps, and schema drift across yearly files — perfect for simulating an interviewer&#x27;s &#x27;here&#x27;s a table you&#x27;ve never seen&#x27; cold prompt.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://datalemur.com/questions" target="_blank" rel="noopener">DataLemur — SQL interview questions (windowing, ranking, joins) with difficulty tiers</a></li><li><a href="https://www.stratascratch.com/" target="_blank" rel="noopener">StrataScratch — SQL &amp; data-project interview practice</a></li><li><a href="https://dataintensive.net/" target="_blank" rel="noopener">Designing Data-Intensive Applications (Kleppmann) — the system-design vocabulary interviewers expect</a></li><li><a href="https://docs.databricks.com/aws/en/lakehouse-architecture/" target="_blank" rel="noopener">Databricks — Lakehouse / Well-Architected best practices (grounding for the whiteboard&#x27;s serve &amp; govern boxes)</a></li><li><a href="https://adr.github.io/" target="_blank" rel="noopener">Architecture Decision Records (ADR) — templates and rationale</a></li><li><a href="https://www.makeareadme.com/" target="_blank" rel="noopener">Make a README — structure and checklist for a README that reads senior</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">interview_prep/sql_drill_harness.py</span> <span class="sc-lang">python</span></summary><pre><code># Databricks notebook / PySpark. Timed SQL drill harness for Interview Prep I.
+# Run one cell per problem. Speak grain + pattern ALOUD before you type the SQL.
+import time
+from dataclasses import dataclass, field
+
+CATALOG = &quot;TODO_your_catalog&quot;      # TODO: your Unity Catalog
+SCHEMA  = &quot;TODO_your_silver_schema&quot;  # TODO: drill against SILVER, not GOLD
+TIME_BUDGET_MIN = 25                  # per 10-problem set
+
+@dataclass
+class Drill:
+    id: str
+    prompt: str          # the ask, as an interviewer would state it
+    grain: str           # ONE row per ____  (state before solving)
+    pattern: str         # windowing | dedup-to-grain | gap-and-island | as-of/SCD2 | anti-join
+    solution_sql: str = &quot;&quot;  # TODO: you fill this on the clock
+
+# TODO: author 10 drills against YOUR silver tables. Keep prompts realistic;
+#       do NOT pre-write solution_sql — leave it empty and solve live.
+DRILLS: list[Drill] = [
+    # Drill(&quot;D1&quot;, &quot;Return the current effective row per provider&quot;, &quot;one row per provider&quot;, &quot;dedup-to-grain&quot;),
+    # Drill(&quot;D2&quot;, &quot;Longest run of days price stayed unchanged&quot;, &quot;one row per price-run&quot;, &quot;gap-and-island&quot;),
+    # ... TODO: 8 more, covering every pattern in the catalog at least once.
+]
+
+def narrate_gate(d: Drill) -&gt; None:
+    # Force the interview habit: say it before you type it.
+    print(f&quot;[{d.id}] PATTERN={d.pattern} | TARGET GRAIN=&#x27;{d.grain}&#x27;&quot;)
+    print(&quot;Say aloud now: (1) restate the ask (2) name the grain (3) name the pattern. Then type.&quot;)
+    # TODO: optionally record audio here for later self-review.
+
+def assert_grain(df, key_cols: list[str]) -&gt; None:
+    total = df.count()
+    distinct = df.select(*key_cols).distinct().count()
+    ok = total == distinct
+    print(f&quot;GRAIN CHECK on {key_cols}: rows={total} distinct={distinct} -&gt; {&#x27;PASS&#x27; if ok else &#x27;FAIL&#x27;}&quot;)
+    # TODO: if FAIL, your query broke the grain — the #1 thing interviewers watch. Fix before moving on.
+
+def run_drill(d: Drill, key_cols: list[str]):
+    narrate_gate(d)
+    t0 = time.time()
+    # TODO: write d.solution_sql live, then execute it:
+    # df = spark.sql(d.solution_sql.format(cat=CATALOG, sch=SCHEMA))
+    df = None  # TODO replace
+    elapsed = round(time.time() - t0, 1)
+    print(f&quot;[{d.id}] elapsed={elapsed}s&quot;)
+    # assert_grain(df, key_cols)  # TODO enable once df is real
+    # TODO: log solved(Y/N), elapsed, and where you stalled into your scorecard.
+    return df
+
+# scorecard: append one row per attempt across your 3 timed sets.
+SCORECARD: list[dict] = []  # TODO: {id, set, solved, seconds, stall_note}
+# TODO: after 3 sets, compute solved-rate and median time; target &gt;=8/10 by set 3.
+</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD — a timed SQL drill runner for a Databricks notebook. It gives you the timer, the narrate-first prompt, and a grain-assertion helper. It deliberately ships NO solved queries and NO real problem set — you fill every TODO. Do not turn this into an answer key; the learning is in writing the problems against your own tables and grading your own grain.</div></details>
+        <div class="mirror"><span class="ml2">Adapt to your industry</span> All of Phase 4 is the learner&#x27;s own industry. This week uses no new data — every SQL drill, whiteboard, and README refactor runs on the learner&#x27;s own two-project portfolio (Project 1 healthcare + their industry capstone), so the interview stories are theirs and specific, never canned.</div>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">An &#x27;Interview Prep I&#x27; dossier committed to the portfolio repo, containing: (1) a SQL drill scorecard across three timed 25-minute sets on your own silver tables; (2) a one-page 6-box system-design whiteboard of your capstone plus cold-prompt notes from a novel schema; (3) a take-home graded against the rubric with 3 named gaps + fixes; (4) a refactored README + 4-part architecture doc that leads with grain and two golden-record outputs and passes a 30-second skim; and (5) a recorded 2-minute spoken tradeoff in the X-over-Y-because-Z shape.</div>
+        <div class="accept"><b>Pass when</b> SQL: three timed sets logged, reaching &gt;=8/10 correct with the grain named and grain-asserted for every answer by set three. Whiteboard: all 6 boxes filled from real capstone facts, ending on golden records, and a novel-prompt run completed inside 20 minutes on the clock. Take-home: rubric scored across grain/idempotency/tests-quarantine/docs-ADRs/hygiene with 3 highest-leverage gaps and concrete fixes written. Portfolio: a cold reader repeats back grain + two golden-record outputs + deployment story after a 30-second skim; repo has no secrets in history, a real commit story, and visible tests + DABs/CI-CD from root. Communication: the 2-minute tradeoff is tied to a named person, states the cost, and names how you&#x27;d revisit it — not too clean, not rehearsed.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Learners run a 5-minute live SQL race on a shared novel schema (screen-shared, narrating grain before typing), then two volunteers whiteboard their capstone&#x27;s 6 boxes in 8 minutes each while peers score against the rubric. Recap surfaces the pattern nobody could name on sight and the box everyone hand-waved (usually idempotency/reprocessing).</p>
+        <p><b>Misconception</b> &#x27;The technical round tests whether I can recall syntax / solve the hardest LeetCode.&#x27; Correct it: the interviewer is scoring whether you protect the grain, reason about failure and reprocessing, and can explain WHY. A candidate who states the grain, names the pattern, and writes a correct medium query while narrating beats one who silently speed-solves a hard one and mangles the grain. You do not need perfect decisions, you need explainable ones.</p>
+        <p class="hot"><b>Hot seat</b> "Cold call: &#x27;Here&#x27;s a table you&#x27;ve never seen (shared on screen). In 90 seconds, tell me the grain you&#x27;d enforce and the one SQL pattern you&#x27;d reach for — then, without writing full code, walk the 6 boxes of a pipeline that lands it as a governed gold table. Now: which of those 6 boxes is weakest in YOUR capstone, and what would you do about it?&#x27;"</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> A polished, skim-proof portfolio repo (both projects) plus a linked &#x27;Interview Prep&#x27; folder with the SQL scorecard, capstone system-design one-pager, and the recorded 2-minute tradeoff — assets that double as interview evidence (&#x27;yes, I&#x27;ve done this — twice&#x27;) and as proof a human did the work and documented the decision points.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> W45 elective complete and, critically, the capstone shipped through Phase 4&#x27;s build weeks: a working medallion pipeline with CDC/incremental + idempotency, MDM golden records, Unity Catalog governance, tests/quarantine, and DABs/CI-CD, both projects already in one GitHub repo. Comfort with window functions and SCD-2 from Phases 2–3. A way to record short audio/screen clips for self-review.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w47">
+    <div class="wk-head">
+      <span class="wk-num">W47</span>
+      <span class="wk-title">Interview prep II — behavioral, storytelling &amp; the recorded walkthrough</span>
+      <span class="wk-mod">M36 / M34 · Phase 4 · launch</span>
+      <span class="wk-gaps"><span class="gtag">G10</span><span class="gtag">G1</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> A hiring manager gives you eight minutes and a 30-second skim of your GitHub before deciding whether you interview like someone who has owned a data product or someone who has finished a tutorial. This week you turn the two things you actually built — the healthcare pricing-integrity pipeline and your own-industry capstone — into a story a busy human remembers and repeats to the panel after you leave the room.</div>
+    <div class="project-role"><span class="pl">Launch · this week</span> Launch role: this is the second of the interview-readiness weeks and it converts the two built projects into a portable, spoken asset. It does not add pipeline code; it produces the recorded walkthrough and the story bank the learner will use in real screens starting now, and it pressure-tests whether the capstone (built W48–50) is being designed to survive a 30-second skim and a live defense. Output feeds directly into applying while the capstone finishes.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Deliver a 5–8 minute recorded portfolio walkthrough (Project 1 healthcare → capstone industry) that lands the two-project story and ends on golden records, with every design choice tied to a named person or role, not a tool.</li><li>Reconstruct any decision from your two projects into the trade-off shape (&#x27;I chose X over Y because Z, which cost me A, and I would revisit via B&#x27;) and the failure-story shape (scene → what you SAW → diagnosis in order → fix + one lesson) on demand, without notes.</li><li>Answer &#x27;why not what&#x27; under pressure: given a component of your pipeline, state the business consequence of getting it wrong before naming the technology, in under 90 seconds.</li><li>Pass a timed AI-screen round (Micro1/HireVue format: fixed prompt, 30s think, 2–3 min answer, no re-record) on 4 of 5 standard behavioral prompts, scored against a rubric.</li><li>Defend your own architecture in a live hot seat: field three adversarial &#x27;why didn&#x27;t you just…&#x27; challenges and convert at least one into an explicit, costed trade-off rather than a defense.</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Communication as the senior signal (0.75 hr): why interviewers screen for judgment, not syntax; the &#x27;why not what&#x27; reframe; the rule that every decision must resolve to a PERSON (the analyst who gets a wrong price, the on-call engineer paged at 3am, the compliance owner), never a tool. Watch: how a mid answer (&#x27;I used Auto Loader&#x27;) becomes a senior answer (&#x27;the finance analyst was reconciling stale prices, so I needed incremental ingest that couldn&#x27;t silently drop a file&#x27;).</li><li>The two answer shapes, drilled (1.0 hr): the FAILURE-STORY shape (set the scene → what you SAW in the data/logs → diagnosis IN ORDER → the fix + one lesson) and the TRADE-OFF shape (&#x27;I chose X over Y because Z, which cost me A, and I would revisit via B&#x27;). Why &#x27;too clean&#x27; and &#x27;too rehearsed&#x27; both read as junior; how a real cost (A) and a real revisit path (B) signal seniority. Mining your own ADRs and quarantine logs for material.</li><li>Behavioral frameworks and the AI-screen format (0.75 hr): STAR vs. the failure/trade-off shapes and when each wins; the mechanics of Micro1/HireVue/async video screens (fixed prompt, countdown, one take, no interviewer to read the room); pacing for a camera; the five evergreen prompts (conflict, ambiguity, failure, data-quality catch, a decision you&#x27;d redo).</li><li>Anatomy of a senior 5–8 minute walkthrough (1.0 hr): structure = 30s business framing → 60s architecture (the 4-part doc, grain, one ADR) → 3–4 min the demo path bronze→silver→gold→golden record, narrating ONE quality/idempotency decision live → 60s the second project as proof it&#x27;s a repeatable method, not a one-off → close on ownership. What a 30-second GitHub skim must already show before you speak. Recording hygiene: audio first, screen legible, no dead air.</li><li>Defend-your-design without getting defensive (0.5 hr): converting &#x27;why didn&#x27;t you just use a view / skip MDM / use Postgres&#x27; into a costed trade-off instead of a wall; the phrase &#x27;that&#x27;s the right question — here&#x27;s what it would have cost&#x27;; admitting the one thing you&#x27;d revisit as a strength, not a confession (&#x27;you do not need perfect decisions, you need explainable ones&#x27;).</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~7h</span></div>
+        <p>A no-new-data communication lab: you script, record, and self-critique a 5–8 minute portfolio walkthrough, build a personal &#x27;story bank&#x27; of trade-off and failure answers mined from your own ADRs, and run two timed mock rounds (a human behavioral round and an AI-screen round) against a scoring rubric. The deliverable is evidence that a human — you — did the work and can explain the judgment behind it.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Story-mine your own repos (60 min): open your Project 1 and capstone ADRs, quarantine logs, and architecture docs. Extract at least 8 raw decision points into the story-bank template — one row each for the grain choice, an SCD/CDC choice, the MDM match-threshold choice, a quarantine/quality gate, an idempotency guarantee, a governance (Unity Catalog) choice, a cost/measure-first optimization, and one genuine failure you hit and fixed.</li><li>Convert 5 rows to the TRADE-OFF shape (45 min): for each, write one sentence in &#x27;I chose X over Y because Z, which cost me A, and I would revisit via B.&#x27; Reject any row where A (&#x27;what it cost&#x27;) or B (&#x27;how I&#x27;d revisit&#x27;) is blank — a missing cost is the tell of a rehearsed non-answer. Every Z must name a person or role.</li><li>Convert 3 rows to the FAILURE-STORY shape (45 min): scene → what you SAW (the actual symptom in data/logs, e.g. row counts doubling, a null spike, a duplicate golden record) → diagnosis in order → the fix → one lesson. Keep each to ~90 seconds spoken.</li><li>Script the walkthrough (45 min): fill the walkthrough beat-sheet scaffold — 30s framing / 60s architecture+one ADR / 3–4 min bronze→silver→gold→golden-record demo narrating one live quality decision / 60s second project as repeatable method / 30s ownership close. Write speaker notes, not a read-aloud paragraph; mark the ONE decision you will narrate live.</li><li>Prep the 30-second skim (20 min): before recording, verify the two repos pass the skim test — README leads with business framing + architecture diagram, ADR folder visible, tests/quarantine visible, a badge or CI status. Fix anything that would make a skimmer think &#x27;tutorial.&#x27;</li><li>Record take 1 and self-score (40 min): screen-record the walkthrough (Loom/OBS/QuickTime). Watch it once against the rubric: Did you open with a person, not a tool? Did you stay in 5–8 min? Did you narrate a live decision, not just click? Did you end on golden records + ownership? Note the three weakest moments.</li><li>Record take 2 (30 min): re-record fixing only those three moments. Do NOT polish to &#x27;too clean&#x27; — leave the natural seams. Keep both takes; you will compare in the live session.</li><li>Run the AI-screen simulation (30 min): use the provided prompt runner (or a phone timer) for 5 prompts, HireVue rules — prompt shown, 30s think, one 2–3 min take, no re-record, camera on. Save all five clips unedited.</li><li>Draft your answer-key notes (15 min): for each AI-screen clip, jot the one improvement you&#x27;d make — this becomes your pre-interview warmup sheet, not a re-record.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">None — communication/interview-prep week (no new data)</div><div class="ds-url">none — design/prep week; reuses the learner&#x27;s existing Project 1 (healthcare) and capstone repos</div><div class="ds-mess"><span class="ml">Mess to handle</span> The &#x27;raw material&#x27; is your own decision history: ADRs, quarantine logs, and commit messages written weeks ago that you must now reconstruct into a coherent spoken narrative. The mess is that real decisions were non-linear and half-documented — the work is turning that honest mess into an explainable story without sanding it into something &#x27;too clean&#x27; to be believed.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://www.amazon.jobs/content/en/how-we-hire/interviewing-at-amazon" target="_blank" rel="noopener">Amazon Behavioral Interview / STAR method and Leadership Principles (official prep guidance)</a></li><li><a href="https://www.hirevue.com/candidates" target="_blank" rel="noopener">HireVue — how asynchronous / AI video interviews work (candidate guidance)</a></li><li><a href="https://github.com/joelparkerhenderson/architecture-decision-record" target="_blank" rel="noopener">Architecture Decision Records (ADR) — Michael Nygard&#x27;s original template and pattern</a></li><li><a href="https://www.loom.com/" target="_blank" rel="noopener">Loom — record and share a screen + camera walkthrough (free tier)</a></li><li><a href="https://obsproject.com/" target="_blank" rel="noopener">OBS Studio — free open-source screen recorder (Loom alternative, fully local)</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">walkthrough_beatsheet_and_storybank.md</span> <span class="sc-lang">markdown</span></summary><pre><code># Portfolio Walkthrough Beat-Sheet + Story Bank (STARTER — fill every TODO)
+
+## PART A — 5–8 min Walkthrough beat-sheet
+# Rule: every beat names a PERSON/ROLE before it names a tool. Mark the ONE decision you narrate live with (LIVE).
+
+### [0:00–0:30] Business framing (RECOGNITION before evaluation)
+- Who is hurt when this data is wrong? TODO: &lt;named role, e.g. &quot;the finance analyst reconciling contracted prices&quot;&gt;
+- The one-line stakes: TODO: &lt;what bad decision the wrong data causes&gt;
+- DO NOT open with &quot;So I used Databricks...&quot;  &lt;- delete this line only when you&#x27;ve replaced the opener above
+
+### [0:30–1:30] Architecture in 60s (slow-front-end, fast-back-end)
+- Grain of the gold product: TODO: &lt;one row = ____&gt;
+- The 4-part arch doc lives at: TODO: &lt;repo link&gt;
+- The ONE ADR I&#x27;ll name out loud: TODO: &lt;decision + the person it served&gt;
+
+### [1:30–5:00] Demo path bronze -&gt; silver -&gt; gold -&gt; golden record
+- Bronze (raw, recoverable history): TODO: &lt;what I show&gt;
+- Silver (conformed + quality gate): TODO: &lt;the quarantine/test I point at&gt;
+- (LIVE) Narrate ONE decision as it happens: TODO: &lt;e.g. match threshold, idempotent MERGE key&gt;
+- Gold / MDM golden record: TODO: &lt;the survivorship rule + why&gt;
+
+### [5:00–6:00] Second project = proof of a repeatable METHOD
+- Same spine, different industry: TODO: &lt;one contrast that proves it wasn&#x27;t luck&gt;
+
+### [6:00–6:30] Ownership close
+- What I&#x27;d watch in prod / what I&#x27;d revisit: TODO: &lt;one honest item&gt;
+
+---
+## PART B — Story Bank (one row per decision; convert to a shape)
+# Reject any TRADE-OFF row with an empty COST or REVISIT column.
+
+| # | Decision point | Shape | X (chose) | Y (over) | Z (because — NAME THE PERSON) | A (cost) | B (revisit via) |
+|---|----------------|-------|-----------|----------|-------------------------------|----------|-----------------|
+| 1 | Grain          | trade-off | TODO | TODO | TODO | TODO | TODO |
+| 2 | CDC / SCD      | trade-off | TODO | TODO | TODO | TODO | TODO |
+| 3 | MDM threshold  | trade-off | TODO | TODO | TODO | TODO | TODO |
+| 4 | Quality gate   | trade-off | TODO | TODO | TODO | TODO | TODO |
+| 5 | Governance     | trade-off | TODO | TODO | TODO | TODO | TODO |
+
+### Failure stories (3 rows) — scene -&gt; what I SAW -&gt; diagnosis in order -&gt; fix -&gt; one lesson
+- F1: TODO scene | SAW: TODO &lt;the symptom in data/logs&gt; | diagnosis: TODO -&gt; TODO -&gt; TODO | fix: TODO | lesson: TODO
+- F2: TODO ...
+- F3: TODO ...
+
+---
+## PART C — AI-screen runner (HireVue rules: 30s think, one 2-3 min take, no re-record)
+# TODO: run these 5 prompts on a timer; save clips; do NOT re-record.
+prompts = [
+  &quot;Tell me about a time you caught a data-quality problem others missed.&quot;,   # TODO answer live
+  &quot;Describe a technical decision you would make differently now.&quot;,           # TODO
+  &quot;Walk me through a disagreement about a design choice.&quot;,                   # TODO
+  &quot;Tell me about the hardest ambiguity in your capstone.&quot;,                  # TODO
+  &quot;Why this architecture and not something simpler?&quot;,                        # TODO (defend-your-design)
+]
+# TODO: after each, write ONE improvement note in your warmup sheet — not a re-record.
+</code></pre><div class="sc-note"><span class="ml">Note</span> A STARTER scaffold, not a solution. Fill every TODO with YOUR own project specifics. The point is that the words are yours — a graded walkthrough that reads as a filled-in template defeats the purpose.</div></details>
+        <div class="mirror"><span class="ml2">Adapt to your industry</span> All of Phase 4 is the learner&#x27;s OWN target industry. Here that means: the walkthrough&#x27;s second-project segment, every story-bank row drawn from the capstone, and every &#x27;who is hurt when this is wrong&#x27; framing must name a real role in YOUR chosen industry (e.g. a crypto risk analyst, a disaster-relief logistics coordinator, an SEC-filing compliance reviewer), not the healthcare exemplar. The healthcare Project 1 is the shared worked example; the capstone half of every answer is yours.</div>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A committed interview-readiness bundle: (1) a 5–8 minute recorded portfolio walkthrough (two takes) covering Project 1 → capstone and ending on golden records + ownership; (2) a completed story bank with at least 5 trade-off answers (all with a named person, a real cost, and a revisit path) and 3 failure-story answers; (3) five unedited AI-screen clips plus a one-line-per-clip warmup sheet; (4) confirmation both repos pass the 30-second skim test (README business framing, architecture diagram, visible ADRs, visible tests/quarantine).</div>
+        <div class="accept"><b>Pass when</b> Walkthrough is 5–8 minutes, opens on a named person/role (not a tool), narrates at least one design decision live during the demo, and closes on golden records + an ownership statement. Every trade-off answer resolves Z to a person and has non-empty cost (A) and revisit (B) fields. At least 3 failure stories follow scene→SAW→diagnosis-in-order→fix→lesson. AI-screen round: 4 of 5 prompts answered within the time box in one take, scored &#x27;senior&#x27; on the rubric&#x27;s &#x27;why not what&#x27; and &#x27;ties to a person&#x27; rows. Both repos pass the skim checklist. A peer or the mentor could retell your two-project story after watching once.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Live session (60–75 min): each learner plays their stronger walkthrough take (or the weakest 90 seconds of it) to the group. The cohort scores it live on two rubric rows only — &#x27;did they open with a person, not a tool?&#x27; and &#x27;did they narrate a decision or just click?&#x27; We then diff take 1 vs take 2 to show what improved and, deliberately, to catch anyone who over-polished into &#x27;too clean.&#x27; Recap the two shapes and the &#x27;why not what&#x27; reframe with real cohort examples.</p>
+        <p><b>Misconception</b> The dominant misconception: that a great walkthrough is a fluent tour of the tech (&#x27;here&#x27;s my Auto Loader job, here&#x27;s my MERGE, here&#x27;s Unity Catalog&#x27;). That reads as junior no matter how smooth. We surface it by asking, mid-tour, &#x27;who was hurt when this was wrong?&#x27; — and watching people who can&#x27;t answer without restarting. The fix is drilled live: reframe every &#x27;what I built&#x27; sentence into a &#x27;who it served / what it cost&#x27; sentence. Second misconception: that admitting a revisit (B) is weakness — we reframe it as the single strongest seniority signal (&#x27;you do not need perfect decisions, you need explainable ones&#x27;).</p>
+        <p class="hot"><b>Hot seat</b> "Defend-your-design gauntlet: the mentor picks one learner&#x27;s capstone and fires three adversarial &#x27;why didn&#x27;t you just…&#x27; challenges in a row — e.g. &#x27;why not just a SQL view instead of a gold table?&#x27;, &#x27;why MDM at all — is dedup not enough?&#x27;, &#x27;why Databricks and not Postgres for this volume?&#x27; The learner must convert at least one into an explicit costed trade-off (&#x27;that&#x27;s the right question — here&#x27;s what skipping it would have cost the [named role]&#x27;) rather than defending. Then a cold behavioral: &#x27;tell me about the data-quality bug you were most embarrassed by&#x27; — graded live on the failure-story shape (did they say what they SAW, and diagnose in order?)."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Adds the recorded walkthrough and story bank to the portfolio as the top-of-repo, human-facing layer: a README-linked &#x27;Watch the 6-minute walkthrough&#x27; badge on both projects, an /interview folder containing the story bank and AI-screen warmup sheet, and confirmation the two-project narrative (healthcare productionized → own-industry capstone, ending on golden records) is skim-legible. This is the asset that converts a GitHub skim into an interview.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Completed W46 (interview prep I): resume/LinkedIn/GitHub cleanup and the first pass at articulating the two-project story. A productionized Project 1 (healthcare) repo and a capstone repo far enough along to demo bronze→silver→gold→golden record and to show ADRs — even if the capstone build formally finishes W48–50, its architecture doc, charter, and at least a gold/MDM slice must exist to record against. A screen recorder (Loom or OBS) and a working mic/camera.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w48">
+    <div class="wk-head">
+      <span class="wk-num">W48</span>
+      <span class="wk-title">Capstone (W48-50) - ship &amp; defend your own end-to-end data product</span>
+      <span class="wk-mod">M37 · Phase 4 · launch · capstone · W48–50</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G9</span><span class="gtag">G10</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> You are the first data engineer a mid-sized organization in your chosen industry has ever hired. The head of operations has been making decisions off a spreadsheet that three people edit and nobody trusts, and they have asked you a single question they cannot currently answer reliably. Your job over the next three weeks is not to build &#x27;a pipeline&#x27; - it is to hand that leader one governed data product they can bet a decision on, and to be able to explain, to a skeptical stakeholder, why every part of it can be trusted.</div>
+    <div class="project-role"><span class="pl">Launch · this week</span> THE PROOF. This is the flagship interview piece - the learner&#x27;s own independent, governed medallion product on their chosen industry, built mostly solo with minimal scaffolding. Weeks 48-50 take the Week 44 charter all the way to golden records under Unity Catalog, deployed via DABs/CI-CD, with an idempotency/recovery proof and a recorded walkthrough. Combined with the productionized Project 1 (healthcare), it completes the two-project portfolio arc that ends on golden records and is defensible end to end.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Ship an independent, governed medallion pipeline on your own industry - charter + 4-part architecture doc + at least 3 ADRs, bronze/silver/gold, CDC/incremental with proven idempotency, MDM golden records, Unity Catalog governance, tests + quarantine, and a DAB deployed through CI/CD - runnable end to end from a clean clone.</li><li>Prove idempotency and recoverability with evidence: re-run the same load twice and show gold row counts and golden-record keys are byte-for-byte stable, and replay one day of history to show the pipeline reconstructs the same state.</li><li>Defend every non-trivial decision in writing using the trade-off shape (&#x27;I chose X over Y because Z, which cost me A, and I would revisit via B&#x27;), tied to a named stakeholder rather than a tool.</li><li>Package the work so a reviewer reaches &#x27;this is senior&#x27; within a 30-second GitHub skim: README with grain, lineage diagram, run instructions, and a 5-8 minute recorded walkthrough that opens on the business question and ends on golden records.</li><li>Operate a real quality gate: define measurable data-quality expectations, route violations to a quarantine table with a written reason code, and demonstrate that a bad batch fails loudly without corrupting gold.</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~3h</span></div><ul><li>Capstone scoping &amp; the &#x27;defensible slice&#x27; (0.75h): how to cut your own industry problem down to one grain and one business question you can actually ship in three weeks - narrow-and-complete beats broad-and-broken. Recognition-before-evaluation: write the business framing first, in the voice of the person who feels the pain.</li><li>The 30-second senior skim (0.5h): what a hiring reviewer looks for on a GitHub landing - README grain statement, architecture diagram, ADRs, run-from-clean-clone instructions, tests, CI badge. Reverse-engineering your repo layout from that skim.</li><li>Portfolio narrative: the two-project arc (0.5h): sequencing Project 1 (healthcare, productionized) and your capstone into one story that ends on golden records - what each project proves, and the failure-story you will tell about each in an interview (scene -&gt; what you SAW -&gt; diagnosis in order -&gt; fix + one lesson).</li><li>Harden-and-prove checklist (0.75h): the difference between &#x27;it ran once&#x27; and &#x27;it is recoverable&#x27; - idempotency proof, replay/backfill proof, quarantine proof, teardown-and-redeploy proof. Documentation as interview prep: every proof is a screenshot or logged assertion you can show.</li><li>The defense rehearsal (0.5h): anticipating the three hardest questions about your capstone (Why this grain? What happens on a duplicate/late/malformed record? How would this scale or break?) and pre-writing the trade-off-shaped answers.</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~30h</span></div>
+        <p>A three-week solo build sprint that turns your Week 44 charter into a shipped, defensible data product on your own industry. Week one is design and the bronze/silver foundation; week two is the gold layer, CDC/incremental with idempotency, and MDM golden records; week three is governance, tests/quarantine, DABs/CI-CD hardening, and a recorded walkthrough. You work mostly solo with minimal scaffolding - the point is to prove you can do it without hand-holding. Learners without a viable second source instead extend Project 1 with a new business question and a new source, applying the identical checklist.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>WEEK 1 - DESIGN &amp; CHARTER LOCK (design before code). Finalize the project charter: name the stakeholder, the one business question, the grain of your gold product, the definition of &#x27;done&#x27;, and explicit non-goals. Write the 4-part architecture doc (context/sources -&gt; logical medallion design -&gt; physical Databricks/Unity Catalog layout -&gt; operations &amp; recovery). Open an ADR log and write your first 3 ADRs (e.g., source choice, grain choice, incremental strategy). Commit charter + architecture + ADRs BEFORE any pipeline code - slow on the front end, fast on the back end.</li><li>WEEK 1 - SOURCE &amp; BRONZE. Ingest your real messy source (data.gov / CMS / SEC EDGAR / CoinGecko / ReliefWeb / NOAA / Faker for locked-down domains) into a bronze table exactly as received: full fidelity, source metadata columns (ingest timestamp, source file/endpoint, batch id), no cleaning. Profile the raw data and write down, in the README, the three messiest things you found (nulls, dupes, drifting schema, encoding, late records) - these become your silver requirements.</li><li>WEEK 1 - SILVER, TESTED. Build silver: typed, deduplicated, conformed, with a clear primary key at the declared grain. Encode your data-quality expectations as explicit assertions and route failures to a quarantine table with a written reason code - do not silently drop rows. Add the first round of tests (schema, not-null on keys, uniqueness at grain, referential checks). Prove a deliberately corrupted batch lands in quarantine and does NOT reach silver.</li><li>WEEK 2 - GOLD PRODUCT. Model the gold layer to answer the charter&#x27;s business question at the declared grain (dimensional or wide aggregate as fits). Write the grain statement at the top of the gold table doc. Validate gold against a hand-computed spot check so you can defend the numbers, not just produce them.</li><li>WEEK 2 - CDC / INCREMENTAL + IDEMPOTENCY PROOF. Convert the load from full-refresh to incremental (MERGE / change-feed / watermark as appropriate). Then PROVE idempotency: run the identical incremental load twice and capture evidence that gold row counts and keys are unchanged. Replay one prior day/batch and show the pipeline reconstructs the same state (recoverable history). Log both proofs as assertions or screenshots in the repo.</li><li>WEEK 2 - MDM GOLDEN RECORDS. Resolve entities across your source(s) into golden records: define match rules, survivorship rules (which field wins and why), and a stable golden key. Document why you chose deterministic vs probabilistic matching and what a wrong merge would cost the stakeholder. Show a before/after on a real duplicate cluster from your data.</li><li>WEEK 3 - GOVERNANCE &amp; SECURITY. Put the whole product under Unity Catalog: catalog/schema layout, table + column comments, ownership/grants that reflect least privilege, and lineage you can screenshot. Tag or mask at least one sensitive column and write one sentence on the governed-access decision and who it protects.</li><li>WEEK 3 - DABs / CI-CD HARDENING. Package everything as a Databricks Asset Bundle and deploy through a CI/CD pipeline (lint + tests run on push, bundle deploys the job). Prove repeatable deployment: tear the job down and redeploy it from a clean clone with one command, and confirm it runs green. This is the &#x27;repeatable deployment&#x27; pillar made real.</li><li>WEEK 3 - RECORD, POLISH &amp; DEFEND. Finalize the README for the 30-second senior skim (grain, diagram, run instructions, test/CI badges, ADR links). Record a 5-8 minute walkthrough that opens on the business question and ends on golden records. Pre-write trade-off-shaped answers to the three hardest questions about your build. Do a final teardown-redeploy-rerun to confirm end-to-end reproducibility before you call it shipped.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">data.gov (US open data catalog - pick a dataset in your target industry)</div><div class="ds-url"><a href="https://catalog.data.gov/dataset" target="_blank" rel="noopener">https://catalog.data.gov/dataset</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Inconsistent CSV schemas across yearly files, free-text categorical fields with spelling variants, embedded nulls and placeholder codes, and metadata that drifts between releases - forces real conforming and schema-drift handling.</div></div><div class="ds"><div class="ds-name">SEC EDGAR full-text &amp; financial statement datasets (finance/company industry)</div><div class="ds-url"><a href="https://www.sec.gov/edgar/search/" target="_blank" rel="noopener">https://www.sec.gov/edgar/search/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Entity identity is genuinely hard - the same company appears under multiple CIK/ticker/name variants across filings, dates are reporting-period not event dates, and amendments create late-arriving restatements - an ideal MDM golden-record and CDC test.</div></div><div class="ds"><div class="ds-name">CoinGecko API (crypto/markets industry)</div><div class="ds-url"><a href="https://www.coingecko.com/en/api/documentation" target="_blank" rel="noopener">https://www.coingecko.com/en/api/documentation</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> High-frequency incremental data with rate limits, duplicate/near-duplicate ticks, missing intervals, and coins that rename or merge over time - a natural fit for watermark-based incremental loads and idempotent MERGE.</div></div><div class="ds"><div class="ds-name">ReliefWeb API (humanitarian/NGO industry)</div><div class="ds-url"><a href="https://apidoc.reliefweb.int/" target="_blank" rel="noopener">https://apidoc.reliefweb.int/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Semi-structured JSON with nested arrays, inconsistent country/organization naming, and late-updated records - strong test for flattening, conforming reference data, and quarantine of malformed payloads.</div></div><div class="ds"><div class="ds-name">NOAA Climate Data Online (weather/energy/agriculture industry)</div><div class="ds-url"><a href="https://www.ncdc.noaa.gov/cdo-web/webservices/v2" target="_blank" rel="noopener">https://www.ncdc.noaa.gov/cdo-web/webservices/v2</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Station-level records with gaps, quality-flag columns, unit inconsistencies, and huge volume - forces incremental loading, explicit quality gates, and honest handling of missing data rather than silent drops.</div></div><div class="ds"><div class="ds-name">Faker-generated synthetic source (for locked-down or fraud domains with no public data)</div><div class="ds-url"><a href="https://faker.readthedocs.io/en/master/" target="_blank" rel="noopener">https://faker.readthedocs.io/en/master/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> You engineer the mess deliberately - injected duplicates, late records, malformed rows, and drifting schemas - which is acceptable ONLY if you document the generation rules as a source contract so the pipeline still faces realistic failure modes.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://docs.databricks.com/aws/en/dev-tools/bundles/" target="_blank" rel="noopener">Databricks Asset Bundles (DABs) - overview &amp; CI/CD</a></li><li><a href="https://docs.databricks.com/aws/en/data-governance/unity-catalog/" target="_blank" rel="noopener">Unity Catalog - governance, lineage, and grants</a></li><li><a href="https://docs.databricks.com/aws/en/delta/merge" target="_blank" rel="noopener">Delta Lake MERGE INTO (idempotent upserts / CDC)</a></li><li><a href="https://docs.databricks.com/aws/en/delta/delta-change-data-feed" target="_blank" rel="noopener">Delta change data feed (CDC / incremental)</a></li><li><a href="https://docs.databricks.com/aws/en/lakehouse/medallion" target="_blank" rel="noopener">The medallion (bronze/silver/gold) architecture</a></li><li><a href="https://github.com/joelparkerhenderson/architecture-decision-record" target="_blank" rel="noopener">Architecture Decision Records (ADR) - Michael Nygard&#x27;s original template</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">capstone_scaffold/README_and_merge_scaffold.md</span> <span class="sc-lang">python</span></summary><pre><code># capstone/  (repo skeleton - the 30-second senior skim starts here)
+#   README.md                &lt;- grain statement, diagram, run-from-clean-clone steps, CI badge
+#   docs/architecture.md      &lt;- 4 parts: context/sources | logical | physical | ops &amp; recovery
+#   docs/adr/0001-*.md ...    &lt;- &gt;= 3 ADRs, Nygard template
+#   databricks.yml            &lt;- DAB bundle (TODO: define job, targets, CI deploy)
+#   src/bronze.py  src/silver.py  src/gold.py  src/mdm.py
+#   tests/  .github/workflows/ci.yml
+
+from pyspark.sql import DataFrame, SparkSession
+from delta.tables import DeltaTable
+
+# --- INCREMENTAL, IDEMPOTENT UPSERT STUB -------------------------------------
+def merge_incremental(spark: SparkSession, source_df: DataFrame,
+                      target_table: str, business_keys: list[str]) -&gt; None:
+    &quot;&quot;&quot;Upsert a batch into a Delta target so that re-running the SAME batch
+    produces the SAME target (idempotency). Fill the TODOs; do not ship stubs.&quot;&quot;&quot;
+    # TODO(grain): assert source_df is unique on `business_keys` BEFORE merge,
+    #   or your MERGE will double-count. Route violations to quarantine.
+    # TODO(cdc): if using change data feed / watermark, filter source_df to the
+    #   new increment here and record the watermark you consumed.
+    merge_condition = None  # TODO: build &quot;tgt.k = src.k AND ...&quot; from business_keys
+
+    tgt = DeltaTable.forName(spark, target_table)
+    (tgt.alias(&quot;tgt&quot;)
+        .merge(source_df.alias(&quot;src&quot;), merge_condition)  # TODO: real condition
+        # TODO: whenMatchedUpdate only when a change is detected (hash compare)
+        # TODO: whenNotMatchedInsertAll()
+        .execute())
+    # TODO(proof): after merge, assert row_count(target) and key-set are stable
+    #   on a second identical run; log the assertion into docs/ as your evidence.
+
+# --- QUALITY GATE + QUARANTINE STUB -----------------------------------------
+def split_valid_quarantine(df: DataFrame) -&gt; tuple[DataFrame, DataFrame]:
+    # TODO: encode your declared expectations (not-null keys, unique at grain,
+    #   domain/range checks). Return (valid, quarantined_with_reason_code).
+    # Never silently drop - every quarantined row carries a written reason.
+    raise NotImplementedError
+
+# --- MDM GOLDEN RECORD STUB --------------------------------------------------
+def resolve_golden_records(silver_df: DataFrame) -&gt; DataFrame:
+    # TODO: match rules (deterministic vs probabilistic - justify in an ADR)
+    # TODO: survivorship rules (which field wins, why) + stable golden key
+    raise NotImplementedError
+</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY - a repo skeleton plus an idempotent incremental-load stub with TODOs. It intentionally does NOT implement match rules, survivorship, quality expectations, or the DAB. You design and fill every TODO; leaving them stubbed will fail acceptance.</div></details>
+        <div class="mirror"><span class="ml2">Adapt to your industry</span> This entire three-week capstone IS the learner&#x27;s own target industry - there is no separate mirror this week. Every choice (source, grain, business question, match/survivorship rules) is made for their chosen domain and defended to a stakeholder in that domain. Learners without a viable second source instead extend Project 1 (healthcare) with a NEW business question and a NEW source, applying the identical charter-to-golden-records checklist.</div>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A single public GitHub repo (plus a 5-8 minute recorded walkthrough) containing a shipped, governed medallion data product on the learner&#x27;s own industry: charter + 4-part architecture doc + &gt;=3 ADRs; bronze/silver/gold Delta tables with a stated grain; incremental/CDC load with a written idempotency proof and a replay/recovery proof; MDM golden records with documented match + survivorship rules; Unity Catalog governance (grants, comments, lineage, one masked/tagged sensitive column); tests + a quarantine table with reason codes; and a Databricks Asset Bundle deployed through CI/CD. The README must satisfy the 30-second senior skim.</div>
+        <div class="accept"><b>Pass when</b> Reproducibility: a reviewer clones the repo and deploys the DAB with one command, the CI pipeline runs green (lint + tests), and the job runs end to end. Idempotency: running the incremental load twice leaves gold row counts and golden-record keys unchanged, with the proof committed. Recovery: replaying one prior batch reconstructs the same gold state. Quality: a deliberately corrupted batch lands in quarantine with a reason code and never reaches gold. Governance: Unity Catalog shows ownership, comments, lineage, and at least one masked/tagged sensitive column. Defensibility: the README states the grain in one sentence, ADRs justify source/grain/incremental/matching choices in trade-off shape, and the walkthrough opens on the business question and ends on golden records.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Each learner gives a 3-minute &#x27;state of the capstone&#x27; at the top of the live review: the one business question, the current grain, and the single hardest decision made this week framed as &#x27;I chose X over Y because Z.&#x27; The cohort mirrors back only &#x27;why&#x27;, not &#x27;what&#x27; - if an answer names a tool instead of a person or a decision, the room flags it. Recap the week&#x27;s proofs (idempotency, quarantine, recovery) as show-me-the-evidence, not describe-it.</p>
+        <p><b>Misconception</b> &#x27;The capstone should show everything I learned.&#x27; No - breadth-and-broken reads as junior; one narrow grain shipped completely, recoverable, and governed reads as senior. The second killer misconception: &#x27;idempotent&#x27; means &#x27;it ran without error twice.&#x27; It does not - it means the SECOND identical run produces the SAME output, and you must show the row-count/key evidence, not assert it. A third: quarantine is not &#x27;drop the bad rows&#x27; - a dropped row is an untracked data-loss decision you cannot defend.</p>
+        <p class="hot"><b>Hot seat</b> "Screen-share your gold table and its grain statement. In 90 seconds, defend three things to a skeptical head of operations who has never met you: (1) Why THIS grain and not one level finer or coarser? (2) A duplicate, a late-arriving, and a malformed record each hit your pipeline tonight - walk me through exactly what happens to each and why gold stays trustworthy. (3) Your golden-record logic merged two entities that a domain expert says are actually different - how did that happen, what did it cost, and how would you revisit it? Answers must be trade-off-shaped and tied to a person, not a tool."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Adds the capstone as the second and final piece of the portfolio: a governed, end-to-end data product on the learner&#x27;s own industry, sitting alongside the productionized Project 1 (healthcare). Together they form the two-project interview story that ends on golden records - one worked example proving depth in a regulated domain, one solo build proving independence. The recorded walkthrough and skim-ready README become direct interview and application assets.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> W44 charter + architecture doc for the capstone (design started); a chosen real messy source in the learner&#x27;s target industry (or a documented Faker source contract, or the Project 1 extension path); a working Databricks workspace with Unity Catalog enabled; Git/GitHub with CI (GitHub Actions) configured; and Phase 1-3 fluency in medallion modeling, Delta MERGE/CDC, MDM survivorship, tests/quarantine, and DAB deployment.</div>
+      </div>
+    </div>
+  </article>
+</main>
+<footer><div class="wrap"><div class="foot-note">
+      <span>Launch · Phase 4 — Advanced & Launch (W44–50) · architecture, elective, interview prep, and the independent capstone.</span>
+      <span class="mono">Gambill Data Engineer Track</span></div></div></footer>

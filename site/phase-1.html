@@ -1,0 +1,1455 @@
+<title>Launch · Phase 1 — Weekly Lesson Plans</title>
+<style>
+  :root {
+    --bg: #EFF2F5; --surface: #FFFFFF; --surface-2: #E7ECF0; --surface-3: #DCE3E9;
+    --ink: #101922; --ink-2: #2C3A47; --muted: #5C6B78; --faint: #8494A1;
+    --line: #D3DBE2; --line-strong: #B7C2CC;
+    --accent: #E8842A; --accent-strong: #A65210; --accent-soft: #FBEAD6; --accent-ink: #7E3D0D;
+    --blue: #6FA3D2; --blue-strong: #3F73A8; --blue-soft: #E9F1F9;
+    --bronze: #A26B37; --silver: #7C8894; --gold: #B08A2A; --bronze-soft: #F0E4D6;
+    --good: #3C8C5C; --good-soft: #DCEDE2; --warn: #B0791F; --warn-soft: #F3E8D2;
+    --code-bg: #F5F1EC;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --maxw: 1120px; --radius: 4px; --radius-lg: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0A1118; --surface: #101B24; --surface-2: #16232E; --surface-3: #1D2E3A;
+      --ink: #E9EFF4; --ink-2: #C4D0DA; --muted: #92A1AE; --faint: #6E7E8B;
+      --line: #22333F; --line-strong: #2E4351;
+      --accent: #F0954A; --accent-strong: #F4A860; --accent-soft: #3A2413; --accent-ink: #F7C08A;
+      --blue: #83B4DE; --blue-strong: #ACCDEC; --blue-soft: #172836;
+      --bronze: #C79357; --silver: #9EAAB6; --gold: #D2AC4E; --bronze-soft: #2A2117;
+      --good: #5DB77C; --good-soft: #16281D; --warn: #D2A040; --warn-soft: #2A2211;
+      --code-bg: #0D1620;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #EFF2F5; --surface: #FFFFFF; --surface-2: #E7ECF0; --surface-3: #DCE3E9;
+    --ink: #101922; --ink-2: #2C3A47; --muted: #5C6B78; --faint: #8494A1;
+    --line: #D3DBE2; --line-strong: #B7C2CC;
+    --accent: #E8842A; --accent-strong: #A65210; --accent-soft: #FBEAD6; --accent-ink: #7E3D0D;
+    --blue: #6FA3D2; --blue-strong: #3F73A8; --blue-soft: #E9F1F9;
+    --bronze: #A26B37; --silver: #7C8894; --gold: #B08A2A; --bronze-soft: #F0E4D6;
+    --good: #3C8C5C; --good-soft: #DCEDE2; --warn: #B0791F; --warn-soft: #F3E8D2;
+    --code-bg: #F5F1EC;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A1118; --surface: #101B24; --surface-2: #16232E; --surface-3: #1D2E3A;
+    --ink: #E9EFF4; --ink-2: #C4D0DA; --muted: #92A1AE; --faint: #6E7E8B;
+    --line: #22333F; --line-strong: #2E4351;
+    --accent: #F0954A; --accent-strong: #F4A860; --accent-soft: #3A2413; --accent-ink: #F7C08A;
+    --blue: #83B4DE; --blue-strong: #ACCDEC; --blue-soft: #172836;
+    --bronze: #C79357; --silver: #9EAAB6; --gold: #D2AC4E; --bronze-soft: #2A2117;
+    --good: #5DB77C; --good-soft: #16281D; --warn: #D2A040; --warn-soft: #2A2211;
+    --code-bg: #0D1620;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  h1,h2,h3,h4 { text-wrap: balance; margin: 0; line-height: 1.15; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  a { color: var(--accent-strong); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-strong); font-weight: 600; }
+  .mono { font-family: var(--font-mono); }
+
+  .hero { border-bottom: 1px solid var(--line); background: radial-gradient(120% 100% at 85% -10%, var(--accent-soft) 0%, transparent 55%), var(--surface); position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 44px 44px; opacity: 0.35; -webkit-mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, transparent 60%); mask-image: radial-gradient(120% 90% at 80% 0%, #000 0%, transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 1; padding-top: 52px; padding-bottom: 40px; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  h1 { font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin: 16px 0 0; max-width: 20ch; }
+  h1 .thin { color: var(--muted); font-weight: 300; }
+  .lede { font-size: clamp(1rem, 2vw, 1.16rem); color: var(--ink-2); max-width: 66ch; margin-top: 18px; line-height: 1.5; }
+  .sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .src { font-family: var(--font-mono); font-size: 11.5px; color: var(--blue-strong); background: var(--blue-soft); border: 1px solid var(--line); border-radius: 20px; padding: 4px 11px; }
+
+  .platform-note { margin-top: 22px; background: var(--surface-2); border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 16px; font-size: 13px; color: var(--ink-2); line-height: 1.5; max-width: 82ch; }
+  .platform-note b { color: var(--ink); }
+  .platform-note .pn-cav { margin-top: 8px; font-size: 12px; color: var(--muted); }
+  .platform-note .pn-cav b { color: var(--blue-strong); font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+
+  .weeknav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .weeknav .wrap { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; padding-bottom: 10px; align-items: center; }
+  .weeknav .nl { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); margin-right: 4px; }
+  .weeknav a { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 4px 8px; text-decoration: none; }
+  .weeknav a:hover { border-color: var(--accent); color: var(--accent-strong); text-decoration: none; }
+  .weeknav .navhome { color: var(--accent-strong); background: var(--accent-soft); border-color: transparent; font-weight: 700; }
+  .weeknav .navsep { width: 1px; align-self: stretch; background: var(--line); margin: 2px 4px; }
+
+  main { padding: 34px 0 20px; display: flex; flex-direction: column; gap: 22px; }
+
+  .wk-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; scroll-margin-top: 64px; }
+  .wk-head { padding: 18px 22px; position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; }
+  .wk-head::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--bronze); }
+  .wk-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #fff; background: var(--bronze); border-radius: 4px; padding: 3px 8px; letter-spacing: 0.03em; }
+  .wk-title { font-size: 1.12rem; font-weight: 730; flex: 1 1 260px; }
+  .wk-mod { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+  .wk-gaps { display: inline-flex; gap: 4px; }
+  .gtag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; color: var(--blue-strong); background: var(--blue-soft); border-radius: 3px; padding: 2px 6px; }
+  .gtag.f { color: var(--muted); background: var(--surface-2); }
+
+  .framing { margin: 0 22px 4px; padding: 12px 15px; background: var(--blue-soft); border-left: 3px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .framing .fl { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue-strong); margin-right: 6px; }
+
+  .project-role { margin: 8px 22px 2px; padding: 12px 15px; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; color: var(--accent-ink); line-height: 1.5; }
+  .project-role .pl { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-strong); margin-right: 6px; }
+
+  .wk-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin-top: 14px; }
+  .blk { padding: 17px 22px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .blk:nth-child(even) { border-right: none; }
+  .blk.full { grid-column: 1 / -1; border-right: none; }
+  .wk-grid > .blk:last-child { border-bottom: none; }
+  .bh { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent-strong); display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .bh .hrs { color: var(--faint); font-weight: 600; }
+  .blk ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .blk li { font-size: 13.5px; color: var(--ink-2); padding-left: 17px; position: relative; line-height: 1.45; }
+  .blk ul li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.55; }
+  .blk p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .blk p + p { margin-top: 8px; }
+
+  .lab .lab-sub { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin: 16px 0 8px; }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 8px; }
+  ol.steps li { counter-increment: step; position: relative; padding-left: 30px; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  ol.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 21px; height: 21px; border-radius: 5px; background: var(--accent-soft); color: var(--accent-strong); font-family: var(--font-mono); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+  .ds-list { display: flex; flex-direction: column; gap: 10px; }
+  .ds { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 11px 13px; }
+  .ds-name { font-weight: 660; font-size: 13.5px; color: var(--ink); }
+  .ds-url { font-family: var(--font-mono); font-size: 11.5px; margin-top: 4px; word-break: break-word; line-height: 1.5; }
+  .ds-url a { color: var(--blue-strong); }
+  .ds-mess { font-size: 12.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+  .ds-mess .ml, .sc-note .ml { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--warn); margin-right: 5px; }
+
+  ul.refs { gap: 6px !important; }
+  ul.refs li { padding-left: 17px; }
+  ul.refs li::before { content: "\2197"; position: absolute; left: 0; top: 0; color: var(--blue-strong); font-size: 12px; background: none !important; width: auto !important; height: auto !important; border-radius: 0 !important; }
+  ul.refs li a { font-size: 13px; }
+
+  details.script { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
+  details.script summary { cursor: pointer; padding: 10px 13px; font-size: 12.5px; color: var(--ink-2); list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+  details.script summary::-webkit-details-marker { display: none; }
+  details.script summary:hover { color: var(--accent-strong); }
+  .sc-ic { font-family: var(--font-mono); font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border-radius: 3px; padding: 1px 5px; font-size: 11px; }
+  .sc-lang { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; margin-left: auto; }
+  details.script[open] summary { border-bottom: 1px solid var(--line); }
+  details.script pre { margin: 0; padding: 14px 15px; overflow-x: auto; background: var(--code-bg); }
+  details.script code { font-family: var(--font-mono); font-size: 12px; line-height: 1.55; color: var(--ink); white-space: pre; }
+  .sc-note { padding: 10px 13px; font-size: 12px; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--line); }
+
+  .mirror { margin-top: 14px; padding: 10px 13px; border: 1px dashed var(--line-strong); border-radius: var(--radius); font-size: 12.5px; color: var(--muted); line-height: 1.5; background: var(--surface-2); }
+  .mirror .ml2 { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--silver); margin-right: 6px; }
+
+  .deliver { background: var(--accent-soft); border-radius: var(--radius); padding: 11px 13px; font-size: 13px; color: var(--accent-ink); line-height: 1.5; }
+  .accept { font-size: 12.5px; color: var(--muted); margin-top: 9px; line-height: 1.5; }
+  .accept b { color: var(--ink-2); font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .live b { color: var(--accent-ink); font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+  .live .hot { margin-top: 8px; padding: 9px 11px; border-left: 2px solid var(--accent); background: var(--surface-2); border-radius: 0 var(--radius) var(--radius) 0; font-style: italic; color: var(--ink-2); }
+
+  .foot { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; background: var(--surface-2); }
+  .foot .pf { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .foot .fl2 { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); display: block; margin-bottom: 4px; }
+
+  footer { padding: 20px 0 60px; }
+  .foot-note { font-size: 13px; color: var(--faint); border-top: 1px solid var(--line); padding-top: 18px; margin-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 820px) {
+    .wk-grid { grid-template-columns: 1fr; }
+    .blk { border-right: none; }
+    .foot { grid-template-columns: 1fr; gap: 14px; }
+    .framing, .project-role { margin-left: 18px; margin-right: 18px; }
+  }
+
+
+</style>
+<div class="hero"><div class="wrap">
+    <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 1 of 4</span>
+    <h1>Foundations, <span class="thin">week by week.</span></h1>
+    <p class="lede">All 13 weeks of Phase 1 (Foundations · bronze depth), with deepened labs — a business framing, step-by-step instructions, linked real datasets, reference docs, and a starter scaffold where the setup earns one. Every lab runs on free, open, deliberately-messy public data; nothing is client data, and no canned tutorial sets.</p>
+    <div class="sources"><span class="src">NYC 311 · Socrata</span><span class="src">USGS Earthquakes</span><span class="src">World Bank + OWID</span><span class="src">Chinook · DuckDB</span><span class="src">NOAA GHCN-Daily</span><span class="src">NYC DOHMH Inspections</span></div>
+  </div></div>
+<nav class="weeknav"><div class="wrap"><a class="navhome" href="index.html">← Course home</a><a href="curriculum.html">Curriculum</a><a href="phase-2.html">Phase 2 →</a><span class="navsep"></span><span class="nl">Weeks</span><a href="#w1">W1</a><a href="#w2">W2</a><a href="#w3">W3</a><a href="#w4">W4</a><a href="#w5">W5</a><a href="#w6">W6</a><a href="#w7">W7</a><a href="#w8">W8</a><a href="#w9">W9</a><a href="#w10">W10</a><a href="#w11">W11</a><a href="#w12">W12</a><a href="#w13">W13</a></div></nav>
+<main class="wrap">
+
+  <article class="wk-card" id="w1">
+    <div class="wk-head">
+      <span class="wk-num">W01</span>
+      <span class="wk-title">Dev environment, the command line &amp; Git</span>
+      <span class="wk-mod">M00 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag f">foundation</span><span class="gtag">G6</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> On real teams, an un-versioned &quot;final_analysis_v3_ACTUAL.ipynb&quot; folder is how a company loses a week of work, ships a number nobody can reproduce, and can&#x27;t answer &quot;who changed this and why&quot; during an audit. The Git repo you stand up this week is the foundation every future pipeline, model, and dashboard gets committed into — reproducibility and traceability start here, not later.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Move around a filesystem and run common shell commands with confidence</li><li>Initialize a Git repo; stage, commit, branch, push, and open a pull request</li><li>Create a reproducible Python environment and manage its dependencies</li><li>Structure a project repo with a README, .gitignore, and env manifest</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Terminal &amp; shell basics: paths, files, pipes</li><li>The Git model: working tree → stage → history</li><li>Branches, remotes, and the PR workflow</li><li>Environments &amp; dependency management (venv/conda)</li><li>Repo hygiene: structure, README, ignore rules</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~3h</span></div>
+        <p>Stand up the course&#x27;s foundational Git repository the way a real data team would: a Python virtual environment, one installed dependency pinned in requirements.txt, a tiny runnable script, a .gitignore that keeps secrets and the venv out of history, and a clear README. You practice the everyday DE workflow — feature branch, at least three small atomic commits, and a pull request you open, review, and merge — so the mechanics are muscle memory before any data is involved.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Create the repo skeleton locally: make the folder tree shown in the scaffold (src/, data/raw/, data/processed/, notes/, README.md, .gitignore, requirements.txt), then run `git init` and confirm `git status` shows the untracked files.</li><li>Create and activate a virtual environment (`python -m venv .venv` then `source .venv/bin/activate`, or the Windows equivalent), install ONE package (e.g. `pip install requests`), and freeze it with `pip freeze &gt; requirements.txt`. Verify `.venv/` is ignored by confirming it does NOT appear in `git status`.</li><li>Write the small script `src/check_env.py` from the starter scaffold: complete the TODOs so it prints the Python version and confirms the installed package imports — this is your proof the environment is reproducible from requirements.txt alone.</li><li>Make your FIRST commit on `main` containing only the baseline: .gitignore, README skeleton, and requirements.txt (do not commit .venv or data files). Confirm with `git log --oneline` that exactly one commit exists.</li><li>Create and switch to a feature branch (`git switch -c feature/env-setup`), then build up the work in at least THREE atomic commits — e.g. (a) add `src/check_env.py`, (b) fill in the README run instructions, (c) add a `notes/decisions.md` entry. Each commit message states WHAT changed and WHY in the imperative mood.</li><li>Push the branch to GitHub (`git push -u origin feature/env-setup`) and open a Pull Request whose description explains what the repo is for and lists the acceptance items as a checklist a reviewer can tick off.</li><li>Self-review the PR diff in the GitHub UI as if you were a teammate: confirm no secrets, no .venv, and no large data files leaked into the diff; leave at least one review comment on your own PR, then merge it (squash or merge-commit, chosen deliberately) and delete the branch.</li><li>Prove idempotency of your setup: on a clean checkout (or after `git switch main &amp;&amp; git pull`), recreate the venv from scratch and run `pip install -r requirements.txt` followed by `python src/check_env.py` — it must succeed with no manual fixes. Record this in `notes/decisions.md`.</li><li>Write a 4-6 line `notes/decisions.md` reflection: which files you deliberately kept OUT of Git and why, why you chose squash vs merge-commit, and what a teammate would need to reproduce your environment.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">None — you build your own course repository</div><div class="ds-url">&mdash;</div><div class="ds-mess"><span class="ml">Mess to handle</span> n/a — this foundational week has no external dataset. The &#x27;mess&#x27; being prevented is the real one: un-versioned work, secrets committed to history, a 200 MB venv or raw data file bloating the repo, and setups that only run on the author&#x27;s machine. You practice the hygiene (.gitignore, pinned requirements, reproducible venv) that keeps later weeks&#x27; messy real data out of trouble.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git book (esp. ch. 2 Git Basics &amp; ch. 3 Branching)</a></li><li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank" rel="noopener">GitHub Docs: About pull requests</a></li><li><a href="https://docs.python.org/3/library/venv.html" target="_blank" rel="noopener">Python docs: venv — Creation of virtual environments</a></li><li><a href="https://pip.pypa.io/en/stable/user_guide/#requirements-files" target="_blank" rel="noopener">Python Packaging: Installing packages with pip &amp; requirements files</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">src/check_env.py</span> <span class="sc-lang">python</span></summary><pre><code>&quot;&quot;&quot;check_env.py — proves this repo&#x27;s environment is reproducible.
+
+Run after: python -m venv .venv &amp;&amp; source .venv/bin/activate
+           pip install -r requirements.txt
+Usage:     python src/check_env.py
+
+This is a STARTER SCAFFOLD. Fill in the TODOs — do not just run it as-is.
+&quot;&quot;&quot;
+import sys
+
+
+def report_python_version() -&gt; None:
+    # Print the running interpreter version so a teammate can confirm
+    # they&#x27;re on a compatible Python (this course assumes 3.10+).
+    print(f&quot;Python: {sys.version.split()[0]}&quot;)
+    # TODO: exit non-zero (sys.exit(1)) if the major.minor is below 3.10,
+    #       so a broken env fails loudly instead of silently.
+
+
+def check_dependency() -&gt; None:
+    # TODO: import the ONE package you installed and pinned in
+    #       requirements.txt (e.g. `requests`). Wrap it in try/except
+    #       ImportError and print a clear message telling the user to run
+    #       `pip install -r requirements.txt` if the import fails.
+    # TODO: print the package&#x27;s __version__ so the output is proof the
+    #       pinned dependency is actually present.
+    pass
+
+
+def main() -&gt; None:
+    report_python_version()
+    check_dependency()
+    # TODO: print a final one-line &#x27;environment OK&#x27; banner ONLY if both
+    #       checks passed — this line is what your README tells a reviewer
+    #       to look for.
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><div class="sc-note"><span class="ml">Note</span> Also create a starter .gitignore ( .venv/  __pycache__/  *.pyc  .env  data/raw/*  data/processed/*  .DS_Store ) and a README skeleton with sections: Purpose, Setup (venv + pip install -r requirements.txt), Run (python src/check_env.py), Repo layout. Recommended tree: repo/ ├─ src/  ├─ data/raw/  data/processed/  ├─ notes/decisions.md  ├─ README.md  ├─ requirements.txt  └─ .gitignore. The scaffold intentionally leaves the version-gate and dependency-import logic as TODOs — the learner writes the real checks.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A public GitHub repository (the course repo everything else will build on) containing: a working Python venv workflow captured in a pinned requirements.txt, a completed `src/check_env.py` that runs green, a real .gitignore (excluding .venv, secrets/.env, and data files), a README with Setup/Run/Layout sections, and a `notes/decisions.md`. Git history shows at least three atomic commits on a `feature/env-setup` branch merged into `main` via a Pull Request you opened, reviewed, and merged. Submit the repo URL and the merged PR link.</div>
+        <div class="accept"><b>Pass when</b> Verified when: (1) a fresh clone runs `python -m venv .venv`, `pip install -r requirements.txt`, `python src/check_env.py` and the script prints the Python version, the pinned package version, and an &#x27;environment OK&#x27; banner with no manual fixes; (2) `git log --oneline` on main shows a merged PR whose feature branch has ≥3 atomic commits with imperative WHAT+WHY messages; (3) neither `.venv/`, `.env`/secrets, nor raw data files appear anywhere in the Git history (`git log --all --stat` is clean of them); (4) the README documents setup+run and the repo tree; (5) `notes/decisions.md` states which files were kept out of Git and why, and the squash-vs-merge choice.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> the Git mental model.</p>
+        <p><b>Misconception</b> conflating stage vs commit vs push.</p>
+        <p class="hot"><b>Hot seat</b> "Walk me through exactly what happens, and where your code lives, at each step of add → commit → push."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Initializes the portfolio repository that every later week&#x27;s work is committed into — the backbone of the whole Phase 1 project.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes nothing. The Git / PR / venv workflow established here is used in every subsequent week.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w2">
+    <div class="wk-head">
+      <span class="wk-num">W02</span>
+      <span class="wk-title">The DE mental model &amp; the data lifecycle</span>
+      <span class="wk-mod">M01 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G9</span><span class="gtag">G10</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> NYC agencies dispatch crews (potholes, downed trees, heat/hot-water complaints) off dashboards fed by 311. When a complaint type is quietly renamed or a request lands with a null borough/lat-long, those rows drop out of the filtered view and the crew never gets routed — the outage is invisible because the dashboard still renders. A stated grain and a one-page data contract are the cheapest insurance against that silent failure.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>trace a real dataset end-to-end — source system → ingest → store → transform → consumer — naming what happens at each hop and where the data physically lives</li><li>reframe a raw dataset as a DATA PRODUCT by declaring its grain, owner, consumers, freshness/SLA, and quality expectations</li><li>write a one-page data contract (schema, grain, nullability, freshness, semantics, ownership) for a real public dataset</li><li>explain why operational (source) and analytical (consumer) systems keep separate copies and how data changes shape between them</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>what a data product is (grain, owner, consumers, contract) vs. the common trap of calling the pipeline itself &#x27;the product&#x27;</li><li>the data lifecycle: source → ingest → store → transform → serve → consume, with a light bronze/silver/gold intuition (no tooling yet)</li><li>operational vs. analytical systems (OLTP vs. OLAP intuition) and why copies of data exist at all</li><li>anatomy of a data contract: schema &amp; types, grain, freshness/SLA, nullability, business semantics, and named ownership</li><li>reading a source&#x27;s API docs / schema to infer the true grain and meaning of a row before you trust it</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~4h</span></div>
+        <p>Pull a live sample of NYC 311 Service Requests from the Socrata API, inspect the real mess (drifting complaint types, null locations, late-closed tickets), then map the record&#x27;s end-to-end lifecycle as a Mermaid diagram and write a one-page data contract that declares the grain, the required fields, the known failure modes, and the downstream consumers who break when the data drifts. Deliverable is documentation, not a pipeline — but every claim in it must be backed by something you actually observed in the sample.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Land the data: run the provided curl scaffold to pull ~50 live rows from https://data.cityofnewyork.us/resource/erm2-nwe9.json into sample_311.json, then open it and skim the raw JSON so you see the actual field names (e.g. unique_key, complaint_type, descriptor, borough, latitude, incident_zip, created_date, closed_date, status).</li><li>Profile the mess concretely: for your sample, count how many rows have a null borough, latitude, or incident_zip; list the distinct complaint_type values; and find at least one record that is &#x27;closed&#x27; but has no closed_date (or a closed_date before created_date). Record the exact counts and one example unique_key for each problem — these become your evidence.</li><li>Identify the grain in one sentence: state what exactly one row represents (one service request identified by unique_key) and name the column that makes it unique. Verify it by checking that unique_key has no duplicates in your sample; note what you&#x27;d do if it did.</li><li>Map the lifecycle: starting from the Mermaid skeleton, draw the record&#x27;s journey from citizen intake (call/app/web) through the 311 system, the Socrata/Open Data publication layer, ingestion, storage, and the two or three dashboards/consumers at the end. On the edges where the data can silently break, annotate the failure (e.g. &#x27;complaint_type renamed upstream&#x27;, &#x27;null borough -&gt; dropped by borough filter&#x27;, &#x27;late closed_date -&gt; SLA metric wrong&#x27;).</li><li>Write the one-page data contract (Markdown) with these sections: Grain; Source &amp; refresh cadence; Required (non-null) fields and their types; Known failure modes with the evidence counts from step 2; Idempotency/rerun policy (state how a re-pull must not create duplicate rows — merge on unique_key); and Consumers (who reads it and what breaks for them when a field drifts or goes null).</li><li>Declare consumers explicitly: name at least two downstream consumers (e.g. &#x27;crew-routing dashboard filters on borough + complaint_type&#x27;, &#x27;SLA report aggregates closed_date - created_date&#x27;) and, for each, write the one sentence describing the concrete harm when the contract is violated.</li><li>Write a short &#x27;why&#x27; note (3-5 sentences): defend one real decision you made — for example, why you chose unique_key as the merge key for idempotent reloads, or why you treat null borough as a quarantine-worthy reject rather than a silent drop. This note is your interview answer.</li><li>Assemble README.md containing the business framing, the embedded Mermaid diagram, the data contract, the consumer list, and the why-note; commit sample_311.json alongside it as the evidence the numbers came from.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">NYC 311 Service Requests (NYC Open Data / Socrata)</div><div class="ds-url"><a href="https://data.cityofnewyork.us/resource/erm2-nwe9.json" target="_blank" rel="noopener">https://data.cityofnewyork.us/resource/erm2-nwe9.json</a> (API) · dataset page <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests/erm2-nwe9" target="_blank" rel="noopener">https://data.cityofnewyork.us/Social-Services/311-Service-Requests/erm2-nwe9</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Free-text and drifting complaint_type/descriptor values (categories are renamed and added over time), nulls in location fields (borough, latitude/longitude, incident_zip), and late-arriving/inconsistent lifecycle timestamps (status=&#x27;Closed&#x27; with missing closed_date, or closed_date earlier than created_date).</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://dev.socrata.com/docs/endpoints.html" target="_blank" rel="noopener">Socrata SODA API — Getting Started &amp; query basics ($limit, $where, $select)</a></li><li><a href="https://dev.socrata.com/docs/queries/" target="_blank" rel="noopener">Socrata SODA API — Filtering &amp; querying data with SoQL</a></li><li><a href="https://mermaid.js.org/syntax/flowchart.html" target="_blank" rel="noopener">Mermaid — Flowchart syntax (nodes, edges, edge labels)</a></li><li><a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests/erm2-nwe9" target="_blank" rel="noopener">NYC 311 Service Requests — dataset page &amp; column dictionary</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">pull_and_map_311.sh</span> <span class="sc-lang">bash</span></summary><pre><code>#!/usr/bin/env bash
+# Week 2 starter scaffold — LANDS the raw data only. You build the analysis + contract.
+set -euo pipefail
+
+# --- 1. Pull ~50 live rows from the NYC 311 Socrata endpoint ------------------
+# $limit caps the rows. No app token is needed for small pulls (you may get
+# throttled/429 if you hammer it — that throttling IS one of the messes you
+# should note in your contract).
+API=&quot;https://data.cityofnewyork.us/resource/erm2-nwe9.json&quot;
+curl -s &quot;${API}?\$limit=50&quot; -o sample_311.json
+echo &quot;Wrote sample_311.json ($(wc -c &lt; sample_311.json) bytes)&quot;
+
+# TODO(you): profile the mess. Suggested one-liners (needs jq):
+#   jq &#x27;[.[] | select(.borough==null)] | length&#x27; sample_311.json      # null boroughs
+#   jq -r &#x27;[.[].complaint_type] | unique[]&#x27; sample_311.json           # distinct categories
+#   jq &#x27;[.[] | select(.status==&quot;Closed&quot; and (.closed_date==null))]|length&#x27; sample_311.json
+# Record the COUNTS + one example unique_key each — that is your evidence.
+
+# TODO(you): confirm the grain — prove unique_key is unique in the sample:
+#   jq -r &#x27;.[].unique_key&#x27; sample_311.json | sort | uniq -d   # should print nothing
+
+# --- 2. Mermaid lifecycle SKELETON — copy into your README and finish it ------
+# Replace the ??? edge labels with the SPECIFIC failure you observed, and add
+# the real downstream consumers at the end.
+cat &lt;&lt;&#x27;MERMAID&#x27;
+```mermaid
+flowchart LR
+  A[Citizen: call / app / web] --&gt; B[NYC 311 intake system]
+  B --&gt; C[Socrata Open Data publish]
+  C --&gt;|??? category drift?| D[Ingest / pull]
+  D --&gt;|??? null borough?| E[(Storage table)]
+  E --&gt; F[Crew-routing dashboard]
+  E --&gt; G[SLA / closure-time report]
+  %% TODO(you): add a quarantine path for rejected rows (reason + timestamp)
+  %% TODO(you): label every edge where data can SILENTLY break
+```
+MERMAID
+</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands 50 rows and hands you a diagram stub. You must run the profiling queries, fill in the real counts/failure labels, add the quarantine path, and write the contract + why-note yourself. jq is optional but recommended (sudo apt install jq).</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A README.md in a Git repo containing: (1) the 1-2 sentence business framing, (2) an embedded Mermaid flowchart of the 311 record lifecycle with failure-mode annotations on the edges, (3) a one-page data contract (grain, source/cadence, required non-null fields + types, known failure modes with observed counts, idempotency/rerun policy keyed on unique_key), (4) a named list of at least two downstream consumers and the concrete harm each suffers when the contract is violated, and (5) a 3-5 sentence why-note defending one design decision. The raw sample_311.json is committed as evidence.</div>
+        <div class="accept"><b>Pass when</b> Accepted when: the grain is stated as one row = one service request and unique_key is named as the identity/merge key; the Mermaid diagram renders and labels at least two specific silent-failure points (category drift and null location) plus a quarantine path for rejected rows; the contract&#x27;s &#x27;known failure modes&#x27; section cites at least three real numbers pulled from sample_311.json (e.g. count of null boroughs, count of Closed-with-no-closed_date); at least two consumers are named with a concrete per-consumer harm; the idempotency policy explicitly says a re-pull merges/overwrites on unique_key so reruns create no duplicates; and the why-note defends one decision specifically rather than generically.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> what makes a dataset a data PRODUCT — grain, owner, consumers, and a contract — rather than just a pipeline or a table of rows.</p>
+        <p><b>Misconception</b> believing &quot;the pipeline is the product&quot; and treating a data contract as just a list of column names — missing that grain, freshness, semantics, and ownership are the actual promises being made.</p>
+        <p class="hot"><b>Hot seat</b> "State the grain of your dataset in one sentence — then tell me exactly who breaks, and how, if that grain is wrong or silently changes."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> This data-product map + contract becomes the opening design artifact of the Phase 1 portfolio — the framing document that every later week&#x27;s model, incremental load, and quality check is built against and can be traced back to.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W1 (filesystem, Git, repo hygiene) — the deliverable is authored in Markdown and merged via a PR into the existing course repo. Uses no Python yet (that&#x27;s W3), so the API is inspected via curl/browser, not scripted. The grain and contract vocabulary introduced here is the foundation later weeks build on directly: relational modeling (grain of a table), CDC/incremental (grain + change detection), and data quality/testing (contract expectations become tests).</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w3">
+    <div class="wk-head">
+      <span class="wk-num">W03</span>
+      <span class="wk-title">Python I — control flow &amp; functions</span>
+      <span class="wk-mod">M02 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> Ops and monitoring teams live or die by threshold alerting on live feeds: page someone at M5.0, stay quiet at M2.0. If a single blank or malformed record crashes the alerting job, the whole feed goes dark and a real event slips past unnoticed — a trust and safety failure. This week you build that alerting loop against a real seismic feed that changes every minute and ships dirty rows.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>Declare Python&#x27;s core types (int/float/str/bool/None) and predict truthiness and coercion behavior before running the code</li><li>Direct program flow over a collection of records using if/elif/else, for/while, and break/continue to produce a correct summary</li><li>Decompose a task into small single-purpose functions with explicit parameters and return values, and explain local vs global scope</li><li>Write and run a procedural CLI script that reads an argument and processes a real public dataset top to bottom</li><li>Trace any line of your own script aloud and say what it does and why (return vs print, = vs ==)</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Types &amp; variables: int/float/str/bool/None, truthiness, and implicit vs explicit coercion (int(x), str(x))</li><li>Control flow: conditionals, boolean logic, for/while loops, break/continue, and guarding against bad rows</li><li>Functions: def, positional/default parameters, return vs print, and local vs global scope</li><li>Structuring a procedural script: a main() entry point, reading sys.argv, and clean top-to-bottom flow</li><li>Just enough data-in: reading a CSV with the stdlib csv module (deep file I/O &amp; error handling comes in W4)</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~4h</span></div>
+        <p>Build quakestats.py, a command-line tool that reads the live USGS all_day earthquake CSV, filters events above a magnitude threshold passed on the command line, and prints a summary — while surviving blank/missing magnitudes and malformed place strings instead of crashing. You will structure the logic into parse, classify, and summarize functions and prove robustness by running it twice with different thresholds.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Fetch a snapshot: download the all_day CSV once to a local file (e.g. `curl -sL https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv -o all_day.csv`) so you develop against a stable copy, then open it and note the columns (time, latitude, longitude, depth, mag, place, ...) and confirm some `mag` fields are blank.</li><li>Parse argv: read the magnitude threshold from sys.argv[1], convert it to float, and exit with a clear usage message and non-zero status if it is missing or non-numeric (fail loud on operator error, not silently).</li><li>Write parse_row(row): given a csv.DictReader row, return a clean dict with a float magnitude and a safe place string — but when `mag` is blank or non-numeric, do NOT default it to 0.0; instead flag the row as unparseable and return it (or None) so the caller can quarantine it. Handle malformed/missing place with a fallback like &#x27;unknown location&#x27;.</li><li>Quarantine bad records: collect every row that fails magnitude parsing into a rejected list with the reason (e.g. &#x27;blank mag&#x27;, &#x27;non-numeric mag&#x27;) and the event id, and write them to rejected.csv with a reason column — never let a bad row silently vanish or crash the loop.</li><li>Write classify(mag): using if/elif/else control flow, bucket a magnitude into a severity label (e.g. minor &lt; 3.0, light 3.0–4.9, moderate 5.0–5.9, strong 6.0+); write summarize(events) to count how many valid events cleared the threshold, group counts by severity, and track the single strongest quake and its place.</li><li>Loop and filter: iterate the CSV with csv.DictReader, call parse_row on each, skip+quarantine failures, keep only events with mag &gt;= threshold, and feed survivors to classify/summarize. Print a readable report: total rows read, count above threshold, counts per severity, the strongest event, and how many rows were rejected and why.</li><li>Run it twice against the same snapshot with different thresholds (e.g. `python quakestats.py 2.0` then `python quakestats.py 4.5`) and confirm the above-threshold count drops while the rejected count stays identical — the dirty-data handling is threshold-independent.</li><li>Write a 4–6 sentence NOTES.md: state exactly what you did with blank magnitudes and why (quarantine vs. drop vs. default-to-zero — and why defaulting to 0.0 would silently hide real events), and note that re-running overwrites rejected.csv rather than appending, so reruns stay idempotent.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">USGS Earthquakes — all_day CSV (real-time feed)</div><div class="ds-url"><a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv" target="_blank" rel="noopener">https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> The `mag` column has blank/missing values on some rows, `place` strings are occasionally malformed or empty, and the feed regenerates every minute — so the exact rows change between downloads and your script cannot assume a fixed row count or that every magnitude is a valid number.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/" target="_blank" rel="noopener">USGS Real-time GeoJSON/CSV Feeds — documentation &amp; feed formats</a></li><li><a href="https://docs.python.org/3/library/csv.html" target="_blank" rel="noopener">Python docs — csv module (DictReader, DictWriter)</a></li><li><a href="https://docs.python.org/3/library/sys.html#sys.argv" target="_blank" rel="noopener">Python docs — sys.argv (command-line arguments)</a></li><li><a href="https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity" target="_blank" rel="noopener">USGS — magnitude / event terminology reference</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">quakestats.py</span> <span class="sc-lang">python</span></summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;quakestats.py — threshold alerting over the USGS all_day earthquake feed.
+
+Usage:  python quakestats.py &lt;magnitude_threshold&gt;
+Example: python quakestats.py 4.5
+&quot;&quot;&quot;
+import csv
+import sys
+
+FEED_URL = &quot;https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv&quot;
+LOCAL_CSV = &quot;all_day.csv&quot;      # download once with curl, develop against this snapshot
+REJECTED_CSV = &quot;rejected.csv&quot;  # bad rows land here with a reason
+
+
+def parse_args(argv):
+    &quot;&quot;&quot;Return the float threshold from argv, or exit with a usage message.&quot;&quot;&quot;
+    # TODO: require exactly one argument; convert to float.
+    # TODO: on missing/non-numeric input, print usage to stderr and sys.exit(1).
+    ...
+
+
+def read_rows(path):
+    &quot;&quot;&quot;Yield dict rows from the local CSV snapshot.&quot;&quot;&quot;
+    with open(path, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            yield row
+    # NOTE: the live feed changes every minute — download once, then read the file.
+
+
+def parse_row(row):
+    &quot;&quot;&quot;Return (event, reason). event is a clean dict, or None if unparseable.
+
+    reason is None on success, else a short string like &#x27;blank mag&#x27;.
+    &quot;&quot;&quot;
+    # TODO: pull row[&#x27;mag&#x27;]; if blank or non-numeric, return (None, &#x27;&lt;reason&gt;&#x27;).
+    #       Do NOT default a missing magnitude to 0.0 — that hides real gaps.
+    # TODO: build a clean dict: {&#x27;id&#x27;:..., &#x27;mag&#x27;: float, &#x27;place&#x27;: ...}
+    #       with a fallback place string when row[&#x27;place&#x27;] is missing/malformed.
+    ...
+
+
+def classify(mag):
+    &quot;&quot;&quot;Return a severity label for a magnitude using if/elif/else.&quot;&quot;&quot;
+    # TODO: minor / light / moderate / strong buckets.
+    ...
+
+
+def summarize(events):
+    &quot;&quot;&quot;Return a summary of events that cleared the threshold.&quot;&quot;&quot;
+    # TODO: total count, counts per severity label, and the strongest event.
+    ...
+
+
+def main():
+    threshold = parse_args(sys.argv)
+    kept, rejected = [], []
+
+    for row in read_rows(LOCAL_CSV):
+        event, reason = parse_row(row)
+        if event is None:
+            # TODO: append (id, reason) to rejected — quarantine, don&#x27;t crash.
+            continue
+        # TODO: keep only events with event[&#x27;mag&#x27;] &gt;= threshold.
+
+    # TODO: write rejected rows to REJECTED_CSV (overwrite, not append -&gt; idempotent).
+    # TODO: call summarize(kept) and print a readable report:
+    #       rows read, count above threshold, per-severity counts,
+    #       strongest event + place, and rejected count with reasons.
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only. It parses argv and stubs the fetch/read and the three functions with TODO markers. You write the real parse/classify/summarize logic, the quarantine of blank-magnitude rows, and the report output.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">quakestats.py (a CLI taking a magnitude threshold as argv), a rejected.csv produced by a run showing quarantined blank/malformed-magnitude rows with a reason column, and a short NOTES.md explaining the blank-magnitude decision and rerun idempotency. Committed to the learner&#x27;s portfolio repo with a README snippet showing the two example runs and their differing above-threshold counts.</div>
+        <div class="accept"><b>Pass when</b> Passing means: (1) `python quakestats.py 2.0` and `python quakestats.py 4.5` both run to completion on the real all_day snapshot without crashing, and the higher threshold reports fewer above-threshold events; (2) rows with blank or non-numeric magnitudes are written to rejected.csv with a reason column rather than dropped silently or defaulted to 0.0, and the rejected count is identical across both threshold runs; (3) logic is split into parse_row, classify, and summarize functions and the threshold comes from sys.argv with a clear usage error on bad input; (4) re-running overwrites rejected.csv instead of appending (no duplicate rejected rows); (5) NOTES.md states specifically what happened to blank magnitudes and why.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Decomposing a procedural task into small functions, and how control flow walks a collection of records</p>
+        <p><b>Misconception</b> Confusing return with print — believing a function that prints a value has therefore &#x27;given back&#x27; a usable result to the caller (also = vs ==)</p>
+        <p class="hot"><b>Hot seat</b> "Defend how you split this into functions: pick one function, walk me through exactly what it takes in and what it returns, tell me where that value goes next, and justify why that logic isn&#x27;t just inlined in your main loop — then show me what happens when a row&#x27;s magnitude is blank."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> First real Python artifact in the portfolio repo: a documented, argument-driven script that ingests a live public dataset and emits a clean summary — the seed of the reusable ingestion scripts refactored and tested in later phases.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W1 (Git branch/PR workflow, venv, repo hygiene) and W2 (DE mental model — records as rows, grain). Deliberately stays procedural: data structures, comprehensions, robust file I/O and error handling are W4 (Python II), which refactors these very functions; SQL modeling begins W5.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w4">
+    <div class="wk-head">
+      <span class="wk-num">W04</span>
+      <span class="wk-title">Python II — data structures &amp; files</span>
+      <span class="wk-mod">M02 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span><span class="gtag">G4</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> When a monitoring pipeline ingests a live seismic feed, one truncated or null-magnitude record can crash the whole run or silently vanish — and a dropped M5.8 event is a missed alert, an audit gap, and a &quot;why didn&#x27;t we catch this?&quot; postmortem. Routing bad records to a quarantine with a reason and timestamp (instead of crashing or dropping) is the single most-asked &quot;what happens when the data is bad?&quot; interview moment.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>choose the right built-in collection (list/tuple/set/dict) for a task and justify it by mutability, ordering, and membership cost</li><li>iterate over nested JSON with loops, enumerate/zip, and comprehensions to extract and reshape records</li><li>read and write CSV and JSON safely with context managers, converting types explicitly and handling missing/empty values</li><li>handle malformed records with targeted try/except so one bad row never crashes the run — route rejects to a quarantine log with a reason</li><li>dedupe records with a set and aggregate metrics into a dict, and explain why each structure fits</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>the four core collections and when to reach for each: list vs tuple (mutability/intent), set (membership &amp; dedupe, O(1) lookup), dict (keyed aggregation)</li><li>iteration patterns: for-loops, enumerate/zip, and list/dict/set comprehensions for reshaping data</li><li>file I/O with context managers: the csv module (DictReader/DictWriter) and the json module (load/loads/dump/dumps)</li><li>error handling: try/except/else/finally, catching specific exceptions, EAFP vs LBYL, and logging vs silently swallowing</li><li>type conversion &amp; missing data: None vs empty string, safe casting, and deciding reject-vs-default per field</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~5h</span></div>
+        <p>Ingest the live USGS all_month earthquake GeoJSON, iterate its nested features, and for each one validate/cast the fields, dedupe by event id with a set, and aggregate event counts and max magnitude per region into a dict. Every record that fails a check is written to a quarantine file with a specific reason and a timestamp rather than crashing the run — then you deliberately inject malformed records and prove the run finishes clean.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Download the feed: fetch https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson and save it locally as all_month.geojson so your run is reproducible and you are not re-hitting the API on every rerun; open it and note the top-level &#x27;features&#x27; array and the nested &#x27;properties&#x27;/&#x27;geometry&#x27; shape.</li><li>Load the file with the json module inside a try/except and iterate the &#x27;features&#x27; list; for each feature pull id, properties.mag, properties.place, and geometry.coordinates, wrapping the access so a truncated/missing-key object raises a caught exception instead of stopping the loop.</li><li>Write validation rules that decide good vs. bad: id must be present and non-empty; mag must be castable to float and non-null; place must be a non-empty string; coordinates must be a 3-element list. Each failing rule produces a specific reason string (e.g. &#x27;null_mag&#x27;, &#x27;missing_id&#x27;, &#x27;bad_coordinates&#x27;).</li><li>Dedupe by id using a set of seen ids: the first time you see an id you process it, and any later feature with the same id is skipped (or sent to quarantine with reason &#x27;duplicate_id&#x27;) so overlapping pulls never double-count.</li><li>Derive a region key from place (e.g. the text after the last comma, or &#x27;unknown&#x27; when place is null) and aggregate into a dict per region: increment an event count and track the running max magnitude.</li><li>For every rejected record, call your quarantine writer to append one JSON line to rejects.jsonl containing the raw record (or its id), the reason, and a UTC timestamp — so a reviewer can see what was dropped and why.</li><li>Inject failure on purpose: append 3–4 hand-crafted malformed features to a copy of the input (a null mag, a missing id, a truncated object cut mid-field, a duplicate id) and rerun; confirm the program finishes without crashing and each bad record lands in rejects.jsonl with the right reason.</li><li>Prove idempotency: run the whole script twice against the same input and show the region aggregates are identical and rejects.jsonl is not double-appended — pick and document your strategy (truncate/overwrite the rejects file at start of run, and dedupe by id so counts don&#x27;t grow).</li><li>Write a short DECISIONS.md: state your validation rules, why bad records are quarantined rather than dropped, your dedupe key, and your rerun strategy — these are your interview answers.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">USGS Earthquakes — all_month GeoJSON</div><div class="ds-url"><a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson" target="_blank" rel="noopener">https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Deeply nested JSON (features[].properties / features[].geometry.coordinates); null &#x27;mag&#x27; and null/empty &#x27;place&#x27; values; duplicate event ids across overlapping time-window pulls; occasional truncated/incomplete feature objects that break naive key access.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://geojson.org/" target="_blank" rel="noopener">GeoJSON format specification (geojson.org)</a></li><li><a href="https://docs.python.org/3/library/json.html" target="_blank" rel="noopener">Python docs — json module</a></li><li><a href="https://docs.python.org/3/tutorial/errors.html" target="_blank" rel="noopener">Python docs — Errors and Exceptions (try/except)</a></li><li><a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" target="_blank" rel="noopener">USGS Earthquake GeoJSON feed — field/format documentation</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">ingest_quakes.py</span> <span class="sc-lang">python</span></summary><pre><code>&quot;&quot;&quot;Week 4 lab scaffold: ingest USGS all_month GeoJSON, quarantine bad records.
+Stdlib only. Fill in every TODO. This is a starting structure, NOT a solution.
+&quot;&quot;&quot;
+import json
+import datetime
+import urllib.request
+
+FEED_URL = &quot;https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson&quot;
+INPUT_FILE = &quot;all_month.geojson&quot;
+REJECTS_FILE = &quot;rejects.jsonl&quot;
+
+
+def download_feed(url=FEED_URL, dest=INPUT_FILE):
+    &quot;&quot;&quot;Land the raw feed locally so reruns don&#x27;t re-hit the API.&quot;&quot;&quot;
+    urllib.request.urlretrieve(url, dest)
+    print(f&quot;saved feed -&gt; {dest}&quot;)
+
+
+def quarantine(record, reason, rejects_path=REJECTS_FILE):
+    &quot;&quot;&quot;Append one bad record to the rejects file with a reason + UTC timestamp.
+    STUB: keep this shape. A reviewer must be able to answer &#x27;what was dropped and why?&#x27;
+    &quot;&quot;&quot;
+    row = {
+        &quot;ts&quot;: datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        &quot;reason&quot;: reason,
+        &quot;record&quot;: record,  # TODO: consider storing just the id if records are large
+    }
+    with open(rejects_path, &quot;a&quot;, encoding=&quot;utf-8&quot;) as f:
+        f.write(json.dumps(row) + &quot;\n&quot;)
+
+
+def main():
+    # download_feed()  # uncomment once, then work off the local file
+
+    # TODO: decide your idempotent-rerun strategy. e.g. truncate REJECTS_FILE here
+    #       so a second run doesn&#x27;t append duplicate reject rows.
+
+    with open(INPUT_FILE, encoding=&quot;utf-8&quot;) as f:
+        data = json.load(f)
+
+    seen_ids = set()          # TODO: use this to dedupe by event id
+    regions = {}              # TODO: {region_key: {&quot;count&quot;: int, &quot;max_mag&quot;: float}}
+
+    for feature in data.get(&quot;features&quot;, []):
+        try:
+            # TODO: safely pull id, properties.mag, properties.place,
+            #       geometry.coordinates. A truncated object should raise here
+            #       and be caught below -&gt; quarantine, NOT crash.
+
+            # TODO: validation rules. On each failure call:
+            #       quarantine(feature, &quot;&lt;specific_reason&gt;&quot;); then skip this feature.
+            #       reasons to cover: missing_id, null_mag, bad_mag_cast,
+            #       empty_place, bad_coordinates, duplicate_id
+
+            # TODO: dedupe with seen_ids
+
+            # TODO: derive region key from place, then aggregate count + max_mag
+            pass
+        except Exception as e:
+            quarantine(feature, f&quot;parse_error:{type(e).__name__}&quot;)
+            continue
+
+    # TODO: print the per-region summary (count + max magnitude) sorted by count
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw GeoJSON, iterates features, and gives you a quarantine-writer stub. The validation rules, dedupe set, per-region aggregation, and idempotent-rerun choice are yours to build where the TODOs are.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A runnable ingest_quakes.py that turns the live USGS all_month GeoJSON into a per-region aggregate dict (event count + max magnitude), a rejects.jsonl quarantine file where every bad record carries a specific reason and UTC timestamp, and a short DECISIONS.md explaining the validation rules, dedupe key, quarantine choice, and idempotent-rerun strategy.</div>
+        <div class="accept"><b>Pass when</b> The script runs to completion on the real feed AND on a copy seeded with injected malformed records (null mag, missing id, truncated object, duplicate id) without ever crashing; every injected bad record appears in rejects.jsonl with a correct reason and timestamp; duplicate ids are counted once; running the script twice on the same input produces identical per-region aggregates and does not double-append the rejects file; DECISIONS.md names each validation rule and the rerun strategy.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Which collection for which job (list/tuple/set/dict) and the try/except handling model — handled-and-logged vs silently ignored.</p>
+        <p><b>Misconception</b> Using a bare `except:` that swallows every error silently, and conflating &quot;handled&quot; with &quot;ignored&quot; — instead of catching specific exceptions and logging each reject with context.</p>
+        <p class="hot"><b>Hot seat</b> "Walk me through what happens to a single malformed record end to end — which exception fires, where you catch it, and why you chose to quarantine it instead of dropping it or letting the run crash. Then defend using a set for dedupe over just checking a list."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Produces the repo&#x27;s first reusable ingestion/validation module — the clean-plus-quarantine pattern (read, validate, cast, dedupe, aggregate, reject-with-reason) that later bronze ingestion and data-quality labs build directly on, and a portfolio piece showing robust, defensible file handling.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W3 Python I (variables, functions, control flow, running scripts) and the course repo + venv and Git/PR workflow from W1. Later weeks build on it: W5 Python III refactors this script into tested, importable modules, and the clean+quarantine pattern seeds G4 data quality and the incremental bronze loads in later phases.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w5">
+    <div class="wk-head">
+      <span class="wk-num">W05</span>
+      <span class="wk-title">Python III — modules, environments &amp; OOP basics</span>
+      <span class="wk-mod">M02 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> On a real team, the difference between &quot;a script that ran on my laptop once&quot; and code the company can deploy, test, and trust is whether it&#x27;s an installable, importable package — copy-pasted one-off scripts are how pipelines silently rot and break in production. A hiring manager skimming your GitHub decides in 30 seconds whether you look like an engineer or a tutorial-follower, and a clean `pip install -e .` + `python -m quakes` is the single clearest signal you cross that line.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>organize code into an importable package (dirs with __init__, absolute imports, an `if __name__ == &quot;__main__&quot;` guard) and run it as both `python -m` and via imported functions</li><li>design one small class with a single responsibility — __init__/self, methods, a __repr__ — and articulate when a class beats a plain function or dict</li><li>split a script into modules by concern (fetch / parse / report) so each file does one job with no circular imports</li><li>build a fresh virtual env and install your own project editable (`pip install -e .`) so it imports by name anywhere</li><li>rebuild the whole environment from the manifest and prove the package still imports and runs end to end</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>modules &amp; packages: the import system, __init__.py, module vs package, absolute vs relative imports, and the `__name__ == &quot;__main__&quot;` guard</li><li>classes &amp; OOP basics: attributes vs methods, __init__/self, __repr__, and the decision rule for class vs function vs dict</li><li>packaging &amp; editable installs: src/ project layout, a minimal pyproject, `pip install -e .`, and running with `python -m pkg`</li><li>virtual envs revisited: why per-project isolation matters, pinning deps, and rebuilding cleanly from the manifest</li><li>structuring a small codebase: separation of concerns, module boundaries, and keeping data flow one-directional to avoid circular imports</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~5h</span></div>
+        <p>Refactor your Week 3–4 USGS earthquake scripts into a proper installable Python package, quakes/, with a QuakeClient class (client.py), pure parsing functions (parse.py), a report writer (report.py), and a CLI entry point (__main__.py). You&#x27;ll create a fresh virtual environment, write a minimal pyproject.toml, install the package editable with pip install -e ., and prove it works end-to-end via both import quakes and python -m quakes.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Create the target package tree exactly as scaffolded: a project root holding pyproject.toml, README.md, and a quakes/ package directory containing __init__.py, client.py, parse.py, report.py, and __main__.py. Confirm quakes/ has an __init__.py so Python treats it as a real package, not a loose folder of scripts.</li><li>Create and activate a FRESH virtual environment at the project root (python -m venv .venv then source .venv/bin/activate on macOS/Linux or .venv\Scripts\activate on Windows). Confirm you are isolated by running which python (or where python) and pip list — the list should be nearly empty. Add .venv/ to .gitignore.</li><li>Fill in pyproject.toml from the scaffold: set name, version, requires-python, dependencies (requests), and a [project.scripts] entry so quakes maps to quakes.__main__:main. Read the Packaging User Guide section on pyproject.toml before choosing setuptools vs hatchling as your build backend, and write one sentence in your notes on why you picked it.</li><li>Refactor your Week 3–4 fetch logic into the QuakeClient class in client.py: the class holds the feed URL and a requests.Session, and exposes a fetch_all_day() method that returns the parsed GeoJSON dict. Move the fielding-out logic (pulling id, place, mag, time from each feature) into pure, side-effect-free functions in parse.py that take data in and return rows out — no network, no printing.</li><li>Wire report.py to take the parsed rows and write a deterministic output (CSV or a summary text file), and wire __main__.py to define main() that instantiates QuakeClient, calls fetch, passes results through parse, then report. Make the run idempotent: writing to a fixed output path must OVERWRITE, not append, so re-running python -m quakes twice produces one identical file, not duplicated rows.</li><li>Install the package in editable mode from the project root: pip install -e . . Confirm it landed by running pip list (you should see quakes) and pip show quakes.</li><li>Prove importability two ways: (a) open a Python REPL and run import quakes; from quakes.client import QuakeClient and confirm no ImportError; (b) run python -m quakes from a DIFFERENT working directory (e.g. your home folder) and confirm it still fetches and writes the report — this proves the package is installed, not just found because you happened to be in its folder.</li><li>Write a short DECISIONS.md (5–8 lines) answering: which build backend you chose and why, why the network code lives in a class but parsing lives in plain functions (testability), and how you made reruns idempotent. Commit the whole package to a GitHub repo with a README showing the install + run commands.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">USGS Earthquakes — all_day GeoJSON feed</div><div class="ds-url"><a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson" target="_blank" rel="noopener">https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Same live feed as Weeks 3–4 — the data mess is unchanged and already handled; this week the deliberate challenge is CODE structure, not new data mess. The subtle trap: your parsing must stay pure (no live network call baked in) so the package is importable and testable offline, and your CLI must remain idempotent even though the feed&#x27;s contents change every time you fetch.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/" target="_blank" rel="noopener">Python Packaging User Guide — Packaging Python Projects tutorial</a></li><li><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" target="_blank" rel="noopener">Writing your pyproject.toml (setuptools &amp; hatchling build backends)</a></li><li><a href="https://docs.python.org/3/tutorial/modules.html" target="_blank" rel="noopener">Python docs — Modules and Packages</a></li><li><a href="https://pip.pypa.io/en/stable/topics/local-project-installs/" target="_blank" rel="noopener">pip — Editable installs (pip install -e .)</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">quakes-package-scaffold.txt</span> <span class="sc-lang">text</span></summary><pre><code># ============================================================
+# STARTER SCAFFOLD ONLY — sets up the package skeleton.
+# You write the real fetch / parse / report logic (see TODOs).
+# ============================================================
+
+# ---- Target package tree (create these files) ----
+# quakes-project/
+# |- pyproject.toml
+# |- README.md
+# |- .gitignore          # add: .venv/
+# `- quakes/
+#    |- __init__.py       # can be empty (marks it a package)
+#    |- client.py         # QuakeClient class (network lives here)
+#    |- parse.py          # PURE functions (no network, no print)
+#    |- report.py         # write rows -&gt; file (overwrite = idempotent)
+#    `- __main__.py       # main(): wires client -&gt; parse -&gt; report
+
+
+# ================= pyproject.toml =================
+# [build-system]
+# requires = [&quot;setuptools&gt;=68&quot;]        # TODO: or swap to hatchling
+# build-backend = &quot;setuptools.build_meta&quot;
+#
+# [project]
+# name = &quot;quakes&quot;
+# version = &quot;0.1.0&quot;
+# requires-python = &quot;&gt;=3.9&quot;
+# dependencies = [&quot;requests&quot;]
+#
+# [project.scripts]
+# quakes = &quot;quakes.__main__:main&quot;      # lets `quakes` run from shell too
+
+
+# ================= quakes/client.py =================
+import requests
+
+ALL_DAY_URL = (
+    &quot;https://earthquake.usgs.gov/earthquakes/feed/&quot;
+    &quot;v1.0/summary/all_day.geojson&quot;
+)
+
+class QuakeClient:
+    &quot;&quot;&quot;Owns the feed URL + an HTTP session. Network belongs HERE only.&quot;&quot;&quot;
+
+    def __init__(self, url=ALL_DAY_URL, session=None):
+        self.url = url
+        self.session = session or requests.Session()
+
+    def fetch_all_day(self):
+        # TODO: GET self.url, raise_for_status(), return response.json()
+        # TODO: (reuse your Week 3-4 error handling / timeout here)
+        raise NotImplementedError
+
+
+# ================= quakes/parse.py =================
+def feature_to_row(feature):
+    &quot;&quot;&quot;PURE: one GeoJSON feature dict -&gt; a flat dict. No I/O.&quot;&quot;&quot;
+    # TODO: pull id, place, mag, time from feature[&#x27;properties&#x27;] / [&#x27;id&#x27;]
+    raise NotImplementedError
+
+def rows_from_geojson(data):
+    &quot;&quot;&quot;PURE: full feed dict -&gt; list of rows. No network, no printing.&quot;&quot;&quot;
+    # TODO: iterate data[&#x27;features&#x27;], call feature_to_row on each
+    raise NotImplementedError
+
+
+# ================= quakes/report.py =================
+def write_report(rows, path=&quot;quakes_report.csv&quot;):
+    # TODO: OVERWRITE path (mode &#x27;w&#x27;) so a rerun does NOT duplicate rows
+    # TODO: write a header + one line per row (csv module is fine)
+    raise NotImplementedError
+
+
+# ================= quakes/__main__.py =================
+from quakes.client import QuakeClient
+from quakes.parse import rows_from_geojson
+from quakes.report import write_report
+
+def main():
+    # TODO: client = QuakeClient(); data = client.fetch_all_day()
+    # TODO: rows = rows_from_geojson(data); write_report(rows)
+    # TODO: print a one-line summary (count of quakes written)
+    raise NotImplementedError
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><div class="sc-note"><span class="ml">Note</span> Every function raises NotImplementedError on purpose — this is a skeleton, not a solution. Reuse your Week 3-4 logic to fill the TODOs. After building the tree, run: python -m venv .venv &amp;&amp; source .venv/bin/activate &amp;&amp; pip install -e . &amp;&amp; python -m quakes</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A GitHub repository containing an installable Python package quakes/ (with client.py exposing a QuakeClient class, pure parse.py functions, report.py, __main__.py, and __init__.py), a minimal working pyproject.toml, a README with copy-paste install+run instructions, and a short DECISIONS.md. The package must install cleanly into a fresh venv via pip install -e . and run via both import quakes and python -m quakes.</div>
+        <div class="accept"><b>Pass when</b> Graded pass requires: (1) pip install -e . succeeds in a fresh venv and pip show quakes lists it; (2) import quakes and from quakes.client import QuakeClient both succeed in a REPL with no ImportError; (3) python -m quakes run from a directory OUTSIDE the project folder fetches the all_day feed and writes a report file; (4) running python -m quakes twice yields one identical report (no duplicated rows), proving idempotent overwrite; (5) network code lives only in QuakeClient while parse.py functions are pure (no requests import, no print); and (6) DECISIONS.md states the chosen build backend and why, and how reruns were made idempotent.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> The Python import path — module (a file) vs package (a directory with __init__), why `python -m pkg` and editable installs make your code importable by name.</p>
+        <p><b>Misconception</b> Thinking OOP means &quot;wrap everything in a class,&quot; and conflating a module with a package / running a file directly with running it as a module.</p>
+        <p class="hot"><b>Hot seat</b> "Point to exactly one place you used a class and one where you kept a plain function — defend each. What state or behavior made that thing deserve a class, and what would break if you&#x27;d done the opposite?"</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Converts the throwaway scripts from Weeks 3–4 into a reusable, installable code package — the importable backbone that later pandas/ETL weeks pull functions from instead of copy-pasting, and the first piece of the portfolio repo that looks like real engineering.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W4 Python II (functions, error handling, file/JSON I/O — the scripts being refactored here) and W1&#x27;s Git + venv workflow. W6 (pandas) and later ETL modules import from this package layout and extend the module/class pattern rather than writing standalone scripts.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w6">
+    <div class="wk-head">
+      <span class="wk-num">W06</span>
+      <span class="wk-title">pandas — DataFrames: select, clean, transform, group &amp; merge</span>
+      <span class="wk-mod">M03 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G4</span><span class="gtag">G2</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> A city agency publishes a &quot;311 requests per 10,000 residents&quot; dashboard to decide where to send inspectors and budget. If the borough population join key isn&#x27;t unique, the merge silently multiplies request rows and one borough&#x27;s rate comes out 2–3x too high — inspectors get sent to the wrong place and the public dashboard misleads. The merge-validation check, not the chart, is the real deliverable.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>load a messy real-world CSV into a DataFrame and profile it (dtypes, null counts, cardinality, duplicates) to write a cleaning plan before touching data</li><li>select and filter rows/columns with .loc and boolean masks, and coerce types correctly (datetimes, categoricals, numerics) without triggering chained-assignment bugs</li><li>clean systematically — impute vs drop missing values, de-duplicate, normalize categorical/string and timestamp columns — and justify each choice against downstream trust</li><li>aggregate with groupby to an explicitly stated grain, then merge to a reference table while validating join keys so rows don&#x27;t silently multiply</li><li>produce a reproducible cleaning notebook that runs top-to-bottom and ties every transformation decision to a documented output grain</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>the DataFrame/Series mental model: the index, dtypes, and why vectorized ops beat Python loops</li><li>selection &amp; filtering: .loc vs .iloc, boolean masks, and the copy-vs-view / SettingWithCopy trap</li><li>cleaning toolkit: missing data (fillna/dropna), duplicates, type coercion, and string/datetime normalization</li><li>transformation: derived columns, map/apply vs vectorized ops, and binning</li><li>split-apply-combine with groupby to a grain, plus merge/join semantics (how=, key uniqueness, row-count validation)</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~6h</span></div>
+        <p>Pull one real month of NYC 311 service requests via Socrata, profile its dtypes/nulls/duplicate keys, write and execute a short cleaning plan (normalize borough casing, parse created_date, quarantine rejects), aggregate to complaint_type x borough x month, then merge to a tiny borough-population reference to compute per-10k rates. Prove the merge did not inflate rows (output row count == grain cardinality) and export a validated parquet.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>LAND the raw data: query the Socrata endpoint for exactly one month using a $where on created_date (e.g. created_date between &#x27;2023-06-01&#x27; and &#x27;2023-07-01&#x27;) plus $limit=200000, and save the CSV locally so reruns don&#x27;t re-hit the API.</li><li>PROFILE the raw frame: print shape, df.dtypes, per-column null counts (df.isna().sum()), unique_key duplicate count (df[&#x27;unique_key&#x27;].duplicated().sum()), and value_counts() on the borough column so you SEE the mixed casing (&#x27;BROOKLYN&#x27;, &#x27;Brooklyn&#x27;, &#x27;Unspecified&#x27;) and datetime stored as object.</li><li>WRITE a cleaning plan as a short markdown/comment block BEFORE coding it: which columns you keep, how you parse created_date (pd.to_datetime, errors=&#x27;coerce&#x27;), how you normalize borough (strip + str.upper or title-case to one canonical form), your rule for rows failing the id/date null check, and your dedup rule on unique_key (keep first). Decisions become interview answers.</li><li>EXECUTE cleaning and QUARANTINE bad records: send rows that fail the checks (null unique_key, unparseable created_date, borough not in the 5 canonical boroughs / &#x27;Unspecified&#x27;) to a rejected DataFrame with a reject_reason column and a rejected_at timestamp, write it to rejected_311.parquet, and keep only clean rows in the main frame.</li><li>TRANSFORM + AGGREGATE: derive a month period column from created_date, then groupby([&#x27;complaint_type&#x27;,&#x27;borough&#x27;,&#x27;month&#x27;]).size() (or .agg) to build the request_count fact at that exact grain; confirm the grain is unique with an assertion on the groupby keys.</li><li>PREP + INSPECT the population reference: load the borough population table, normalize its borough key with the SAME normalization function, and PROVE the join key is unique (assert pop[&#x27;borough&#x27;].is_unique) — this is the guard against silent row multiplication.</li><li>MERGE and VALIDATE: left-merge the aggregate to population on the normalized borough key, then assert the merged row count == the pre-merge aggregate row count (no inflation) and assert there are no null population values (every borough matched). Compute requests_per_10k = request_count / population * 10000.</li><li>MAKE THE RERUN IDEMPOTENT and EXPORT: write the final table to parquet with overwrite semantics (or partition by month) so a second run reproduces the same file instead of appending duplicates, and export requests_per_10k_by_type_borough_month.parquet.</li><li>WRITE the why-note (5–8 sentences): state your normalization choice, your reject rule, and specifically how you detected/prevented merge inflation (the row-count-equality and unique-key assertions), plus what the rate would have looked like if the key had been non-unique.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">NYC 311 Service Requests (Socrata Open Data API)</div><div class="ds-url"><a href="https://data.cityofnewyork.us/resource/erm2-nwe9.csv?$limit=200000" target="_blank" rel="noopener">https://data.cityofnewyork.us/resource/erm2-nwe9.csv?$limit=200000</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Real 311 export: null unique_key/borough values, borough stored in mixed case (&#x27;BROOKLYN&#x27; vs &#x27;Brooklyn&#x27;) plus &#x27;Unspecified&#x27;, created_date arrives as a string needing to_datetime with coercion, and duplicate unique_key rows. Scope to one month by appending a $where on created_date (e.g. &amp;$where=created_date between &#x27;2023-06-01&#x27; and &#x27;2023-07-01&#x27;).</div></div><div class="ds"><div class="ds-name">NYC Population by Borough (NYC DCP / US Census reference)</div><div class="ds-url"><a href="https://data.cityofnewyork.us/City-Government/New-York-City-Population-by-Borough-1950-2040/xywu-7bv9" target="_blank" rel="noopener">https://data.cityofnewyork.us/City-Government/New-York-City-Population-by-Borough-1950-2040/xywu-7bv9</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Tiny 5-row reference table with borough names whose casing/spelling won&#x27;t match the 311 borough column out of the box; the join key must be normalized with the exact same function used on the 311 side, and the reference must be proven unique per borough before merging.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://pandas.pydata.org/docs/user_guide/merging.html" target="_blank" rel="noopener">pandas User Guide — Merge, join, concatenate and compare</a></li><li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html" target="_blank" rel="noopener">pandas User Guide — Working with missing data</a></li><li><a href="https://dev.socrata.com/docs/queries/" target="_blank" rel="noopener">Socrata SoQL — $where and $limit query parameters</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html" target="_blank" rel="noopener">pandas.DataFrame.merge — validate and indicator parameters</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">profile_and_validate_311.py</span> <span class="sc-lang">python</span></summary><pre><code>import pandas as pd
+
+# --- 1. LAND one month of raw 311 (scope with a SoQL $where so you don&#x27;t pull everything) ---
+START, END = &quot;2023-06-01&quot;, &quot;2023-07-01&quot;  # TODO: pick your month
+BASE = &quot;https://data.cityofnewyork.us/resource/erm2-nwe9.csv&quot;
+WHERE = f&quot;created_date &gt;= &#x27;{START}&#x27; AND created_date &lt; &#x27;{END}&#x27;&quot;
+URL = f&quot;{BASE}?$limit=200000&amp;$where={WHERE}&quot;
+# Tip: download once, then read the local file on reruns so you don&#x27;t re-hit the API (429s).
+raw = pd.read_csv(URL, low_memory=False)
+# raw.to_csv(&#x27;raw_311_month.csv&#x27;, index=False)  # cache it
+
+
+def profile(df):
+    &quot;&quot;&quot;Print the mess so your cleaning plan is evidence-based.&quot;&quot;&quot;
+    print(&quot;shape:&quot;, df.shape)
+    print(&quot;\ndtypes:\n&quot;, df.dtypes)
+    print(&quot;\nnull counts:\n&quot;, df.isna().sum().sort_values(ascending=False).head(15))
+    print(&quot;\nduplicate unique_key rows:&quot;, df[&#x27;unique_key&#x27;].duplicated().sum())
+    print(&quot;\nborough value_counts (look at the CASING):\n&quot;, df[&#x27;borough&#x27;].value_counts(dropna=False))
+    # TODO: also inspect created_date dtype — is it object (string) or datetime?
+
+
+profile(raw)
+
+# --- 2. TODO: write your cleaning plan (comment block), then execute it ---
+# TODO: parse created_date with pd.to_datetime(..., errors=&#x27;coerce&#x27;)
+# TODO: normalize borough to ONE canonical form (define borough_norm() and reuse it on BOTH frames)
+# TODO: quarantine rows failing null/date/borough checks into a rejected frame with
+#       reject_reason + rejected_at columns, write rejected_311.parquet, keep clean rows only
+# TODO: dedup on unique_key (decide keep=&#x27;first&#x27; and say why in the note)
+# TODO: derive month, then groupby([&#x27;complaint_type&#x27;,&#x27;borough&#x27;,&#x27;month&#x27;]).size() -&gt; agg fact
+
+
+def assert_no_merge_inflation(left, merged, on):
+    &quot;&quot;&quot;The validation IS the deliverable. Call this right after your merge.&quot;&quot;&quot;
+    # A unique key on the RIGHT table is what prevents row multiplication.
+    assert len(merged) == len(left), (
+        f&quot;MERGE INFLATED ROWS: left={len(left)} -&gt; merged={len(merged)}. &quot;
+        f&quot;Your right-side &#x27;{on}&#x27; key is probably non-unique.&quot;
+    )
+    # TODO: also assert every left row matched (no null population after merge)
+    # TODO: also assert pop_ref[on].is_unique BEFORE you merge
+    print(&quot;merge OK: no inflation, grain preserved&quot;)
+
+
+# --- 3. TODO: load population ref, normalize its borough with the SAME borough_norm(),
+#             assert it&#x27;s unique, left-merge, call assert_no_merge_inflation(),
+#             compute requests_per_10k, and export the parquet idempotently (overwrite). ---
+</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands one month of raw 311 data, gives you a profiling helper and a merge-validation assertion helper. The cleaning plan, quarantine logic, aggregation, normalization, and rate calc are yours to build at the TODO markers.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A validated parquet (requests_per_10k_by_type_borough_month.parquet) at the complaint_type x borough x month grain with a requests_per_10k column, plus a rejected_311.parquet (quarantined rows with reject_reason + rejected_at), the executed cleaning script, and a short why-note documenting the normalization choice, reject rule, and the merge-inflation guard.</div>
+        <div class="accept"><b>Pass when</b> Reviewer can rerun the script and get byte-stable output (no duplicate rows, idempotent overwrite). The merged output row count equals the pre-merge aggregate grain cardinality (assertion passes — no inflation), the population reference key is proven unique before the merge, and no borough is left with a null population. Bad records land in rejected_311.parquet with a reason and timestamp rather than silently dropped, and the why-note explicitly explains how a non-unique join key would have inflated the per-10k rate and how the validation caught it.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> split-apply-combine (groupby changes the grain) and merge semantics (how= and key uniqueness govern the row count)</p>
+        <p><b>Misconception</b> that a merge is inherently &quot;safe&quot; and can&#x27;t change the row count — not realizing a non-unique join key silently multiplies rows, and conflating a groupby result&#x27;s grain with the source table&#x27;s grain</p>
+        <p class="hot"><b>Hot seat</b> "Defend your cleaning decisions and your output grain: for one column, why did you impute where you dropped elsewhere? State the grain of your final table, prove each key in it is unique, and show me the check that proves your merge didn&#x27;t silently duplicate rows."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> This clean notebook and its exported grain-level parquet become the ingestion-and-cleaning stage of the Phase 1 portfolio pipeline; the reusable cleaning steps and the explicitly documented grain feed directly into the later relational-modeling weeks.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W5 Python (functions, comprehensions, file I/O, error handling) and W1 repo hygiene (venv, atomic commits) to keep the notebook reproducible and committed. W7 builds on this by pulling the same domain from a live API and reconciling it against this cleaned baseline; the groupby-to-a-grain habit seeds the G2 dimensional-modeling weeks.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w7">
+    <div class="wk-head">
+      <span class="wk-num">W07</span>
+      <span class="wk-title">Python for data II — APIs &amp; reconciliation</span>
+      <span class="wk-mod">M03 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G4</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> Two &quot;authoritative&quot; population sources will disagree, and an inner join silently deletes exactly the rows where they diverge — the discrepancies a data engineer is paid to surface for finance, grants allocation, or regulatory reporting. When a per-capita metric is off because two feeds used different population denominators, someone signs off on wrong money; reconciliation with provenance is the control that catches it before the sign-off.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>make HTTP GET requests from Python and parse JSON into tidy records, handling status codes, timeouts, and error responses</li><li>page through a paginated API to collect a complete result set while respecting rate limits with backoff/retry</li><li>reconcile two independent sources on a shared key: quantify matched, source-only, and value-discrepant rows against a stated tolerance</li><li>produce one clean reconciled table carrying provenance (source + as-of) plus a documented reconciliation rule you can defend</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>HTTP/REST basics: methods, status codes, headers, query params, JSON payloads — the request/response mental model</li><li>calling APIs from Python with requests: params, timeouts, raise_for_status, turning nested JSON into flat rows</li><li>pagination patterns (offset/limit, page/per_page, cursor) and rate limits: 429, Retry-After, and simple exponential backoff</li><li>reconciliation concepts: join keys, match vs source-only vs value-mismatch, numeric tolerance, and why provenance/as-of matter</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~6h</span></div>
+        <p>Paginate the World Bank population API (SP.POP.TOTL) with exponential backoff on 429/timeouts, normalize its nested JSON into rows keyed by ISO3+year, load the OWID population CSV, then outer-join the two and classify every key as matched / api-only / csv-only. Compare overlapping values against a tolerance to flag agreements vs. real discrepancies, and emit one reconciled table where every row carries source and as-of provenance.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Set up: create a fresh virtualenv, `pip install requests pandas`, and read the three reference docs (World Bank Developer Information, requests timeouts/raise_for_status, MDN 429/Retry-After) so you know the pagination contract and the retry rules before writing code.</li><li>Build `paginate()`: call the World Bank endpoint, read `page`, `pages`, and `total` from the metadata object at `response[0]` (element 0 is the header, element 1 is the data array), and loop `page=1..pages`. Wrap each request with a connect+read `timeout` and `raise_for_status()`; on a 429 or timeout, back off exponentially (e.g. 1s, 2s, 4s, capped) and honor the `Retry-After` header when present, giving up after N tries.</li><li>Normalize the API payload into flat records keyed by ISO3 + year: pull `countryiso3code`, `date` (year), and `value`. Drop rows where `countryiso3code` is empty (World Bank returns aggregates like regions with blank/2-letter codes) and quarantine rows where `value` is null into a `rejected` list with a reason (&#x27;null_value&#x27;) and a UTC `rejected_at` timestamp rather than silently dropping them.</li><li>Load the OWID population CSV with pandas. Reconcile its `Entity` names / `Code` column to ISO3: keep rows that have a real 3-letter ISO3 `Code`, and quarantine the aggregate &#x27;regions&#x27; (e.g. &#x27;World&#x27;, &#x27;Africa&#x27;, income groups whose Code is blank or non-ISO3) to the same rejected table with reason &#x27;not_a_country&#x27; — do NOT let them collide with country keys.</li><li>Implement `reconcile(api_df, csv_df)`: outer-join on (iso3, year) and label each key `matched` (in both), `api_only` (World Bank has it, OWID doesn&#x27;t), or `csv_only` (OWID has it, World Bank doesn&#x27;t). Return counts per class so you can prove the inner join would have hidden the api_only + csv_only rows.</li><li>For `matched` keys, compare the two population values with a relative tolerance (e.g. abs(a-b)/max(a,b) &lt;= 0.005 = 0.5%). Add a `discrepancy` flag and a `pct_diff` column so within-tolerance agreements are distinguished from genuine disagreements you must explain.</li><li>Write ONE reconciled table (Parquet or CSV) with columns: iso3, year, wb_value, owid_value, match_class, pct_diff, discrepancy, plus provenance columns `source_wb`, `source_owid` (the URLs), and `as_of` (UTC run timestamp). Make the write idempotent — overwrite the output file (or replace by run key) so a rerun does not append duplicates.</li><li>Write a short DECISIONS.md: your tolerance and why, how you keyed and why blank ISO3 rows are rejected not dropped, your backoff/Retry-After policy, and 2–3 concrete discrepancies you found (country+year+pct_diff) with a hypothesis for why the sources disagree.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">World Bank Indicators API — Total Population (SP.POP.TOTL)</div><div class="ds-url"><a href="https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&amp;per_page=1000" target="_blank" rel="noopener">https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&amp;per_page=1000</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Paginated: page/total metadata live in element[0] of the JSON array, data in element[1]; many country/year cells are null; &#x27;country/all&#x27; mixes real countries with aggregate regions that have blank or non-ISO3 codes; the endpoint rate-limits (429) and can time out, so you must back off and retry.</div></div><div class="ds"><div class="ds-name">Our World in Data — Population (population.csv)</div><div class="ds-url"><a href="https://ourworldindata.org/population-growth" target="_blank" rel="noopener">https://ourworldindata.org/population-growth</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Entity is a human-readable name, not an ISO3 code, and the Code column is blank for aggregates like &#x27;World&#x27;, &#x27;Africa&#x27;, and income groups — these must not be joined against country keys; year coverage and exact values differ from the World Bank feed, which is the whole point of reconciling.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures" target="_blank" rel="noopener">World Bank Indicators API — Developer Information (Basic Call Structures, pagination, format=json)</a></li><li><a href="https://requests.readthedocs.io/en/latest/user/quickstart/#timeouts" target="_blank" rel="noopener">requests — timeouts and Response.raise_for_status()</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429" target="_blank" rel="noopener">MDN — HTTP 429 Too Many Requests &amp; Retry-After header</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html" target="_blank" rel="noopener">pandas — merge/join (how=&#x27;outer&#x27;, indicator=True)</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">reconcile_population.py</span> <span class="sc-lang">python</span></summary><pre><code>import time
+from datetime import datetime, timezone
+import requests
+import pandas as pd
+
+WB_URL = &quot;https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL&quot;
+AS_OF = datetime.now(timezone.utc).isoformat()
+
+
+def paginate(per_page=1000, max_retries=5, timeout=(5, 30)):
+    &quot;&quot;&quot;Yield the data array from every page, backing off on 429/timeouts.&quot;&quot;&quot;
+    page = 1
+    while True:
+        params = {&quot;format&quot;: &quot;json&quot;, &quot;per_page&quot;: per_page, &quot;page&quot;: page}
+        delay = 1.0
+        for attempt in range(max_retries):
+            try:
+                r = requests.get(WB_URL, params=params, timeout=timeout)
+                if r.status_code == 429:
+                    # TODO: honor Retry-After header if present, else use `delay`
+                    time.sleep(delay); delay *= 2; continue
+                r.raise_for_status()
+                break
+            except (requests.Timeout, requests.ConnectionError):
+                if attempt == max_retries - 1:
+                    raise
+                time.sleep(delay); delay *= 2  # exponential backoff
+        meta, data = r.json()  # element[0]=metadata, element[1]=rows
+        yield data
+        if page &gt;= meta[&quot;pages&quot;]:  # meta also has total/per_page
+            break
+        page += 1
+
+
+def normalize_wb(pages):
+    &quot;&quot;&quot;TODO: flatten rows to dicts keyed by (iso3, year) with value.
+    - use countryiso3code + date + value
+    - DROP blank/non-ISO3 codes (aggregates)
+    - QUARANTINE null value -&gt; rejected list w/ reason + rejected_at (UTC)
+    Return (clean_df, rejected_df).&quot;&quot;&quot;
+    raise NotImplementedError
+
+
+def load_owid(csv_path):
+    &quot;&quot;&quot;TODO: read population.csv; keep real ISO3 `Code` rows;
+    quarantine aggregates (blank/non-ISO3 Code) with reason &#x27;not_a_country&#x27;.&quot;&quot;&quot;
+    raise NotImplementedError
+
+
+def reconcile(api_df, csv_df, tol=0.005):
+    &quot;&quot;&quot;Outer-join and classify each (iso3, year) key.&quot;&quot;&quot;
+    merged = api_df.merge(csv_df, on=[&quot;iso3&quot;, &quot;year&quot;], how=&quot;outer&quot;, indicator=True)
+    merged[&quot;match_class&quot;] = merged[&quot;_merge&quot;].map({
+        &quot;both&quot;: &quot;matched&quot;, &quot;left_only&quot;: &quot;api_only&quot;, &quot;right_only&quot;: &quot;csv_only&quot;})
+    # TODO: for matched rows compute pct_diff and set discrepancy = pct_diff &gt; tol
+    # TODO: attach provenance columns source_wb, source_owid, as_of = AS_OF
+    return merged
+
+
+if __name__ == &quot;__main__&quot;:
+    pages = list(paginate())
+    # api_clean, api_rejected = normalize_wb(pages)
+    # owid_clean, owid_rejected = load_owid(&quot;population.csv&quot;)
+    # out = reconcile(api_clean, owid_clean)
+    # TODO: idempotent write (overwrite) of reconciled + rejected tables
+    print(&quot;pages fetched:&quot;, len(pages))
+</code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only: paginate() has the backoff skeleton and reconcile() returns match classes. Normalization, tolerance comparison, quarantine, and the provenance write are yours to build (see TODOs).</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A runnable `reconcile_population.py` plus its outputs: one reconciled table (Parquet/CSV) keyed by iso3+year with columns wb_value, owid_value, match_class (matched/api_only/csv_only), pct_diff, discrepancy, and provenance (source_wb, source_owid, as_of); a `rejected` table capturing quarantined rows (null values, non-country aggregates) each with a reason and UTC timestamp; and a DECISIONS.md explaining tolerance, keying, retry/backoff policy, and 2–3 real discrepancies found.</div>
+        <div class="accept"><b>Pass when</b> paginate() fetches all pages by reading `pages` from element[0] and provably retries with exponential backoff on 429/timeouts (honoring Retry-After). The output distinguishes matched, api_only, and csv_only keys, and the counts demonstrate what an inner join would have dropped. Every matched row carries pct_diff and a discrepancy flag against the stated tolerance; every output row carries source + as_of provenance. Aggregate/region rows and null values appear in the rejected table with a reason (never silently dropped), and rerunning the script overwrites (does not duplicate) the outputs. DECISIONS.md names at least 2 concrete country+year discrepancies with a hypothesis.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Reconciliation as a data-quality gate: matched vs source-only vs value-mismatch, plus provenance — turning two disagreeing sources into one trustworthy table.</p>
+        <p><b>Misconception</b> Thinking a join IS reconciliation — an inner join silently drops non-matching rows and hides the exact discrepancies you&#x27;re paid to surface; and assuming two &#x27;authoritative&#x27; sources will agree exactly.</p>
+        <p class="hot"><b>Hot seat</b> "Defend your join key and your tolerance: when the two sources disagree on a country&#x27;s population, how do you decide which is right — and what would you do to reconcile them if there were no shared code to join on?"</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Becomes the Phase 1 &#x27;ingestion + reconciliation&#x27; artifact: a repeatable, rate-limit-aware API pull plus a documented reconciliation that fuses two messy sources into one clean, provenance-tagged table — pairs with the W6 cleaning work to complete the &#x27;raw → clean data product&#x27; story.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W6 pandas (frames, merge/joins, dtypes, cleaning) and W1 Git/env hygiene. Produces the clean multi-source table that W8 SE hygiene refactors into tested, modular functions, and seeds later ingestion/CDC weeks — a paginated pull is the shape of an incremental source.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w8">
+    <div class="wk-head">
+      <span class="wk-num">W08</span>
+      <span class="wk-title">Software engineering hygiene — typed, tested, packaged</span>
+      <span class="wk-mod">M04 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G6</span><span class="gtag">G1</span><span class="gtag">G4</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> When a data component silently double-counts or drops records, the downstream number a director trusts in a board deck is wrong, and no one knows for days. A typed, tested, pip-installable reconciler with a documented contract is the artifact that lets an on-call engineer clone your repo, run one command, and trust the count in 30 seconds — the difference between a component a team can own and a script no one dares to touch.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>annotate every function with type hints and pass a static type check (mypy/pyright) with zero errors</li><li>write pytest unit tests for the reconciliation logic — happy path plus edge cases (empty feed, duplicate ids, missing field, count mismatch) — using fixtures so tests run offline and deterministically</li><li>refactor a monolithic script into a clean src-layout package that separates pure logic from side-effecting I/O and the CLI</li><li>build and pip-install a wheel into a fresh venv that exposes a working console entry point</li><li>write docstrings that state each function&#x27;s contract (args/returns/raises) so the signature, docstring, and tests agree</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>type hints &amp; static checking: annotating params/returns, list[dict]/Optional/TypedDict &amp; dataclasses, running mypy or pyright, and why hints are checked statically not at runtime</li><li>docstrings as contracts: Google/NumPy style, documenting args/returns/raises, and keeping the docstring honest against the signature</li><li>unit testing with pytest: assert, arrange-act-assert, fixtures, @parametrize, and testing boundaries not just the happy path — tests as an executable spec</li><li>modular structure &amp; separation of concerns: pure functions vs I/O, why testability is a consequence of structure, the src layout</li><li>packaging: pyproject.toml, building a wheel, editable vs regular installs, and a console_scripts entry point</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~7h</span></div>
+        <p>Harden your Week 7 USGS earthquake reconciliation into a proper src-layout Python package with clean io/reconcile/cli seams, full type hints that pass mypy with zero errors, and a pytest suite (parametrized over a committed GeoJSON fixture) covering the ugly cases — empty feed, duplicate ids across overlapping pulls, a missing field, and a metadata.count vs. actual-feature-count mismatch. Then build a wheel, install it into a clean venv, and run the whole thing through a console entry point exactly as a stranger cloning your repo would.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Capture the raw feed once and commit it as a frozen fixture: download https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson to tests/fixtures/all_day.geojson, and make a second edited copy (tests/fixtures/all_day_overlap.geojson) that repeats 2-3 feature ids from the first pull so you have a real duplicate-id scenario committed to the repo (never fetch the network inside a test).</li><li>Scaffold the package with a src/ layout: create src/quake_recon/{__init__.py, io.py, reconcile.py, cli.py} and a pyproject.toml. Move your W7 logic into seams — io.py only loads/parses GeoJSON (and writes the rejected file), reconcile.py holds pure functions (no I/O), cli.py wires argparse to those functions and exposes a main().</li><li>Write the reconcile contract as typed pure functions: e.g. reconcile(features: list[Feature], reported_count: int) -&gt; ReconcileResult that returns the actual feature count, the metadata.count delta, and a list of duplicate ids. Add type hints everywhere (use TypedDict or a dataclass for the GeoJSON feature shape) and run `mypy src/` until it reports zero errors.</li><li>Implement build-for-failure behavior: dedupe features on the feature id, and route any feature failing a null-id check to a rejected table/file (data/rejected/*.jsonl) with a `reason` column and an ISO `rejected_at` timestamp. Make the run idempotent — a rerun over the same pulls must merge/dedupe on id, not append duplicates.</li><li>Write a parametrized pytest suite in tests/test_reconcile.py that loads the committed fixtures and covers, as separate cases: empty feed (zero features), duplicate ids across the two overlapping pulls, a feature with a missing/null id field, and a metadata.count vs. actual-count mismatch — asserting the reconcile result and that bad records land in the rejected file with a reason.</li><li>Add a console_scripts entry point in pyproject.toml (e.g. `quake-recon = quake_recon.cli:main`) so the tool runs as a command, not `python somefile.py`. Run `pytest` and `mypy` together and get both green.</li><li>Build the distributable: `python -m build` to produce a wheel in dist/. Confirm the wheel filename and that it includes your package (not the tests).</li><li>Create a clean throwaway venv, `pip install dist/quake_recon-*.whl` into it (nothing else from your source tree on the path), and run `quake-recon --input tests/fixtures/all_day.geojson` via the entry point to prove it works as an installed component.</li><li>Write a short README contract (inputs, outputs, exit codes, where rejected records go) plus a WHY.md decisions note answering: why dedupe on id vs. drop, why null-id rows are quarantined instead of failing the whole run, and why you chose overwrite/merge for idempotency — these are your interview answers.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">USGS Earthquakes — all_day GeoJSON (committed test fixture)</div><div class="ds-url"><a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson" target="_blank" rel="noopener">https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> metadata.count in the header frequently disagrees with the actual number of features in the array, so you must reconcile the reported count against the real count; and when you save two overlapping pulls of the rolling window, the same earthquake feature id appears in both — you have to dedupe on id idempotently rather than double-count. Some features also carry null/missing ids that must be quarantined, not silently kept.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://docs.pytest.org/en/stable/how-to/fixtures.html" target="_blank" rel="noopener">pytest — fixtures and parametrize (how to use)</a></li><li><a href="https://docs.pytest.org/en/stable/how-to/parametrize.html" target="_blank" rel="noopener">pytest — parametrizing tests</a></li><li><a href="https://mypy.readthedocs.io/en/stable/getting_started.html" target="_blank" rel="noopener">mypy — getting started with static typing</a></li><li><a href="https://packaging.python.org/en/latest/specifications/entry-points/" target="_blank" rel="noopener">Python Packaging — entry points / console_scripts</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">quake_recon_starter/</span> <span class="sc-lang">python</span></summary><pre><code># ============================================================
+# FILE: pyproject.toml
+# ============================================================
+# [build-system]
+# requires = [&quot;setuptools&gt;=68&quot;]
+# build-backend = &quot;setuptools.build_meta&quot;
+#
+# [project]
+# name = &quot;quake_recon&quot;
+# version = &quot;0.1.0&quot;
+# requires-python = &quot;&gt;=3.10&quot;
+#
+# [project.scripts]
+# quake-recon = &quot;quake_recon.cli:main&quot;   # &lt;- console entry point
+#
+# [tool.setuptools.packages.find]
+# where = [&quot;src&quot;]
+
+
+# ============================================================
+# FILE: src/quake_recon/io.py   (I/O seam — only place that touches disk)
+# ============================================================
+from __future__ import annotations
+import json
+from pathlib import Path
+from typing import TypedDict
+
+
+class Feature(TypedDict):
+    id: str | None          # USGS feature id; can be missing/null in the wild
+    properties: dict
+    geometry: dict
+
+
+def load_feed(path: Path) -&gt; tuple[list[Feature], int]:
+    &quot;&quot;&quot;Return (features, reported_count) from a committed GeoJSON file.
+    NOTE: read from disk only. Tests must never hit the network.
+    &quot;&quot;&quot;
+    data = json.loads(path.read_text())
+    reported_count = data[&quot;metadata&quot;][&quot;count&quot;]  # may disagree with len(features)!
+    features: list[Feature] = data[&quot;features&quot;]
+    return features, reported_count
+
+
+def write_rejected(rows: list[dict], out: Path) -&gt; None:
+    # TODO: append each rejected row as JSONL with a `reason` and ISO `rejected_at`.
+    # TODO: make this idempotent-safe (dedupe on id) so reruns don&#x27;t pile up dups.
+    raise NotImplementedError
+
+
+# ============================================================
+# FILE: src/quake_recon/reconcile.py   (pure logic — NO I/O here)
+# ============================================================
+from __future__ import annotations
+from dataclasses import dataclass, field
+from .io import Feature
+
+
+@dataclass
+class ReconcileResult:
+    actual_count: int
+    reported_count: int
+    count_delta: int                       # reported - actual
+    duplicate_ids: list[str] = field(default_factory=list)
+    rejected: list[dict] = field(default_factory=list)  # null/missing-id rows + reason
+
+
+def reconcile(features: list[Feature], reported_count: int) -&gt; ReconcileResult:
+    &quot;&quot;&quot;THE CONTRACT. Given features + the header count, return a ReconcileResult.
+    TODO: count actual features.
+    TODO: find ids that appear more than once (the overlapping-pull dup case).
+    TODO: quarantine features whose id is None/missing into `rejected` with a reason.
+    TODO: compute count_delta = reported_count - actual_count.
+    Keep this function pure: no printing, no file writes.
+    &quot;&quot;&quot;
+    raise NotImplementedError
+
+
+# ============================================================
+# FILE: src/quake_recon/cli.py   (wiring seam — argparse -&gt; functions)
+# ============================================================
+from __future__ import annotations
+import argparse
+from pathlib import Path
+from .io import load_feed
+from .reconcile import reconcile
+
+
+def main(argv: list[str] | None = None) -&gt; int:
+    parser = argparse.ArgumentParser(prog=&quot;quake-recon&quot;)
+    parser.add_argument(&quot;--input&quot;, required=True, type=Path)
+    args = parser.parse_args(argv)
+
+    features, reported = load_feed(args.input)
+    result = reconcile(features, reported)
+    # TODO: print a human-readable summary (actual vs reported, dup count).
+    # TODO: write rejected rows via io.write_rejected(...).
+    # TODO: return a non-zero exit code if count_delta != 0 (documented contract).
+    return 0
+
+
+if __name__ == &quot;__main__&quot;:
+    raise SystemExit(main())
+
+
+# ============================================================
+# FILE: tests/test_reconcile.py   (ONE parametrized example — add the rest)
+# ============================================================
+import json
+from pathlib import Path
+import pytest
+from quake_recon.reconcile import reconcile
+from quake_recon.io import load_feed
+
+FIXTURES = Path(__file__).parent / &quot;fixtures&quot;
+
+
+@pytest.fixture
+def all_day() -&gt; tuple[list, int]:
+    return load_feed(FIXTURES / &quot;all_day.geojson&quot;)
+
+
+# Starter parametrization skeleton. Fill in expected values for each edge case,
+# and add cases for: empty feed, missing/null id, count mismatch.
+@pytest.mark.parametrize(
+    &quot;fixture_name, expect_duplicate_ids&quot;,
+    [
+        (&quot;all_day.geojson&quot;, False),          # baseline single pull
+        (&quot;all_day_overlap.geojson&quot;, True),   # TODO: overlapping pull w/ repeated ids
+    ],
+)
+def test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -&gt; None:
+    features, reported = load_feed(FIXTURES / fixture_name)
+    result = reconcile(features, reported)
+    # TODO: assert bool(result.duplicate_ids) == expect_duplicate_ids
+    # TODO: assert result.actual_count == &lt;the number you counted by hand&gt;
+    raise NotImplementedError
+</code></pre><div class="sc-note"><span class="ml">Note</span> A src-layout scaffold with a pyproject entry point and ONE parametrized pytest example over a fixture. It defines the seams and types but leaves the real reconcile/dedupe/quarantine logic as TODOs — you build that. Create the files at the paths shown in each header comment.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A src-layout Python package (quake_recon) with io/reconcile/cli seams that reconciles the USGS all_day feed&#x27;s metadata.count against the actual feature count, dedupes duplicate ids across overlapping pulls, and quarantines null-id records to a rejected JSONL file with a reason + timestamp. Ships with: committed GeoJSON fixtures, a parametrized pytest suite (empty feed, dup ids, missing field, count mismatch), zero mypy errors, a pyproject with a console_scripts entry point, a built wheel in dist/, a README documenting the contract (inputs/outputs/exit codes), and a WHY.md decisions note.</div>
+        <div class="accept"><b>Pass when</b> Graded by a 30-second clone-and-run: `mypy src/` reports zero errors; `pytest` passes with the parametrized suite covering empty feed, duplicate ids, missing/null id field, and count mismatch, all reading committed fixtures (no network in tests); `python -m build` produces a wheel; that wheel installs into a fresh empty venv and the `quake-recon --input tests/fixtures/all_day.geojson` console command runs end-to-end, printing actual vs. reported counts and writing quarantined records to a rejected file with reason + timestamp. Rerunning the command over overlapping pulls produces no duplicate output rows (idempotent). README states the contract and WHY.md explains the dedupe, quarantine, and idempotency choices.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> separation of concerns — pure functions vs side-effecting I/O — and why that boundary is what makes code unit-testable</p>
+        <p><b>Misconception</b> believing a green test run (or a high coverage number) proves the code is correct — that a line executed is the same as a behavior asserted, and that type hints are enforced at runtime</p>
+        <p class="hot"><b>Hot seat</b> "Walk me to the seam between your pure reconcile function and your I/O — why did you cut it there, show me the one test that only exists because of that cut, and tell me what a passing test suite does NOT prove about your package."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Produces the first genuinely engineered Phase 1 artifact: the W7 script becomes a typed, tested, pip-installable component with a documented contract — a reusable quality-checked building block the capstone imports, and concrete evidence of dev hygiene (G6) an interviewer can clone, install, and run.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W1 (Git, venv, repo hygiene) and W7 (the API-fetching reconciliation script and its data model). Later weeks build on it by treating typed, modular, pytest-covered packages as the baseline for all pipeline code — the seed for data-quality testing (G4) and for Git→DABs deployment (G6) in later phases.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w9">
+    <div class="wk-head">
+      <span class="wk-num">W09</span>
+      <span class="wk-title">SQL I — joins &amp; filtering</span>
+      <span class="wk-mod">M05 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G2</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> When a revenue dashboard silently drops customers with no orders, or double-counts sales because an invoice fanned out across its line items, leadership makes decisions on wrong numbers and trust in the data team evaporates. Being able to read an ERD and predict exactly which rows an INNER vs LEFT join keeps, drops, or duplicates is the daily reasoning that keeps report totals correct.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>write a SELECT that projects specific columns and filters rows with WHERE (=, IN, BETWEEN, LIKE, IS NULL) then ORDER BY / LIMIT to answer a stated business question</li><li>read an ERD, identify each table&#x27;s primary key and the foreign keys that connect two tables, and predict the join path BEFORE writing SQL</li><li>choose and justify the correct join type (INNER, LEFT, RIGHT, FULL OUTER, CROSS, self) for a given relationship and explain what each keeps or drops</li><li>state the grain of a join result and explain how a join fans out rows (one-to-many) or drops them (unmatched), and how NULLs behave in filters and join keys</li><li>prove a LEFT JOIN surfaces unmatched parent rows and recognize when a WHERE on the right table silently collapses it to an INNER JOIN</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>projection &amp; the SELECT/WHERE/ORDER BY/LIMIT skeleton; predicates: comparison, IN, BETWEEN, LIKE, IS NULL</li><li>keys as the contract of a relational model: primary vs foreign keys, and how a relationship encodes grain</li><li>join types and their set semantics: INNER, LEFT/RIGHT OUTER, FULL OUTER, CROSS, and self-joins — what each row set means</li><li>NULL &amp; three-valued logic: how NULLs disappear from filters, behave in join keys, and appear from unmatched outer rows</li><li>reading an ERD and planning a query: trace the join path before typing SQL</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~5h</span></div>
+        <p>Load the Chinook sample database into DuckDB and write 8–10 documented SQL queries that exercise filtering, multi-hop INNER JOINs, a LEFT JOIN that surfaces parentless rows, an employee→manager self-join, and a fan-out that inflates a total. Chinook is intentionally clean so you can isolate join and grain mechanics; the point is to predict row counts before you run and explain every delta.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Install DuckDB (`pip install duckdb`), download `Chinook_Sqlite.sqlite` from the Chinook releases page, and run the starter scaffold to ATTACH the SQLite file and confirm the tables (Artist, Album, Track, Invoice, InvoiceLine, Customer, Employee) are visible.</li><li>Before writing joins, print the schema of the core tables and sketch the ERD on paper: mark each primary key and each foreign key (Album.ArtistId, Track.AlbumId, InvoiceLine.InvoiceId, Invoice.CustomerId, Customer.SupportRepId, Employee.ReportsTo). You will predict row counts from this sketch.</li><li>Write 2 FILTER queries: customers in one Country sorted by name, and tracks whose Name matches a LIKE pattern with a price threshold. Add a one-line comment stating the grain (one row per ___).</li><li>Write the multi-hop INNER JOIN: Artist → Album → Track → InvoiceLine → Invoice → Customer to answer &#x27;which customers bought music by a given artist?&#x27;. Comment which rows this silently drops (artists never purchased, customers with no invoices).</li><li>Write the LEFT JOIN Artist → Album filtered to `WHERE Album.AlbumId IS NULL` to surface parentless rows — artists with zero albums — the exact rows the INNER version hid.</li><li>Write the self-join Employee e → Employee m ON `e.ReportsTo = m.EmployeeId`; use a LEFT join so the top manager (ReportsTo IS NULL) is not dropped, and output each employee next to their manager&#x27;s name.</li><li>Demonstrate fan-out: join Invoice to InvoiceLine, show that one invoice becomes many rows, and prove that naively SUM-ing Invoice.Total after the join inflates revenue; then write the correct grain-aware aggregation.</li><li>Pick one pair of tables and write the SAME query twice — once INNER, once LEFT — capture both row counts, and write a 3–5 sentence note explaining the exact delta and which real report bug each version would cause.</li><li>Save each query as a numbered .sql file with a header comment stating its result grain and expected vs actual row count; commit the folder plus the WHY note as your deliverable.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">Chinook sample database (Chinook_Sqlite.sqlite / Parquet)</div><div class="ds-url"><a href="https://github.com/lerocha/chinook-database" target="_blank" rel="noopener">https://github.com/lerocha/chinook-database</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Intentionally CLEAN by design — no nulls in keys, no schema drift. This week isolates join and grain mechanics (fan-out, parentless rows, self-referencing FKs) so the only &#x27;mess&#x27; is the reasoning trap: an INNER join quietly dropping rows and a fan-out quietly double-counting. Real messy data (429s, late records, mixed dates) returns in W11–13.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://duckdb.org/docs/sql/introduction" target="_blank" rel="noopener">DuckDB — SQL Introduction</a></li><li><a href="https://duckdb.org/docs/extensions/sqlite" target="_blank" rel="noopener">DuckDB — SQLite extension (ATTACH / read .sqlite)</a></li><li><a href="https://duckdb.org/docs/data/parquet/overview" target="_blank" rel="noopener">DuckDB — Reading and writing Parquet files</a></li><li><a href="https://github.com/lerocha/chinook-database" target="_blank" rel="noopener">Chinook database schema &amp; ERD (lerocha/chinook-database)</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">load_chinook.py</span> <span class="sc-lang">python</span></summary><pre><code>&quot;&quot;&quot;
+Week 9 starter scaffold — LAND the Chinook data in DuckDB, then STOP.
+This file only opens a connection and exposes the tables. The queries are YOUR job.
+
+Setup (once):
+    pip install duckdb
+    # Download Chinook_Sqlite.sqlite from:
+    #   https://github.com/lerocha/chinook-database/releases
+    # and put it next to this file.
+&quot;&quot;&quot;
+
+import duckdb
+
+DB_PATH = &quot;chinook.duckdb&quot;          # persistent DuckDB file (so your work survives reruns)
+SQLITE_FILE = &quot;Chinook_Sqlite.sqlite&quot;
+
+con = duckdb.connect(DB_PATH)
+
+# The sqlite extension lets DuckDB read a .sqlite file directly.
+con.execute(&quot;INSTALL sqlite; LOAD sqlite;&quot;)
+
+# ATTACH mounts the SQLite DB read-only under the alias `chinook`.
+# You can now query e.g.  chinook.Artist, chinook.Customer, chinook.Employee ...
+con.execute(f&quot;ATTACH &#x27;{SQLITE_FILE}&#x27; AS chinook (TYPE sqlite);&quot;)
+
+# Sanity check — confirm tables are visible before you write real queries.
+print(con.execute(&quot;SELECT name FROM (SHOW ALL TABLES) WHERE database = &#x27;chinook&#x27;&quot;).fetchdf())
+
+# ------------------------------------------------------------------
+# TODO 1: Print the schema of Artist, Album, Track, InvoiceLine,
+#         Invoice, Customer, Employee. Sketch the ERD before querying.
+# TODO 2: FILTER — customers in a single Country, sorted; add a WHERE + LIKE.
+# TODO 3: Multi-hop INNER JOIN artist -&gt; album -&gt; track -&gt; invoiceline -&gt;
+#         invoice -&gt; customer. Which customers bought a given artist?
+# TODO 4: LEFT JOIN Artist -&gt; Album to surface artists with NO albums
+#         (the parentless rows: WHERE Album.AlbumId IS NULL).
+# TODO 5: SELF-JOIN Employee e -&gt; Employee m ON e.ReportsTo = m.EmployeeId.
+#         Use LEFT so the top manager (ReportsTo IS NULL) is not dropped.
+# TODO 6: FAN-OUT — join Invoice to InvoiceLine and show how one invoice
+#         row becomes many; prove it inflates SUM(Total) if you double-count.
+# TODO 7: Write ONE query twice (INNER vs LEFT on the same tables) and
+#         record the row-count delta + WHY those rows differ.
+# TODO 8: Save each query as a numbered .sql file with a comment header
+#         stating the grain of the result (one row per ___).
+# ------------------------------------------------------------------
+
+con.close()
+</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the data via ATTACH and prints the table list. It writes zero business queries — every JOIN, filter, and the INNER-vs-LEFT delta note are the learner&#x27;s work at the TODO markers.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A `week09-sql-joins/` folder containing 8–10 numbered `.sql` files (each with a header comment stating its result grain and expected vs actual row count) plus a `WHY.md` note. The queries must cover: 2 filtering queries, a multi-hop INNER JOIN artist→…→customer, a LEFT JOIN surfacing parentless (album-less) artists, an employee→manager self-join that retains the top manager, a fan-out demonstration with the grain-correct fix, and one query written twice (INNER vs LEFT) with the row-count delta recorded.</div>
+        <div class="accept"><b>Pass when</b> Running the queries against the attached Chinook DB reproduces the row counts documented in each file&#x27;s header. The LEFT JOIN returns at least one parentless row that the INNER version omits; the self-join output includes the top-level manager (ReportsTo IS NULL) rather than dropping them; the fan-out query visibly turns one invoice into multiple rows and the WHY.md explains why naive SUM(Total) over-counts revenue and how the corrected aggregation fixes it. WHY.md states the exact INNER-vs-LEFT row-count delta for the paired query and names, in one sentence each, the real report bug each variant would cause.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> Join types as set operations over keys — what INNER, LEFT, and FULL OUTER each keep and drop, and how PK/FK relationships determine the join path and the result grain.</p>
+        <p><b>Misconception</b> Believing a LEFT JOIN always preserves all left-hand rows even when a WHERE predicate references the right table (the NULLs fail the filter and silently turn it into an INNER JOIN), and conflating &quot;no matching row&quot; with a NULL value.</p>
+        <p class="hot"><b>Hot seat</b> "Show me your query listing customers and their invoice totals: defend why you used LEFT vs INNER, tell me exactly which rows appear or vanish if I swap it, and predict how the row count changes — then run it and show me you were right."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Adds a documented SQL query suite to the Phase 1 data-product repo, proving the learner can navigate a real relational schema, reason about keys and grain, and defend join choices — the query/analysis layer that later weeks (W10 aggregation, then modeling) build the modeled data product on top of.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W8 software-engineering hygiene (working repo, venv, running scripts, atomic commits) and comfort at the CLI to load and query DuckDB locally. Introduces keys/grain and NULL/join semantics that W10 (SQL II — GROUP BY, subqueries, CTEs) and the relational-modeling weeks depend on directly; the join-path-before-SQL habit seeds G1 (defend your query) and G2 (modeling fundamentals).</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w10">
+    <div class="wk-head">
+      <span class="wk-num">W10</span>
+      <span class="wk-title">SQL II — aggregation &amp; subqueries</span>
+      <span class="wk-mod">M05 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> Every number you put in front of finance or a skeptical PM — &quot;revenue per country,&quot; &quot;active customers per genre&quot; — is an aggregation with a grain and a NULL-handling choice baked in. The day someone asks &quot;does this COUNT include the customers with no state on file?&quot; and you can&#x27;t answer, the whole report loses trust; a COUNT that silently drops NULLs understates a churn or coverage metric and can send money and headcount to the wrong place.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>summarize data with GROUP BY + aggregate functions (COUNT/SUM/AVG/MIN/MAX) and state the grain of every grouped result set</li><li>filter groups with HAVING and explain why it differs from WHERE (group filter vs row filter) using the logical order of evaluation</li><li>combine result sets with UNION / UNION ALL / INTERSECT / EXCEPT and pick the correct one for a given question</li><li>write scalar, IN/EXISTS, and derived-table (FROM) subqueries to answer questions a single flat query can&#x27;t</li><li>translate a plain-English analytical question into correct SQL and defend why the returned numbers are right</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>aggregate functions &amp; GROUP BY: the grain of a grouped result, NULL handling, and COUNT(*) vs COUNT(col) vs COUNT(DISTINCT)</li><li>WHERE vs HAVING and the logical order of evaluation (FROM -&gt; WHERE -&gt; GROUP BY -&gt; HAVING -&gt; SELECT -&gt; ORDER BY) — why you can&#x27;t filter an aggregate in WHERE</li><li>set operations: UNION vs UNION ALL, INTERSECT, EXCEPT, and the column-count / type-compatibility rules</li><li>subqueries: scalar subqueries, IN/NOT IN vs EXISTS/NOT EXISTS, derived tables in FROM, and correlated vs uncorrelated</li><li>reading results critically: sanity-checking totals against a known number and the NOT IN + NULL trap</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~4.5h</span></div>
+        <p>On the Chinook database in DuckDB, build a ~10-query analytical pack covering GROUP BY+HAVING, set operations (EXCEPT/INTERSECT), and scalar/EXISTS/derived-table subqueries. Every query is annotated with its exact result grain (&quot;one row per country-genre pair&quot;) and a one-line correctness proof, and the pack includes a deliberate NOT IN + NULL trap that returns the wrong answer plus its NOT EXISTS fix.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Get the data: install the DuckDB CLI (or the Python `duckdb` package), clone https://github.com/lerocha/chinook-database, and load the Chinook schema into a local `chinook.duckdb` file — either by running the SQLite/SQL build script through DuckDB or by `INSTALL sqlite; LOAD sqlite; ATTACH &#x27;Chinook_Sqlite.sqlite&#x27; AS chinook (TYPE sqlite);`. Run 2-3 `SELECT count(*)` checks against `invoices`, `invoice_items`/`InvoiceLine`, `tracks`, and `customers` and record the counts as your sanity baseline.</li><li>Write 3 GROUP BY + HAVING queries whose grain you can name in one sentence each: (a) total revenue per billing country, (b) revenue per genre, (c) customers per country having more than N invoices. For each, add a comment line stating the exact result grain — e.g. `-- grain: one row per BillingCountry; measure = SUM(Total)` — and confirm HAVING filters groups, not rows.</li><li>Prove your COUNT isn&#x27;t lying about NULLs: pick a nullable column (e.g. `customers.Company` or `State`) and run `COUNT(*)` vs `COUNT(&lt;column&gt;)` side by side in one query. Comment the delta — `-- COUNT(*)=59, COUNT(State)=30 -&gt; 29 customers have NULL State and are excluded by COUNT(col)` — so you can defend exactly what each number represents.</li><li>Write 2 set-operation queries against the same-shaped column lists: use EXCEPT to find customers who bought from genre A but never genre B, and INTERSECT to find tracks appearing in two different playlists (or customers active in two years). Note in a comment that set ops dedupe by default (vs UNION ALL) and why that matches the question&#x27;s grain.</li><li>Write 3 subquery queries — one of each kind: a scalar subquery (e.g. each customer&#x27;s spend vs the overall average in a `WHERE` or `SELECT`), an EXISTS/correlated subquery (customers who have at least one invoice over $X), and a derived-table subquery (aggregate in a subquery, then filter/join the result — e.g. per-customer totals wrapped as a derived table). Annotate the grain each one returns.</li><li>Build the NOT IN + NULL trap deliberately: write a `WHERE col NOT IN (SELECT nullable_col FROM ...)` where the subquery contains at least one NULL, and show it returns zero/too-few rows (three-valued logic makes the whole predicate never TRUE). Then write the correct version with `NOT EXISTS` (or add `WHERE nullable_col IS NOT NULL`) and show the row counts differ. Comment both with the row counts as evidence.</li><li>Assemble all queries into a single `analytics_pack.sql` file in run order, each block preceded by: a plain-English question, a `-- grain:` line, and a `-- why correct:` line. Ensure the file runs top-to-bottom idempotently (read-only SELECTs; if you materialize anything use `CREATE OR REPLACE VIEW`/`TABLE` so a rerun produces no duplicates and no errors).</li><li>Write a short `NOTES.md` (the interview-answer file): for the NOT IN trap, state the specific failure (NULL in the subquery -&gt; NOT IN predicate evaluates to UNKNOWN -&gt; row excluded) and your fix; and for one GROUP BY row, write the sentence you&#x27;d say to a stakeholder about exactly what that row counts and how NULLs were handled.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">Chinook sample database</div><div class="ds-url"><a href="https://github.com/lerocha/chinook-database" target="_blank" rel="noopener">https://github.com/lerocha/chinook-database</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> A clean, well-normalized learning schema — so the &#x27;mess&#x27; here is not dirty data but aggregation-grain and subquery-correctness traps: nullable columns (customer State/Company, some track composers) that make COUNT(col) silently drop rows and make NOT IN return wrong answers, plus fan-out risk when joining invoices to invoice lines before aggregating. The lab forces you to name the grain and prove the NULL handling on every number.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://duckdb.org/docs/stable/sql/functions/aggregates" target="_blank" rel="noopener">DuckDB — Aggregate functions (COUNT, SUM, and NULL handling)</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/groupby" target="_blank" rel="noopener">DuckDB — GROUP BY and HAVING clauses</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/setops" target="_blank" rel="noopener">DuckDB — Set operations (UNION / EXCEPT / INTERSECT)</a></li><li><a href="https://www.postgresql.org/docs/current/functions-subquery.html" target="_blank" rel="noopener">PostgreSQL — Subquery expressions (IN / NOT IN / EXISTS and the NULL pitfall)</a></li></ul>
+        
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">An `analytics_pack.sql` file (~10 queries) run against Chinook in DuckDB, where each query is preceded by a plain-English question, a `-- grain:` line naming exactly what one result row represents, and a `-- why correct:` line — plus one worked NOT IN + NULL trap alongside its NOT EXISTS fix with the differing row counts shown. A companion `NOTES.md` records the NULL/COUNT decision and the sentence you&#x27;d use to defend one GROUP BY row to a stakeholder.</div>
+        <div class="accept"><b>Pass when</b> The full `analytics_pack.sql` runs top-to-bottom in DuckDB with no errors and is idempotent on rerun (read-only SELECTs, or CREATE OR REPLACE for any materialized object — no duplicates, no failures). It contains at least: 3 GROUP BY+HAVING queries, one EXCEPT and one INTERSECT, and one each of scalar / EXISTS / derived-table subqueries — every block carrying a grain line and a why-correct line. The COUNT(*) vs COUNT(col) query demonstrates a real NULL delta with the number commented, and the NOT IN trap and its NOT EXISTS fix show different row counts as evidence. `NOTES.md` states the specific NOT IN + NULL failure mechanism, the chosen fix, and one stakeholder-facing sentence describing exactly what a named GROUP BY row counts and how NULLs were treated.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> WHERE vs HAVING and the logical order of evaluation, and how to name the grain of a grouped result set.</p>
+        <p><b>Misconception</b> Treating WHERE and HAVING as interchangeable (or trying to filter an aggregate in WHERE), and assuming COUNT(col) counts every row when it silently skips NULLs.</p>
+        <p class="hot"><b>Hot seat</b> "Point at one row of your GROUP BY result and tell me exactly what it represents — then defend that your COUNT/SUM is counting the right thing and isn&#x27;t silently dropping NULLs or double-counting from a join."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Adds a reproducible &quot;analytics query pack&quot; to the course repo — real business questions turned into defensible SQL with grain-level explanations — the first evidence in the Phase 1 SQL/modeling portfolio artifact that the learner can answer questions with data and justify the numbers, not just run queries.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W9 SQL I (SELECT/WHERE, single-table filtering, JOINs, ORDER BY) and the W1 Git workflow for committing the pack. W11 Advanced SQL I builds window functions and CTEs directly on top of this week&#x27;s aggregation, grouping, and subquery foundations — so grain-awareness and the logical evaluation order established here are prerequisites.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w11">
+    <div class="wk-head">
+      <span class="wk-num">W11</span>
+      <span class="wk-title">Advanced SQL I — window functions &amp; CTEs</span>
+      <span class="wk-mod">M06 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> Climate, energy-load, and agriculture teams live on rolling-window and period-over-period math run on messy sensor feeds — a wrong 7-day average or a missed temperature swing feeds directly into demand forecasts, crop-loss claims, and grid-capacity decisions worth millions. The hard part is never the SQL; it is the -9999 missing readings and quality-control flags that silently poison a moving average if you don&#x27;t handle them before the window ever runs.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>choose correctly among row_number/rank/dense_rank for per-group top-N and explain how each handles ties</li><li>use lag/lead to compute period-over-period change and inter-event gaps without a self-join</li><li>compute running totals and moving averages with an explicit frame clause, and explain ROWS vs RANGE</li><li>refactor a nested subquery stack into named CTEs that a reviewer can read top-to-bottom</li><li>state when a window (PARTITION BY, keeps every row) is the right tool vs GROUP BY (collapses rows)</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>window function anatomy: OVER, PARTITION BY, ORDER BY, and why rows are not collapsed</li><li>ranking family — row_number vs rank vs dense_rank and how ties differ</li><li>offset functions — lag/lead for deltas, gaps, and prev/next comparisons</li><li>frame clauses — running totals &amp; moving averages with ROWS BETWEEN vs RANGE, and the default-frame trap</li><li>CTEs for layered, readable logic — naming steps, chaining, and when a CTE beats a subquery</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~6h</span></div>
+        <p>Load a subset of NOAA GHCN-Daily observations for a handful of weather stations into DuckDB, quarantine bad readings (-9999 sentinels and failed QC flags) into a rejected table with reasons, then answer four business questions — top-N ranking per month, day-over-day change detection, a 7-day moving average, and a running cumulative total — each written as a single, named-CTE-structured query with no nested subquery pyramids.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>Pick 4-6 stations and pull their data: either download a couple of per-station CSVs from the /access/ folder or grab a recent year file from /by_year/ (long format: ID, DATE, ELEMENT, VALUE, M-FLAG, Q-FLAG, S-FLAG, OBS-TIME). Note in your README exactly which stations/years you chose and why (e.g. mix of stations that start/stop reporting mid-period).</li><li>Start from the starter scaffold: use DuckDB read_csv to load the raw files into a `raw_obs` table, keeping only ELEMENT in (&#x27;TMAX&#x27;,&#x27;TMIN&#x27;,&#x27;PRCP&#x27;) and casting DATE properly. Do NOT drop bad rows yet — you inspect them first.</li><li>Build a quarantine step: write rows to a `rejected_obs` table with a `reason` column and a `rejected_at` timestamp for (a) VALUE = -9999 sentinels and (b) any non-blank Q-FLAG (failed a QC check). Everything clean lands in a `clean_obs` table with VALUE scaled to real units (TMAX/TMIN are tenths of degrees C, PRCP is tenths of mm). Record the reject count per reason in your notes.</li><li>Q1 — Ranking: in ONE query using named CTEs, aggregate a monthly metric per station (e.g. total PRCP or avg TMAX per station-month) and rank top-N stations within each month. Choose RANK vs DENSE_RANK vs ROW_NUMBER deliberately and write one sentence defending your choice on ties (e.g. two stations with identical monthly rainfall).</li><li>Q2 — Period-over-period: in ONE CTE-structured query use LAG() over (PARTITION BY station, element ORDER BY date) to compute day-over-day change in TMAX and PRCP, then flag the single biggest swing per station. Handle the gap where a station skipped a day so the lag does not silently compare non-adjacent dates.</li><li>Q3 — Moving average: compute a 7-day moving average of TMAX per station using an explicit window frame `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW`. In your notes, state what your frame does when fewer than 7 readings exist (leading edge / gaps) and why you chose ROWS over RANGE.</li><li>Q4 — Running total: compute a running cumulative PRCP total within each station partition (PARTITION BY station ORDER BY date, default frame) to model season-to-date accumulation. Confirm the total resets per station and never bleeds across partitions.</li><li>Make it idempotent: wrap the load in CREATE OR REPLACE TABLE (or DELETE-then-INSERT on the station+date+element key) so rerunning the whole script twice yields identical row counts — no duplicates. Verify with a COUNT(*) before and after a second run.</li><li>Write a short DECISIONS.md: which ranking function and why, how you defined an &#x27;adjacent&#x27; day for LAG, your ROWS-frame edge behavior, your reject rules, and your idempotency strategy — these are your interview answers.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">NOAA GHCN-Daily (Global Historical Climatology Network — Daily)</div><div class="ds-url"><a href="https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/" target="_blank" rel="noopener">https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> -9999 missing-value sentinels that will wreck an average or sum if cast as real numbers; quality-control flags (Q-FLAG) marking failed checks that must be quarantined, not trusted; multiple elements (TMAX/TMIN/PRCP) stacked per station/day in long format that you must normalize; and stations that start or stop reporting mid-period, leaving date gaps that break naive LAG() and moving-window assumptions. Per-station CSVs live under /access/, yearly long-format files under /by_year/, and element codes + flags are documented under /doc/GHCND_documentation.pdf.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/doc/GHCND_documentation.pdf" target="_blank" rel="noopener">GHCN-Daily documentation (readme, element codes, QC &amp; source flags, units)</a></li><li><a href="https://duckdb.org/docs/sql/functions/window_functions" target="_blank" rel="noopener">DuckDB — Window Functions</a></li><li><a href="https://duckdb.org/docs/sql/query_syntax/with" target="_blank" rel="noopener">DuckDB — WITH clause (Common Table Expressions)</a></li><li><a href="https://duckdb.org/docs/data/csv/overview" target="_blank" rel="noopener">DuckDB — read_csv / CSV import</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">load_ghcn.sql</span> <span class="sc-lang">sql</span></summary><pre><code>-- Starter scaffold: land raw GHCN-Daily long-format data into DuckDB and
+-- set up the normalize + quarantine split. This ONLY stages data.
+-- You write the QC/quarantine logic and all four analytical queries.
+--
+-- Run with:  duckdb climate.duckdb &lt; load_ghcn.sql
+-- by_year files are long format with NO header, columns are:
+--   ID, DATE(YYYYMMDD), ELEMENT, VALUE, M_FLAG, Q_FLAG, S_FLAG, OBS_TIME
+
+-- 1) Land the raw rows. Point read_csv at your downloaded file(s).
+--    (A glob like &#x27;2023.csv&#x27; or a couple of /access/ station files also works
+--     but /access/ files are WIDE format -- adjust columns if you use those.)
+CREATE OR REPLACE TABLE raw_obs AS
+SELECT *
+FROM read_csv(
+    &#x27;2023.csv&#x27;,                 -- TODO: your downloaded GHCN file(s) / glob
+    header = false,
+    columns = {
+        &#x27;ID&#x27;: &#x27;VARCHAR&#x27;,
+        &#x27;OBS_DATE&#x27;: &#x27;VARCHAR&#x27;,  -- keep as text for now, cast below
+        &#x27;ELEMENT&#x27;: &#x27;VARCHAR&#x27;,
+        &#x27;VALUE&#x27;: &#x27;INTEGER&#x27;,     -- tenths of units; -9999 = missing
+        &#x27;M_FLAG&#x27;: &#x27;VARCHAR&#x27;,
+        &#x27;Q_FLAG&#x27;: &#x27;VARCHAR&#x27;,    -- non-blank = failed a QC check
+        &#x27;S_FLAG&#x27;: &#x27;VARCHAR&#x27;,
+        &#x27;OBS_TIME&#x27;: &#x27;VARCHAR&#x27;
+    }
+);
+
+-- 2) Narrow to your stations + the 3 elements you care about.
+--    TODO: replace with the station IDs you selected (see docs for ID format).
+CREATE OR REPLACE VIEW obs_scoped AS
+SELECT
+    ID                                   AS station,
+    strptime(OBS_DATE, &#x27;%Y%m%d&#x27;)::DATE   AS obs_date,
+    ELEMENT                              AS element,
+    VALUE                               AS raw_value,
+    Q_FLAG                               AS q_flag
+FROM raw_obs
+WHERE ELEMENT IN (&#x27;TMAX&#x27;,&#x27;TMIN&#x27;,&#x27;PRCP&#x27;)
+  AND ID IN ( &#x27;USW00094728&#x27; /* TODO: add your 3-5 other station IDs */ );
+
+-- 3) QUARANTINE: split bad rows out WITH A REASON + timestamp.
+--    TODO: insert rows where raw_value = -9999 (reason &#x27;missing_sentinel&#x27;)
+--          and rows where q_flag &lt;&gt; &#x27;&#x27; (reason &#x27;failed_qc_&#x27; || q_flag)
+--          into rejected_obs(station, obs_date, element, raw_value, reason, rejected_at).
+CREATE OR REPLACE TABLE rejected_obs (
+    station VARCHAR, obs_date DATE, element VARCHAR,
+    raw_value INTEGER, reason VARCHAR, rejected_at TIMESTAMP
+);
+-- INSERT INTO rejected_obs SELECT ... ;   -- &lt;-- your logic here
+
+-- 4) CLEAN table: only rows that pass, with VALUE scaled to real units.
+--    TMAX/TMIN are in tenths of degC; PRCP is in tenths of mm.
+--    TODO: exclude anything you quarantined above, then divide by 10.0.
+CREATE OR REPLACE TABLE clean_obs AS
+SELECT
+    station,
+    obs_date,
+    element,
+    raw_value / 10.0 AS value      -- TODO: confirm scaling per element
+FROM obs_scoped
+WHERE 1 = 0;                       -- TODO: replace with your real WHERE (drop rejects)
+
+-- 5) Sanity check before you build the 4 window queries.
+SELECT &#x27;clean&#x27; t, count(*) n FROM clean_obs
+UNION ALL SELECT &#x27;rejected&#x27;, count(*) FROM rejected_obs;
+
+-- ---- Your four named-CTE queries go in separate files (q1..q4.sql):
+-- Q1 rank top-N stations per month  (defend RANK vs DENSE_RANK vs ROW_NUMBER)
+-- Q2 LAG() day-over-day change + flag biggest swing (mind date gaps)
+-- Q3 7-day moving avg with ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+-- Q4 running cumulative PRCP within each station partition
+</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it stages raw rows and stubs the normalize/quarantine split. You write the QC filters, the unit scaling, idempotent reruns, and all four single-query named-CTE analyses. Verify the by_year column order and the -9999 sentinel against GHCND_documentation.pdf before trusting any number.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A DuckDB database (or reproducible .sql script set) that: (1) loads a subset of NOAA GHCN-Daily observations for 4-6 named stations from long format into a normalized `clean_obs` table with values scaled to real units; (2) quarantines -9999 sentinels and QC-flagged rows into a `rejected_obs` table with a reason and timestamp; and (3) answers the four business questions as four separate single queries, each built ONLY from named CTEs (no nested subquery pyramids) — top-N stations per month, LAG() day-over-day change with the biggest swing flagged, a 7-day moving average using an explicit ROWS frame, and a running cumulative total per station partition. Include a DECISIONS.md explaining the ranking-function choice on ties, the adjacent-day handling for LAG, the ROWS-frame edge behavior, the reject rules, and the idempotency strategy.</div>
+        <div class="accept"><b>Pass when</b> Passing means: rerunning the load script twice produces identical row counts in clean_obs and rejected_obs (idempotent, no duplicates); zero -9999 values and zero non-blank-Q-FLAG rows remain in clean_obs, and every rejected row carries a non-null reason and rejected_at; each of the four analytical queries uses named CTEs with no nested subqueries and runs on clean_obs; Q1 uses a ranking function whose tie behavior is justified in one sentence; Q2&#x27;s LAG() does not compare non-adjacent dates across a station&#x27;s reporting gap; Q3 uses an explicit ROWS BETWEEN 6 PRECEDING AND CURRENT ROW frame; Q4&#x27;s running total resets per station partition; and DECISIONS.md documents each of those choices with specific rules, not generic statements.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> the window-function mental model — OVER/PARTITION BY/ORDER BY/frame — and that a window annotates rows instead of collapsing them like GROUP BY</p>
+        <p><b>Misconception</b> assuming a window function collapses rows like GROUP BY, and treating rank/dense_rank/row_number as interchangeable; also forgetting that adding ORDER BY silently changes the default frame</p>
+        <p class="hot"><b>Hot seat</b> "Defend your ranking function: you used rank() (or row_number) for top-5 zones — what happens on a day where two zones tie for 5th, who shows up in your output, and would your stakeholder&#x27;s answer change if you&#x27;d picked a different function?"</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Adds a readable &#x27;analytical SQL&#x27; module to the portfolio repo — CTE-structured window queries over a real public dataset — evidence the candidate can express layered business logic clearly and defend function/frame choices, the analysis layer that Phase 1&#x27;s modeling and quality work will later feed.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W10 SQL II (joins, aggregation, GROUP BY/HAVING, subqueries) and a working DuckDB + Git/PR workflow from earlier weeks. W12 Advanced SQL II builds on these window/CTE foundations (recursive CTEs, more advanced windowing and query-shaping); this week deliberately stops at single-level window functions and non-recursive CTEs.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w12">
+    <div class="wk-head">
+      <span class="wk-num">W12</span>
+      <span class="wk-title">Advanced SQL II — query plans &amp; tuning</span>
+      <span class="wk-mod">M06 · Phase 1 · bronze</span>
+      <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G7</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> When a climate dashboard or a regulatory report times out on a multi-year weather query, the on-call data engineer is expected to open the query plan, name the operator that is burning the time, and defend exactly one index change on a whiteboard — including which index they refused to add. That &quot;read the plan and justify the index&quot; moment is a near-verbatim data-engineering interview task and a real cost/latency lever in production.</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>read an EXPLAIN / EXPLAIN ANALYZE plan top-to-bottom and name the driving cost (seq scan, sort, nested loop) and where estimated rows diverge from actual</li><li>define sargability and rewrite a non-sargable predicate (function-on-column, leading wildcard, implicit cast) so an index can be used</li><li>add the right index (single, composite with correct column order, or covering) and quantify the before/after runtime and I/O</li><li>reason about when an index does NOT help — low selectivity, tiny table, write cost — and defend that call</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>how a planner works: logical vs physical plan, cost model, and the table statistics it depends on</li><li>reading EXPLAIN vs EXPLAIN ANALYZE — estimated vs actual rows, BUFFERS, and per-node timing</li><li>scan &amp; join operators: seq scan, index scan, bitmap heap scan; nested loop vs hash join and when each wins</li><li>indexes in depth: B-tree, composite column order, covering (INCLUDE) indexes, and selectivity</li><li>sargability — the predicate patterns that silently disable an index and how to rewrite them</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~6h</span></div>
+        <p>Load a multi-million-row slice of NOAA GHCN-Daily (one by_year file) into local PostgreSQL, then tune a provided slow date-range + station-filter aggregation: capture an EXPLAIN (ANALYZE, BUFFERS) baseline, pinpoint the bottleneck operator, rewrite the non-sargable date predicate, add one composed index, and prove each change against the plan — ending with a written decision note on the index you added and the one you deliberately did not.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>1. Download one by_year file from NOAA GHCN-Daily (e.g. 2020.csv.gz — tens of millions of global rows), gunzip it, and inspect the 8 comma-separated columns (ID, YYYYMMDD date, ELEMENT, VALUE, M/Q/S flags, OBS-TIME) — note there is no header row and the date arrives as an 8-digit string.</li><li>2. Create the raw table and bulk-load with COPY exactly as in the scaffold, loading obs_date as TEXT on purpose (this is what forces the non-sargable predicate you will fix). Confirm the row count is in the millions with SELECT count(*).</li><li>3. Run the provided intentionally-slow query and capture the baseline with EXPLAIN (ANALYZE, BUFFERS). Save the full plan text to a file (baseline_plan.txt) — record total time, the top-cost operator (expect a Parallel Seq Scan), rows removed by filter, and shared buffers hit/read.</li><li>4. Diagnose why it is slow: identify that the Seq Scan reads every row and that to_date(obs_date,&#x27;YYYYMMDD&#x27;) in the WHERE clause is non-sargable, so no index on the date could even be used. Write down the bottleneck operator and the reason in your decision note.</li><li>5. Make the predicate sargable: rewrite the date filter to compare obs_date against literal text bounds (&#x27;20200601&#x27; AND &#x27;20200831&#x27;) OR add a computed date column / expression index — choose one deliberately. Re-run EXPLAIN (ANALYZE, BUFFERS) and diff against baseline.</li><li>6. Add ONE index that serves the filter + aggregation (compose station_id, element, and the sargable date column; consider column order and whether an index-only scan is achievable by INCLUDE-ing value). Run ANALYZE, re-EXPLAIN, and confirm the plan switched to an Index/Index-Only Scan with fewer buffers.</li><li>7. Prove idempotence of your tuning artifacts: make the load rerunnable without duplicates (TRUNCATE-then-COPY, or COPY into a staging table then INSERT on a unique key), and guard index creation with CREATE INDEX IF NOT EXISTS so a rerun of your tuning script is safe.</li><li>8. Write the decision note (tuning.md): the operator you fixed, the predicate rewrite, the index you added and its column order rationale, and — critically — one index you deliberately did NOT add (e.g. a single-column index on element with tiny cardinality, or a redundant index the planner would ignore) and why.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">NOAA GHCN-Daily — by_year slice (one year, millions of rows)</div><div class="ds-url"><a href="https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/by_year/" target="_blank" rel="noopener">https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/by_year/</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> Headerless comma-separated long-format files where each row is one station/element/day; the date is an 8-digit YYYYMMDD string (not a DATE), VALUE is an integer in tenths (tenths of degrees C / tenths of mm), and there are sentinel M/Q/S flag columns plus a frequently-empty OBS-TIME. One year is tens of millions of global rows — realistic size where a full scan actually hurts and index/plan choices are visible in EXPLAIN.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://www.postgresql.org/docs/current/using-explain.html" target="_blank" rel="noopener">PostgreSQL Documentation — Using EXPLAIN</a></li><li><a href="https://www.postgresql.org/docs/current/indexes.html" target="_blank" rel="noopener">PostgreSQL Documentation — Indexes (B-tree, multicolumn, index-only scans)</a></li><li><a href="https://www.postgresql.org/docs/current/sql-copy.html" target="_blank" rel="noopener">PostgreSQL Documentation — COPY (bulk load)</a></li><li><a href="https://www.postgresql.org/docs/current/row-estimation-examples.html" target="_blank" rel="noopener">PostgreSQL Documentation — Row Estimation &amp; the Planner (why predicates must be sargable)</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">load_and_slow_query.sql</span> <span class="sc-lang">sql</span></summary><pre><code>-- ============================================================
+-- Week 12 STARTER SCAFFOLD — GHCN-Daily bulk load + slow query
+-- Fills in the SETUP only. You build the tuning. Look for TODO.
+-- ============================================================
+
+-- 1) Raw table. NOTE: obs_date is TEXT on purpose (YYYYMMDD).
+--    That choice is what makes the date filter non-sargable later.
+CREATE TABLE IF NOT EXISTS ghcn_raw (
+    station_id text,
+    obs_date   text,      -- 8-digit YYYYMMDD string, e.g. &#x27;20200615&#x27;
+    element    text,      -- &#x27;TMAX&#x27;,&#x27;TMIN&#x27;,&#x27;PRCP&#x27;,...
+    value      integer,   -- tenths of a unit (deg C / mm)
+    m_flag     text,
+    q_flag     text,
+    s_flag     text,
+    obs_time   text
+);
+
+-- 2) Bulk load one by_year file with COPY (headerless CSV).
+--    Download + gunzip first, e.g.:
+--      curl -O https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/by_year/2020.csv.gz
+--      gunzip 2020.csv.gz
+--    IDEMPOTENCY: uncomment TRUNCATE so a rerun does NOT duplicate rows.
+-- TRUNCATE ghcn_raw;
+COPY ghcn_raw FROM &#x27;/absolute/path/to/2020.csv&#x27; WITH (FORMAT csv);
+
+-- Sanity check: expect millions of rows.
+-- SELECT count(*) FROM ghcn_raw;
+
+ANALYZE ghcn_raw;
+
+-- 3) THE INTENTIONALLY-SLOW QUERY. Do NOT edit it yet — baseline it first.
+--    Summer daily-high averages for US stations.
+SELECT station_id, element, avg(value) / 10.0 AS avg_deg_c
+FROM   ghcn_raw
+WHERE  to_date(obs_date, &#x27;YYYYMMDD&#x27;) BETWEEN DATE &#x27;2020-06-01&#x27; AND DATE &#x27;2020-08-31&#x27;  -- non-sargable!
+  AND  station_id LIKE &#x27;US%&#x27;
+  AND  element = &#x27;TMAX&#x27;
+GROUP  BY station_id, element;
+
+-- TODO(a): capture the baseline plan and save it:
+--   EXPLAIN (ANALYZE, BUFFERS) &lt;the query above&gt;;
+--   -&gt; record total time, the top operator (Seq Scan?), rows removed by filter, buffers.
+
+-- TODO(b): rewrite the date predicate to be SARGABLE.
+--   Hint: obs_date is text in YYYYMMDD, which sorts lexically like dates.
+--   Compare obs_date to text bounds instead of wrapping it in to_date(...).
+
+-- TODO(c): add exactly ONE composed index to serve filter + aggregation.
+--   Think about column order (equality cols first, range last) and whether
+--   INCLUDE (value) lets you get an INDEX-ONLY scan.
+--   CREATE INDEX IF NOT EXISTS ... ;  ANALYZE ghcn_raw;
+
+-- TODO(d): re-run EXPLAIN (ANALYZE, BUFFERS) after (b) and again after (c).
+--   Prove each change: operator switched, time dropped, buffers dropped.
+
+-- TODO(e): in tuning.md, name ONE index you deliberately did NOT add and why.
+</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw data and hands you the slow query. You write the baseline capture, the sargable rewrite, the single composed index, and the before/after plan proof. Do not replace the provided query until you have saved its baseline plan.</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A tuning package for the GHCN-Daily slice containing: (1) load_and_slow_query.sql extended with your sargable predicate rewrite and your CREATE INDEX IF NOT EXISTS statement; (2) three saved plan files — baseline_plan.txt, after_rewrite_plan.txt, after_index_plan.txt — each from EXPLAIN (ANALYZE, BUFFERS); and (3) tuning.md documenting the bottleneck operator, the predicate rewrite, the index you added with its column-order rationale, and one index you deliberately did NOT add and why.</div>
+        <div class="accept"><b>Pass when</b> Accepted when: the table is loaded with a verifiable multi-million row count via COPY; baseline_plan.txt shows a sequential scan as the dominant operator on the original query; the rewritten predicate is sargable (no function wrapping obs_date in the WHERE clause) and after_index_plan.txt shows the planner using an Index Scan or Index-Only Scan with a measurable drop in both execution time and shared buffers versus baseline; the load and index creation are idempotent (rerunning produces no duplicate rows and no error); and tuning.md explicitly names the index added, its column order rationale, and at least one index deliberately not added with justification.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> how the planner chooses a physical plan and how to read it top-to-bottom</p>
+        <p><b>Misconception</b> that adding an index always makes a query faster — ignoring selectivity, sargability, and the fact that an index can exist yet be correctly skipped by the planner</p>
+        <p class="hot"><b>Hot seat</b> "Walk me through your plan: which operator was the bottleneck, why does your index fix it, and name a query where this same index would be ignored or would actually hurt."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Adds a performance-tuning case study (read a plan → diagnose → optimize → defend) to the SQL portfolio — a direct proxy for the query-optimization whiteboard task interviewers use.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W11 Advanced SQL I (window functions, CTEs, multi-join/subquery fluency) so learners can read and reason about the non-trivial query being tuned, plus a working local Postgres from earlier SQL weeks. Feeds W13 relational theory (keys/normalization inform which indexes make sense) and plants G7 seeds — physical operators, partitioning, and cost intuition reused when reading Spark plans in the lakehouse phase.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="wk-card" id="w13">
+    <div class="wk-head">
+      <span class="wk-num">W13</span>
+      <span class="wk-title">Relational theory &amp; normalization — keys, FDs, 1NF→3NF</span>
+      <span class="wk-mod">M07 · Phase 1 · bronze · Phase 1 capstone</span>
+      <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G1</span><span class="gtag">G10</span></span>
+    </div>
+    <div class="framing"><span class="fl">Why this matters</span> NYC&#x27;s restaurant-inspection feed repeats a venue&#x27;s name, address, borough, and cuisine on every single inspection and violation row — so when a restaurant changes its name or moves, you either update dozens of rows correctly or silently corrupt your data, and a brand-new venue with no inspection yet can&#x27;t even be recorded. Those are the exact update, delete, and insert anomalies that normalization exists to kill, and getting them wrong is how a public health dashboard shows a shuttered address as &quot;grade pending.&quot;</div>
+    <div class="wk-grid">
+      <div class="blk"><div class="bh">Objectives</div><ul><li>identify candidate, primary &amp; foreign keys (natural vs surrogate) and write the functional dependencies that actually hold in a real flat dataset</li><li>decompose a denormalized table to 3NF, justifying each split by the specific normal-form rule (partial vs transitive dependency) it removes</li><li>enforce referential integrity with PK/FK constraints and prove that orphan/duplicate inserts are rejected</li><li>decide when to denormalize and articulate the read-vs-write / redundancy tradeoff in writing</li><li>assemble the Phase 1 portfolio: an ERD + normalized schema wrapping the SQL + Python analytics work into one defensible project</li></ul></div>
+      <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>keys: super/candidate/primary/foreign, natural vs surrogate — and why every table needs a declared PK</li><li>functional dependencies: what X→Y means and how to detect them by profiling data</li><li>normal forms: 1NF (atomicity/no repeating groups), 2NF (no partial deps), 3NF (no transitive deps), with the decomposition procedure; a nod to BCNF</li><li>referential integrity: PK/FK constraints, orphan rows, and cascade/restrict behavior</li><li>denormalization: the update/insert/delete anomalies 3NF prevents vs the read-speed reasons to deliberately break it</li></ul></div>
+      <div class="blk full lab">
+        <div class="bh">Hands-on lab <span class="hrs">· ~7h</span></div>
+        <p>Profile the wide, denormalized NYC DOHMH inspection flat file in pandas to empirically discover functional dependencies and quantify redundancy, then design and build a 3NF schema in DuckDB (restaurant / inspection / violation + cuisine/borough lookups) with real PRIMARY KEY and FOREIGN KEY constraints. Split the flat file into the normalized tables idempotently, then PROVE integrity by watching DuckDB reject an FK-violating insert and a duplicate-PK insert, add one deliberately justified denormalization, and ship the whole thing as your Phase 1 capstone README.</p>
+        <div class="lab-sub">Step by step</div>
+        <ol class="steps"><li>LAND THE DATA: page the Socrata API at https://data.cityofnewyork.us/resource/43nn-pn8j.json using $limit/$offset (pull ~50k rows) into a raw DataFrame, and write it verbatim to a local raw_inspections.parquet so every rerun starts from the same immutable snapshot (no re-hitting the API).</li><li>PROFILE FOR FDs: in pandas, quantify the redundancy — e.g. groupby(&#x27;camis&#x27;) and confirm dba/building/street/boro/cuisine_description are (nearly) constant per CAMIS; count how many times each restaurant&#x27;s name+address is physically repeated across rows; flag the CAMIS values where the &#x27;constant&#x27; columns actually disagree (schema drift / late edits) as candidate dirty keys.</li><li>DISCOVER KEYS &amp; ANOMALIES: verify candidate keys empirically — test whether camis alone, (camis, inspection_date, inspection_type), and (camis, inspection_date, inspection_type, violation_code) are unique; write down which grain each represents (restaurant vs inspection vs violation) and note the nulls in violation_code/grade/inspection_date that break naive keys.</li><li>MODEL THE ERD: draw the target 3NF schema as a Mermaid erDiagram (or dbdiagram.io) — restaurant (PK camis), inspection (PK inspection_id derived from camis+date+type), violation (PK/composite FK to inspection + violation_code), plus cuisine and boro lookup tables — showing every FK relationship and cardinality; commit the .mmd/source into the repo.</li><li>WRITE DDL: fill in the starter scaffold to CREATE the staging table plus the five target tables in DuckDB with explicit PRIMARY KEY and FOREIGN KEY constraints, choosing column types deliberately (dates as DATE, score as INTEGER) and documenting why each PK was chosen in a comment.</li><li>SPLIT IDEMPOTENTLY: load raw_inspections.parquet into staging, then run INSERT ... SELECT DISTINCT statements (lookups first, then restaurant, inspection, violation) to populate the normalized tables; make reruns safe by using CREATE OR REPLACE / DELETE-before-load / anti-join so a second run produces zero duplicate rows — state which idempotency strategy you chose and why.</li><li>QUARANTINE BAD ROWS: before the FK-constrained inserts, route rows that would violate integrity (null camis, unparseable inspection_date, violation_code not tied to a valid inspection) into a rejected_rows table with a reason column and a load timestamp instead of dropping them silently.</li><li>PROVE INTEGRITY: run two inserts that MUST fail and capture the DuckDB error text in your README — (a) an INSERT into violation referencing a camis/inspection_id that does not exist (FK violation), and (b) an INSERT into restaurant reusing an existing camis (duplicate PK); show that both are rejected and explain in one line what each proves.</li><li>JUSTIFY ONE DENORMALIZATION + SHIP README: add exactly one deliberate denormalization (e.g. carry cuisine_description onto inspection, or store latest_grade on restaurant) and write 2-3 sentences on the read/query win vs the update-anomaly risk you re-accepted; then assemble the Phase 1 portfolio README (business framing, ERD image, DDL, the two rejected inserts, the why-notes) so a hiring manager can clone and read it in 30 seconds.</li></ol>
+        <div class="lab-sub">Data</div>
+        <div class="ds-list"><div class="ds"><div class="ds-name">NYC DOHMH Restaurant Inspection Results (Socrata)</div><div class="ds-url"><a href="https://data.cityofnewyork.us/resource/43nn-pn8j.json" target="_blank" rel="noopener">https://data.cityofnewyork.us/resource/43nn-pn8j.json</a> (API) · dataset page <a href="https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j" target="_blank" rel="noopener">https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> The textbook denormalized flat file: restaurant name (dba), building/street, borough, and cuisine_description are repeated on EVERY inspection and violation row, so one venue appears hundreds of times; a single inspection fans out into multiple rows (one per violation_code); inspection_date, grade, violation_code, and score contain nulls; the same CAMIS occasionally carries slightly different name/address strings across rows (edits over time); and the API paginates at 1,000 rows per request so you must loop $limit/$offset to assemble a real dataset.</div></div></div>
+        <div class="lab-sub">Reference material</div>
+        <ul class="refs"><li><a href="https://duckdb.org/docs/sql/statements/create_table" target="_blank" rel="noopener">DuckDB — CREATE TABLE, PRIMARY KEY &amp; FOREIGN KEY constraints</a></li><li><a href="https://duckdb.org/docs/sql/constraints" target="_blank" rel="noopener">DuckDB — Constraints (primary/foreign/unique/not null) reference</a></li><li><a href="https://en.wikipedia.org/wiki/Database_normalization" target="_blank" rel="noopener">Normalization: 1NF → 2NF → 3NF → BCNF explained</a></li><li><a href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html" target="_blank" rel="noopener">Mermaid Entity-Relationship Diagram syntax</a></li></ul>
+        <details class="script"><summary><span class="sc-ic">&lt;/&gt;</span> Starter scaffold &mdash; <span class="mono">build_normalized.sql</span> <span class="sc-lang">sql</span></summary><pre><code>-- ============================================================
+-- Week 13 — Normalize the NYC DOHMH flat file into 3NF (DuckDB)
+-- Load raw_inspections.parquet (landed in the pandas step) first.
+-- ============================================================
+
+-- 0) STAGING: mirror the wide flat file exactly, no constraints.
+CREATE OR REPLACE TABLE stg_inspections AS
+SELECT * FROM read_parquet(&#x27;raw_inspections.parquet&#x27;);
+-- TODO: sanity-check row count + peek at columns (camis, dba, boro,
+--       cuisine_description, inspection_date, inspection_type,
+--       violation_code, score, grade).
+
+-- 1) LOOKUP TABLES (small dimensions the fact rows repeat endlessly)
+CREATE OR REPLACE TABLE boro (
+    boro_name TEXT PRIMARY KEY
+);
+CREATE OR REPLACE TABLE cuisine (
+    cuisine_description TEXT PRIMARY KEY
+);
+-- TODO: INSERT ... SELECT DISTINCT the non-null values from staging.
+--       Decide how to treat &#x27;&#x27; / &#x27;0&#x27; / NULL boro codes.
+
+-- 2) RESTAURANT  (grain = one row per CAMIS)
+CREATE OR REPLACE TABLE restaurant (
+    camis               TEXT PRIMARY KEY,
+    dba                 TEXT,
+    building            TEXT,
+    street              TEXT,
+    zipcode             TEXT,
+    boro_name           TEXT REFERENCES boro(boro_name),
+    cuisine_description TEXT REFERENCES cuisine(cuisine_description)
+    -- TODO (denormalization decision): should latest_grade live here?
+    --      If you add it, justify the update-anomaly risk in the README.
+);
+-- TODO: INSERT ... SELECT — collapse many rows per camis to ONE.
+--       A restaurant can have conflicting name/address strings across
+--       rows: pick a rule (e.g. most recent inspection_date wins) and
+--       write down why. Rows with NULL camis must NOT land here.
+
+-- 3) INSPECTION (grain = one visit: camis + date + type)
+CREATE OR REPLACE TABLE inspection (
+    inspection_id   TEXT PRIMARY KEY,          -- TODO: derive a stable id
+    camis           TEXT NOT NULL REFERENCES restaurant(camis),
+    inspection_date DATE,
+    inspection_type TEXT,
+    score           INTEGER,
+    grade           TEXT
+    -- TODO: pick your ONE justified denormalization if it belongs here
+    --       (e.g. carry cuisine_description for fast filtering).
+);
+-- TODO: build inspection_id (e.g. hash/concat of camis||date||type),
+--       CAST inspection_date TEXT -&gt; DATE, and INSERT SELECT DISTINCT.
+--       Idempotency: use CREATE OR REPLACE or an anti-join so a rerun
+--       adds zero duplicates — state your choice.
+
+-- 4) VIOLATION (grain = one violation on one inspection)
+CREATE OR REPLACE TABLE violation (
+    inspection_id  TEXT NOT NULL REFERENCES inspection(inspection_id),
+    violation_code TEXT NOT NULL,
+    description    TEXT,
+    critical_flag  TEXT,
+    PRIMARY KEY (inspection_id, violation_code)   -- TODO: verify unique
+);
+-- TODO: INSERT SELECT — rows with NULL violation_code are not violations;
+--       route them (and orphan inspection_ids) to rejected_rows instead.
+
+-- 5) QUARANTINE
+-- CREATE OR REPLACE TABLE rejected_rows (
+--     reason        TEXT,
+--     rejected_at   TIMESTAMP DEFAULT now(),
+--     raw_camis     TEXT,
+--     raw_row       TEXT
+-- );
+-- TODO: before the FK inserts, capture null-key / bad-date / orphan rows.
+
+-- 6) PROVE INTEGRITY (these two statements MUST fail — paste errors in README)
+-- INSERT INTO violation VALUES (&#x27;does-not-exist&#x27;,&#x27;10F&#x27;,&#x27;x&#x27;,&#x27;N&#x27;);   -- FK reject
+-- INSERT INTO restaurant (camis) VALUES (&#x27;&lt;an-existing-camis&gt;&#x27;);   -- dup PK reject
+</code></pre><div class="sc-note"><span class="ml">Note</span> A DuckDB DDL + split SKELETON, not a solution. It creates staging + the target 3NF tables with PK/FK constraints and stubs the INSERT...SELECT split. You must: derive a stable inspection_id, choose DISTINCT/anti-join logic that makes reruns idempotent, add the rejected_rows quarantine, and pick your one justified denormalization. Run with: duckdb nyc.duckdb &lt; build_normalized.sql</div></details>
+      </div>
+      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+        <div class="deliver">A Git repo Phase 1 capstone: (1) a pandas profiling notebook/script that lands raw_inspections.parquet and prints the discovered functional dependencies + redundancy counts; (2) an ERD (Mermaid/dbdiagram source + rendered image) of the 3NF design; (3) build_normalized.sql producing a DuckDB database with 5 constrained tables (restaurant, inspection, violation, boro, cuisine), a rejected_rows quarantine table, and idempotent INSERT...SELECT splits; (4) a README.md with the business framing, the ERD, the FD/anomaly findings, the two rejected-insert error outputs (FK + duplicate PK), and a short write-up of the one justified denormalization and the idempotency strategy chosen.</div>
+        <div class="accept"><b>Pass when</b> A grader who clones the repo and runs `duckdb nyc.duckdb &lt; build_normalized.sql` gets a fully populated 3NF database with enforced PK/FK constraints; running it a SECOND time yields identical row counts (proven idempotent, no duplicates). The README shows (a) at least three empirically discovered functional dependencies from the flat file with redundancy counts, (b) the ERD, (c) captured DuckDB errors for both a FK-violating insert and a duplicate-PK insert, (d) evidence that bad rows (null camis / unparseable date / orphan violation) landed in rejected_rows with a reason + timestamp rather than being dropped, and (e) 2-3 sentences justifying exactly one denormalization by naming the query win and the re-accepted update-anomaly risk. The 30-second README skim makes the business consequence (update/insert/delete anomalies on repeated restaurant facts) obvious.</div></div>
+      <div class="blk live"><div class="bh">Live session focus</div>
+        <p><b>Recap</b> functional dependencies as the engine of normalization — how X→Y drives 1NF→3NF and why 3NF removes update/insert/delete anomalies</p>
+        <p><b>Misconception</b> believing a surrogate id alone makes a table &quot;normalized&quot; — conflating &quot;has a unique key&quot; with 3NF, and blurring 2NF (partial dependency on part of a composite key) with 3NF (transitive dependency through a non-key column)</p>
+        <p class="hot"><b>Hot seat</b> "Walk me through one table you normalized: name the exact functional dependency that forced the split, the specific anomaly it prevents, and then defend one place where you chose NOT to normalize."</p></div>
+      <div class="blk full foot">
+        <div class="pf"><span class="fl2">Portfolio</span> Caps Phase 1: the normalized schema, ERD, and rationale become the modeling backbone of the flagship &#x27;SQL + Python analytics&#x27; portfolio project — wrapping the W12 advanced-SQL queries and earlier Python profiling into one clonable, documented, defensible repo that demonstrates keys, FDs, integrity, and a reasoned tradeoff.</div>
+        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W12 Advanced SQL II (joins, aggregation, window functions, CTEs) to write the split/validation queries, plus Python/pandas and Git/repo hygiene from M00. Deliberately stops at 3NF/BCNF and normalized OLTP-style modeling; W14 (Phase 2, dimensional modeling) builds directly on these keys and FDs by intentionally denormalizing into star-schema facts and dimensions.</div>
+      </div>
+    </div>
+  </article>
+</main>
+<footer><div class="wrap"><div class="foot-note">
+      <span>Launch · Phase 1 — 13 weekly lesson plans · deepened labs on real open data · method per the Gambill DE career videos.</span>
+      <span class="mono">Gambill Data Engineer Track</span></div></div></footer>
