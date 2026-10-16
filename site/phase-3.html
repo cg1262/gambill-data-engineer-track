@@ -89,6 +89,8 @@
   .wk-title { font-size: 1.12rem; font-weight: 730; flex: 1 1 260px; }
   .wk-mod { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
   .wk-gaps { display: inline-flex; gap: 4px; }
+  .howto-link { margin-left: auto; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid transparent; border-radius: 5px; padding: 3px 9px; text-decoration: none; white-space: nowrap; }
+  .howto-link:hover { border-color: var(--accent); text-decoration: none; }
   .gtag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; color: var(--blue-strong); background: var(--blue-soft); border-radius: 3px; padding: 2px 6px; }
   .gtag.f { color: var(--muted); background: var(--surface-2); }
 
@@ -184,6 +186,7 @@
       <span class="wk-title">Delta Lake internals &amp; table optimization</span>
       <span class="wk-mod">M20 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G7</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s price-integrity mart now backs a daily 8am revenue-cycle review, but since Phase 3 turned the pipeline to streaming, Auto Loader is dribbling thousands of tiny Delta files into silver_pricing and the mart query has crept past the deadline — every late report is a payer-dispute review that slips a day and a chargemaster correction that ages. Slow, bloated tables are also a direct DBU bill: every needless byte scanned is money. This week we make the tables fast and cheap without changing a single business rule, and we prove the win with numbers.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Productionizing step: the project&#x27;s Delta tables go from &#x27;correct&#x27; to &#x27;fast and cheap.&#x27; Streaming ingestion (Phase 3) left silver_pricing riddled with small files; this week compacts and clusters the tables by Maria&#x27;s real query pattern, resolves the partition-vs-cluster decision, sets retention/VACUUM, and proves a clean time-travel recovery — seeding the RUNBOOK&#x27;s recovery procedure and opening the PERFORMANCE NOTES living deliverable with the first before/after entry.</div>
@@ -251,6 +254,7 @@ CLUSTER_KEYS = []  # TODO e.g. [&quot;payer_id&quot;, &quot;hospital_ccn&quot;, 
 #       Headline the BUSINESS OUTCOME first (lands before 8am / DBU down ~X%),
 #       technical change second.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the measure/tune/measure structure and where to record numbers. Fill every TODO yourself; the point is that YOU read the profile and choose keys by query pattern. Do not let this become the full solution.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the healthcare tables for your own target industry&#x27;s high-write tables and cluster by how YOUR consumer actually filters: crypto (CoinGecko) — cluster a prices table by coin_id + day for a trading dashboard; disclosures (SEC EDGAR) — cluster filings by cik + form_type; climate (NOAA) — cluster observations by station_id + date. Same discipline: measure first, pick keys from the query pattern not the schema, avoid partitioning a high-cardinality id, and lead your Performance Notes with the business outcome your stakeholder feels.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -273,6 +277,7 @@ CLUSTER_KEYS = []  # TODO e.g. [&quot;payer_id&quot;, &quot;hospital_ccn&quot;, 
       <span class="wk-title">Databricks &amp; Unity Catalog — governing the project</span>
       <span class="wk-mod">M21 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G8</span><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s provider-pricing tables currently live in the default hive_metastore with no owner, no access control, and no PHI tagging — meaning provider names, addresses, and competitively-sensitive negotiated rates are readable by anyone on the workspace and untraceable in an audit. For PHI-adjacent data that is a real compliance exposure (and a failed audit is real money): this week converts &#x27;a pipeline that works&#x27; into &#x27;a pipeline a compliance officer will sign off on&#x27; by putting the whole project under governed, least-privilege, lineage-tracked access.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This is the governance retrofit of the running project. Nothing about the pipeline logic changes; instead the whole medallion stack (bronze/silver/gold + ops) moves under a designed Unity Catalog namespace with a documented managed-vs-external decision per table, persona-based least-privilege access for Maria&#x27;s analysts, the engineering team, and compliance auditors, PHI-adjacent tagging, and captured lineage. Output is a governed, auditable version of Project 1 and a permanent Architecture Doc update (namespace diagram + GRANT matrix + tag taxonomy + lineage evidence).</div>
@@ -336,6 +341,7 @@ CREATE CATALOG IF NOT EXISTS ${catalog_name}
 -- FROM ${catalog_name}.information_schema.tables ORDER BY 1,2;   -- TODO screenshot
 -- TODO: query column tags back from information_schema.column_tags
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up structure and TODO markers, not the solution. You decide the catalog boundary, the managed/external split, the exact grants, and the tag taxonomy. Runs on Databricks SQL / a UC-enabled notebook.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the same retrofit on YOUR target-industry project. Pick the catalog boundary that matches how your real users query, and identify YOUR sensitive columns: for SEC EDGAR/finance it&#x27;s issuer identifiers and material non-public fields; for NOAA/climate it&#x27;s station-owner or embargoed-release fields; for ReliefWeb/humanitarian it&#x27;s beneficiary-identifying data; for CoinGecko it&#x27;s API-key/cost attribution. Tag those, grant an &#x27;analyst&#x27; vs &#x27;engineer&#x27; vs &#x27;auditor&#x27; group, and prove one denied-then-granted access — the sensitivity story changes by industry but the governance moves are identical.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -358,6 +364,7 @@ CREATE CATALOG IF NOT EXISTS ${catalog_name}
       <span class="wk-title">Declarative pipelines I — Lakeflow/DLT with expectations</span>
       <span class="wk-mod">M22 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G3</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s revenue-cycle team stopped trusting the pricing dataset after a silent bad-load pushed negotiated rates that were off by orders of magnitude into a payer-contract review — the notebook pipeline ran green while shipping garbage. A hospital that publishes or negotiates on wrong transparency data faces both CMS compliance exposure and real dollars left on the table in contract talks. This week converts the pipeline from &#x27;ran without erroring&#x27; to &#x27;provably enforced its data contract on every row,&#x27; so a bad negotiated rate or malformed NPI is caught, quarantined, and reported before it can reach a contract decision.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Productionizes the ingest→validation core of Project 1 (Provider Pricing Integrity): the hand-orchestrated Phase 2 bronze→silver notebook becomes a declarative Lakeflow pipeline whose data contract is enforced as code and whose quality is observable via the event log and UC lineage. This is the foundation the W34 Jobs orchestration and W35 Auto Loader/streaming weeks build on, and it turns the DQ rules from Phase 2 prose into governed, auditable enforcement.</div>
@@ -456,6 +463,7 @@ def silver_pricing_conformed_mv():
 # and paste them into the Runbook. TODO: add your event_log TVF query here or in
 # a companion notebook.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the pipeline structure, table shells, and expectation slots with TODOs. It does NOT implement the transforms, the real constraint expressions, or the tier decisions — that is your work in the lab. Wire it to YOUR W32 Unity Catalog catalog/schema.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror this to YOUR target industry&#x27;s regulated or decision-critical dataset. Pick a source that arrives as repeated file drops and has a real &#x27;wrong value = money/risk&#x27; story, then define the same three-tier contract on it. Fintech: SEC EDGAR filings (https://www.sec.gov/edgar) or crypto prices from CoinGecko (https://www.coingecko.com/en/api) — fail on a missing ticker/period key, drop on an out-of-range price. Public sector / humanitarian: data.gov or ReliefWeb (https://reliefweb.int/) — fail on missing geography+period grain, drop on an implausible metric. Climate/energy: NOAA (https://www.ncdc.noaa.gov/cdo-web/webservices/v2) — drop on a sensor reading outside physical bounds. No public feed? Generate one with Faker and inject the same defects. Write the same &#x27;why this tier&#x27; note tied to a decision-maker in YOUR domain.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -478,6 +486,7 @@ def silver_pricing_conformed_mv():
       <span class="wk-title">Declarative pipelines II — Jobs &amp; orchestration</span>
       <span class="wk-mod">M22 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G3</span><span class="gtag">G6</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s revenue-cycle team pulls the pricing-integrity report at 8:00am to flag providers billing outside the CMS-published rate; if the MDM golden-record step silently fails but the gold marts still refresh off yesterday&#x27;s data, Maria bills against duplicated/stale providers — a compliance and cash-recovery exposure. A single orchestrated Job with dependencies, retries, and a freshness-SLA alert turns &quot;did the pipeline run last night?&quot; from a morning fire-drill into a page that either says all-clear or tells you exactly which task broke and when.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Converts the Phase 2 pipeline (which the learner previously ran cell-by-cell or as a single Lakeflow pipeline) into ONE governed, scheduled, self-recovering Databricks Job DAG — the orchestration backbone the rest of Phase 3 (streaming, DABs/CI-CD, alerting SLAs) plugs into. This is the &quot;one button, one schedule, one alert&quot; that makes the project operable by someone other than its author.</div>
@@ -550,6 +559,7 @@ resources:
           # TODO: read taskValues from mdm_golden_refresh to stamp the KPI row
           # TODO: point at your gold marts + KPI refresh; keep it idempotent (MERGE/overwrite-by-key)
 </code></pre><div class="sc-note"><span class="ml">Note</span> SCAFFOLD ONLY — a Jobs config resource showing the DAG shape, dependency edges, retry/timeout knobs, parameters, and notification blocks. It intentionally does NOT contain the MDM/gold logic. Fill every TODO; do not let an AI expand this into the full pipeline — the wiring decisions are your interview answers.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the medallion DAG for your own domain&#x27;s nightly chain and orchestrate it the same way: SEC EDGAR filings → parse/validate → entity-resolve issuers → gold financial marts; or CoinGecko prices → clean → dedup by asset → gold KPI table; or NOAA/ReliefWeb feeds → conform → gold. Keep the SAME three-part shape (ingest+validate → resolve/master → publish marts), the SAME run_if gate before publishing, and set your own domain&#x27;s &quot;report must land by X&quot; as the duration-SLA alert. State your business SLA in one sentence tied to money/risk in your industry.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -572,6 +582,7 @@ resources:
       <span class="wk-title">Structured Streaming I — Auto Loader, triggers &amp; checkpoints</span>
       <span class="wk-mod">M23 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G5</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Every night at 2am, a Databricks Job re-lists an entire cloud folder of CMS hospital price-transparency files, reloads them, and dedupes — so when a hospital posts a corrected chargemaster mid-afternoon, Maria&#x27;s revenue-integrity team doesn&#x27;t see it until the next full run, and the re-list bill grows with every file ever landed. This week the ingest becomes continuous: Auto Loader picks up each new pricing file within the freshness SLA and touches only new files, so corrected prices reach Maria&#x27;s disputes queue sooner and the compute bill stops scaling with historical file count.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Converts Project 1&#x27;s ingestion tier from scheduled batch to continuous, file-arrival streaming — the foundational productionization step of Phase 3. Bronze CMS pricing now ingests incrementally via Auto Loader with checkpoints and exactly-once guarantees, setting up W36 (streaming II: the provider-change event stream with stateful watermarked dedup) and feeding the freshness-SLA and alerting story the phase builds toward.</div>
@@ -644,6 +655,7 @@ query.awaitTermination()
 #  2) Kill mid-run, restart SAME checkpoint -&gt; prove 0 duplicates.
 #  3) Drop a file with a NEW column -&gt; find it in _rescued_data, then evolve.
 #  Capture input-row metrics for your Performance Notes.</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up structure/config with TODO markers. It intentionally omits the schema-evolution proof, the recovery test, and the trigger-choice write-up so you build and defend those yourself.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap CMS pricing files for whatever lands irregularly in YOUR industry and re-run the same Auto Loader pattern: SEC EDGAR filings dropping as they are submitted, NOAA weather station extracts, CoinGecko market snapshots you write to a landing folder, ReliefWeb situation reports, or a Faker-generated file feed. Keep the discipline identical — schemaLocation, per-source checkpoint, Trigger.AvailableNow, and a _rescued_data safety net — and write the same &#x27;streaming ≠ real-time&#x27; note stating your own numeric freshness SLA to your own stakeholder.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -666,6 +678,7 @@ query.awaitTermination()
       <span class="wk-title">Structured Streaming II — stateful dedup &amp; watermarks</span>
       <span class="wk-mod">M23 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G5</span><span class="gtag">G3</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s revenue-cycle team acts on provider-change events — an address move, a specialty correction, an NPI deactivation. These events arrive from an upstream feed that retries on failure, so the same change shows up two or three times and often out of order. If a duplicate stale event overwrites a newer address, or a claim is billed under an already-deactivated NPI, the payer denies it: cash is delayed and billing under a dead NPI is a compliance exposure. This week makes the change stream apply each real change exactly once, on time, and quarantine anything too late to trust.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This week converts the provider-change feed (ingested as a raw stream in W35) into a deduped, watermark-bounded silver stream that feeds the MDM golden-provider layer. It guarantees each real provider change is applied exactly once and in the right order, which is the precondition for the downstream SCD2 history and MDM collapse to stay correct as the project goes from scheduled-batch to continuous.</div>
@@ -740,6 +753,7 @@ def main(spark):
     # TODO: after it runs, print q.lastProgress[&#x27;stateOperators&#x27;] -&gt; numRowsTotal
     return q
 </code></pre><div class="sc-note"><span class="ml">Note</span> SCAFFOLD ONLY — sets up structure/config with TODO markers, not the solution. Fill the TODOs yourself; the MERGE logic and late-tagging are the point of the lab.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the provider-change feed for an event stream in your own target industry and keep the exact same machinery. Fintech: dedup SEC EDGAR filing events on (cik + form_type + filed_at); crypto: dedup CoinGecko price ticks on (coin_id + market + observed_at) with a tight watermark; humanitarian/climate: dedup ReliefWeb report updates or NOAA station observations on (station_id + metric + event_ts). In every case, name the composite key that means &#x27;the same real event&#x27;, justify a watermark from your source&#x27;s real lateness, and quarantine the too-late instead of dropping it.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -762,6 +776,7 @@ def main(spark):
       <span class="wk-title">Observability, SLAs, Lineage &amp; Alerting: Make the Pricing-Integrity Platform Break Safely</span>
       <span class="wk-mod">M26 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G4</span><span class="gtag">G9</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s team bills and audits against the CMS price-transparency data your pipeline serves; if a nightly load lands late, half-loaded, or silently drops rows, the hospital acts on wrong prices - a direct compliance-exposure and revenue-integrity risk. This week you stop trusting that the pipeline &#x27;ran&#x27; and start proving it met a freshness and quality SLA, leaving one auditable row per run and an alert the moment it breaches.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Wraps the Phase 2 pipeline in a production observability + governance layer: the same bronze-&gt;silver-&gt;MDM-&gt;gold flow now leaves an auditable one-row-per-run trail, enforces numeric freshness/quality SLAs, exposes Unity Catalog lineage for the PHI-adjacent masking story, alerts on breaches/failures, and gains a rehearsed time-travel recovery path. No new project - this hardens Provider Pricing Integrity into an operable platform and produces the RUNBOOK living deliverable.</div>
@@ -832,6 +847,7 @@ def upsert_audit(spark, row_df):
 # TODO: also emit the same metrics into ops.sla_metrics for the dashboard/alert.
 # TODO: on RESTORE recovery, call upsert_audit with a distinct run_id + reason.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY - sets up structure, config, and idempotent-write pattern with TODOs. It does NOT compute your real metrics or define your thresholds; fill those in from your own silver/gold tables. Do not let an assistant expand this into a full solution - be the human in the loop.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Re-frame the SLA and audit log for your own target industry&#x27;s clock and risk. In fintech/SEC EDGAR the freshness SLA is tied to filing/market cutoffs and the audit log is a regulatory necessity; in crypto (CoinGecko) freshness is minutes and quarantine spikes signal a bad feed; in humanitarian data (ReliefWeb) or weather (NOAA) late data delays response decisions. Pick your domain&#x27;s real deadline, define freshness against source arrival (not wall clock), and write one alert-to-action line a real on-call in your field would follow.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -854,6 +870,7 @@ def upsert_audit(spark, row_df):
       <span class="wk-title">Git deep — branching, PRs &amp; code review for data</span>
       <span class="wk-mod">M27 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G6</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> In week 37 you made the pipeline observable; now make it safe to CHANGE. Last sprint an analyst hotfixed the PHI-masking cell directly in the Databricks workspace to patch a leaking column, then the nightly deploy re-pushed the old notebook and silently re-exposed provider tax IDs -- a reportable compliance event and hours of Maria&#x27;s team unable to trust the pricing mart. A real Git workflow (branches, reviewed PRs, protected main) is the control that makes every change to PHI-adjacent code traceable, reviewable, and impossible to lose on deploy.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Converts the running &#x27;Provider Pricing Integrity&#x27; project from something edited by clicking in the Databricks workspace into governed notebooks-as-code with a reviewed change process. This is the version-control substrate W39 (CI/CD with DABs + GitHub Actions) will deploy from — feature branches, reviewed PRs, protected main, and CODEOWNERS on the masking/validation/MDM paths — plus the documented-decisions discipline that turns every change into an interview-ready record.</div>
@@ -928,6 +945,7 @@ git push -u origin &quot;$BRANCH&quot;
 # TODO: in GitHub settings, protect main: require PR + 1 approval, block direct pushes,
 #       require CODEOWNERS review. Then verify a direct push to main is rejected.
 echo &quot;Branch $BRANCH ready. Now fill every TODO before requesting review.&quot;</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the branch + PR structure and drops placeholder governance files with TODO markers. It does NOT make your data change, write the decision log for you, or configure protection rules. Fill every TODO; keep it minimal (resist over-engineering the repo).</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the identical workflow on your own domain&#x27;s pipeline. Pick the change that touches your grain-defining key: SEC EDGAR (CIK + accession as the composite key), CoinGecko (coin_id + snapshot timestamp), NOAA (station + observation time), or a Faker-generated feed. Open a decision-log PR for a validation/merge-key change, plant the same three review risks (key change, append instead of MERGE, loosened quality check), and reproduce the &#x27;workspace hotfix lost on deploy&#x27; trap on your data so your industry has the same reviewed-change compliance story.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -950,6 +968,7 @@ echo &quot;Branch $BRANCH ready. Now fill every TODO before requesting review.&q
       <span class="wk-title">CI/CD for data — GitHub Actions, tests &amp; env promotion</span>
       <span class="wk-mod">M28 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G6</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s pricing marts feed a hospital&#x27;s price-transparency compliance posting; an untested merge that ships a broken silver transform can publish wrong prices to a regulated public file — a fine-and-headline risk. This week the &#x27;green check before merge&#x27; becomes the control that guarantees no untested or DQ-failing pipeline ever reaches the prod catalog, and that promotion to prod is a deliberate, approved, recoverable act rather than an accidental push.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Turns the W38 version-controlled repo into a governed release process: from now on no change reaches the prod_pricing catalog without a green CI check (tests + DQ) and an approved promotion. This is the automation backbone the RUNBOOK and (next week&#x27;s) DAB packaging plug into, and it operationalizes the KPIs as merge-blocking gates.</div>
@@ -1018,6 +1037,7 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: echo &quot;TODO: run validation on prod_pricing; if KPIs fail, DO NOT promote (leave last good version)&quot;
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up structure, triggers, and the promotion skeleton with TODO markers. It deliberately omits your real test commands, KPI thresholds, and deploy logic. Fill the TODOs yourself; do not paste a full solution. Deployment here uses the Databricks CLI to target per-env catalogs — full Asset Bundle packaging comes in W40.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the CMS/NPPES pipeline for your own target industry&#x27;s product and keep the identical CI/CD spine: define your three environments as isolated catalogs/schemas, pick two domain KPIs that must pass before promotion, and gate prod behind approval. Fintech (SEC EDGAR filings) -&gt; assert filing-completeness + no duplicate CIKs; crypto (CoinGecko) -&gt; assert price-freshness SLA before promoting; humanitarian (ReliefWeb) -&gt; assert report-count + dedup; weather (NOAA) -&gt; assert station coverage. The lesson is the same: a red check means your data product broke loudly before customers saw it.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1040,6 +1060,7 @@ jobs:
       <span class="wk-title">Databricks Asset Bundles (DABs) &amp; infrastructure-as-code</span>
       <span class="wk-mod">M29 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G6</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s revenue-cycle team now depends on the pricing-integrity pipeline for the 8am completeness report, but today it only exists because someone clicked it into the dev workspace — there is no reviewed, reproducible way to stand up prod, and a hotfix applied by hand in one environment silently diverges from the other. For PHI-adjacent pricing data, an un-auditable, un-reproducible deployment is a compliance and continuity risk: if the workspace is lost or a bad manual change breaks the SLA, there is no rollback and no record of who changed what. Packaging the whole project as infrastructure-as-code turns &quot;it works on my workspace&quot; into &quot;any environment is one reviewed command away,&quot; which is what makes the platform trustworthy to the business.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This week converts the running Provider Pricing Integrity platform from click-configured workspace objects into a single, reviewed, reproducible Databricks Asset Bundle. It makes the W39 CI/CD meaningful (there is now a deployable artifact for the pipeline to promote), and it is the prerequisite for W41 governance &amp; security — declaring grants and a service-principal run-as in code is what lets access be reviewed in Git rather than clicked. It directly produces the &#x27;packaged as a DAB with CI/CD&#x27; living deliverable and feeds the RUNBOOK&#x27;s deploy/rollback procedures.</div>
@@ -1115,6 +1136,7 @@ targets:
       notify_email: TODO-oncall@example.com
     # TODO: override cluster/serverless sizing and schedule (active in prod, paused in dev)
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up bundle structure, variables, and dev/prod targets with TODO markers. It intentionally does NOT contain your real resource definitions, sizing, service principal, or grants — you fill those from your Phase 2 project. Do not paste this as a finished solution.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Apply this to your own target industry: whatever pipeline you are mirroring (SEC EDGAR filings, CoinGecko market pulls, NOAA weather, ReliefWeb, or Faker-generated events), package the WHOLE thing as one bundle with dev and prod targets. Your environment-specific literals — API base URLs, catalog/schema names, rate-limit knobs, landing-volume paths — become `${var.*}` overrides per target. If your domain is regulated (fintech/EDGAR, health, safety), lead your decision note with the same audit/reproducibility argument Maria&#x27;s does; if it is not, frame it as protecting the SLA and enabling safe parallel-developer work.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1137,6 +1159,7 @@ targets:
       <span class="wk-title">Governance &amp; Security — PHI, RBAC, Masking &amp; Service Principals</span>
       <span class="wk-mod">M30 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G8</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s pricing-integrity marts are now used by three analysts and a nightly job — and the tables carry NPI, provider name, TIN, and address, which are PHI-adjacent under HIPAA. A single over-broad grant or a personal token baked into a job is the exact finding that fails a payer audit or a HIPAA risk assessment, and &#x27;we trusted people not to look&#x27; is not a control. This week converts the pipeline from &#x27;works&#x27; into &#x27;defensible&#x27;: who can see what, why, and can you prove it.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Converts the Phase 2 medallion pipeline into a governed, PHI-safe data product: the gold marts now enforce column masking and row-level scoping by persona, the nightly Job/DAB runs under a service principal instead of a personal token, and the catalog produces auditable access evidence. This is the compliance backbone the rest of Phase 3 (cloud foundations W42, hardened assembly W43) builds on — governance is now a property of the platform, not a slide.</div>
@@ -1197,6 +1220,7 @@ ALTER TABLE gold.provider_mart
 -- Break-glass (document who authorizes; do not leave applied):
 -- ALTER TABLE gold.provider_mart ALTER COLUMN npi UNSET MASK;
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — structure + config + TODOs, not the solution. Fill in your own classification-driven rules, group names, and column lists. Run it idempotently (re-run 3x) and verify by querying as each persona.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap PHI for your industry&#x27;s regulated/sensitive fields and the story transfers directly: finance/SEC EDGAR — mask CIK-linked PII and material non-public identifiers, scope analysts to their coverage universe; crypto/CoinGecko — protect internal wallet/customer mappings and API keys; humanitarian/ReliefWeb — protect beneficiary identifiers under do-no-harm; climate/NOAA — usually public, so pivot the exercise to protecting your job&#x27;s service credentials and internal enrichment tables. In every case: build a classification table first, mask by group membership, run pipelines as a machine identity, and prove it with audit logs.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1219,6 +1243,7 @@ ALTER TABLE gold.provider_mart
       <span class="wk-title">Cloud foundations — Azure or AWS (choose your track)</span>
       <span class="wk-mod">M31 · Phase 3 · gold</span>
       <span class="wk-gaps"><span class="gtag">G8</span><span class="gtag">G9</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s revenue-cycle team is moving the Provider Pricing Integrity pipeline off a shared sandbox and onto a cloud footprint that Compliance and Finance will both audit: the CMS pricing and NPPES data is PHI-adjacent, so where the bytes physically live, who can reach them, and whether any secret key is floating around are audit findings waiting to happen — and the monthly DBU bill is now a real line item someone has to defend. This week you pick the cloud the hospital actually runs on and prove the storage is governed, keyless, and cost-measured before anyone builds another feature on top of it.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Moves the running Provider Pricing Integrity project off the shared sandbox onto a real, single-cloud footprint: the medallion layers now live in cloud-native object storage governed by Unity Catalog through a keyless credential, and the pipeline has its first per-run cost baseline. This is the platform substrate that W43 hardening and the W44+ tuning weeks build on.</div>
@@ -1285,6 +1310,7 @@ ALTER TABLE gold.provider_mart
 -- ORDER BY est_usd DESC;
 -- TODO: paste the total into architecture doc &gt; Performance Notes &gt; Cost Baseline, with a reduction target.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — structure + TODOs, not a working solution. Do ONE cloud branch. Fill the identity/path TODOs from your provisioned resources; delete the branch you did not choose.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Fork this onto the cloud your OWN target industry actually runs on and land a comparable large, messy source into a bucket/container you provision: SEC EDGAR full-text filing archives or NOAA climate bulk files (heavy public downloads), CoinGecko market history (API-to-storage), or a Faker-generated event feed if your domain&#x27;s data is private. The transferable move is identical — governed, keyless external storage plus a cost baseline — only the payload and the compliance framing (financial reporting, environmental, crypto AML) change.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1307,6 +1333,7 @@ ALTER TABLE gold.provider_mart
       <span class="wk-title">Integration &amp; hardening — the production release</span>
       <span class="wk-mod">M20-M31 · Phase 3 · gold · Phase 3 portfolio</span>
       <span class="wk-gaps"><span class="gtag">G9</span><span class="gtag">G6</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s hospital signs off its chargemaster/price-transparency posture on the numbers this pipeline produces; a bad number or a missed morning refresh is a CMS compliance exposure and a revenue-cycle mispricing risk measured in real dollars. Shipping the platform on a service principal, behind a validated release with a runbook and recovery drill, is the difference between a system Maria&#x27;s team can trust unattended and a demo that only runs when its author is in the room.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This is the capstone integration week for portfolio Project 1: no new capability is added — everything Phase 3 built (Unity Catalog governance, Lakeflow expectations, Auto Loader + event-stream dedup, Jobs orchestration, Delta optimization, DAB/CI-CD) is run together once, end-to-end, on a clean prod-target and proven to operate and recover unattended. The output is the release: a tagged, continuously-deployed, governed, observable platform plus its living deliverables, ready to be defended as the anchor project in Phase 4&#x27;s interview prep.</div>
@@ -1369,6 +1396,7 @@ jobs:
 
       # TODO: on failure, post to the same alert channel your pipeline uses
       # TODO: on success, this tagged, green run IS the release record</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only — TODO markers mark the work. It assumes a working databricks.yml with a `prod` target and a job key already defined in your bundle (built in W40-W42). Auth is service-principal OAuth via GitHub secrets; do not paste a personal token. The point is to make a git tag, not a manual click, the thing that ships to prod.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do this whole integration on YOUR mirror project&#x27;s stack, not Maria&#x27;s. Pick the SLA and the failure that would actually cost your target industry money or trigger a regulator, and make the release prove it: SEC EDGAR filings landing before a market-open dashboard, NOAA weather feeds behind an operations alert, CoinGecko prices where a stale number misprices a position, or a ReliefWeb/data.gov feed a program officer reports upward. Your cold-start run, recovery drill, and Performance Notes headline should name your industry&#x27;s deadline and dollar/risk outcome in the same specific, non-generic voice.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>

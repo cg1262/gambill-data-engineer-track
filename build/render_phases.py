@@ -6,6 +6,9 @@ import json, re, html, sys, os
 HERE = os.path.dirname(__file__)
 DATA = os.path.join(HERE, "data")
 BASECSS = open(os.path.join(HERE, "base.css")).read()
+VIDEOS = json.load(open(os.path.join(HERE, "videos.json")))
+WEEKLY = VIDEOS.get("weekly", {})
+RESOURCES = VIDEOS.get("resources", {})
 
 # ---- link maps ---------------------------------------------------------------
 ART = {
@@ -71,6 +74,22 @@ def script_html(sc):
 def wnum(w):
     m = re.search(r"\d+", str(w.get("week", ""))); return int(m.group()) if m else 0
 
+MODCODE_RE = re.compile(r"M\d{2}")
+def mod_code(s):
+    m = MODCODE_RE.search(str(s or "")); return m.group(0) if m else ""
+def howto_html(n):
+    url = (WEEKLY.get(str(n), "") or "").strip()
+    if not url: return ""
+    return f'<a class="howto-link" href="{html.escape(url)}" target="_blank" rel="noopener">&#9654; How-to</a>'
+def godeeper_html(mod):
+    items = RESOURCES.get(mod_code(mod)) or []
+    if not items: return ""
+    rows = []
+    for r in items:
+        t, u = e(r.get("title", "")), r.get("url", "")
+        rows.append(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{t}</a></li>' if u else f'<li>{t}</li>')
+    return ('<div class="lab-sub">Go deeper</div>\n        <ul class="refs godeeper">' + "".join(rows) + '</ul>')
+
 def navbar(items, weeknums):
     parts = []
     for i, (label, key, home) in enumerate(items):
@@ -130,6 +149,7 @@ def card_p1(n, base, enh):
       <span class="wk-title">{e(title)}</span>
       <span class="wk-mod">{e(modline)}</span>
       <span class="wk-gaps">{gap_chips(gaps)}</span>
+      {howto_html(n)}
     </div>
     <div class="framing"><span class="fl">Why this matters</span> {e(x.get("businessFraming",""))}</div>
     <div class="wk-grid">
@@ -145,6 +165,7 @@ def card_p1(n, base, enh):
         <div class="lab-sub">Reference material</div>
         <ul class="refs">{refs_html(x.get("referenceMaterials"))}</ul>
         {script_html(x.get("sampleScript"))}
+        {godeeper_html(mod)}
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">{e(x.get("deliverable",""))}</div>
@@ -196,6 +217,7 @@ def card_generic(w, tier, capweeks):
       <span class="wk-title">{title}</span>
       <span class="wk-mod">{modline}</span>
       <span class="wk-gaps">{gap_chips(w.get("gaps"))}</span>
+      {howto_html(n)}
     </div>
     <div class="framing"><span class="fl">Why this matters</span> {e(w.get("businessFraming",""))}</div>
     {role_html}
@@ -212,6 +234,7 @@ def card_generic(w, tier, capweeks):
         <div class="lab-sub">Reference material</div>
         <ul class="refs">{refs_html(w.get("referenceMaterials"))}</ul>
         {script_html(w.get("sampleScript"))}
+        {godeeper_html(w.get("module",""))}
         {mirror_html}
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>

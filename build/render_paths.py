@@ -4,12 +4,13 @@ Usage: python render_paths.py <artifact|site>
 - hub outbound links open in the SAME tab (no target=_blank)
 - Bridge/Sharpen carry a 'Course home' backlink
 - module chips deep-link to their lesson week (mode-aware)."""
-import html, sys, os
+import html, sys, os, re, json
 
 MODE = sys.argv[1] if len(sys.argv) > 1 else "artifact"
 HERE = os.path.dirname(__file__)
 OUTDIR = os.path.join(HERE, "..", ("artifact_out" if MODE == "artifact" else "site"))
 os.makedirs(OUTDIR, exist_ok=True)
+VIDEOS = json.load(open(os.path.join(HERE, "videos.json")))
 
 ART = {
  "home":"https://claude.ai/code/artifact/bbf75ac1-4993-40ea-a08f-d488d2b5acf4",
@@ -65,6 +66,21 @@ CSS=open(os.path.join(HERE,"paths.css")).read()
 
 def page(title, body): return f'<title>{title}</title>\n<style>{CSS}</style>\n{body}'
 
+# ---- welcome video (site: responsive iframe; artifact: link-out button) ------
+YT_RE = re.compile(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|embed/))([A-Za-z0-9_-]{6,})")
+def yt_embed(url):
+    m = YT_RE.search((url or "").strip())
+    return f"https://www.youtube.com/embed/{m.group(1)}" if m else (url or "").strip()
+def welcome_html(key):
+    url = (VIDEOS.get("welcome", {}).get(key, "") or "").strip()
+    if not url: return ""
+    if MODE == "site":
+        return (f'<div class="video-embed"><iframe src="{e(yt_embed(url))}" title="Welcome video" '
+                f'loading="lazy" frameborder="0" '
+                f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+                f'allowfullscreen></iframe></div>')
+    return f'<a class="welcome-btn" href="{e(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
+
 # ---------- BRIDGE ----------
 analyst_stages=[("Close the engineering gap","~5 wks",['M00','M01','M02','M03','M04']),
  ("Core data engineering","~8 wks",['M06','M07','M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25']),
@@ -90,6 +106,7 @@ bridge_body=f'''
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 02 — Bridge</span>
   <h1>Cross over into DE. <span class="thin">4–6 months.</span></h1>
   <p class="lede">Bridge is for people who already work with data — <b>analysts</b> and <b>software engineers</b> — who want to become data engineers. You skip what you already own and go deep on the rest, so it is faster than starting from zero. A short placement diagnostic routes you to the right variant; both converge on the same lakehouse core and capstone.</p>
+  {welcome_html("bridge")}
   {backlinks("bridge")}
 </div></div>
 <section><div class="wrap">
@@ -160,6 +177,7 @@ sharpen_body=f'''
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 03 — Sharpen</span>
   <h1>Close the gaps. <span class="thin">On your schedule.</span></h1>
   <p class="lede">Sharpen is for working data engineers who "missed things along the way." Start with the self-diagnostic against the ten recurring gaps, then take individual modules or a pre-built bundle. Every unit stands alone and links straight to its lesson — no need to have done the earlier modules.</p>
+  {welcome_html("sharpen")}
   {backlinks("sharpen")}
 </div></div>
 <section><div class="wrap">
@@ -199,6 +217,7 @@ landing_body=f'''
     <a href="{L["cur"]}">Curriculum architecture</a>
     <a href="{L["build"]}">Weekly build plan</a>
   </div>
+  {welcome_html("launch")}
 </div></div>
 <section><div class="wrap">
   <div class="sec-head"><span class="eyebrow">Choose your path</span><h2>Three ways in</h2>

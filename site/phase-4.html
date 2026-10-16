@@ -89,6 +89,8 @@
   .wk-title { font-size: 1.12rem; font-weight: 730; flex: 1 1 260px; }
   .wk-mod { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
   .wk-gaps { display: inline-flex; gap: 4px; }
+  .howto-link { margin-left: auto; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid transparent; border-radius: 5px; padding: 3px 9px; text-decoration: none; white-space: nowrap; }
+  .howto-link:hover { border-color: var(--accent); text-decoration: none; }
   .gtag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; color: var(--blue-strong); background: var(--blue-soft); border-radius: 3px; padding: 2px 6px; }
   .gtag.f { color: var(--muted); background: var(--surface-2); }
 
@@ -182,6 +184,7 @@
       <span class="wk-title">Architecture decision-making — design &amp; defend your capstone</span>
       <span class="wk-mod">M32 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G9</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> You are the founding data engineer for a company in your target industry. Leadership has funded exactly one data product and wants to know, before a single line of code is written, what it will be, who decides differently because of it, and why your architecture is the right bet — because rework after go-live is expensive and your job is on the line. This week you earn the right to build by designing something you can defend to a skeptical senior in 30 seconds.</div>
     <div class="project-role"><span class="pl">Launch · this week</span> Launch gate for the solo capstone: this is the design-before-code week where the learner locks their own industry, validates a real messy source, and commits the charter + 4-part architecture + 3 ADRs that every subsequent capstone-build week (W46+) executes against. Getting this right is what makes the later build fast and the final GitHub read as senior.</div>
@@ -234,6 +237,7 @@
 - Charter: ../charter.md
 - Architecture: ../architecture.md#&lt;TODO section&gt;
 </code></pre><div class="sc-note"><span class="ml">Note</span> A starter ADR scaffold, not a solution. Copy it to 0001/0002/0003 and fill every TODO. The rejected option must be written as carefully as the chosen one — that is the interview signal.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> This entire phase IS the learner&#x27;s own industry — there is no separate mirror. The healthcare Project 1 charter and architecture doc from Phases 1–3 are your reference exemplar only: open them side-by-side and match their rigor, but every artifact this week describes YOUR chosen industry and YOUR real source. Reuse the structure, not the content.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -256,6 +260,7 @@
       <span class="wk-title">Elective deep-dive — Data Vault 2.0 OR AI-assisted DE (choose one)</span>
       <span class="wk-mod">M12 / M33 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Your capstone works, but every mature data platform eventually faces one of two pressures a hiring manager will probe: &#x27;How would you make this auditable and agile when the source systems multiply?&#x27; (Data Vault) or &#x27;Where would you responsibly put AI in this pipeline without it becoming a liability?&#x27; (AI-assisted DE). This week you add ONE of those capabilities to your toolkit and, ideally, to the capstone — chosen for a real reader, not for résumé decoration — so you can speak to it with judgment instead of hype.</div>
     <div class="project-role"><span class="pl">Launch · this week</span> Adds exactly one advanced, interview-defensible capability to the toolkit and, where it fits, to the capstone. Just as important, it trains the senior instinct to SCOPE: the learner practices choosing one capability for a real reader and consciously declining the other — the anti-over-engineering muscle that W46 interview prep will draw on directly.</div>
@@ -347,6 +352,7 @@ def guarded_infer(row):
 # TODO: pick ONE case you OVERRIDE the model; document why (human-in-the-loop).
 # TODO: ADR — why a bounded LLM step here; cost/latency/non-determinism; revisit trigger.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — TODO markers, not a solution. Keep the ONE track block you chose; delete the other. Databricks notebook. Runs on your capstone catalog.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> This entire phase is the learner&#x27;s own industry: apply the chosen track to YOUR capstone&#x27;s domain and source. Track A re-models one of your capstone subject areas as a vault (falling back to the Project 1 healthcare model only if your source lacks the relationship complexity to make vaulting meaningful); Track B runs the LLM step against your own real messy source. Either way the artifact lands in your capstone repo, not a throwaway.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -369,6 +375,7 @@ def guarded_infer(row):
       <span class="wk-title">Interview prep I — technical (SQL, pipeline &amp; system design)</span>
       <span class="wk-mod">M36 / M35 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> A hiring manager has 45 minutes and six candidates who all say they &#x27;built a pipeline&#x27;; the person across the table has to be able to defend hiring you to THEIR boss the next morning. This week you make your judgment legible fast — so a stranger skimming your repo for 30 seconds and quizzing you for 45 minutes leaves able to repeat back your grain, your golden records, and one tradeoff you owned.</div>
     <div class="project-role"><span class="pl">Launch · this week</span> Converts the finished two-project portfolio from an artifact into interview performance. This is the first of two interview-prep weeks: it drills the technical rounds (SQL, pipeline/system-design, take-home grading) and hardens portfolio engineering (README, architecture doc, repo hygiene) so both projects survive a 30-second GitHub skim and a 45-minute technical loop — always narrated through the learner&#x27;s OWN capstone rather than generic problems.</div>
@@ -438,6 +445,7 @@ def run_drill(d: Drill, key_cols: list[str]):
 SCORECARD: list[dict] = []  # TODO: {id, set, solved, seconds, stall_note}
 # TODO: after 3 sets, compute solved-rate and median time; target &gt;=8/10 by set 3.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD — a timed SQL drill runner for a Databricks notebook. It gives you the timer, the narrate-first prompt, and a grain-assertion helper. It deliberately ships NO solved queries and NO real problem set — you fill every TODO. Do not turn this into an answer key; the learning is in writing the problems against your own tables and grading your own grain.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> All of Phase 4 is the learner&#x27;s own industry. This week uses no new data — every SQL drill, whiteboard, and README refactor runs on the learner&#x27;s own two-project portfolio (Project 1 healthcare + their industry capstone), so the interview stories are theirs and specific, never canned.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -460,6 +468,7 @@ SCORECARD: list[dict] = []  # TODO: {id, set, solved, seconds, stall_note}
       <span class="wk-title">Interview prep II — behavioral, storytelling &amp; the recorded walkthrough</span>
       <span class="wk-mod">M36 / M34 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G10</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> A hiring manager gives you eight minutes and a 30-second skim of your GitHub before deciding whether you interview like someone who has owned a data product or someone who has finished a tutorial. This week you turn the two things you actually built — the healthcare pricing-integrity pipeline and your own-industry capstone — into a story a busy human remembers and repeats to the panel after you leave the room.</div>
     <div class="project-role"><span class="pl">Launch · this week</span> Launch role: this is the second of the interview-readiness weeks and it converts the two built projects into a portable, spoken asset. It does not add pipeline code; it produces the recorded walkthrough and the story bank the learner will use in real screens starting now, and it pressure-tests whether the capstone (built W48–50) is being designed to survive a 30-second skim and a live defense. Output feeds directly into applying while the capstone finishes.</div>
@@ -531,6 +540,7 @@ prompts = [
 ]
 # TODO: after each, write ONE improvement note in your warmup sheet — not a re-record.
 </code></pre><div class="sc-note"><span class="ml">Note</span> A STARTER scaffold, not a solution. Fill every TODO with YOUR own project specifics. The point is that the words are yours — a graded walkthrough that reads as a filled-in template defeats the purpose.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> All of Phase 4 is the learner&#x27;s OWN target industry. Here that means: the walkthrough&#x27;s second-project segment, every story-bank row drawn from the capstone, and every &#x27;who is hurt when this is wrong&#x27; framing must name a real role in YOUR chosen industry (e.g. a crypto risk analyst, a disaster-relief logistics coordinator, an SEC-filing compliance reviewer), not the healthcare exemplar. The healthcare Project 1 is the shared worked example; the capstone half of every answer is yours.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -553,6 +563,7 @@ prompts = [
       <span class="wk-title">Capstone (W48-50) - ship &amp; defend your own end-to-end data product</span>
       <span class="wk-mod">M37 · Phase 4 · launch · capstone · W48–50</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G9</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> You are the first data engineer a mid-sized organization in your chosen industry has ever hired. The head of operations has been making decisions off a spreadsheet that three people edit and nobody trusts, and they have asked you a single question they cannot currently answer reliably. Your job over the next three weeks is not to build &#x27;a pipeline&#x27; - it is to hand that leader one governed data product they can bet a decision on, and to be able to explain, to a skeptical stakeholder, why every part of it can be trusted.</div>
     <div class="project-role"><span class="pl">Launch · this week</span> THE PROOF. This is the flagship interview piece - the learner&#x27;s own independent, governed medallion product on their chosen industry, built mostly solo with minimal scaffolding. Weeks 48-50 take the Week 44 charter all the way to golden records under Unity Catalog, deployed via DABs/CI-CD, with an idempotency/recovery proof and a recorded walkthrough. Combined with the productionized Project 1 (healthcare), it completes the two-project portfolio arc that ends on golden records and is defensible end to end.</div>
@@ -612,6 +623,7 @@ def resolve_golden_records(silver_df: DataFrame) -&gt; DataFrame:
     # TODO: survivorship rules (which field wins, why) + stable golden key
     raise NotImplementedError
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY - a repo skeleton plus an idempotent incremental-load stub with TODOs. It intentionally does NOT implement match rules, survivorship, quality expectations, or the DAB. You design and fill every TODO; leaving them stubbed will fail acceptance.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> This entire three-week capstone IS the learner&#x27;s own target industry - there is no separate mirror this week. Every choice (source, grain, business question, match/survivorship rules) is made for their chosen domain and defended to a stakeholder in that domain. Learners without a viable second source instead extend Project 1 (healthcare) with a NEW business question and a NEW source, applying the identical charter-to-golden-records checklist.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>

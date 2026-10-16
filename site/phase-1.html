@@ -89,6 +89,8 @@
   .wk-title { font-size: 1.12rem; font-weight: 730; flex: 1 1 260px; }
   .wk-mod { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
   .wk-gaps { display: inline-flex; gap: 4px; }
+  .howto-link { margin-left: auto; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid transparent; border-radius: 5px; padding: 3px 9px; text-decoration: none; white-space: nowrap; }
+  .howto-link:hover { border-color: var(--accent); text-decoration: none; }
   .gtag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; color: var(--blue-strong); background: var(--blue-soft); border-radius: 3px; padding: 2px 6px; }
   .gtag.f { color: var(--muted); background: var(--surface-2); }
 
@@ -181,6 +183,7 @@
       <span class="wk-title">Dev environment, the command line &amp; Git</span>
       <span class="wk-mod">M00 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag f">foundation</span><span class="gtag">G6</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> On real teams, an un-versioned &quot;final_analysis_v3_ACTUAL.ipynb&quot; folder is how a company loses a week of work, ships a number nobody can reproduce, and can&#x27;t answer &quot;who changed this and why&quot; during an audit. The Git repo you stand up this week is the foundation every future pipeline, model, and dashboard gets committed into — reproducibility and traceability start here, not later.</div>
     <div class="wk-grid">
@@ -235,6 +238,7 @@ def main() -&gt; None:
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Also create a starter .gitignore ( .venv/  __pycache__/  *.pyc  .env  data/raw/*  data/processed/*  .DS_Store ) and a README skeleton with sections: Purpose, Setup (venv + pip install -r requirements.txt), Run (python src/check_env.py), Repo layout. Recommended tree: repo/ ├─ src/  ├─ data/raw/  data/processed/  ├─ notes/decisions.md  ├─ README.md  ├─ requirements.txt  └─ .gitignore. The scaffold intentionally leaves the version-gate and dependency-import logic as TODOs — the learner writes the real checks.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A public GitHub repository (the course repo everything else will build on) containing: a working Python venv workflow captured in a pinned requirements.txt, a completed `src/check_env.py` that runs green, a real .gitignore (excluding .venv, secrets/.env, and data files), a README with Setup/Run/Layout sections, and a `notes/decisions.md`. Git history shows at least three atomic commits on a `feature/env-setup` branch merged into `main` via a Pull Request you opened, reviewed, and merged. Submit the repo URL and the merged PR link.</div>
@@ -256,6 +260,7 @@ if __name__ == &quot;__main__&quot;:
       <span class="wk-title">The DE mental model &amp; the data lifecycle</span>
       <span class="wk-mod">M01 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G9</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> NYC agencies dispatch crews (potholes, downed trees, heat/hot-water complaints) off dashboards fed by 311. When a complaint type is quietly renamed or a request lands with a null borough/lat-long, those rows drop out of the filtered view and the crew never gets routed — the outage is invisible because the dashboard still renders. A stated grain and a one-page data contract are the cheapest insurance against that silent failure.</div>
     <div class="wk-grid">
@@ -308,6 +313,7 @@ flowchart LR
 ```
 MERMAID
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands 50 rows and hands you a diagram stub. You must run the profiling queries, fill in the real counts/failure labels, add the quarantine path, and write the contract + why-note yourself. jq is optional but recommended (sudo apt install jq).</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A README.md in a Git repo containing: (1) the 1-2 sentence business framing, (2) an embedded Mermaid flowchart of the 311 record lifecycle with failure-mode annotations on the edges, (3) a one-page data contract (grain, source/cadence, required non-null fields + types, known failure modes with observed counts, idempotency/rerun policy keyed on unique_key), (4) a named list of at least two downstream consumers and the concrete harm each suffers when the contract is violated, and (5) a 3-5 sentence why-note defending one design decision. The raw sample_311.json is committed as evidence.</div>
@@ -329,6 +335,7 @@ MERMAID
       <span class="wk-title">Python I — control flow &amp; functions</span>
       <span class="wk-mod">M02 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Ops and monitoring teams live or die by threshold alerting on live feeds: page someone at M5.0, stay quiet at M2.0. If a single blank or malformed record crashes the alerting job, the whole feed goes dark and a real event slips past unnoticed — a trust and safety failure. This week you build that alerting loop against a real seismic feed that changes every minute and ships dirty rows.</div>
     <div class="wk-grid">
@@ -417,6 +424,7 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only. It parses argv and stubs the fetch/read and the three functions with TODO markers. You write the real parse/classify/summarize logic, the quarantine of blank-magnitude rows, and the report output.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">quakestats.py (a CLI taking a magnitude threshold as argv), a rejected.csv produced by a run showing quarantined blank/malformed-magnitude rows with a reason column, and a short NOTES.md explaining the blank-magnitude decision and rerun idempotency. Committed to the learner&#x27;s portfolio repo with a README snippet showing the two example runs and their differing above-threshold counts.</div>
@@ -438,6 +446,7 @@ if __name__ == &quot;__main__&quot;:
       <span class="wk-title">Python II — data structures &amp; files</span>
       <span class="wk-mod">M02 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> When a monitoring pipeline ingests a live seismic feed, one truncated or null-magnitude record can crash the whole run or silently vanish — and a dropped M5.8 event is a missed alert, an audit gap, and a &quot;why didn&#x27;t we catch this?&quot; postmortem. Routing bad records to a quarantine with a reason and timestamp (instead of crashing or dropping) is the single most-asked &quot;what happens when the data is bad?&quot; interview moment.</div>
     <div class="wk-grid">
@@ -520,6 +529,7 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw GeoJSON, iterates features, and gives you a quarantine-writer stub. The validation rules, dedupe set, per-region aggregation, and idempotent-rerun choice are yours to build where the TODOs are.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A runnable ingest_quakes.py that turns the live USGS all_month GeoJSON into a per-region aggregate dict (event count + max magnitude), a rejects.jsonl quarantine file where every bad record carries a specific reason and UTC timestamp, and a short DECISIONS.md explaining the validation rules, dedupe key, quarantine choice, and idempotent-rerun strategy.</div>
@@ -541,6 +551,7 @@ if __name__ == &quot;__main__&quot;:
       <span class="wk-title">Python III — modules, environments &amp; OOP basics</span>
       <span class="wk-mod">M02 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> On a real team, the difference between &quot;a script that ran on my laptop once&quot; and code the company can deploy, test, and trust is whether it&#x27;s an installable, importable package — copy-pasted one-off scripts are how pipelines silently rot and break in production. A hiring manager skimming your GitHub decides in 30 seconds whether you look like an engineer or a tutorial-follower, and a clean `pip install -e .` + `python -m quakes` is the single clearest signal you cross that line.</div>
     <div class="wk-grid">
@@ -642,6 +653,7 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Every function raises NotImplementedError on purpose — this is a skeleton, not a solution. Reuse your Week 3-4 logic to fill the TODOs. After building the tree, run: python -m venv .venv &amp;&amp; source .venv/bin/activate &amp;&amp; pip install -e . &amp;&amp; python -m quakes</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A GitHub repository containing an installable Python package quakes/ (with client.py exposing a QuakeClient class, pure parse.py functions, report.py, __main__.py, and __init__.py), a minimal working pyproject.toml, a README with copy-paste install+run instructions, and a short DECISIONS.md. The package must install cleanly into a fresh venv via pip install -e . and run via both import quakes and python -m quakes.</div>
@@ -663,6 +675,7 @@ if __name__ == &quot;__main__&quot;:
       <span class="wk-title">pandas — DataFrames: select, clean, transform, group &amp; merge</span>
       <span class="wk-mod">M03 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G4</span><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> A city agency publishes a &quot;311 requests per 10,000 residents&quot; dashboard to decide where to send inspectors and budget. If the borough population join key isn&#x27;t unique, the merge silently multiplies request rows and one borough&#x27;s rate comes out 2–3x too high — inspectors get sent to the wrong place and the public dashboard misleads. The merge-validation check, not the chart, is the real deliverable.</div>
     <div class="wk-grid">
@@ -726,6 +739,7 @@ def assert_no_merge_inflation(left, merged, on):
 #             assert it&#x27;s unique, left-merge, call assert_no_merge_inflation(),
 #             compute requests_per_10k, and export the parquet idempotently (overwrite). ---
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands one month of raw 311 data, gives you a profiling helper and a merge-validation assertion helper. The cleaning plan, quarantine logic, aggregation, normalization, and rate calc are yours to build at the TODO markers.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A validated parquet (requests_per_10k_by_type_borough_month.parquet) at the complaint_type x borough x month grain with a requests_per_10k column, plus a rejected_311.parquet (quarantined rows with reject_reason + rejected_at), the executed cleaning script, and a short why-note documenting the normalization choice, reject rule, and the merge-inflation guard.</div>
@@ -747,6 +761,7 @@ def assert_no_merge_inflation(left, merged, on):
       <span class="wk-title">Python for data II — APIs &amp; reconciliation</span>
       <span class="wk-mod">M03 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Two &quot;authoritative&quot; population sources will disagree, and an inner join silently deletes exactly the rows where they diverge — the discrepancies a data engineer is paid to surface for finance, grants allocation, or regulatory reporting. When a per-capita metric is off because two feeds used different population denominators, someone signs off on wrong money; reconciliation with provenance is the control that catches it before the sign-off.</div>
     <div class="wk-grid">
@@ -828,6 +843,7 @@ if __name__ == &quot;__main__&quot;:
     # TODO: idempotent write (overwrite) of reconciled + rejected tables
     print(&quot;pages fetched:&quot;, len(pages))
 </code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only: paginate() has the backoff skeleton and reconcile() returns match classes. Normalization, tolerance comparison, quarantine, and the provenance write are yours to build (see TODOs).</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A runnable `reconcile_population.py` plus its outputs: one reconciled table (Parquet/CSV) keyed by iso3+year with columns wb_value, owid_value, match_class (matched/api_only/csv_only), pct_diff, discrepancy, and provenance (source_wb, source_owid, as_of); a `rejected` table capturing quarantined rows (null values, non-country aggregates) each with a reason and UTC timestamp; and a DECISIONS.md explaining tolerance, keying, retry/backoff policy, and 2–3 real discrepancies found.</div>
@@ -849,6 +865,7 @@ if __name__ == &quot;__main__&quot;:
       <span class="wk-title">Software engineering hygiene — typed, tested, packaged</span>
       <span class="wk-mod">M04 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G6</span><span class="gtag">G1</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> When a data component silently double-counts or drops records, the downstream number a director trusts in a board deck is wrong, and no one knows for days. A typed, tested, pip-installable reconciler with a documented contract is the artifact that lets an on-call engineer clone your repo, run one command, and trust the count in 30 seconds — the difference between a component a team can own and a script no one dares to touch.</div>
     <div class="wk-grid">
@@ -1001,6 +1018,7 @@ def test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -&gt
     # TODO: assert result.actual_count == &lt;the number you counted by hand&gt;
     raise NotImplementedError
 </code></pre><div class="sc-note"><span class="ml">Note</span> A src-layout scaffold with a pyproject entry point and ONE parametrized pytest example over a fixture. It defines the seams and types but leaves the real reconcile/dedupe/quarantine logic as TODOs — you build that. Create the files at the paths shown in each header comment.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A src-layout Python package (quake_recon) with io/reconcile/cli seams that reconciles the USGS all_day feed&#x27;s metadata.count against the actual feature count, dedupes duplicate ids across overlapping pulls, and quarantines null-id records to a rejected JSONL file with a reason + timestamp. Ships with: committed GeoJSON fixtures, a parametrized pytest suite (empty feed, dup ids, missing field, count mismatch), zero mypy errors, a pyproject with a console_scripts entry point, a built wheel in dist/, a README documenting the contract (inputs/outputs/exit codes), and a WHY.md decisions note.</div>
@@ -1022,6 +1040,7 @@ def test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -&gt
       <span class="wk-title">SQL I — joins &amp; filtering</span>
       <span class="wk-mod">M05 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> When a revenue dashboard silently drops customers with no orders, or double-counts sales because an invoice fanned out across its line items, leadership makes decisions on wrong numbers and trust in the data team evaporates. Being able to read an ERD and predict exactly which rows an INNER vs LEFT join keeps, drops, or duplicates is the daily reasoning that keeps report totals correct.</div>
     <div class="wk-grid">
@@ -1084,6 +1103,7 @@ print(con.execute(&quot;SELECT name FROM (SHOW ALL TABLES) WHERE database = &#x2
 
 con.close()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the data via ATTACH and prints the table list. It writes zero business queries — every JOIN, filter, and the INNER-vs-LEFT delta note are the learner&#x27;s work at the TODO markers.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A `week09-sql-joins/` folder containing 8–10 numbered `.sql` files (each with a header comment stating its result grain and expected vs actual row count) plus a `WHY.md` note. The queries must cover: 2 filtering queries, a multi-hop INNER JOIN artist→…→customer, a LEFT JOIN surfacing parentless (album-less) artists, an employee→manager self-join that retains the top manager, a fan-out demonstration with the grain-correct fix, and one query written twice (INNER vs LEFT) with the row-count delta recorded.</div>
@@ -1105,6 +1125,7 @@ con.close()
       <span class="wk-title">SQL II — aggregation &amp; subqueries</span>
       <span class="wk-mod">M05 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Every number you put in front of finance or a skeptical PM — &quot;revenue per country,&quot; &quot;active customers per genre&quot; — is an aggregation with a grain and a NULL-handling choice baked in. The day someone asks &quot;does this COUNT include the customers with no state on file?&quot; and you can&#x27;t answer, the whole report loses trust; a COUNT that silently drops NULLs understates a churn or coverage metric and can send money and headcount to the wrong place.</div>
     <div class="wk-grid">
@@ -1119,6 +1140,7 @@ con.close()
         <div class="ds-list"><div class="ds"><div class="ds-name">Chinook sample database</div><div class="ds-url"><a href="https://github.com/lerocha/chinook-database" target="_blank" rel="noopener">https://github.com/lerocha/chinook-database</a></div><div class="ds-mess"><span class="ml">Mess to handle</span> A clean, well-normalized learning schema — so the &#x27;mess&#x27; here is not dirty data but aggregation-grain and subquery-correctness traps: nullable columns (customer State/Company, some track composers) that make COUNT(col) silently drop rows and make NOT IN return wrong answers, plus fan-out risk when joining invoices to invoice lines before aggregating. The lab forces you to name the grain and prove the NULL handling on every number.</div></div></div>
         <div class="lab-sub">Reference material</div>
         <ul class="refs"><li><a href="https://duckdb.org/docs/stable/sql/functions/aggregates" target="_blank" rel="noopener">DuckDB — Aggregate functions (COUNT, SUM, and NULL handling)</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/groupby" target="_blank" rel="noopener">DuckDB — GROUP BY and HAVING clauses</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/setops" target="_blank" rel="noopener">DuckDB — Set operations (UNION / EXCEPT / INTERSECT)</a></li><li><a href="https://www.postgresql.org/docs/current/functions-subquery.html" target="_blank" rel="noopener">PostgreSQL — Subquery expressions (IN / NOT IN / EXISTS and the NULL pitfall)</a></li></ul>
+        
         
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1141,6 +1163,7 @@ con.close()
       <span class="wk-title">Advanced SQL I — window functions &amp; CTEs</span>
       <span class="wk-mod">M06 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Climate, energy-load, and agriculture teams live on rolling-window and period-over-period math run on messy sensor feeds — a wrong 7-day average or a missed temperature swing feeds directly into demand forecasts, crop-loss claims, and grid-capacity decisions worth millions. The hard part is never the SQL; it is the -9999 missing readings and quality-control flags that silently poison a moving average if you don&#x27;t handle them before the window ever runs.</div>
     <div class="wk-grid">
@@ -1228,6 +1251,7 @@ UNION ALL SELECT &#x27;rejected&#x27;, count(*) FROM rejected_obs;
 -- Q3 7-day moving avg with ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
 -- Q4 running cumulative PRCP within each station partition
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it stages raw rows and stubs the normalize/quarantine split. You write the QC filters, the unit scaling, idempotent reruns, and all four single-query named-CTE analyses. Verify the by_year column order and the -9999 sentinel against GHCND_documentation.pdf before trusting any number.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A DuckDB database (or reproducible .sql script set) that: (1) loads a subset of NOAA GHCN-Daily observations for 4-6 named stations from long format into a normalized `clean_obs` table with values scaled to real units; (2) quarantines -9999 sentinels and QC-flagged rows into a `rejected_obs` table with a reason and timestamp; and (3) answers the four business questions as four separate single queries, each built ONLY from named CTEs (no nested subquery pyramids) — top-N stations per month, LAG() day-over-day change with the biggest swing flagged, a 7-day moving average using an explicit ROWS frame, and a running cumulative total per station partition. Include a DECISIONS.md explaining the ranking-function choice on ties, the adjacent-day handling for LAG, the ROWS-frame edge behavior, the reject rules, and the idempotency strategy.</div>
@@ -1249,6 +1273,7 @@ UNION ALL SELECT &#x27;rejected&#x27;, count(*) FROM rejected_obs;
       <span class="wk-title">Advanced SQL II — query plans &amp; tuning</span>
       <span class="wk-mod">M06 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G7</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> When a climate dashboard or a regulatory report times out on a multi-year weather query, the on-call data engineer is expected to open the query plan, name the operator that is burning the time, and defend exactly one index change on a whiteboard — including which index they refused to add. That &quot;read the plan and justify the index&quot; moment is a near-verbatim data-engineering interview task and a real cost/latency lever in production.</div>
     <div class="wk-grid">
@@ -1321,6 +1346,7 @@ GROUP  BY station_id, element;
 
 -- TODO(e): in tuning.md, name ONE index you deliberately did NOT add and why.
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw data and hands you the slow query. You write the baseline capture, the sargable rewrite, the single composed index, and the before/after plan proof. Do not replace the provided query until you have saved its baseline plan.</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A tuning package for the GHCN-Daily slice containing: (1) load_and_slow_query.sql extended with your sargable predicate rewrite and your CREATE INDEX IF NOT EXISTS statement; (2) three saved plan files — baseline_plan.txt, after_rewrite_plan.txt, after_index_plan.txt — each from EXPLAIN (ANALYZE, BUFFERS); and (3) tuning.md documenting the bottleneck operator, the predicate rewrite, the index you added with its column-order rationale, and one index you deliberately did NOT add and why.</div>
@@ -1342,6 +1368,7 @@ GROUP  BY station_id, element;
       <span class="wk-title">Relational theory &amp; normalization — keys, FDs, 1NF→3NF</span>
       <span class="wk-mod">M07 · Phase 1 · bronze · Phase 1 capstone</span>
       <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> NYC&#x27;s restaurant-inspection feed repeats a venue&#x27;s name, address, borough, and cuisine on every single inspection and violation row — so when a restaurant changes its name or moves, you either update dozens of rows correctly or silently corrupt your data, and a brand-new venue with no inspection yet can&#x27;t even be recorded. Those are the exact update, delete, and insert anomalies that normalization exists to kill, and getting them wrong is how a public health dashboard shows a shuttered address as &quot;grade pending.&quot;</div>
     <div class="wk-grid">
@@ -1435,6 +1462,7 @@ CREATE OR REPLACE TABLE violation (
 -- INSERT INTO violation VALUES (&#x27;does-not-exist&#x27;,&#x27;10F&#x27;,&#x27;x&#x27;,&#x27;N&#x27;);   -- FK reject
 -- INSERT INTO restaurant (camis) VALUES (&#x27;&lt;an-existing-camis&gt;&#x27;);   -- dup PK reject
 </code></pre><div class="sc-note"><span class="ml">Note</span> A DuckDB DDL + split SKELETON, not a solution. It creates staging + the target 3NF tables with PK/FK constraints and stubs the INSERT...SELECT split. You must: derive a stable inspection_id, choose DISTINCT/anti-join logic that makes reruns idempotent, add the rejected_rows quarantine, and pick your one justified denormalization. Run with: duckdb nyc.duckdb &lt; build_normalized.sql</div></details>
+        
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A Git repo Phase 1 capstone: (1) a pandas profiling notebook/script that lands raw_inspections.parquet and prints the discovered functional dependencies + redundancy counts; (2) an ERD (Mermaid/dbdiagram source + rendered image) of the 3NF design; (3) build_normalized.sql producing a DuckDB database with 5 constrained tables (restaurant, inspection, violation, boro, cuisine), a rejected_rows quarantine table, and idempotent INSERT...SELECT splits; (4) a README.md with the business framing, the ERD, the FD/anomaly findings, the two rejected-insert error outputs (FK + duplicate PK), and a short write-up of the one justified denormalization and the idempotency strategy chosen.</div>

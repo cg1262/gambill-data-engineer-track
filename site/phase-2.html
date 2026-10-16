@@ -89,6 +89,8 @@
   .wk-title { font-size: 1.12rem; font-weight: 730; flex: 1 1 260px; }
   .wk-mod { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
   .wk-gaps { display: inline-flex; gap: 4px; }
+  .howto-link { margin-left: auto; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid transparent; border-radius: 5px; padding: 3px 9px; text-decoration: none; white-space: nowrap; }
+  .howto-link:hover { border-color: var(--accent); text-decoration: none; }
   .gtag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; color: var(--blue-strong); background: var(--blue-soft); border-radius: 3px; padding: 2px 6px; }
   .gtag.f { color: var(--muted); background: var(--surface-2); }
 
@@ -182,6 +184,7 @@
       <span class="wk-title">Dimensional Modeling I — Facts &amp; Dimensions (kick off the Project Charter; design the pricing star schema)</span>
       <span class="wk-mod">M08 — Dimensional Modeling I · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G1</span><span class="gtag">G9</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria, a hospital revenue-cycle analyst, publishes a monthly cost-and-compliance report that leadership and CMS auditors rely on; it is wrong because prices arrive missing and inconsistent AND the same provider shows up as several records, so charges cannot be summed or attributed. A dimensional model with conformed provider/procedure/facility/payer dimensions is the structure that makes her numbers addable, auditable, and defensible under price-transparency rules.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This is Week 1 of the running Project 1 build. It BIRTHS the living Project Charter (problem statement + persona=Maria + 4 KPIs), which is added to across the phase and assembled at W30, and it lays the dimensional foundation (fact_charge + four conformed dimensions as empty typed Delta tables) that every later silver/gold week populates. Artifacts added to the portfolio repo this week: Project Charter v0.1, the star-schema diagram, the column-classification table, decisions.md, and the Delta skeleton DDL.</div>
@@ -258,6 +261,7 @@ spark.sql(f&quot;&quot;&quot;CREATE TABLE IF NOT EXISTS {CATALOG}.{SCHEMA}.dim_p
 for t in [&quot;dim_provider&quot;]:  # TODO: add your other 4 tables
     print(t, spark.table(f&quot;{CATALOG}.{SCHEMA}.{t}&quot;).count())
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for Databricks Free Edition. It lands raw CMS + NPPES samples to a Bronze path and stubs the Delta dimensional skeleton. It deliberately does NOT classify columns, design the star, or load the fact — those are your TODOs. Run cells top to bottom in a notebook.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry: pick a domain with a measurable event plus messy descriptive context and a real duplicate-entity problem, then write your own charter + star schema. Examples: SEC EDGAR (sec.gov/edgar) — fact = a reported financial line item, dimensions = filer/company (duplicate CIK/name variants), period, form type; CoinGecko — fact = a price/volume observation, dimensions = coin, exchange, quote currency; NOAA — fact = a weather reading, dimensions = station, date, metric; data.gov permits/inspections — fact = an inspection event, dimensions = business (duplicate names/addresses), location, violation code. Name your persona and 4 KPIs the same way Maria&#x27;s are named, and flag your own duplicate-entity mess as a future MDM concern.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -280,6 +284,7 @@ for t in [&quot;dim_provider&quot;]:  # TODO: add your other 4 tables
       <span class="wk-title">Grain, conformed dimensions &amp; the bus matrix</span>
       <span class="wk-mod">M08 — Dimensional Modeling II · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost report double-counts because negotiated prices arrive at mixed grains (some files are one row per hospital, some per service code, some per payer), and she can&#x27;t tie pricing to claims because each process built its own &#x27;provider&#x27; table. Locking one fact grain and building conformed dimensions is what lets a single spend number survive both the CFO&#x27;s cost review and a CMS compliance audit.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 from &#x27;we have facts and dims&#x27; (W14) to &#x27;the fact has a defended, enforced grain and its dimensions are conformed for reuse.&#x27; Adds the locked GRAIN DECISION (with rejected-alternatives rationale) to the living PROJECT CHARTER, and produces the BUS MATRIX — the first concrete input to the architecture doc&#x27;s data-flow map (written in full at W20). Sets up W16, where dim_provider gains SCD2 history.</div>
@@ -340,6 +345,7 @@ providers = spark.table(f&quot;{SCHEMA}.silver_providers&quot;)
 
 print(&quot;SCAFFOLD ONLY — steps above are not implemented yet&quot;)
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD only — lands structure and stubs. Every TODO is where you take over; it does not compute a passing result on its own.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the grain-and-conformance pattern on YOUR target industry. SEC EDGAR (sec.gov/edgar): grain = one row per filer(CIK) x filing x financial-line-item x period; conform dim_entity on CIK so it serves both a filings process and an insider-transactions process. CoinGecko: grain = one row per coin x exchange x snapshot-timestamp; conform dim_asset across a price process and a market-cap process. NOAA: grain = one row per station x day x measure; conform dim_station across temperature and precipitation processes. Whatever your domain: declare the grain in one sentence, build a bus matrix with at least two processes, and prove one shared dimension serves both.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -362,6 +368,7 @@ print(&quot;SCAFFOLD ONLY — steps above are not implemented yet&quot;)
       <span class="wk-title">Recoverable History: SCD Type 2 &amp; Effective Dating on the Provider and Price Dimensions</span>
       <span class="wk-mod">M09 — SCD &amp; History Tracking (SCD Type 2) · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G3</span><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> A payer disputes a charge four months after service and an auditor asks Maria, &quot;what price did this hospital publish for this billing code on January 15th?&quot; If silver overwrote the price on every CMS republish, that answer is gone — and the compliance report is indefensible. SCD2 with effective dating keeps every version, so any past price or provider attribute is recoverable on demand.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 (Provider Pricing Integrity) by turning the W15 grain-correct silver feed into two historized SCD Type 2 Delta dimensions — silver_provider_dim and silver_price_dim — with effective dating, so provider and price history is recoverable. Adds two living artifacts: (1) a written change-tracking policy (Type 2 vs Type 1 per column) that will slot directly into the idempotency-plan section of the 4-part Architecture Doc written in W20, and (2) a &#x27;recoverable history&#x27; entry against the Project Charter started in W14, feeding the data-freshness/history KPI line. The audit-log rows started here become the audit trail assembled at W30.</div>
@@ -477,6 +484,7 @@ if __name__ == &quot;__main__&quot;:
     #        versions_opened == 0 after the first application.
     pass
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — it wires up the two-step SCD2 structure (config, snapshot load, hash stub, seed branch, mark-then-insert MERGE skeleton, as-of validator, audit/idempotency hooks) and leaves every transformation as a commented TODO. It does not implement the MERGE clauses, the hash, or the classification — you do, so you can defend each clause in the hot seat.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the pattern on your own target industry by picking a source that RE-PUBLISHES over time and historizing two snapshots. SEC EDGAR (sec.gov/edgar): a company&#x27;s reported facts/address/officers change between filings — SCD2 the company dimension so you can reconstruct &#x27;what did we know on the 10-K date?&#x27;. CoinGecko: token metadata/market-cap-rank shifts snapshot to snapshot. NOAA: station attributes/instrument changes over time. data.gov permit or license registries: status and holder change across monthly extracts. Locked-down domain? Use Faker to emit two snapshots where a controlled subset of tracked attributes changed. Same deliverable: effective-dated Type 2 dimension + change-tracking policy + point-in-time query on YOUR entity.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -499,6 +507,7 @@ if __name__ == &quot;__main__&quot;:
       <span class="wk-title">Lakehouse &amp; gold-layer modeling — the semantic layer</span>
       <span class="wk-mod">M10 · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G10</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost analysis and CMS compliance report are only as trustworthy as the numbers she can actually query — right now she copies prices out of raw files by hand and cannot tell a hospital&#x27;s leadership what % of required services even have a published price. A governed gold mart plus one canonical completeness KPI turns &#x27;I think the data is incomplete&#x27; into a defensible, auditable number that revenue-cycle and compliance can both cite.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Adds the GOLD layer to Project 1: fact_price_by_facility_procedure + conformed dimensions + the kpi_pricing_completeness table + the vw_price_transparency semantic view — the first artifacts Maria can query directly. Extends the living PROJECT CHARTER by promoting &#x27;% facilities passing the pricing-completeness check per run&#x27; from an intended KPI to a computed, reconciled one, and adds the gold layer + its serve-only contract to the ARCHITECTURE DOC&#x27;s data-flow map and the gold write-strategy (replaceWhere/MERGE) to the idempotency plan.</div>
@@ -577,6 +586,7 @@ FROM {GOLD}.fact_price_by_facility_procedure f
 # TODO: loop the whole build 10x; assert identical fact.count() AND identical pct_passing each time.
 #       Capture the 10 identical numbers in your why-note.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — it wires up the gold star schema, the KPI table, the semantic view, an idempotent write, and reconciliation stubs. The joins, the grain-enforcement, the canonical KPI SQL, and the 10x idempotency assertion are left as TODOs for you. Do NOT fill in the full solution here — the decisions are your interview answers.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry&#x27;s silver model. SEC EDGAR: build fact_metric_by_company_period (grain = company x fiscal-period x metric) from your SCD2 filing silver, a completeness KPI = % companies with all required line items filed, and a vw_financials semantic view. CoinGecko: fact_price_by_asset_exchange (grain = asset x exchange x snapshot) + a coverage KPI = % assets with a price on every tracked exchange. NOAA: fact_reading_by_station_day + a completeness KPI = % stations reporting all required measures. Keep the moves identical: declare the grain first, take CURRENT-view dims from your SCD2 silver, define ONE canonical KPI, expose a business-named serve-only view, quarantine grain violations, and prove 10x idempotency.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -599,6 +609,7 @@ FROM {GOLD}.fact_price_by_facility_procedure f
       <span class="wk-title">MDM I — Reference Data, Crosswalks &amp; Match Keys</span>
       <span class="wk-mod">M11 — Master Data Management I · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost analysis is wrong because the SAME hospital shows up as several provider records with slightly different names and addresses, so her spend and compliance rollups double-count and mislabel facilities. Before anyone can trust a single price per provider, the pipeline needs governed reference data and a defensible way to find which records are candidates for being the same entity — cheaply, at scale, and without comparing every row to every other row.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This is the FIRST half of the golden-records closer for Project 1. It produces the three inputs W19 needs to actually resolve duplicates: (a) governed provider reference data in silver.dim_provider_ref, (b) the xwalk_provider crosswalk that will bind pricing rows to a canonical provider, and (c) blocked candidate_pairs. It advances the running pipeline&#x27;s silver layer and adds the MDM/entity-resolution section (reference-data model, crosswalk design, blocking strategy) to the ARCHITECTURE DOC — specifically extending the data-flow map and the tool-selection log started in W20 prep, and adding the new blocking KPI &#x27;candidate-pair reduction ratio&#x27; plus &#x27;records quarantined for no block key&#x27; to the PROJECT CHARTER&#x27;s KPI list.</div>
@@ -696,6 +707,7 @@ def pairs_for(df, key):
 # TODO: run this notebook 10x; assert DIM_REF count and PAIRS count are
 #       identical every run. Paste the proof into your why-note.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the reference-table, crosswalk, and blocking structure and lands the shapes; TODO markers are where YOU do the real work. It deliberately does NOT implement standardization logic, the full USPS map, pair scoring, or survivorship (W19). Run in a Databricks Free Edition notebook.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry&#x27;s duplicate-entity problem, swapping only the sources. Finance/markets: dedupe issuers/filers across SEC EDGAR (https://www.sec.gov/edgar) where the same company appears under CIK variants and messy company names — block on soundex(company_name)+state_of_incorp. Crypto: reconcile the same asset across exchanges via CoinGecko (contract-address vs. ticker collisions). Public sector/aid: dedupe organizations across ReliefWeb or data.gov grantee lists. Locked-down or fraud domains: synthesize duplicate customers with Faker (same person, typo&#x27;d name + address). In every case build a reference dimension, a crosswalk with a match_status column, and &gt;=2 deterministic blocking keys — do NOT score or merge yet.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -718,6 +730,7 @@ def pairs_for(df, key):
       <span class="wk-title">MDM II — Entity Resolution &amp; Golden Records: collapsing duplicate providers into one trustworthy record</span>
       <span class="wk-mod">M11 — Master Data Management · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G1</span><span class="gtag">G9</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost analysis and CMS compliance report are wrong because the same hospital and physician group show up as several different provider records — so a facility&#x27;s prices look &#x27;missing&#x27; when they exist under a duplicate, and spend is double-counted. Collapsing duplicates into one trusted golden record per provider is what makes her numbers defensible to auditors and to Finance.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This is THE CLOSER of the MDM arc: it converts W18&#x27;s blocked candidates into published GOLDEN provider records — the trustworthy spine that GOLD marts and Maria&#x27;s KPIs sit on. It adds three durable artifacts to Project 1: the golden_providers + golden_lineage tables, the provider_review_queue (a governance/stewardship artifact), and a new Charter KPI line (&#x27;# duplicate providers collapsed into golden records&#x27; per run). Its survivorship logic, threshold decision, and idempotency approach become raw material for next week&#x27;s (W20) 4-part Architecture Doc — specifically the failure plan and idempotency plan.</div>
@@ -805,6 +818,7 @@ review_rows = (to_review
 # --- KPI line for the Charter ---
 # TODO: print { collapsed = input_rows - golden_rows, golden_rows, review_rows, pct_change_vs_last }
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for Databricks Free Edition — lands structure and the blocking→pairing→feature skeleton using only Spark built-ins (no pip installs). TODO markers are where the learner does the real thinking: weighting, threshold, clustering, survivorship, idempotent MERGE. Not a solution.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry&#x27;s duplicate-entity problem, keeping every step (block → pair → fuzzy-score → threshold → cluster → survivorship → golden + review queue). Finance/markets: dedupe issuers/companies across SEC EDGAR filings (same company, many CIK-linked name variants) — https://www.sec.gov/edgar. Crypto: reconcile the same asset across exchanges/aliases via CoinGecko — https://www.coingecko.com/en/api. Public sector/NGO: dedupe organizations across data.gov or ReliefWeb feeds. Weather/IoT: resolve duplicate station identities in NOAA data. Locked-down/fraud domains: generate a labeled duplicate set with Faker (inject name/address noise yourself) so you control ground truth. The William→Illiam problem, the survivorship rules, and the human-review queue are industry-agnostic — only the entity and the source change.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -827,6 +841,7 @@ review_rows = (to_review
       <span class="wk-title">ETL vs ELT, Batch vs Incremental — Write the 4-Part Architecture Doc</span>
       <span class="wk-mod">M13 — Architecture &amp; Design Decisions · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G9</span><span class="gtag">G6</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost analysis and CMS compliance report are only as trustworthy as the pipeline behind them — and right now she cannot answer an auditor&#x27;s &#x27;how do you know this number is right, and can you reproduce it?&#x27; A written architecture doc (paradigm, processing mode, tool choices, failure and recovery posture) is what turns a pile of notebooks into a defensible data product she can sign her name to.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This week produces the second LIVING DELIVERABLE: the 4-PART ARCHITECTURE DOC (data-flow map, tool-selection log, failure plan, idempotency plan) for Project 1, committed as ARCHITECTURE.md. It formally decides ELT + medallion + incremental batch and defends each choice against alternatives. It pairs with the Project Charter (started W14) and will be added to across the phase and fully assembled at W30. It sets the contract that W21 (ingestion→bronze) must implement.</div>
@@ -897,6 +912,7 @@ unclassified.show(truncate=False)
 # NOTE: This scaffold produces EVIDENCE. The four architecture-doc parts
 #       (data-flow map, tool-selection log, failure plan, idempotency plan)
 #       are written by YOU in ARCHITECTURE.md — that&#x27;s the deliverable.</code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only — it inventories the Delta tables you already built so your data-flow map cites real row counts. It deliberately does NOT write any of the four doc sections or make the ELT/incremental decision; those TODOs are where you take over. Table/schema names are guesses you must correct to match W15–W19.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the same four-part doc on YOUR target industry&#x27;s running project — the decision framework is identical, only the mess changes. Fintech/markets: map SEC EDGAR filings (sec.gov/edgar) or CoinGecko price pulls (rate-limited, revised filings = late records) — ELT still wins because filing formats vary and you want replayable raw. Climate: NOAA (schema drift across station generations). Humanitarian: ReliefWeb (duplicate org entities → your own MDM). Locked-down/fraud domains: Faker-generated sources. Whatever your domain, your architecture doc must name YOUR specific failure modes (rate limits, format drift, late republishes, duplicate entities) and justify incremental-vs-full against YOUR source&#x27;s republish cadence.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -919,6 +935,7 @@ unclassified.show(truncate=False)
       <span class="wk-title">Landing the Mess: NPPES (API + bulk) &amp; CMS Price-Transparency Files into an Append-Only Bronze</span>
       <span class="wk-mod">M14 — Ingestion patterns &amp; source systems → bronze · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G3</span><span class="gtag">G6</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost analysis and her hospital&#x27;s price-transparency compliance filing are only as trustworthy as the day they were pulled — and CMS providers republish pricing files on no fixed schedule while the NPPES API throttles bulk callers, so a run that silently ingested nothing looks identical to a clean one and quietly corrupts the report. This week builds the ingestion edge so every pull is stamped, replayable, and fails loudly instead of lying green.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This is the first working code of Project 1&#x27;s running pipeline: it builds the Bronze landing layer that every later week reads from. NPPES (API + a look at bulk) and CMS MRF pricing now land raw, append-only, and stamped with source + ingest-timestamp, with an ingest audit log capturing every run&#x27;s fate. It adds a new subsection to the W20 Architecture Doc: the FAILURE PLAN gains its first two concrete entries (API 429 handling and missing-source detection), and the IDEMPOTENCY PLAN gains its first entry (Bronze = append-across-time, partition-overwrite within a run). The Project Charter (started W14) gets its data-freshness-SLA KPI made real by the _ingest_ts / audit-log foundation laid here. No Silver contracts yet — that&#x27;s W22.</div>
@@ -1032,6 +1049,7 @@ def ingest_mrf(landing_path):
 # ingest_mrf(&quot;/Volumes/workspace/default/landing/hospital_mrf.json&quot;)
 # display(spark.table(AUDIT).orderBy(&quot;ingest_ts&quot;))
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for a Databricks Free Edition notebook — it will NOT run clean as-is. Every TODO is where you take over. It only sets up run lineage, the audit-log helper, and the two ingest skeletons; the 429/backoff logic, the Bronze metadata write, the idempotent replaceWhere, and the missing-file guard are yours to implement. Do not add cleaning/typing/dedup here — that violates the Bronze contract and belongs in W22 Silver.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the identical pattern on your own target industry with one rate-limited API source plus one irregularly-published bulk file. Fintech/compliance: SEC EDGAR full-text search + submissions API (real rate limits and a required User-Agent header — a perfect 429/backoff exercise) plus a bulk financial-statement dataset from sec.gov/dera. Crypto: CoinGecko public API (documented rate limits and 429s) plus a periodic CSV export. Public-sector/ESG: any data.gov CKAN API plus a monthly agency file; climate: NOAA APIs. Whatever you pick, land it to YOUR bronze_&lt;source&gt; tables with the same _source/_ingest_ts/_batch_id metadata, make one source a paged API you must back off from, and make one source a file that can fail to appear so your MISSING_SOURCE guard has something real to catch. If your industry&#x27;s data is locked down, generate a Faker feed with an injected outage instead.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1054,6 +1072,7 @@ def ingest_mrf(landing_path):
       <span class="wk-title">Medallion architecture — enforcing layer contracts</span>
       <span class="wk-mod">M15 · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G3</span><span class="gtag">G2</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s finance team keeps re-cleaning the same hospital pricing data in three different reports because nobody agreed on where cleaning happens — so two dashboards show different total charges for the same provider and compliance can&#x27;t tell which number is defensible. Enforced layer contracts make one layer the single source of clean truth, so a hospital&#x27;s reported price is computed once, provably, and the same everywhere.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 by turning the W21 bronze into a governed, three-layer pipeline: it produces the first conformed silver table and a serve-only gold view for the Provider Pricing Integrity project. It adds the LAYER CONTRACTS section (with the documented silver PK grain and the bronze/silver/gold ALLOWED-FORBIDDEN table) to the 4-part Architecture Doc written in W20, and it establishes the quarantine + reconciliation pattern that later KPIs (# records quarantined, % facilities passing completeness) will read from.</div>
@@ -1133,6 +1152,7 @@ rejected = (
 # TODO 14: write a contract test that FAILS if the gold definition text
 #          references BRONZE or contains a cleaning function.
 </code></pre><div class="sc-note"><span class="ml">Note</span> SCAFFOLD ONLY — sets up the three-layer contract structure and fails loud on violations. Every TODO is where you take over; it deliberately does NOT contain a full silver transform or the finished gold view.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Apply the identical bronze/silver/gold contract discipline to your own target industry&#x27;s data. SEC EDGAR filings (sec.gov/edgar): bronze = raw filing text/XBRL as landed with accession-number + ingest timestamp; silver = typed financials, standardized ticker/CIK, one documented grain per line item; gold = serve-only ratio marts. CoinGecko/markets: bronze = raw JSON snapshots; silver = typed prices, standardized symbol + currency; gold = serve-only OHLC views. NOAA/weather: bronze = raw station files; silver = typed, unit-standardized observations keyed by station+timestamp; gold = serve-only climatology. Write the same one-page contract and the same &#x27;if you need to clean it in gold, it belongs in silver&#x27; rule for YOUR source, and name YOUR raw-string mess (SEC&#x27;s mixed &#x27;NM&#x27;/blank/parenthesized-negative numbers is a great parallel to CMS&#x27;s &#x27;$&#x27;/&#x27;N/A&#x27;/range charges).</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1155,6 +1175,7 @@ rejected = (
       <span class="wk-title">CDC &amp; Incremental I — Watermarks: load only what changed</span>
       <span class="wk-mod">M16 — CDC &amp; Incremental Loading I · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G3</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> CMS republishes hospital price-transparency files on a rolling schedule, but Maria&#x27;s pipeline reprocesses every historical file and all of NPPES on every run — a multi-hour, Free-Edition-melting refresh that misses her month-end compliance deadline. A watermark makes each run touch only the pricing periods that actually changed, so the freshness SLA is met and compute stays inside the budget.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Converts the running Provider Pricing Integrity pipeline from W22&#x27;s one-shot medallion load into a resumable incremental load, directly serving the freshness-SLA KPI and the compute budget. Adds a persistent etl_watermark control table to the project and an &#x27;Incremental / watermark&#x27; node to the 4-part ARCHITECTURE DOC&#x27;s data-flow map; seeds the idempotency-plan section (naming the known append double-count that W24 will close) and adds a bullet to the failure-plan (advance-on-success-only guard). The PROJECT CHARTER&#x27;s freshness-SLA KPI now has a concrete mechanism behind it.</div>
@@ -1246,6 +1267,7 @@ except Exception as e:
 # (c) land 1 late record (event date 2025-06, ingest now) -&gt; show it IS processed;
 #     comment why an event-time watermark on last_updated would have skipped it.
 # Then read `spark.table(WATERMARK)` history as evidence for your &#x27;why&#x27; note.</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the control table, period landing, and the read-process-advance skeleton. TODO markers are where YOU implement the incremental logic. It deliberately does NOT solve idempotency (append is intentional; W24 fixes it) and does NOT switch to event-time watermarking.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the watermark on your own industry&#x27;s periodically-republished source. SEC EDGAR: watermark on filing acceptance datetime so each run pulls only newly-accepted filings, not the full history. CoinGecko: watermark on your ingest_timestamp of price snapshots across polling windows. NOAA / data.gov: watermark on the dataset&#x27;s period/version or your land time. The pattern is identical — land raw with an ingest_timestamp, store a durable high-water mark in a Delta control table, read WHERE ingest_ts &gt; watermark, advance only on success — and the same trap applies: prefer YOUR ingest-time over the source&#x27;s self-reported &#x27;last_updated&#x27;, which is often stale, missing, or reused when the publisher re-emits an unchanged file.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1268,6 +1290,7 @@ except Exception as e:
       <span class="wk-title">CDC &amp; incremental II — idempotency, backfills &amp; the 10× test</span>
       <span class="wk-mod">M16 — CDC &amp; incremental loading · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G3</span><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Last cycle a mid-load cluster failure led Maria&#x27;s team to re-run the CMS ingest; because the silver load was append-only, the same provider batch landed twice, inflating &quot;facilities analyzed&quot; and skewing average negotiated rates on a report that feeds compliance filings. A silver load that is safe to re-run and safe to backfill is the difference between a defensible number and a public retraction.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1&#x27;s silver layer from &#x27;loads once&#x27; to &#x27;loads safely, forever&#x27;: the silver dim_provider load becomes idempotent (MERGE-on-NPI) and the pricing fact load becomes month-partition-idempotent (replaceWhere). Adds the IDEMPOTENCY PLAN section to the 4-part architecture doc (started W20) — one row per table naming the chosen strategy, the natural key, and the 10× evidence — plus a backfill runbook. Produces the KPI &#x27;reruns produce identical counts (variance = 0)&#x27; as demonstrable proof.</div>
@@ -1339,6 +1362,7 @@ def prove_idempotent(spark, batch_id, runs=10):
     # TODO: assert current_rows == distinct keys (exactly one current row per provider = no dup collapse).
     return seen
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for Databricks Free Edition — lands the structure and the 10× harness skeleton only. Fill every TODO; this is deliberately NOT the solution. Runs on Delta + PySpark.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Run the same pattern on YOUR industry&#x27;s re-published, keyed source. SEC EDGAR: re-fetch a company&#x27;s filings and MERGE on accession number so a retry never double-lists a 10-K; backfill a prior quarter. CoinGecko: month-partition overwrite (replaceWhere) daily OHLC by coin_id after a 429 retry. ReliefWeb/NOAA: MERGE reports/stations on their stable id. Locked-down data (Faker): generate a batch with intentional in-batch duplicate keys and prove your MERGE + 10× harness collapses them. Name your natural key and your strategy in your own idempotency plan.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1361,6 +1385,7 @@ def prove_idempotent(spark, batch_id, runs=10):
       <span class="wk-title">Spark I — the PySpark DataFrame API</span>
       <span class="wk-mod">M17 — Spark I · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G7</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s silver transforms passed on a 5,000-row pandas sample but choke the moment CMS republishes the full multi-million-row NPPES provider dump — so her monthly completeness and duplicate-provider KPIs are computed on a subset, not the real provider universe, which is exactly the gap a compliance auditor would flag. Re-expressing the transforms in the PySpark DataFrame API is what lets the pricing-integrity checks run over the whole population each month instead of a hand-picked slice.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 by replacing the SQL/pandas silver transform with a Spark-native DataFrame notebook that runs over the full-scale bronze Delta tables — the same silver + rejected outputs, now at population scale. Adds to the 4-Part Architecture Doc (started W20): a tool-selection-log entry justifying the PySpark DataFrame API over pandas for the monthly CMS republish, plus the saved explain() physical plans as evidence. Feeds the running KPIs (% completeness, # quarantined) computed on the whole provider universe rather than a sample.</div>
@@ -1437,6 +1462,7 @@ df_valid.explain(True)   # save this output to /architecture/spark_plans_w25.txt
 # 7) KPIs for Maria
 # TODO: pct_complete = df_valid.count() / n_in; print quarantined count by reason
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it reads bronze, stubs the transform chain, and hard-wires the lazy-eval timing + explain() instrumentation so the learner SEES the execution model. Every real transform (select/cast/when/na), the specific quality predicates, per-reason rejection labels, the conservation assert, and the idempotent writes are left as TODOs. Deliberately never calls collect() — the scaffold models the safe habit and the WHY note asks the learner to explain why.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the same re-expression on YOUR target industry&#x27;s silver transforms. If your Project-1 mirror is SEC EDGAR filings, re-express your issuer-conforming and numeric-cast transforms in the DataFrame API over the full bulk submission dump (not a 100-filing sample); if it&#x27;s CoinGecko, port your price/volume type-casts and null-handling; if it&#x27;s NOAA, your station-reading conforms. The pattern is identical: one predicate set → valid/rejected split, prove conservation, read explain(), and document one place collect() would have blown up your driver at full volume. Name YOUR specific scale mess (EDGAR&#x27;s inconsistent tags, CoinGecko 429s, NOAA missing-value sentinels like -9999).</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1459,6 +1485,7 @@ df_valid.explain(True)   # save this output to /architecture/spark_plans_w25.txt
       <span class="wk-title">Spark II — Joining CMS Pricing to NPPES Providers at Scale, Aggregating Gold KPIs, and Writing the MDM Matching UDF</span>
       <span class="wk-mod">M17 — Spark II: joins, aggregations &amp; UDFs at scale · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G7</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost and compliance report attributes every price line to a provider — but CMS pricing rows and the NPPES provider registry only line up cleanly for a fraction of records, and a naive row-by-row match in Python either takes hours or crashes the driver. A wrong or silently-dropped join means prices land on the wrong provider (or vanish), so the compliance filing and the cost analysis are both wrong — the exact error that draws a CMS penalty and blows up the revenue-cycle forecast.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 from a cleaned silver layer to the first real gold KPI marts: the CMS-pricing-to-NPPES join produces the enriched, provider-attributed dataset that the gold KPIs are computed from, and the normalize_key/matching UDF written here is the exact component the W29 MDM golden-records step will import to block and score duplicate providers. Adds finalized KPI definitions to the PROJECT CHARTER (started W14) and drafts the idempotency-plan and failure-plan sections of the 4-PART ARCHITECTURE DOC (written W20, assembled W30).</div>
@@ -1526,6 +1553,7 @@ normalize_key = F.udf(_normalize_key, StringType())
 #       then run this build 10x and assert identical counts + KPI values.
 #       Append a row to your audit log (run ts, input counts, match rate, quarantined).
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY. Runs on Databricks Free Edition against your existing silver Delta tables. It sets up the join, the matching-UDF stub, and the KPI aggregation shell; every real decision is a TODO. Do NOT fill in a full solution here — the choices are the interview answers.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Run the identical pattern on your own target industry&#x27;s data: join a messy transactional fact to a canonical entity registry at scale, quarantine the no-match rows, and write a normalization UDF you&#x27;ll reuse for your own dedup/MDM week. Finance/markets: join SEC EDGAR filings (https://www.sec.gov/edgar) to a ticker/CIK entity list — issuer names vary (Inc/Corp/Co, subsidiaries). Crypto: join CoinGecko (https://www.coingecko.com/en/api) trades/markets to a canonical asset list — same coin listed under symbol variants across exchanges. Humanitarian: join ReliefWeb (https://reliefweb.int/help/api) reports to an org/country reference. Locked-down or fraud domain: generate millions of rows with Faker and inject deliberate name/address variants. Keep the same deliverables: chosen join type + strategy, a match-rate gate, a reusable matching UDF, quarantine-with-reason, and a 10x idempotency proof.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1548,6 +1576,7 @@ normalize_key = F.udf(_normalize_key, StringType())
       <span class="wk-title">Spark internals — partitions, shuffles, skew &amp; the Spark UI</span>
       <span class="wk-mod">M18 · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G7</span><span class="gtag">G9</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly dedup now stalls: the provider-matching join finishes only after one giant task grinds on a handful of mega health systems, and the run risks blowing past the data-freshness SLA — meaning her compliance report ships on stale prices or misses its filing window, and an oversized always-on cluster burns budget to hide the problem. A pipeline that is slow-but-silent on a straggler is exactly how a monthly close quietly starts missing deadlines.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 by making the W26 provider-dedup join actually finishable within the freshness SLA before it feeds the MDM golden-records work in W29-W30 — so the dedup can scale to the full NPPES dump instead of a toy sample. It ADDS to the living 4-part ARCHITECTURE DOC (started W20): a new performance/skew section that extends both the tool-selection log (why salt vs broadcast vs AQE here) and the failure plan (the straggler was a silent SLA risk, now diagnosed and bounded). It also contributes a concrete runtime figure to the data-freshness SLA KPI.</div>
@@ -1614,6 +1643,7 @@ SALT_N = 8  # TODO: choose N deliberately; justify with max-task time. Try a few
 # TODO: assert your fixed join produces the SAME count as baseline_count.
 #       assert fixed_count == baseline_count, f&quot;fix changed output: {fixed_count} != {baseline_count}&quot;
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — it sets up the baseline join and the measurement points, then hands off at every TODO. It deliberately does NOT implement the salt/broadcast fixes or the correctness assertion; that is your work. Runs on Databricks Free Edition (Delta + PySpark). Open the Spark UI from the compute page.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the identical diagnosis on YOUR target industry&#x27;s biggest join, where a few keys dominate. SEC EDGAR: a company/filing join where a handful of mega-filers (big banks, Berkshire) own thousands of filings under one CIK. CoinGecko: a trades-by-market join where BTC and ETH dwarf every other pair. NOAA: an observations-by-station join where a few busy stations carry most rows. Retail/e-commerce (Faker or public): orders skewed to a few top SKUs or one flagship store. Whatever it is, run it, open the Spark UI, find the straggler, name the hot keys, fix with salt or broadcast, and record before/after — same pattern, your data.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1636,6 +1666,7 @@ SALT_N = 8  # TODO: choose N deliberately; justify with max-task time. Try a few
       <span class="wk-title">Data quality I — expectations &amp; quarantine: making silver break loudly</span>
       <span class="wk-mod">M24 — Data Quality I: Expectations &amp; Quarantine · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G4</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s monthly cost analysis and the hospital&#x27;s federally-required price-transparency compliance report are only as trustworthy as the silver table feeding them — and right now a single malformed price or an out-of-range CPT code silently poisons a KPI that a compliance officer signs their name to. This week builds the gate that catches those rows loudly, quarantines them with a reason, and alerts before bad data reaches a regulator-facing number.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Adds the enforced DQ gate to the SILVER layer of Project 1&#x27;s running pipeline and produces two new living artifacts: the `silver_rejected` quarantine table (reason + timestamp + run_id) and the `dq_run_summary` that computes the phase KPIs &#x27;% facilities passing the pricing-completeness check per run&#x27; and &#x27;# records quarantined (with reason)&#x27;. It appends the expectations catalog + severity/threshold choices to the Project Charter&#x27;s KPI section and seeds the &#x27;failure plan&#x27; quarter of the Architecture Doc (to be formalized W20/assembled W30). Silver now breaks loudly instead of silently, directly advancing Maria&#x27;s trust problem.</div>
@@ -1722,6 +1753,7 @@ rejected_out = (rejected
 #       if quarantine_rate &gt; rule[&#x27;budget&#x27;]: append a dq_alerts row AND print a LOUD message.
 #       Decide: does a breach halt the run (raise) or continue with alert logged? Write it down.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the expectations catalog shape, the flag-then-split skeleton, and the quarantine/summary/alert write points. TODOs are where YOU write the actual rules, thresholds, idempotency key, and alert behavior. Do not fill these in from a tutorial — your rule choices are your interview answers.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact flag-then-split-quarantine pattern on YOUR target industry&#x27;s silver table. Fintech (SEC EDGAR): quarantine filings where CIK is malformed, a reported value is non-numeric, or a (CIK, period, tag) grain collides. Crypto (CoinGecko): reject rows where price is null/negative, a coin_id is off your accepted list, or timestamps are out of the expected window. Humanitarian (ReliefWeb) or weather (NOAA): reject out-of-domain country/station codes and impossible measurements. Fraud/locked-down data: use Faker to generate a bad-row deck. Keep the same four rule classes (schema, completeness, uniqueness/grain, domain), the same `&lt;domain&gt;_rejected` table with reason+timestamp, and the same threshold alert — only the columns and accepted-code sets change.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1744,6 +1776,7 @@ rejected_out = (rejected
       <span class="wk-title">Data Quality II — Reconciliation &amp; Audit: Proving the Pipeline Didn&#x27;t Lose or Invent Rows</span>
       <span class="wk-mod">M24 · Phase 2 · silver</span>
       <span class="wk-gaps"><span class="gtag">G4</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s finance director asked a simple question about last month&#x27;s cost report — &#x27;are we sure no hospitals fell out of this number?&#x27; — and nobody could answer, because the pipeline that produced it kept no receipts. A run that quietly drops 3,000 price rows on a bad CMS republish and still returns a plausible KPI is worse than one that crashes: the wrong compliance number gets filed. This week builds the ledger that lets Maria prove every dollar and every provider is accounted for on every run.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> Advances Project 1 from &#x27;the pipeline cleans data&#x27; to &#x27;the pipeline proves what it did.&#x27; It adds the audit_log Delta table as a permanent pipeline component and produces two artifacts for the living docs: a reconciliation note (control totals, tolerances, where rows legitimately disappear) that becomes a section of the 4-part Architecture Doc&#x27;s FAILURE PLAN, and run-level evidence that feeds the KPI panel (records quarantined with reason, % facilities passing, data-freshness/watermark) Maria will read. It directly hardens the idempotency plan by making idempotency observable — you can now prove 10 identical reruns, not just claim it.</div>
@@ -1836,6 +1869,7 @@ def check_control_total(bronze_total, silver_total, money_tolerance):
 # TODO (lab): wire bronze-&gt;silver-&gt;gold through instrument_layer(), run assert_completeness()
 #   and check_control_total(), flip run status, then run the whole thing 3-10x and prove
 #   the audit_log holds one row per (run_id, layer) with identical numbers every time.</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it stands up run_id, the audit_log DDL, an idempotent MERGE writer, and the reconciliation function signatures. The learner must clean the currency control total, complete the completeness identity, set and justify the money tolerance, and make FAIL actually block gold. The dedup_collapsed bucket is intentionally left for them to compute from their golden-record step.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the reconciliation + audit_log pattern onto your own industry&#x27;s running pipeline, keeping the same identity (in = out + rejected + collapsed) and one control total that must be conserved. SEC EDGAR: reconcile filing counts and a summed financial line (total revenue) across layers, watermark = latest accession date. CoinGecko: reconcile row counts and a conserved metric (total market cap or 24h volume) per pull, watermark = snapshot timestamp, and account for coins dropped as duplicates/delisted. NOAA: reconcile station-reading counts and summed precipitation, explaining rows quarantined for out-of-range sensor values. Whatever the domain, pick a money/volume total a stakeholder would notice if it silently changed, and prove it doesn&#x27;t.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1858,6 +1892,7 @@ def check_control_total(bronze_total, silver_total, money_tolerance):
       <span class="wk-title">Testing taxonomy for data — pytest &amp; the Phase 2 portfolio</span>
       <span class="wk-mod">M25 · Phase 2 · silver · Phase 2 portfolio</span>
       <span class="wk-gaps"><span class="gtag">G4</span><span class="gtag">G6</span><span class="gtag">G1</span></span>
+      
     </div>
     <div class="framing"><span class="fl">Why this matters</span> Maria&#x27;s finance leadership will only act on the cost + compliance numbers if they trust them; a silent regression (a parser that starts dropping every &quot;$1,234.00&quot; price, or a dedupe that quietly stops collapsing providers) would push wrong numbers into a board deck and a CMS compliance filing. Automated tests are how you promise that next month&#x27;s rerun is still correct without re-inspecting it by hand.</div>
     <div class="project-role"><span class="pl">Project 1 · this week</span> This IS the Phase 2 closer for portfolio Project 1. It wraps the full medallion pipeline (bronze→silver→golden MDM→gold KPIs) in an automated four-tier pytest suite that encodes every guarantee the earlier weeks built by hand, then ASSEMBLES the deliverable: the project charter (started W14) and the 4-part architecture doc (written W20) are finalized and locked, cross-linked to the test suite and golden-records table, and the README is shipped with the four KPIs reported as real numbers. Adds two artifacts: the test suite (tests/ + conftest.py + transforms.py refactor) and the assembled, recognition-ready portfolio README.</div>
@@ -1941,6 +1976,7 @@ def test_kpis_are_computed_and_sane(spark):
     # TODO: assert kpis[&#x27;duplicates_collapsed&#x27;] &gt;= 1  # the fixture&#x27;s two-spelling provider must merge
     ...
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD, not a solution. Pair it with a conftest.py holding the session-scoped `spark` fixture (see TODO at top). Every tier has one worked skeleton and TODO markers where you write the real assertions against YOUR transforms.py and pipeline functions. Run with `pytest -v` locally, or `pytest.main([&#x27;-v&#x27;])` in a Databricks notebook cell after `%pip install pytest chispa`.</div></details>
+        
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the taxonomy onto your own domain&#x27;s pipeline, not healthcare. SEC EDGAR: unit-test the CIK/ticker normalizer, quarantine filings with missing financial fields, e2e-test that the same issuer under two name spellings collapses to one golden entity and that a refiled 10-K reruns idempotently. CoinGecko: unit-test price/decimal parsing, smoke-test the market-cap gold contract, e2e-test idempotency across a re-pulled day. ReliefWeb/NOAA/data.gov: same four tiers over your late-arriving, schema-drifting source. Whatever your target industry, your README&#x27;s business framing must name money/risk/compliance in THAT domain so its hiring managers pass the 30-second recognition test.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
