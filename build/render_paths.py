@@ -104,7 +104,7 @@ def backlinks(active):
 bridge_body=f'''
 <div class="hero"><div class="wrap">
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 02 — Bridge</span>
-  <h1>Cross over into DE. <span class="thin">4–6 months.</span></h1>
+  <h1>Cross over into DE. <span class="thin">3–5 months.</span></h1>
   <p class="lede">Bridge is for people who already work with data — <b>analysts</b> and <b>software engineers</b> — who want to become data engineers. You skip what you already own and go deep on the rest, so it is faster than starting from zero. A short placement diagnostic routes you to the right variant; both converge on the same lakehouse core and capstone.</p>
   {welcome_html("bridge")}
   {backlinks("bridge")}
@@ -227,7 +227,7 @@ landing_body=f'''
       <p>The full ~50-week course across four phases, ending on a governed capstone. This is where all the weekly lessons live.</p>
       <a class="go" href="{L["p1"]}">Start at Phase 1 →</a></div>
     <div class="pcard bridge"><span class="k">Path 02 — Bridge</span><h3>Cross over</h3><div class="for">Analysts &amp; software engineers</div>
-      <p>A 4–6 month crossover. A placement diagnostic routes you to the analyst or SWE variant; skip what you own, go deep on the rest.</p>
+      <p>A 3–5 month crossover. A placement diagnostic routes you to the analyst or SWE variant; skip what you own, go deep on the rest.</p>
       <a class="go" href="{L["bridge"]}">See the Bridge path →</a></div>
     <div class="pcard sharpen"><span class="k">Path 03 — Sharpen</span><h3>Fill the gaps</h3><div class="for">Working data engineers</div>
       <p>A self-diagnostic against the ten gaps, plus eight pre-built bundles. Every unit stands alone and links straight to its lesson.</p>
