@@ -286,7 +286,8 @@ spark.sql(f&quot;&quot;&quot;CREATE TABLE IF NOT EXISTS {CATALOG}.{SCHEMA}.dim_p
 for t in [&quot;dim_provider&quot;]:  # TODO: add your other 4 tables
     print(t, spark.table(f&quot;{CATALOG}.{SCHEMA}.{t}&quot;).count())
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for Databricks Free Edition. It lands raw CMS + NPPES samples to a Bronze path and stubs the Delta dimensional skeleton. It deliberately does NOT classify columns, design the star, or load the fact — those are your TODOs. Run cells top to bottom in a notebook.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=JI-_Qk94OH0" target="_blank" rel="noopener">The Star Schema: Fact vs Dimension</a></li><li><a href="https://www.youtube.com/watch?v=529MqZgvgug" target="_blank" rel="noopener">Data Warehouse Schemas Explained</a></li><li><a href="https://amzn.to/45Sd0yH" target="_blank" rel="noopener">The Data Warehouse Toolkit — Kimball (book)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry: pick a domain with a measurable event plus messy descriptive context and a real duplicate-entity problem, then write your own charter + star schema. Examples: SEC EDGAR (sec.gov/edgar) — fact = a reported financial line item, dimensions = filer/company (duplicate CIK/name variants), period, form type; CoinGecko — fact = a price/volume observation, dimensions = coin, exchange, quote currency; NOAA — fact = a weather reading, dimensions = station, date, metric; data.gov permits/inspections — fact = an inspection event, dimensions = business (duplicate names/addresses), location, violation code. Name your persona and 4 KPIs the same way Maria&#x27;s are named, and flag your own duplicate-entity mess as a future MDM concern.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -374,7 +375,8 @@ providers = spark.table(f&quot;{SCHEMA}.silver_providers&quot;)
 
 print(&quot;SCAFFOLD ONLY — steps above are not implemented yet&quot;)
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD only — lands structure and stubs. Every TODO is where you take over; it does not compute a passing result on its own.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=JI-_Qk94OH0" target="_blank" rel="noopener">The Star Schema: Fact vs Dimension</a></li><li><a href="https://www.youtube.com/watch?v=529MqZgvgug" target="_blank" rel="noopener">Data Warehouse Schemas Explained</a></li><li><a href="https://amzn.to/45Sd0yH" target="_blank" rel="noopener">The Data Warehouse Toolkit — Kimball (book)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the grain-and-conformance pattern on YOUR target industry. SEC EDGAR (sec.gov/edgar): grain = one row per filer(CIK) x filing x financial-line-item x period; conform dim_entity on CIK so it serves both a filings process and an insider-transactions process. CoinGecko: grain = one row per coin x exchange x snapshot-timestamp; conform dim_asset across a price process and a market-cap process. NOAA: grain = one row per station x day x measure; conform dim_station across temperature and precipitation processes. Whatever your domain: declare the grain in one sentence, build a bus matrix with at least two processes, and prove one shared dimension serves both.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -517,7 +519,8 @@ if __name__ == &quot;__main__&quot;:
     #        versions_opened == 0 after the first application.
     pass
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — it wires up the two-step SCD2 structure (config, snapshot load, hash stub, seed branch, mark-then-insert MERGE skeleton, as-of validator, audit/idempotency hooks) and leaves every transformation as a commented TODO. It does not implement the MERGE clauses, the hash, or the classification — you do, so you can defend each clause in the hot seat.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=fJFqoambT54" target="_blank" rel="noopener">SCD Type 2 Still Rules In Regulated Industries</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the pattern on your own target industry by picking a source that RE-PUBLISHES over time and historizing two snapshots. SEC EDGAR (sec.gov/edgar): a company&#x27;s reported facts/address/officers change between filings — SCD2 the company dimension so you can reconstruct &#x27;what did we know on the 10-K date?&#x27;. CoinGecko: token metadata/market-cap-rank shifts snapshot to snapshot. NOAA: station attributes/instrument changes over time. data.gov permit or license registries: status and holder change across monthly extracts. Locked-down domain? Use Faker to emit two snapshots where a controlled subset of tracked attributes changed. Same deliverable: effective-dated Type 2 dimension + change-tracking policy + point-in-time query on YOUR entity.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -623,7 +626,8 @@ FROM {GOLD}.fact_price_by_facility_procedure f
 # TODO: loop the whole build 10x; assert identical fact.count() AND identical pct_passing each time.
 #       Capture the 10 identical numbers in your why-note.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — it wires up the gold star schema, the KPI table, the semantic view, an idempotent write, and reconciliation stubs. The joins, the grain-enforcement, the canonical KPI SQL, and the 10x idempotency assertion are left as TODOs for you. Do NOT fill in the full solution here — the decisions are your interview answers.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=tkFr-4r906Q" target="_blank" rel="noopener">How to Design a Data Pipeline That&#x27;s LLM-Ready</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry&#x27;s silver model. SEC EDGAR: build fact_metric_by_company_period (grain = company x fiscal-period x metric) from your SCD2 filing silver, a completeness KPI = % companies with all required line items filed, and a vw_financials semantic view. CoinGecko: fact_price_by_asset_exchange (grain = asset x exchange x snapshot) + a coverage KPI = % assets with a price on every tracked exchange. NOAA: fact_reading_by_station_day + a completeness KPI = % stations reporting all required measures. Keep the moves identical: declare the grain first, take CURRENT-view dims from your SCD2 silver, define ONE canonical KPI, expose a business-named serve-only view, quarantine grain violations, and prove 10x idempotency.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -748,7 +752,8 @@ def pairs_for(df, key):
 # TODO: run this notebook 10x; assert DIM_REF count and PAIRS count are
 #       identical every run. Paste the proof into your why-note.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the reference-table, crosswalk, and blocking structure and lands the shapes; TODO markers are where YOU do the real work. It deliberately does NOT implement standardization logic, the full USPS map, pair scoring, or survivorship (W19). Run in a Databricks Free Edition notebook.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=ROF_c7p3Uvc" target="_blank" rel="noopener">Deterministic Matching vs Fuzzy Matching</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry&#x27;s duplicate-entity problem, swapping only the sources. Finance/markets: dedupe issuers/filers across SEC EDGAR (https://www.sec.gov/edgar) where the same company appears under CIK variants and messy company names — block on soundex(company_name)+state_of_incorp. Crypto: reconcile the same asset across exchanges via CoinGecko (contract-address vs. ticker collisions). Public sector/aid: dedupe organizations across ReliefWeb or data.gov grantee lists. Locked-down or fraud domains: synthesize duplicate customers with Faker (same person, typo&#x27;d name + address). In every case build a reference dimension, a crosswalk with a match_status column, and &gt;=2 deterministic blocking keys — do NOT score or merge yet.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -863,7 +868,8 @@ review_rows = (to_review
 # --- KPI line for the Charter ---
 # TODO: print { collapsed = input_rows - golden_rows, golden_rows, review_rows, pct_change_vs_last }
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for Databricks Free Edition — lands structure and the blocking→pairing→feature skeleton using only Spark built-ins (no pip installs). TODO markers are where the learner does the real thinking: weighting, threshold, clustering, survivorship, idempotent MERGE. Not a solution.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=ROF_c7p3Uvc" target="_blank" rel="noopener">Deterministic Matching vs Fuzzy Matching</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact pattern on YOUR target industry&#x27;s duplicate-entity problem, keeping every step (block → pair → fuzzy-score → threshold → cluster → survivorship → golden + review queue). Finance/markets: dedupe issuers/companies across SEC EDGAR filings (same company, many CIK-linked name variants) — https://www.sec.gov/edgar. Crypto: reconcile the same asset across exchanges/aliases via CoinGecko — https://www.coingecko.com/en/api. Public sector/NGO: dedupe organizations across data.gov or ReliefWeb feeds. Weather/IoT: resolve duplicate station identities in NOAA data. Locked-down/fraud domains: generate a labeled duplicate set with Faker (inject name/address noise yourself) so you control ground truth. The William→Illiam problem, the survivorship rules, and the human-review queue are industry-agnostic — only the entity and the source change.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -961,7 +967,8 @@ unclassified.show(truncate=False)
 # NOTE: This scaffold produces EVIDENCE. The four architecture-doc parts
 #       (data-flow map, tool-selection log, failure plan, idempotency plan)
 #       are written by YOU in ARCHITECTURE.md — that&#x27;s the deliverable.</code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only — it inventories the Delta tables you already built so your data-flow map cites real row counts. It deliberately does NOT write any of the four doc sections or make the ELT/incremental decision; those TODOs are where you take over. Table/schema names are guesses you must correct to match W15–W19.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=7HLVrkYIdCE" target="_blank" rel="noopener">Become a Data Engineer From Scratch: Start with ETL/ELT!</a></li><li><a href="https://www.youtube.com/watch?v=qmnfNhMMxXs" target="_blank" rel="noopener">Why the ETL Developers are Gone in 2026</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the same four-part doc on YOUR target industry&#x27;s running project — the decision framework is identical, only the mess changes. Fintech/markets: map SEC EDGAR filings (sec.gov/edgar) or CoinGecko price pulls (rate-limited, revised filings = late records) — ELT still wins because filing formats vary and you want replayable raw. Climate: NOAA (schema drift across station generations). Humanitarian: ReliefWeb (duplicate org entities → your own MDM). Locked-down/fraud domains: Faker-generated sources. Whatever your domain, your architecture doc must name YOUR specific failure modes (rate limits, format drift, late republishes, duplicate entities) and justify incremental-vs-full against YOUR source&#x27;s republish cadence.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1102,7 +1109,8 @@ def ingest_mrf(landing_path):
 # ingest_mrf(&quot;/Volumes/workspace/default/landing/hospital_mrf.json&quot;)
 # display(spark.table(AUDIT).orderBy(&quot;ingest_ts&quot;))
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for a Databricks Free Edition notebook — it will NOT run clean as-is. Every TODO is where you take over. It only sets up run lineage, the audit-log helper, and the two ingest skeletons; the 429/backoff logic, the Bronze metadata write, the idempotent replaceWhere, and the missing-file guard are yours to implement. Do not add cleaning/typing/dedup here — that violates the Bronze contract and belongs in W22 Silver.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=CrGJTYQ8PVE" target="_blank" rel="noopener">Schema Drift Ruined Their Pipeline | Prevent It</a></li><li><a href="https://www.gambilldataengineering.com/data-engineering/how-to-survive-schema-drift-the-silent-killer-of-data-pipelines" target="_blank" rel="noopener">Surviving Schema Drift (article)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the identical pattern on your own target industry with one rate-limited API source plus one irregularly-published bulk file. Fintech/compliance: SEC EDGAR full-text search + submissions API (real rate limits and a required User-Agent header — a perfect 429/backoff exercise) plus a bulk financial-statement dataset from sec.gov/dera. Crypto: CoinGecko public API (documented rate limits and 429s) plus a periodic CSV export. Public-sector/ESG: any data.gov CKAN API plus a monthly agency file; climate: NOAA APIs. Whatever you pick, land it to YOUR bronze_&lt;source&gt; tables with the same _source/_ingest_ts/_batch_id metadata, make one source a paged API you must back off from, and make one source a file that can fail to appear so your MISSING_SOURCE guard has something real to catch. If your industry&#x27;s data is locked down, generate a Faker feed with an injected outage instead.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1209,7 +1217,8 @@ rejected = (
 # TODO 14: write a contract test that FAILS if the gold definition text
 #          references BRONZE or contains a cleaning function.
 </code></pre><div class="sc-note"><span class="ml">Note</span> SCAFFOLD ONLY — sets up the three-layer contract structure and fails loud on violations. Every TODO is where you take over; it deliberately does NOT contain a full silver transform or the finished gold view.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=uNtMetMNVgw" target="_blank" rel="noopener">The Medallion Architecture Most Teams Get Wrong</a></li><li><a href="https://www.youtube.com/watch?v=s_UkMM_4cLw" target="_blank" rel="noopener">End-to-End Unity Catalog Setup — Medallion</a></li><li><a href="https://www.gambilldataengineering.com/gambill-data-business-templates#real-world-medallion" target="_blank" rel="noopener">Real-World Medallion template (free)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Apply the identical bronze/silver/gold contract discipline to your own target industry&#x27;s data. SEC EDGAR filings (sec.gov/edgar): bronze = raw filing text/XBRL as landed with accession-number + ingest timestamp; silver = typed financials, standardized ticker/CIK, one documented grain per line item; gold = serve-only ratio marts. CoinGecko/markets: bronze = raw JSON snapshots; silver = typed prices, standardized symbol + currency; gold = serve-only OHLC views. NOAA/weather: bronze = raw station files; silver = typed, unit-standardized observations keyed by station+timestamp; gold = serve-only climatology. Write the same one-page contract and the same &#x27;if you need to clean it in gold, it belongs in silver&#x27; rule for YOUR source, and name YOUR raw-string mess (SEC&#x27;s mixed &#x27;NM&#x27;/blank/parenthesized-negative numbers is a great parallel to CMS&#x27;s &#x27;$&#x27;/&#x27;N/A&#x27;/range charges).</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1328,7 +1337,8 @@ except Exception as e:
 # (c) land 1 late record (event date 2025-06, ingest now) -&gt; show it IS processed;
 #     comment why an event-time watermark on last_updated would have skipped it.
 # Then read `spark.table(WATERMARK)` history as evidence for your &#x27;why&#x27; note.</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the control table, period landing, and the read-process-advance skeleton. TODO markers are where YOU implement the incremental logic. It deliberately does NOT solve idempotency (append is intentional; W24 fixes it) and does NOT switch to event-time watermarking.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li><li><a href="https://www.youtube.com/watch?v=CrGJTYQ8PVE" target="_blank" rel="noopener">Schema Drift Ruined Their Pipeline | Prevent It</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the watermark on your own industry&#x27;s periodically-republished source. SEC EDGAR: watermark on filing acceptance datetime so each run pulls only newly-accepted filings, not the full history. CoinGecko: watermark on your ingest_timestamp of price snapshots across polling windows. NOAA / data.gov: watermark on the dataset&#x27;s period/version or your land time. The pattern is identical — land raw with an ingest_timestamp, store a durable high-water mark in a Delta control table, read WHERE ingest_ts &gt; watermark, advance only on success — and the same trap applies: prefer YOUR ingest-time over the source&#x27;s self-reported &#x27;last_updated&#x27;, which is often stale, missing, or reused when the publisher re-emits an unchanged file.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1427,7 +1437,8 @@ def prove_idempotent(spark, batch_id, runs=10):
     # TODO: assert current_rows == distinct keys (exactly one current row per provider = no dup collapse).
     return seen
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD for Databricks Free Edition — lands the structure and the 10× harness skeleton only. Fill every TODO; this is deliberately NOT the solution. Runs on Delta + PySpark.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li><li><a href="https://www.youtube.com/watch?v=CrGJTYQ8PVE" target="_blank" rel="noopener">Schema Drift Ruined Their Pipeline | Prevent It</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Run the same pattern on YOUR industry&#x27;s re-published, keyed source. SEC EDGAR: re-fetch a company&#x27;s filings and MERGE on accession number so a retry never double-lists a 10-K; backfill a prior quarter. CoinGecko: month-partition overwrite (replaceWhere) daily OHLC by coin_id after a 429 retry. ReliefWeb/NOAA: MERGE reports/stations on their stable id. Locked-down data (Faker): generate a batch with intentional in-batch duplicate keys and prove your MERGE + 10× harness collapses them. Name your natural key and your strategy in your own idempotency plan.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1531,7 +1542,8 @@ df_valid.explain(True)   # save this output to /architecture/spark_plans_w25.txt
 # 7) KPIs for Maria
 # TODO: pct_complete = df_valid.count() / n_in; print quarantined count by reason
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it reads bronze, stubs the transform chain, and hard-wires the lazy-eval timing + explain() instrumentation so the learner SEES the execution model. Every real transform (select/cast/when/na), the specific quality predicates, per-reason rejection labels, the conservation assert, and the idempotent writes are left as TODOs. Deliberately never calls collect() — the scaffold models the safe habit and the WHY note asks the learner to explain why.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://trk.udemy.com/RGeRR7" target="_blank" rel="noopener">Databricks &amp; PySpark Zero to Expert (course)</a></li><li><a href="https://trk.udemy.com/vPaNdO" target="_blank" rel="noopener">Taming Big Data with Apache Spark (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#pyspark-on-dbx" target="_blank" rel="noopener">PySpark-on-Databricks template (free)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the same re-expression on YOUR target industry&#x27;s silver transforms. If your Project-1 mirror is SEC EDGAR filings, re-express your issuer-conforming and numeric-cast transforms in the DataFrame API over the full bulk submission dump (not a 100-filing sample); if it&#x27;s CoinGecko, port your price/volume type-casts and null-handling; if it&#x27;s NOAA, your station-reading conforms. The pattern is identical: one predicate set → valid/rejected split, prove conservation, read explain(), and document one place collect() would have blown up your driver at full volume. Name YOUR specific scale mess (EDGAR&#x27;s inconsistent tags, CoinGecko 429s, NOAA missing-value sentinels like -9999).</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1626,7 +1638,8 @@ normalize_key = F.udf(_normalize_key, StringType())
 #       then run this build 10x and assert identical counts + KPI values.
 #       Append a row to your audit log (run ts, input counts, match rate, quarantined).
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY. Runs on Databricks Free Edition against your existing silver Delta tables. It sets up the join, the matching-UDF stub, and the KPI aggregation shell; every real decision is a TODO. Do NOT fill in a full solution here — the choices are the interview answers.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://trk.udemy.com/RGeRR7" target="_blank" rel="noopener">Databricks &amp; PySpark Zero to Expert (course)</a></li><li><a href="https://trk.udemy.com/vPaNdO" target="_blank" rel="noopener">Taming Big Data with Apache Spark (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#pyspark-on-dbx" target="_blank" rel="noopener">PySpark-on-Databricks template (free)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Run the identical pattern on your own target industry&#x27;s data: join a messy transactional fact to a canonical entity registry at scale, quarantine the no-match rows, and write a normalization UDF you&#x27;ll reuse for your own dedup/MDM week. Finance/markets: join SEC EDGAR filings (https://www.sec.gov/edgar) to a ticker/CIK entity list — issuer names vary (Inc/Corp/Co, subsidiaries). Crypto: join CoinGecko (https://www.coingecko.com/en/api) trades/markets to a canonical asset list — same coin listed under symbol variants across exchanges. Humanitarian: join ReliefWeb (https://reliefweb.int/help/api) reports to an org/country reference. Locked-down or fraud domain: generate millions of rows with Faker and inject deliberate name/address variants. Keep the same deliverables: chosen join type + strategy, a match-rate gate, a reusable matching UDF, quarantine-with-reason, and a 10x idempotency proof.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1720,7 +1733,8 @@ SALT_N = 8  # TODO: choose N deliberately; justify with max-task time. Try a few
 # TODO: assert your fixed join produces the SAME count as baseline_count.
 #       assert fixed_count == baseline_count, f&quot;fix changed output: {fixed_count} != {baseline_count}&quot;
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — it sets up the baseline join and the measurement points, then hands off at every TODO. It deliberately does NOT implement the salt/broadcast fixes or the correctness assertion; that is your work. Runs on Databricks Free Edition (Delta + PySpark). Open the Spark UI from the compute page.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://amzn.to/45QIzci" target="_blank" rel="noopener">Designing Data-Intensive Applications (book)</a></li><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the identical diagnosis on YOUR target industry&#x27;s biggest join, where a few keys dominate. SEC EDGAR: a company/filing join where a handful of mega-filers (big banks, Berkshire) own thousands of filings under one CIK. CoinGecko: a trades-by-market join where BTC and ETH dwarf every other pair. NOAA: an observations-by-station join where a few busy stations carry most rows. Retail/e-commerce (Faker or public): orders skewed to a few top SKUs or one flagship store. Whatever it is, run it, open the Spark UI, find the straggler, name the hot keys, fix with salt or broadcast, and record before/after — same pattern, your data.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1834,7 +1848,8 @@ rejected_out = (rejected
 #       if quarantine_rate &gt; rule[&#x27;budget&#x27;]: append a dq_alerts row AND print a LOUD message.
 #       Decide: does a breach halt the run (raise) or continue with alert logged? Write it down.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the expectations catalog shape, the flag-then-split skeleton, and the quarantine/summary/alert write points. TODOs are where YOU write the actual rules, thresholds, idempotency key, and alert behavior. Do not fill these in from a tutorial — your rule choices are your interview answers.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=OEwnU3ooFwo" target="_blank" rel="noopener">Databricks Data Quality: Quarantine Tables Are Not Dumping Grounds</a></li><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the exact flag-then-split-quarantine pattern on YOUR target industry&#x27;s silver table. Fintech (SEC EDGAR): quarantine filings where CIK is malformed, a reported value is non-numeric, or a (CIK, period, tag) grain collides. Crypto (CoinGecko): reject rows where price is null/negative, a coin_id is off your accepted list, or timestamps are out of the expected window. Humanitarian (ReliefWeb) or weather (NOAA): reject out-of-domain country/station codes and impossible measurements. Fraud/locked-down data: use Faker to generate a bad-row deck. Keep the same four rule classes (schema, completeness, uniqueness/grain, domain), the same `&lt;domain&gt;_rejected` table with reason+timestamp, and the same threshold alert — only the columns and accepted-code sets change.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1954,7 +1969,8 @@ def check_control_total(bronze_total, silver_total, money_tolerance):
 # TODO (lab): wire bronze-&gt;silver-&gt;gold through instrument_layer(), run assert_completeness()
 #   and check_control_total(), flip run status, then run the whole thing 3-10x and prove
 #   the audit_log holds one row per (run_id, layer) with identical numbers every time.</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it stands up run_id, the audit_log DDL, an idempotent MERGE writer, and the reconciliation function signatures. The learner must clean the currency control total, complete the completeness identity, set and justify the money tolerance, and make FAIL actually block gold. The dedup_collapsed bucket is intentionally left for them to compute from their golden-record step.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=OEwnU3ooFwo" target="_blank" rel="noopener">Databricks Data Quality: Quarantine Tables Are Not Dumping Grounds</a></li><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the reconciliation + audit_log pattern onto your own industry&#x27;s running pipeline, keeping the same identity (in = out + rejected + collapsed) and one control total that must be conserved. SEC EDGAR: reconcile filing counts and a summed financial line (total revenue) across layers, watermark = latest accession date. CoinGecko: reconcile row counts and a conserved metric (total market cap or 24h volume) per pull, watermark = snapshot timestamp, and account for coins dropped as duplicates/delisted. NOAA: reconcile station-reading counts and summed precipitation, explaining rows quarantined for out-of-range sensor values. Whatever the domain, pick a money/volume total a stakeholder would notice if it silently changed, and prove it doesn&#x27;t.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -2065,7 +2081,8 @@ def test_kpis_are_computed_and_sane(spark):
     # TODO: assert kpis[&#x27;duplicates_collapsed&#x27;] &gt;= 1  # the fixture&#x27;s two-spelling provider must merge
     ...
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD, not a solution. Pair it with a conftest.py holding the session-scoped `spark` fixture (see TODO at top). Every tier has one worked skeleton and TODO markers where you write the real assertions against YOUR transforms.py and pipeline functions. Run with `pytest -v` locally, or `pytest.main([&#x27;-v&#x27;])` in a Databricks notebook cell after `%pip install pytest chispa`.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=1qAtbwm1tT8" target="_blank" rel="noopener">Your Production and Test Environments Are Drifting Apart</a></li><li><a href="https://www.youtube.com/watch?v=jPgM3yghV5Q" target="_blank" rel="noopener">Your Code Works Perfectly? That&#x27;s A Problem</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror the taxonomy onto your own domain&#x27;s pipeline, not healthcare. SEC EDGAR: unit-test the CIK/ticker normalizer, quarantine filings with missing financial fields, e2e-test that the same issuer under two name spellings collapses to one golden entity and that a refiled 10-K reruns idempotently. CoinGecko: unit-test price/decimal parsing, smoke-test the market-cap gold contract, e2e-test idempotency across a re-pulled day. ReliefWeb/NOAA/data.gov: same four tiers over your late-arriving, schema-drifting source. Whatever your target industry, your README&#x27;s business framing must name money/risk/compliance in THAT domain so its hiring managers pass the 30-second recognition test.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>

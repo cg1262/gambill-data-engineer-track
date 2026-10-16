@@ -263,7 +263,8 @@ def main() -&gt; None:
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Also create a starter .gitignore ( .venv/  __pycache__/  *.pyc  .env  data/raw/*  data/processed/*  .DS_Store ) and a README skeleton with sections: Purpose, Setup (venv + pip install -r requirements.txt), Run (python src/check_env.py), Repo layout. Recommended tree: repo/ ├─ src/  ├─ data/raw/  data/processed/  ├─ notes/decisions.md  ├─ README.md  ├─ requirements.txt  └─ .gitignore. The scaffold intentionally leaves the version-gate and dependency-import logic as TODOs — the learner writes the real checks.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=CEGN-LbiX4Y" target="_blank" rel="noopener">If I Started Over As A Data Engineer</a></li><li><a href="https://www.youtube.com/watch?v=uCTVYf9FBQY" target="_blank" rel="noopener">The 2026 Data Engineer Roadmap</a></li><li><a href="https://gambilldata.com/resources/" target="_blank" rel="noopener">Free DE Checklist (template)</a></li><li><a href="https://www.gambilldataengineering.com/data-engineering-honeycomb" target="_blank" rel="noopener">DE Honeycomb roadmap (free)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A public GitHub repository (the course repo everything else will build on) containing: a working Python venv workflow captured in a pinned requirements.txt, a completed `src/check_env.py` that runs green, a real .gitignore (excluding .venv, secrets/.env, and data files), a README with Setup/Run/Layout sections, and a `notes/decisions.md`. Git history shows at least three atomic commits on a `feature/env-setup` branch merged into `main` via a Pull Request you opened, reviewed, and merged. Submit the repo URL and the merged PR link.</div>
@@ -342,7 +343,8 @@ flowchart LR
 ```
 MERMAID
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands 50 rows and hands you a diagram stub. You must run the profiling queries, fill in the real counts/failure labels, add the quarantine path, and write the contract + why-note yourself. jq is optional but recommended (sudo apt install jq).</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li><li><a href="https://amzn.to/4wmq0cb" target="_blank" rel="noopener">Fundamentals of Data Engineering (book)</a></li><li><a href="https://amzn.to/45QIzci" target="_blank" rel="noopener">Designing Data-Intensive Applications (book)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A README.md in a Git repo containing: (1) the 1-2 sentence business framing, (2) an embedded Mermaid flowchart of the 311 record lifecycle with failure-mode annotations on the edges, (3) a one-page data contract (grain, source/cadence, required non-null fields + types, known failure modes with observed counts, idempotency/rerun policy keyed on unique_key), (4) a named list of at least two downstream consumers and the concrete harm each suffers when the contract is violated, and (5) a 3-5 sentence why-note defending one design decision. The raw sample_311.json is committed as evidence.</div>
@@ -457,7 +459,8 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only. It parses argv and stubs the fetch/read and the three functions with TODO markers. You write the real parse/classify/summarize logic, the quarantine of blank-magnitude rows, and the report output.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://amzn.to/4fYPIKD" target="_blank" rel="noopener">Automate the Boring Stuff with Python (book)</a></li><li><a href="https://datacamp.pxf.io/m4EjNa" target="_blank" rel="noopener">DataCamp — Data Engineer in Python track (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">quakestats.py (a CLI taking a magnitude threshold as argv), a rejected.csv produced by a run showing quarantined blank/malformed-magnitude rows with a reason column, and a short NOTES.md explaining the blank-magnitude decision and rerun idempotency. Committed to the learner&#x27;s portfolio repo with a README snippet showing the two example runs and their differing above-threshold counts.</div>
@@ -566,7 +569,8 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw GeoJSON, iterates features, and gives you a quarantine-writer stub. The validation rules, dedupe set, per-region aggregation, and idempotent-rerun choice are yours to build where the TODOs are.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://amzn.to/4fYPIKD" target="_blank" rel="noopener">Automate the Boring Stuff with Python (book)</a></li><li><a href="https://datacamp.pxf.io/m4EjNa" target="_blank" rel="noopener">DataCamp — Data Engineer in Python track (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A runnable ingest_quakes.py that turns the live USGS all_month GeoJSON into a per-region aggregate dict (event count + max magnitude), a rejects.jsonl quarantine file where every bad record carries a specific reason and UTC timestamp, and a short DECISIONS.md explaining the validation rules, dedupe key, quarantine choice, and idempotent-rerun strategy.</div>
@@ -694,7 +698,8 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Every function raises NotImplementedError on purpose — this is a skeleton, not a solution. Reuse your Week 3-4 logic to fill the TODOs. After building the tree, run: python -m venv .venv &amp;&amp; source .venv/bin/activate &amp;&amp; pip install -e . &amp;&amp; python -m quakes</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://amzn.to/4fYPIKD" target="_blank" rel="noopener">Automate the Boring Stuff with Python (book)</a></li><li><a href="https://datacamp.pxf.io/m4EjNa" target="_blank" rel="noopener">DataCamp — Data Engineer in Python track (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A GitHub repository containing an installable Python package quakes/ (with client.py exposing a QuakeClient class, pure parse.py functions, report.py, __main__.py, and __init__.py), a minimal working pyproject.toml, a README with copy-paste install+run instructions, and a short DECISIONS.md. The package must install cleanly into a fresh venv via pip install -e . and run via both import quakes and python -m quakes.</div>
@@ -784,7 +789,8 @@ def assert_no_merge_inflation(left, merged, on):
 #             assert it&#x27;s unique, left-merge, call assert_no_merge_inflation(),
 #             compute requests_per_10k, and export the parquet idempotently (overwrite). ---
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands one month of raw 311 data, gives you a profiling helper and a merge-validation assertion helper. The cleaning plan, quarantine logic, aggregation, normalization, and rate calc are yours to build at the TODO markers.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#dataframe-upgrade-roadmap" target="_blank" rel="noopener">DataFrame Upgrade Roadmap (free)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A validated parquet (requests_per_10k_by_type_borough_month.parquet) at the complaint_type x borough x month grain with a requests_per_10k column, plus a rejected_311.parquet (quarantined rows with reject_reason + rejected_at), the executed cleaning script, and a short why-note documenting the normalization choice, reject rule, and the merge-inflation guard.</div>
@@ -892,7 +898,8 @@ if __name__ == &quot;__main__&quot;:
     # TODO: idempotent write (overwrite) of reconciled + rejected tables
     print(&quot;pages fetched:&quot;, len(pages))
 </code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only: paginate() has the backoff skeleton and reconcile() returns match classes. Normalization, tolerance comparison, quarantine, and the provenance write are yours to build (see TODOs).</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#dataframe-upgrade-roadmap" target="_blank" rel="noopener">DataFrame Upgrade Roadmap (free)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A runnable `reconcile_population.py` plus its outputs: one reconciled table (Parquet/CSV) keyed by iso3+year with columns wb_value, owid_value, match_class (matched/api_only/csv_only), pct_diff, discrepancy, and provenance (source_wb, source_owid, as_of); a `rejected` table capturing quarantined rows (null values, non-country aggregates) each with a reason and UTC timestamp; and a DECISIONS.md explaining tolerance, keying, retry/backoff policy, and 2–3 real discrepancies found.</div>
@@ -1071,7 +1078,8 @@ def test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -&gt
     # TODO: assert result.actual_count == &lt;the number you counted by hand&gt;
     raise NotImplementedError
 </code></pre><div class="sc-note"><span class="ml">Note</span> A src-layout scaffold with a pyproject entry point and ONE parametrized pytest example over a fixture. It defines the seams and types but leaves the real reconcile/dedupe/quarantine logic as TODOs — you build that. Create the files at the paths shown in each header comment.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=jPgM3yghV5Q" target="_blank" rel="noopener">Your Code Works Perfectly? That&#x27;s A Problem</a></li><li><a href="https://www.youtube.com/watch?v=D5bln7fqMZQ" target="_blank" rel="noopener">$180k Data Engineers Don&#x27;t Make These Python Mistakes</a></li><li><a href="https://amzn.to/47eXsaz" target="_blank" rel="noopener">The Pragmatic Programmer (book)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A src-layout Python package (quake_recon) with io/reconcile/cli seams that reconciles the USGS all_day feed&#x27;s metadata.count against the actual feature count, dedupes duplicate ids across overlapping pulls, and quarantines null-id records to a rejected JSONL file with a reason + timestamp. Ships with: committed GeoJSON fixtures, a parametrized pytest suite (empty feed, dup ids, missing field, count mismatch), zero mypy errors, a pyproject with a console_scripts entry point, a built wheel in dist/, a README documenting the contract (inputs/outputs/exit codes), and a WHY.md decisions note.</div>
@@ -1160,7 +1168,8 @@ print(con.execute(&quot;SELECT name FROM (SHOW ALL TABLES) WHERE database = &#x2
 
 con.close()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the data via ATTACH and prints the table list. It writes zero business queries — every JOIN, filter, and the INNER-vs-LEFT delta note are the learner&#x27;s work at the TODO markers.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/m4Gqbq" target="_blank" rel="noopener">DataCamp — Associate Data Engineer in SQL track (course)</a></li><li><a href="https://trk.udemy.com/N9qkav" target="_blank" rel="noopener">The Complete SQL Bootcamp (course)</a></li><li><a href="https://amzn.to/4ajcv2E" target="_blank" rel="noopener">SQL in 10 Minutes (book)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A `week09-sql-joins/` folder containing 8–10 numbered `.sql` files (each with a header comment stating its result grain and expected vs actual row count) plus a `WHY.md` note. The queries must cover: 2 filtering queries, a multi-hop INNER JOIN artist→…→customer, a LEFT JOIN surfacing parentless (album-less) artists, an employee→manager self-join that retains the top manager, a fan-out demonstration with the grain-correct fix, and one query written twice (INNER vs LEFT) with the row-count delta recorded.</div>
@@ -1202,7 +1211,8 @@ con.close()
         <div class="lab-sub">Reference material</div>
         <ul class="refs"><li><a href="https://duckdb.org/docs/stable/sql/functions/aggregates" target="_blank" rel="noopener">DuckDB — Aggregate functions (COUNT, SUM, and NULL handling)</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/groupby" target="_blank" rel="noopener">DuckDB — GROUP BY and HAVING clauses</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/setops" target="_blank" rel="noopener">DuckDB — Set operations (UNION / EXCEPT / INTERSECT)</a></li><li><a href="https://www.postgresql.org/docs/current/functions-subquery.html" target="_blank" rel="noopener">PostgreSQL — Subquery expressions (IN / NOT IN / EXISTS and the NULL pitfall)</a></li></ul>
         
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/m4Gqbq" target="_blank" rel="noopener">DataCamp — Associate Data Engineer in SQL track (course)</a></li><li><a href="https://trk.udemy.com/N9qkav" target="_blank" rel="noopener">The Complete SQL Bootcamp (course)</a></li><li><a href="https://amzn.to/4ajcv2E" target="_blank" rel="noopener">SQL in 10 Minutes (book)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">An `analytics_pack.sql` file (~10 queries) run against Chinook in DuckDB, where each query is preceded by a plain-English question, a `-- grain:` line naming exactly what one result row represents, and a `-- why correct:` line — plus one worked NOT IN + NULL trap alongside its NOT EXISTS fix with the differing row counts shown. A companion `NOTES.md` records the NULL/COUNT decision and the sentence you&#x27;d use to defend one GROUP BY row to a stakeholder.</div>
@@ -1316,7 +1326,8 @@ UNION ALL SELECT &#x27;rejected&#x27;, count(*) FROM rejected_obs;
 -- Q3 7-day moving avg with ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
 -- Q4 running cumulative PRCP within each station partition
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it stages raw rows and stubs the normalize/quarantine split. You write the QC filters, the unit scaling, idempotent reruns, and all four single-query named-CTE analyses. Verify the by_year column order and the -9999 sentinel against GHCND_documentation.pdf before trusting any number.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://amzn.to/4lOy1QK" target="_blank" rel="noopener">SQL Performance Explained (book)</a></li><li><a href="https://trk.udemy.com/aOdoyQ" target="_blank" rel="noopener">SQL for Data Engineering (course)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A DuckDB database (or reproducible .sql script set) that: (1) loads a subset of NOAA GHCN-Daily observations for 4-6 named stations from long format into a normalized `clean_obs` table with values scaled to real units; (2) quarantines -9999 sentinels and QC-flagged rows into a `rejected_obs` table with a reason and timestamp; and (3) answers the four business questions as four separate single queries, each built ONLY from named CTEs (no nested subquery pyramids) — top-N stations per month, LAG() day-over-day change with the biggest swing flagged, a 7-day moving average using an explicit ROWS frame, and a running cumulative total per station partition. Include a DECISIONS.md explaining the ranking-function choice on ties, the adjacent-day handling for LAG, the ROWS-frame edge behavior, the reject rules, and the idempotency strategy.</div>
@@ -1415,7 +1426,8 @@ GROUP  BY station_id, element;
 
 -- TODO(e): in tuning.md, name ONE index you deliberately did NOT add and why.
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw data and hands you the slow query. You write the baseline capture, the sargable rewrite, the single composed index, and the before/after plan proof. Do not replace the provided query until you have saved its baseline plan.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://amzn.to/4lOy1QK" target="_blank" rel="noopener">SQL Performance Explained (book)</a></li><li><a href="https://trk.udemy.com/aOdoyQ" target="_blank" rel="noopener">SQL for Data Engineering (course)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A tuning package for the GHCN-Daily slice containing: (1) load_and_slow_query.sql extended with your sargable predicate rewrite and your CREATE INDEX IF NOT EXISTS statement; (2) three saved plan files — baseline_plan.txt, after_rewrite_plan.txt, after_index_plan.txt — each from EXPLAIN (ANALYZE, BUFFERS); and (3) tuning.md documenting the bottleneck operator, the predicate rewrite, the index you added with its column-order rationale, and one index you deliberately did NOT add and why.</div>
@@ -1535,7 +1547,8 @@ CREATE OR REPLACE TABLE violation (
 -- INSERT INTO violation VALUES (&#x27;does-not-exist&#x27;,&#x27;10F&#x27;,&#x27;x&#x27;,&#x27;N&#x27;);   -- FK reject
 -- INSERT INTO restaurant (camis) VALUES (&#x27;&lt;an-existing-camis&gt;&#x27;);   -- dup PK reject
 </code></pre><div class="sc-note"><span class="ml">Note</span> A DuckDB DDL + split SKELETON, not a solution. It creates staging + the target 3NF tables with PK/FK constraints and stubs the INSERT...SELECT split. You must: derive a stable inspection_id, choose DISTINCT/anti-join logic that makes reruns idempotent, add the rejected_rows quarantine, and pick your one justified denormalization. Run with: duckdb nyc.duckdb &lt; build_normalized.sql</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=529MqZgvgug" target="_blank" rel="noopener">Data Warehouse Schemas Explained</a></li><li><a href="https://amzn.to/3C4uLju" target="_blank" rel="noopener">Database Design for Mere Mortals (book)</a></li><li><a href="https://amzn.to/45Sd0yH" target="_blank" rel="noopener">The Data Warehouse Toolkit — Kimball (book)</a></li></ul>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
         <div class="deliver">A Git repo Phase 1 capstone: (1) a pandas profiling notebook/script that lands raw_inspections.parquet and prints the discovered functional dependencies + redundancy counts; (2) an ERD (Mermaid/dbdiagram source + rendered image) of the 3NF design; (3) build_normalized.sql producing a DuckDB database with 5 constrained tables (restaurant, inspection, violation, boro, cuisine), a rejected_rows quarantine table, and idempotent INSERT...SELECT splits; (4) a README.md with the business framing, the ERD, the FD/anomaly findings, the two rejected-insert error outputs (FK + duplicate PK), and a short write-up of the one justified denormalization and the idempotency strategy chosen.</div>

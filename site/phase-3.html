@@ -279,7 +279,8 @@ CLUSTER_KEYS = []  # TODO e.g. [&quot;payer_id&quot;, &quot;hospital_ccn&quot;, 
 #       Headline the BUSINESS OUTCOME first (lands before 8am / DBU down ~X%),
 #       technical change second.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the measure/tune/measure structure and where to record numbers. Fill every TODO yourself; the point is that YOU read the profile and choose keys by query pattern. Do not let this become the full solution.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=xravKkAElUE" target="_blank" rel="noopener">Managed vs External Tables in Databricks: The $15K Mistake</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the healthcare tables for your own target industry&#x27;s high-write tables and cluster by how YOUR consumer actually filters: crypto (CoinGecko) — cluster a prices table by coin_id + day for a trading dashboard; disclosures (SEC EDGAR) — cluster filings by cik + form_type; climate (NOAA) — cluster observations by station_id + date. Same discipline: measure first, pick keys from the query pattern not the schema, avoid partitioning a high-cardinality id, and lead your Performance Notes with the business outcome your stakeholder feels.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -370,7 +371,8 @@ CREATE CATALOG IF NOT EXISTS ${catalog_name}
 -- FROM ${catalog_name}.information_schema.tables ORDER BY 1,2;   -- TODO screenshot
 -- TODO: query column tags back from information_schema.column_tags
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up structure and TODO markers, not the solution. You decide the catalog boundary, the managed/external split, the exact grants, and the tag taxonomy. Runs on Databricks SQL / a UC-enabled notebook.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=s_UkMM_4cLw" target="_blank" rel="noopener">End-to-End Unity Catalog Setup</a></li><li><a href="https://www.youtube.com/watch?v=EFtUY27bEng" target="_blank" rel="noopener">$180k Databricks Engineers Mastered This One Method</a></li><li><a href="https://trk.udemy.com/o4rnzY" target="_blank" rel="noopener">Databricks Certified DE Associate (course)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do the same retrofit on YOUR target-industry project. Pick the catalog boundary that matches how your real users query, and identify YOUR sensitive columns: for SEC EDGAR/finance it&#x27;s issuer identifiers and material non-public fields; for NOAA/climate it&#x27;s station-owner or embargoed-release fields; for ReliefWeb/humanitarian it&#x27;s beneficiary-identifying data; for CoinGecko it&#x27;s API-key/cost attribution. Tag those, grant an &#x27;analyst&#x27; vs &#x27;engineer&#x27; vs &#x27;auditor&#x27; group, and prove one denied-then-granted access — the sensitivity story changes by industry but the governance moves are identical.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -496,7 +498,8 @@ def silver_pricing_conformed_mv():
 # and paste them into the Runbook. TODO: add your event_log TVF query here or in
 # a companion notebook.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up the pipeline structure, table shells, and expectation slots with TODOs. It does NOT implement the transforms, the real constraint expressions, or the tier decisions — that is your work in the lab. Wire it to YOUR W32 Unity Catalog catalog/schema.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=b6-ygCqlhDQ" target="_blank" rel="noopener">Your Orchestration Isn&#x27;t Ready for AI</a></li><li><a href="https://www.youtube.com/watch?v=oj4MXPEnTDA" target="_blank" rel="noopener">Databricks Notebooks in Production: Director&#x27;s Verdict</a></li><li><a href="https://gambilldata.com/resources/hybrid-notebook-script-architecture-map/" target="_blank" rel="noopener">Hybrid Notebook/Script Architecture Map (free)</a></li><li><a href="https://trk.udemy.com/3JNe1X" target="_blank" rel="noopener">Hands-On Apache Airflow 3 (course)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Mirror this to YOUR target industry&#x27;s regulated or decision-critical dataset. Pick a source that arrives as repeated file drops and has a real &#x27;wrong value = money/risk&#x27; story, then define the same three-tier contract on it. Fintech: SEC EDGAR filings (https://www.sec.gov/edgar) or crypto prices from CoinGecko (https://www.coingecko.com/en/api) — fail on a missing ticker/period key, drop on an out-of-range price. Public sector / humanitarian: data.gov or ReliefWeb (https://reliefweb.int/) — fail on missing geography+period grain, drop on an implausible metric. Climate/energy: NOAA (https://www.ncdc.noaa.gov/cdo-web/webservices/v2) — drop on a sensor reading outside physical bounds. No public feed? Generate one with Faker and inject the same defects. Write the same &#x27;why this tier&#x27; note tied to a decision-maker in YOUR domain.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -596,7 +599,8 @@ resources:
           # TODO: read taskValues from mdm_golden_refresh to stamp the KPI row
           # TODO: point at your gold marts + KPI refresh; keep it idempotent (MERGE/overwrite-by-key)
 </code></pre><div class="sc-note"><span class="ml">Note</span> SCAFFOLD ONLY — a Jobs config resource showing the DAG shape, dependency edges, retry/timeout knobs, parameters, and notification blocks. It intentionally does NOT contain the MDM/gold logic. Fill every TODO; do not let an AI expand this into the full pipeline — the wiring decisions are your interview answers.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=b6-ygCqlhDQ" target="_blank" rel="noopener">Your Orchestration Isn&#x27;t Ready for AI</a></li><li><a href="https://www.youtube.com/watch?v=oj4MXPEnTDA" target="_blank" rel="noopener">Databricks Notebooks in Production: Director&#x27;s Verdict</a></li><li><a href="https://gambilldata.com/resources/hybrid-notebook-script-architecture-map/" target="_blank" rel="noopener">Hybrid Notebook/Script Architecture Map (free)</a></li><li><a href="https://trk.udemy.com/3JNe1X" target="_blank" rel="noopener">Hands-On Apache Airflow 3 (course)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the medallion DAG for your own domain&#x27;s nightly chain and orchestrate it the same way: SEC EDGAR filings → parse/validate → entity-resolve issuers → gold financial marts; or CoinGecko prices → clean → dedup by asset → gold KPI table; or NOAA/ReliefWeb feeds → conform → gold. Keep the SAME three-part shape (ingest+validate → resolve/master → publish marts), the SAME run_if gate before publishing, and set your own domain&#x27;s &quot;report must land by X&quot; as the duration-SLA alert. State your business SLA in one sentence tied to money/risk in your industry.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -696,7 +700,8 @@ query.awaitTermination()
 #  2) Kill mid-run, restart SAME checkpoint -&gt; prove 0 duplicates.
 #  3) Drop a file with a NEW column -&gt; find it in _rescued_data, then evolve.
 #  Capture input-row metrics for your Performance Notes.</code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up structure/config with TODO markers. It intentionally omits the schema-evolution proof, the recovery test, and the trigger-choice write-up so you build and defend those yourself.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=u8D-xQ_4Z4Y" target="_blank" rel="noopener">Build a Real-Time Streaming Project | Live Demo</a></li><li><a href="https://trk.udemy.com/194bRD" target="_blank" rel="noopener">DE Vol.2 AWS: Spark &amp; Kafka (course)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap CMS pricing files for whatever lands irregularly in YOUR industry and re-run the same Auto Loader pattern: SEC EDGAR filings dropping as they are submitted, NOAA weather station extracts, CoinGecko market snapshots you write to a landing folder, ReliefWeb situation reports, or a Faker-generated file feed. Keep the discipline identical — schemaLocation, per-source checkpoint, Trigger.AvailableNow, and a _rescued_data safety net — and write the same &#x27;streaming ≠ real-time&#x27; note stating your own numeric freshness SLA to your own stakeholder.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -798,7 +803,8 @@ def main(spark):
     # TODO: after it runs, print q.lastProgress[&#x27;stateOperators&#x27;] -&gt; numRowsTotal
     return q
 </code></pre><div class="sc-note"><span class="ml">Note</span> SCAFFOLD ONLY — sets up structure/config with TODO markers, not the solution. Fill the TODOs yourself; the MERGE logic and late-tagging are the point of the lab.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=u8D-xQ_4Z4Y" target="_blank" rel="noopener">Build a Real-Time Streaming Project | Live Demo</a></li><li><a href="https://trk.udemy.com/194bRD" target="_blank" rel="noopener">DE Vol.2 AWS: Spark &amp; Kafka (course)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the provider-change feed for an event stream in your own target industry and keep the exact same machinery. Fintech: dedup SEC EDGAR filing events on (cik + form_type + filed_at); crypto: dedup CoinGecko price ticks on (coin_id + market + observed_at) with a tight watermark; humanitarian/climate: dedup ReliefWeb report updates or NOAA station observations on (station_id + metric + event_ts). In every case, name the composite key that means &#x27;the same real event&#x27;, justify a watermark from your source&#x27;s real lateness, and quarantine the too-late instead of dropping it.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -896,7 +902,8 @@ def upsert_audit(spark, row_df):
 # TODO: also emit the same metrics into ops.sla_metrics for the dashboard/alert.
 # TODO: on RESTORE recovery, call upsert_audit with a distinct run_id + reason.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY - sets up structure, config, and idempotent-write pattern with TODOs. It does NOT compute your real metrics or define your thresholds; fill those in from your own silver/gold tables. Do not let an assistant expand this into a full solution - be the human in the loop.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=eMfescivhvY" target="_blank" rel="noopener">Mature Data Teams Don&#x27;t Look Like Yours</a></li><li><a href="https://www.youtube.com/watch?v=DDco8Hw_OI4" target="_blank" rel="noopener">AIOps Is About to Explode—Here&#x27;s Why</a></li><li><a href="https://www.gambilldataengineering.com/gambill-data-business-templates#maturity-tracker" target="_blank" rel="noopener">Data-Maturity Tracker (free)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Re-frame the SLA and audit log for your own target industry&#x27;s clock and risk. In fintech/SEC EDGAR the freshness SLA is tied to filing/market cutoffs and the audit log is a regulatory necessity; in crypto (CoinGecko) freshness is minutes and quarantine spikes signal a bad feed; in humanitarian data (ReliefWeb) or weather (NOAA) late data delays response decisions. Pick your domain&#x27;s real deadline, define freshness against source arrival (not wall clock), and write one alert-to-action line a real on-call in your field would follow.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1094,7 +1101,8 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: echo &quot;TODO: run validation on prod_pricing; if KPIs fail, DO NOT promote (leave last good version)&quot;
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — sets up structure, triggers, and the promotion skeleton with TODO markers. It deliberately omits your real test commands, KPI thresholds, and deploy logic. Fill the TODOs yourself; do not paste a full solution. Deployment here uses the Databricks CLI to target per-env catalogs — full Asset Bundle packaging comes in W40.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=1qAtbwm1tT8" target="_blank" rel="noopener">Your Production and Test Environments Are Drifting Apart</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap the CMS/NPPES pipeline for your own target industry&#x27;s product and keep the identical CI/CD spine: define your three environments as isolated catalogs/schemas, pick two domain KPIs that must pass before promotion, and gate prod behind approval. Fintech (SEC EDGAR filings) -&gt; assert filing-completeness + no duplicate CIKs; crypto (CoinGecko) -&gt; assert price-freshness SLA before promoting; humanitarian (ReliefWeb) -&gt; assert report-count + dedup; weather (NOAA) -&gt; assert station coverage. The lesson is the same: a red check means your data product broke loudly before customers saw it.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1285,7 +1293,8 @@ ALTER TABLE gold.provider_mart
 -- Break-glass (document who authorizes; do not leave applied):
 -- ALTER TABLE gold.provider_mart ALTER COLUMN npi UNSET MASK;
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — structure + config + TODOs, not the solution. Fill in your own classification-driven rules, group names, and column lists. Run it idempotently (re-run 3x) and verify by querying as each persona.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://amzn.to/4myGcBZ" target="_blank" rel="noopener">Data Governance (book)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Swap PHI for your industry&#x27;s regulated/sensitive fields and the story transfers directly: finance/SEC EDGAR — mask CIK-linked PII and material non-public identifiers, scope analysts to their coverage universe; crypto/CoinGecko — protect internal wallet/customer mappings and API keys; humanitarian/ReliefWeb — protect beneficiary identifiers under do-no-harm; climate/NOAA — usually public, so pivot the exercise to protecting your job&#x27;s service credentials and internal enrichment tables. In every case: build a classification table first, mask by group membership, run pipelines as a machine identity, and prove it with audit logs.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1379,7 +1388,8 @@ ALTER TABLE gold.provider_mart
 -- ORDER BY est_usd DESC;
 -- TODO: paste the total into architecture doc &gt; Performance Notes &gt; Cost Baseline, with a reduction target.
 </code></pre><div class="sc-note"><span class="ml">Note</span> STARTER SCAFFOLD ONLY — structure + TODOs, not a working solution. Do ONE cloud branch. Fill the identity/path TODOs from your provisioned resources; delete the branch you did not choose.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=oCVsQbOxEQM" target="_blank" rel="noopener">Pick the Right Data Platform (Before It&#x27;s Too Late)</a></li><li><a href="https://www.youtube.com/watch?v=ot4ptVx3AmI" target="_blank" rel="noopener">Watch This Before Choosing a Data Platform</a></li><li><a href="https://bit.ly/Fabric-Tutorial" target="_blank" rel="noopener">Microsoft Fabric Complete Guide (course)</a></li><li><a href="https://bit.ly/DP-700-Practice" target="_blank" rel="noopener">DP-700 Fabric Practice Test (course)</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Fork this onto the cloud your OWN target industry actually runs on and land a comparable large, messy source into a bucket/container you provision: SEC EDGAR full-text filing archives or NOAA climate bulk files (heavy public downloads), CoinGecko market history (API-to-storage), or a Faker-generated event feed if your domain&#x27;s data is private. The transferable move is identical — governed, keyless external storage plus a cost baseline — only the payload and the compliance framing (financial reporting, environmental, crypto AML) change.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
@@ -1469,7 +1479,8 @@ jobs:
 
       # TODO: on failure, post to the same alert channel your pipeline uses
       # TODO: on success, this tagged, green run IS the release record</code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only — TODO markers mark the work. It assumes a working databricks.yml with a `prod` target and a job key already defined in your bundle (built in W40-W42). Auth is service-principal OAuth via GitHub secrets; do not paste a personal token. The point is to make a git tag, not a manual click, the thing that ships to prod.</div></details>
-        
+        <div class="lab-sub">Go deeper</div>
+        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=xravKkAElUE" target="_blank" rel="noopener">Managed vs External Tables in Databricks: The $15K Mistake</a></li></ul>
         <div class="mirror"><span class="ml2">Adapt to your industry</span> Do this whole integration on YOUR mirror project&#x27;s stack, not Maria&#x27;s. Pick the SLA and the failure that would actually cost your target industry money or trigger a regulator, and make the release prove it: SEC EDGAR filings landing before a market-open dashboard, NOAA weather feeds behind an operations alert, CoinGecko prices where a stale number misprices a position, or a ReliefWeb/data.gov feed a program officer reports upward. Your cold-start run, recovery drill, and Performance Notes headline should name your industry&#x27;s deadline and dollar/risk outcome in the same specific, non-generic voice.</div>
       </div>
       <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
