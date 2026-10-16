@@ -25,7 +25,8 @@ ART = {
 }
 # site mode: phases/paths/hub are local files; the two planning docs stay as artifacts (not in repo)
 SITE = dict(ART)
-SITE.update({"home":"index.html","p1":"phase-1.html","p2":"phase-2.html","p3":"phase-3.html","p4":"phase-4.html",
+SITE.update({"home":"index.html","cur":"curriculum.html","build":"build-plan.html",
+             "p1":"phase-1.html","p2":"phase-2.html","p3":"phase-3.html","p4":"phase-4.html",
              "bridge":"bridge.html","sharpen":"sharpen.html"})
 L = ART if MODE == "artifact" else SITE
 
@@ -74,6 +75,7 @@ details.stage-exp>summary::-webkit-details-marker{display:none}
 details.stage-exp>summary:hover{color:var(--accent)}
 .stage-exp .st-name{min-width:0}
 .stage-exp .wks{margin-left:auto;color:var(--faint);font-weight:600;white-space:nowrap}
+.stage-exp .cnt{color:var(--muted);font-weight:600;white-space:nowrap;font-size:10px}
 .stage-exp .st-chev{color:var(--muted);font-size:10px;transition:transform .18s ease;flex:none}
 details.stage-exp[open]>summary .st-chev{transform:rotate(180deg)}
 .stage-mods{margin:0;padding:4px 0 8px;list-style:none;border-top:1px solid var(--line)}
@@ -118,7 +120,8 @@ def stages_html(stages):
         opn=' open' if i==0 else ''
         items="".join(f'<li>{chip_row(m)}</li>' for m in ms)
         out.append(f'<details class="stage-exp"{opn}><summary><span class="st-name">{e(n)}</span>'
-                   f'<span class="wks">{e(w)}</span><span class="st-chev">&#9662;</span></summary>'
+                   f'<span class="wks">{e(w)}</span><span class="cnt">{len(ms)} modules</span>'
+                   f'<span class="st-chev">&#9662;</span></summary>'
                    f'<ul class="stage-mods">{items}</ul></details>')
     return "".join(out)
 

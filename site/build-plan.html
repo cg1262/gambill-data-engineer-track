@@ -1,0 +1,181 @@
+<title>Build Plan · The Gambill Data Engineer Track</title>
+<style>
+:root{--bg:#EFF2F5;--surface:#FFFFFF;--surface-2:#E7ECF0;--ink:#101922;--ink-2:#2C3A47;--muted:#5C6B78;--faint:#8494A1;--line:#D3DBE2;--line-strong:#B7C2CC;--accent:#E8842A;--accent-strong:#A65210;--accent-soft:#FBEAD6;--accent-ink:#7E3D0D;--blue:#6FA3D2;--blue-strong:#3F73A8;--blue-soft:#E9F1F9;--bronze:#A26B37;--silver:#7C8894;--gold:#B08A2A;--good:#3C8C5C;--good-soft:#DCEDE2;--warn:#B0791F;--warn-soft:#F3E8D2;--skip:#97A3AD;--skip-soft:#E6EAED;--font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--font-mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;--maxw:1120px;--radius:4px;--radius-lg:8px}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1118;--surface:#101B24;--surface-2:#16232E;--ink:#E9EFF4;--ink-2:#C4D0DA;--muted:#92A1AE;--faint:#6E7E8B;--line:#22333F;--line-strong:#2E4351;--accent:#F0954A;--accent-strong:#F4A860;--accent-soft:#3A2413;--accent-ink:#F7C08A;--blue:#83B4DE;--blue-strong:#ACCDEC;--blue-soft:#172836;--bronze:#C79357;--silver:#9EAAB6;--gold:#D2AC4E;--good:#5DB77C;--good-soft:#16281D;--warn:#D2A040;--warn-soft:#2A2211;--skip:#7C8994;--skip-soft:#1A252E}}
+:root[data-theme="light"]{--bg:#EFF2F5;--surface:#FFFFFF;--surface-2:#E7ECF0;--ink:#101922;--ink-2:#2C3A47;--muted:#5C6B78;--faint:#8494A1;--line:#D3DBE2;--line-strong:#B7C2CC;--accent:#E8842A;--accent-strong:#A65210;--accent-soft:#FBEAD6;--accent-ink:#7E3D0D;--blue:#6FA3D2;--blue-strong:#3F73A8;--blue-soft:#E9F1F9;--bronze:#A26B37;--silver:#7C8894;--gold:#B08A2A;--good:#3C8C5C;--good-soft:#DCEDE2;--warn:#B0791F;--warn-soft:#F3E8D2;--skip:#97A3AD;--skip-soft:#E6EAED}
+:root[data-theme="dark"]{--bg:#0A1118;--surface:#101B24;--surface-2:#16232E;--ink:#E9EFF4;--ink-2:#C4D0DA;--muted:#92A1AE;--faint:#6E7E8B;--line:#22333F;--line-strong:#2E4351;--accent:#F0954A;--accent-strong:#F4A860;--accent-soft:#3A2413;--accent-ink:#F7C08A;--blue:#83B4DE;--blue-strong:#ACCDEC;--blue-soft:#172836;--bronze:#C79357;--silver:#9EAAB6;--gold:#D2AC4E;--good:#5DB77C;--good-soft:#16281D;--warn:#D2A040;--warn-soft:#2A2211;--skip:#7C8994;--skip-soft:#1A252E}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.01em}p{margin:0}
+a{color:var(--accent-strong);text-decoration:none}a:hover{text-decoration:underline}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-strong);font-weight:600}
+.mono{font-family:var(--font-mono)}.tnum{font-variant-numeric:tabular-nums}
+.hero{border-bottom:1px solid var(--line);background:radial-gradient(120% 100% at 85% -10%,var(--accent-soft) 0%,transparent 55%),var(--surface);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.35;-webkit-mask-image:radial-gradient(120% 90% at 80% 0%,#000 0%,transparent 60%);mask-image:radial-gradient(120% 90% at 80% 0%,#000 0%,transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding-top:54px;padding-bottom:44px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px}.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:800;letter-spacing:-.03em;margin:16px 0 0;max-width:18ch}
+h1 .thin{color:var(--muted);font-weight:300}
+.lede{font-size:clamp(1rem,2vw,1.22rem);color:var(--ink-2);max-width:64ch;margin-top:18px;line-height:1.5}
+.backlinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.backlinks a{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:5px 12px;text-decoration:none}
+.backlinks a:hover{border-color:var(--accent);color:var(--accent-strong)}
+.backlinks a.home{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent;font-weight:700}
+.video-embed{position:relative;width:100%;max-width:720px;aspect-ratio:16/9;margin-top:22px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface-2)}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.welcome-btn{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-family:var(--font-mono);font-size:12.5px;font-weight:700;color:var(--accent-strong);background:var(--accent-soft);border:1px solid transparent;border-radius:20px;padding:8px 16px;text-decoration:none}
+.welcome-btn:hover{border-color:var(--accent);text-decoration:none}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:30px}.sec-head h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:750;margin-top:10px}
+.sec-head p{color:var(--muted);max-width:70ch;margin-top:12px}
+.mchip{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 9px;text-decoration:none;line-height:1.3}
+.mchip b{font-family:var(--font-mono);font-size:11px;color:var(--accent-strong)}
+.mchip .wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);margin-left:2px}
+.mchip:hover{border-color:var(--accent);text-decoration:none}
+.chipwrap{display:flex;flex-wrap:wrap;gap:6px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.variant{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;position:relative;overflow:hidden}
+.variant::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.variant.a::before{background:var(--blue)}.variant.s::before{background:var(--accent)}
+.variant h3{font-size:1.2rem;font-weight:760}.variant .who{font-size:13px;color:var(--muted);margin-top:4px}
+.variant .meta{display:flex;gap:16px;margin:14px 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.variant .meta .mv{font-family:var(--font-mono);font-weight:600;font-size:1.05rem}.variant .meta .ml{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.haveskip{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.row{display:flex;gap:10px;font-size:13px;align-items:baseline}
+.row .lab{flex:none;width:64px;font-family:var(--font-mono);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.lab.have{color:var(--good)}.lab.skip{color:var(--skip)}
+.stage{margin-top:14px}.stage .st{font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong);margin-bottom:8px;display:flex;justify-content:space-between}
+.stage .st .wks{color:var(--faint)}
+.converge{margin-top:18px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;font-size:13.5px;color:var(--ink-2)}
+.diag{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 24px}
+.diag h3{font-size:1.05rem;font-weight:730;margin-bottom:6px}.diag p{color:var(--muted);font-size:13.5px}
+.diag ol{margin:14px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:9px}
+.diag li{font-size:13.5px;color:var(--ink-2)}.diag li .mono{color:var(--muted);font-size:12px}
+.diag.cols ol{columns:2;column-gap:36px}
+.bundles{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.bundle{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px}
+.bundle h4{font-size:1.02rem;font-weight:720}.bundle .gr{font-family:var(--font-mono);font-size:11px;color:var(--blue-strong);margin-top:3px}
+.bundle p{font-size:12.5px;color:var(--muted);margin:10px 0}.bundle .chipwrap{margin-top:8px}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.pcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.pcard.launch::before{background:linear-gradient(90deg,var(--bronze),var(--silver),var(--gold))}
+.pcard.bridge::before{background:var(--blue)}.pcard.sharpen::before{background:linear-gradient(90deg,var(--accent),var(--blue))}
+.pcard .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pcard h3{font-size:1.3rem;font-weight:760;margin-top:8px}.pcard .for{font-size:13px;color:var(--accent-ink);font-weight:600;margin-top:6px}
+.pcard p{font-size:13.5px;color:var(--ink-2);margin-top:10px;flex:1}
+.pcard .go{margin-top:16px;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-strong)}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.phcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.phcard::before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px}
+.phcard.b::before{background:var(--bronze)}.phcard.s::before{background:var(--silver)}.phcard.g::before{background:var(--gold)}.phcard.l::before{background:var(--accent)}
+.phcard:hover{border-color:var(--accent);text-decoration:none}
+.phcard .pk{font-family:var(--font-mono);font-size:11px;color:var(--muted)}.phcard h4{font-size:1.02rem;font-weight:720;margin-top:6px}.phcard .pd{font-size:12.5px;color:var(--muted);margin-top:6px}
+.gaps{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.gap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:13px 15px;display:flex;gap:10px;align-items:flex-start}
+.gap .idx{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--accent-strong);background:var(--accent-soft);border-radius:4px;padding:2px 6px;flex:none}
+.gap .gt{font-weight:640;font-size:13.5px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.hcard .hn{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent-strong);background:var(--accent-soft);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hcard h4{font-size:1rem;font-weight:710;margin-top:12px}.hcard p{font-size:13px;color:var(--muted);margin-top:6px}
+footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
+
+
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+table.cat{width:100%;border-collapse:collapse;min-width:720px;font-size:13.5px}
+table.cat thead th{text-align:left;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:12px 13px;border-bottom:1px solid var(--line-strong);background:var(--surface);position:sticky;top:0;z-index:2}
+table.cat thead th.c{text-align:center;width:72px}
+table.cat td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+table.cat tr:last-child td{border-bottom:none}
+.domrow td{background:var(--surface-2);font-family:var(--font-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);font-weight:700;padding:9px 13px}
+.domrow .dn{color:var(--accent-strong)}
+.mc{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);font-weight:600}
+.mn{font-weight:640;color:var(--ink)}
+.mn .g{display:inline-block;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.04em;color:var(--warn);background:var(--warn-soft);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+td.c{text-align:center}
+.fit{display:inline-block;min-width:28px;font-family:var(--font-mono);font-size:10.5px;font-weight:700;border-radius:4px;padding:3px 7px}
+.fit-core{background:var(--good-soft);color:var(--good)}
+.fit-comp{background:var(--warn-soft);color:var(--warn)}
+.fit-elec{background:var(--blue-soft);color:var(--blue-strong)}
+.fit-skip{background:var(--skip-soft);color:var(--skip)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend .fit{min-width:0}
+.anatomy{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.acard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:15px 16px}
+.acard .ak{font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-strong)}
+.acard h4{font-size:.96rem;font-weight:680;margin-top:6px}.acard p{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+table.skel{width:100%;border-collapse:collapse;min-width:760px;font-size:13px}
+table.skel thead th{text-align:left;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:11px 13px;border-bottom:1px solid var(--line-strong);background:var(--surface);position:sticky;top:0;z-index:2}
+table.skel td{padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+table.skel .wc{font-family:var(--font-mono);font-weight:700;color:var(--ink);white-space:nowrap;width:52px}
+table.skel .mc2{font-family:var(--font-mono);font-size:11px;color:var(--muted);white-space:nowrap;width:62px}
+table.skel .tc{font-weight:600;color:var(--ink)}
+.band td{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:10px 13px}
+.band.b td{background:var(--bronze-soft);color:var(--bronze)}
+.band.s td{background:#E4E8EC;color:var(--silver)}
+.band.g td{background:#F1E9CE;color:var(--gold)}
+.band.l td{background:var(--accent-soft);color:var(--accent-strong)}
+@media (prefers-color-scheme:dark){.band.s td{background:#1E2831}.band.g td{background:#29230F}}
+:root[data-theme="dark"] .band.s td{background:#1E2831}:root[data-theme="dark"] .band.g td{background:#29230F}
+.port td{background:var(--surface-2);font-size:12.5px;color:var(--accent-ink);font-weight:600;padding:9px 13px}
+.rubric{list-style:none;margin:14px 0 0;padding:0}
+.rubric li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.rubric li:last-child{border-bottom:none}
+.rubric .rk{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-strong);flex:none;width:92px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 24px}
+.card h4{font-size:1.05rem;font-weight:730}.card>p{color:var(--muted);font-size:13.5px;margin-top:8px}
+.gates{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.gates li{font-size:13.5px;color:var(--ink-2);padding-left:24px;position:relative;line-height:1.45}
+.gates li::before{content:"\25C6";position:absolute;left:0;color:var(--accent);font-size:10px;top:3px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+</style>
+
+<div class="hero"><div class="wrap">
+  <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Build Plan</span>
+  <h1>The course, <span class="thin">week by week.</span></h1>
+  <p class="lede">How the Launch path is produced: a fixed weekly template, the complete ~49-week skeleton, and the assessment model. Every week is one card with eight fields; the full detail lives in the four phase pages.</p>
+  <div class="backlinks"><a class="home" href="index.html">Course home</a><a href="curriculum.html">Curriculum</a><a href="phase-1.html">Phase 1</a><a href="phase-2.html">Phase 2</a><a href="phase-3.html">Phase 3</a><a href="phase-4.html">Phase 4</a></div>
+</div></div>
+
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Anatomy of a week</span><h2>The weekly lesson-plan template</h2>
+  <p>Every week fills these eight fields. The structure enforces the spine: nothing is “learned” until it is built (lab) and defended (deliverable + live session).</p></div>
+  <div class="anatomy"><div class="acard"><span class="ak">Field 01</span><h4>Header &amp; context</h4><p>Week number, title, module(s), phase/depth tier, and the gap(s) it closes.</p></div><div class="acard"><span class="ak">Field 02</span><h4>Learning objectives</h4><p>3–5 measurable “by end of week you can…” statements. The bar for done.</p></div><div class="acard"><span class="ak">Field 03</span><h4>Concept lessons</h4><p>Self-paced topics with rough hours — scaffolding for the lab, not the point.</p></div><div class="acard"><span class="ak">Field 04</span><h4>Hands-on lab</h4><p>The build task on real data: steps, dataset links, references, a starter scaffold.</p></div><div class="acard"><span class="ak">Field 05</span><h4>Deliverable + acceptance</h4><p>What they submit (code + a “why” note) and the criteria that make it a pass.</p></div><div class="acard"><span class="ak">Field 06</span><h4>Live session focus</h4><p>Recap point, the likely misconception, and the “defend your decision” prompt.</p></div><div class="acard"><span class="ak">Field 07</span><h4>Portfolio linkage</h4><p>Whether the week feeds the phase artifact or the capstone.</p></div><div class="acard"><span class="ak">Field 08</span><h4>Prereqs &amp; carry-forward</h4><p>What it assumes and what later weeks build on it.</p></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">The full map</span><h2>~49-week skeleton</h2>
+  <p>Every week mapped to its module and title. Phase bands mark depth; portfolio rows mark where a shippable artifact is assembled. Open any phase page for the full weekly detail.</p></div>
+  <div class="table-scroll"><table class="skel">
+    <thead><tr><th>Wk</th><th>Module</th><th>Title</th></tr></thead>
+    <tbody><tr class="band b"><td colspan="3">Phase 1 · Foundations · bronze · Weeks 1–13</td></tr><tr><td class="wc">1</td><td class="mc2">M00</td><td class="tc">Dev environment, CLI &amp; Git</td></tr><tr><td class="wc">2</td><td class="mc2">M01</td><td class="tc">The DE mental model &amp; the data lifecycle</td></tr><tr><td class="wc">3</td><td class="mc2">M02</td><td class="tc">Python I</td></tr><tr><td class="wc">4</td><td class="mc2">M02</td><td class="tc">Python II</td></tr><tr><td class="wc">5</td><td class="mc2">M02</td><td class="tc">Python III</td></tr><tr><td class="wc">6</td><td class="mc2">M03</td><td class="tc">DataFrames: select, clean, transform, group &amp; merge</td></tr><tr><td class="wc">7</td><td class="mc2">M03</td><td class="tc">Python for data II</td></tr><tr><td class="wc">8</td><td class="mc2">M04</td><td class="tc">Typed, tested, packaged: turning a script into a data product component</td></tr><tr><td class="wc">9</td><td class="mc2">M05</td><td class="tc">SQL I</td></tr><tr><td class="wc">10</td><td class="mc2">M05</td><td class="tc">SQL II</td></tr><tr><td class="wc">11</td><td class="mc2">M06</td><td class="tc">Advanced SQL I</td></tr><tr><td class="wc">12</td><td class="mc2">M06</td><td class="tc">Advanced SQL II</td></tr><tr><td class="wc">13</td><td class="mc2">M07</td><td class="tc">Relational theory &amp; normalization: keys, FDs, 1NF→3NF</td></tr><tr class="port"><td colspan="3">◆ Phase 1 portfolio → a SQL + Python analytics project on real data, in a clean, documented repo.</td></tr><tr class="band s"><td colspan="3">Phase 2 · Core data engineering · silver · Weeks 14–30</td></tr><tr><td class="wc">14</td><td class="mc2">M08</td><td class="tc">Dimensional Modeling I</td></tr><tr><td class="wc">15</td><td class="mc2">M08</td><td class="tc">Grain, conformed dimensions &amp; the bus matrix</td></tr><tr><td class="wc">16</td><td class="mc2">M09</td><td class="tc">Recoverable History: SCD Type 2 &amp;amp; Effective Dating on the Provider and Price Dimensions</td></tr><tr><td class="wc">17</td><td class="mc2">M10</td><td class="tc">Lakehouse &amp; gold-layer modeling</td></tr><tr><td class="wc">18</td><td class="mc2">M11</td><td class="tc">MDM I</td></tr><tr><td class="wc">19</td><td class="mc2">M11</td><td class="tc">MDM II</td></tr><tr><td class="wc">20</td><td class="mc2">M13</td><td class="tc">ETL vs ELT, Batch vs Incremental</td></tr><tr><td class="wc">21</td><td class="mc2">M14</td><td class="tc">Landing the Mess: NPPES</td></tr><tr><td class="wc">22</td><td class="mc2">M15</td><td class="tc">Medallion architecture</td></tr><tr><td class="wc">23</td><td class="mc2">M16</td><td class="tc">CDC &amp; Incremental I</td></tr><tr><td class="wc">24</td><td class="mc2">M16</td><td class="tc">CDC &amp; incremental II</td></tr><tr><td class="wc">25</td><td class="mc2">M17</td><td class="tc">Spark I</td></tr><tr><td class="wc">26</td><td class="mc2">M17</td><td class="tc">Spark II</td></tr><tr><td class="wc">27</td><td class="mc2">M18</td><td class="tc">Spark internals</td></tr><tr><td class="wc">28</td><td class="mc2">M24</td><td class="tc">Data quality I</td></tr><tr><td class="wc">29</td><td class="mc2">M24</td><td class="tc">Data Quality II</td></tr><tr><td class="wc">30</td><td class="mc2">M25</td><td class="tc">Testing taxonomy for data</td></tr><tr class="port"><td colspan="3">◆ Phase 2 portfolio → a batch medallion pipeline (bronze→gold) with SCD2 history, MDM, and DQ checks.</td></tr><tr class="band g"><td colspan="3">Phase 3 · Platform & production · gold · Weeks 31–43</td></tr><tr><td class="wc">31</td><td class="mc2">M20</td><td class="tc">Delta Lake internals &amp; table optimization</td></tr><tr><td class="wc">32</td><td class="mc2">M21</td><td class="tc">Databricks &amp; Unity Catalog</td></tr><tr><td class="wc">33</td><td class="mc2">M22</td><td class="tc">Declarative pipelines I</td></tr><tr><td class="wc">34</td><td class="mc2">M22</td><td class="tc">Declarative pipelines II</td></tr><tr><td class="wc">35</td><td class="mc2">M23</td><td class="tc">Structured Streaming I</td></tr><tr><td class="wc">36</td><td class="mc2">M23</td><td class="tc">Structured Streaming II</td></tr><tr><td class="wc">37</td><td class="mc2">M26</td><td class="tc">Observability, SLAs, Lineage &amp; Alerting: Make the Pricing-Integrity Platform Break Safely</td></tr><tr><td class="wc">38</td><td class="mc2">M27</td><td class="tc">Git deep</td></tr><tr><td class="wc">39</td><td class="mc2">M28</td><td class="tc">CI/CD for data</td></tr><tr><td class="wc">40</td><td class="mc2">M29</td><td class="tc">Databricks Asset Bundles</td></tr><tr><td class="wc">41</td><td class="mc2">M30</td><td class="tc">Governance &amp; Security</td></tr><tr><td class="wc">42</td><td class="mc2">M31</td><td class="tc">Cloud foundations</td></tr><tr><td class="wc">43</td><td class="mc2">M20</td><td class="tc">Integration &amp; hardening</td></tr><tr class="port"><td colspan="3">◆ Phase 3 portfolio → a production incremental + streaming pipeline with CI/CD, tests, and Unity Catalog governance.</td></tr><tr class="band l"><td colspan="3">Phase 4 · Advanced & launch · job-ready · Weeks 44–50</td></tr><tr><td class="wc">44</td><td class="mc2">M32</td><td class="tc">Architecture decision-making</td></tr><tr><td class="wc">45</td><td class="mc2">M12</td><td class="tc">Elective deep-dive</td></tr><tr><td class="wc">46</td><td class="mc2">M36</td><td class="tc">Interview prep I</td></tr><tr><td class="wc">47</td><td class="mc2">M36</td><td class="tc">Interview prep II</td></tr><tr><td class="wc">48</td><td class="mc2">M37</td><td class="tc">Capstone</td></tr><tr class="port"><td colspan="3">◆ Capstone → the capstone data product + a recorded walkthrough you can defend in interviews.</td></tr></tbody>
+  </table></div>
+</div></section>
+
+<section style="border-bottom:none"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Making "done" mean something</span><h2>Assessment &amp; portfolio gates</h2>
+  <p>Every deliverable is graded on the same four-part rubric; each phase targets a shippable artifact — a checkpoint, not a turnstile.</p></div>
+  <div class="two">
+    <div class="card"><h4>The weekly rubric</h4><p>The “reasoning” and “defense” lines are where the concept-vs-application gap (G1) is enforced.</p>
+      <ul class="rubric">
+        <li><span class="rk">Correctness</span><span>Does it meet the acceptance criteria and actually run?</span></li>
+        <li><span class="rk">Craft</span><span>Clean, readable, idiomatic — would it survive code review?</span></li>
+        <li><span class="rk">Reasoning</span><span>Does the “why” note justify the key decisions and tradeoffs?</span></li>
+        <li><span class="rk">Defense</span><span>Can they explain and defend it live, under questioning?</span></li>
+      </ul></div>
+    <div class="card"><h4>Phase checkpoints</h4><p>Progression stays open — learners advance and catch up as time allows; the artifact is the proof, not a gate.</p>
+      <ul class="gates">
+        <li><b>Phase 1</b> — SQL + Python analytics project in a clean, documented repo.</li>
+        <li><b>Phase 2</b> — batch medallion pipeline with SCD2 history, MDM, and DQ checks.</li>
+        <li><b>Phase 3</b> — production incremental + streaming pipeline with CI/CD and governance.</li>
+        <li><b>Capstone</b> — governed end-to-end data product + a recorded, defensible walkthrough.</li>
+      </ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="foot-note">
+  <span>The Gambill Data Engineer Track · Launch build plan · weekly template + ~49-week skeleton.</span>
+  <span class="mono">Gambill Data Engineering</span></div></div></footer>

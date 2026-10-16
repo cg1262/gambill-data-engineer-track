@@ -21,7 +21,7 @@ ART = {
 }
 
 SITE = {
-    "home": "index.html", "cur": "https://claude.ai/code/artifact/085627d8-ff0b-4b9a-a7cf-c83107cb71bf",
+    "home": "index.html", "cur": "curriculum.html",
     "p1": "phase-1.html", "p2": "phase-2.html", "p3": "phase-3.html", "p4": "phase-4.html",
 }
 
