@@ -167,6 +167,27 @@
   }
 
 
+  /* collapsible week cards */
+  details.wk-card { position: relative; }
+  details.wk-card > summary.wk-head { cursor: pointer; list-style: none; align-items: center; gap: 8px 14px; padding-right: 48px; }
+  details.wk-card > summary.wk-head::-webkit-details-marker { display: none; }
+  .wk-head::before { display: none !important; }
+  details.wk-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--bronze); border-radius: 8px 0 0 8px; }
+  .wk-headmain { display: flex; flex-direction: column; gap: 3px; flex: 1 1 320px; min-width: 0; }
+  .wk-headmain .wk-title { flex: 0 0 auto; }
+  .wk-teaser { font-size: 12.5px; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .wk-hrs { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--faint); white-space: nowrap; }
+  .wk-chev { position: absolute; right: 20px; top: 22px; transition: transform .18s ease; color: var(--muted); font-size: 11px; }
+  details.wk-card[open] > summary .wk-chev { transform: rotate(180deg); }
+  details.wk-card[open] > summary.wk-head { border-bottom: 1px solid var(--line); }
+  summary.wk-head:hover .wk-title { color: var(--accent-strong); }
+  summary.wk-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .wk-toolbar { display: flex; gap: 8px; justify-content: flex-end; align-items: center; padding-top: 18px; }
+  .wk-toolbar .tl { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); margin-right: auto; }
+  .wk-toggle { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; cursor: pointer; }
+  .wk-toggle:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+
 </style>
 <div class="hero"><div class="wrap">
     <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 1 of 4</span>
@@ -175,18 +196,22 @@
     <div class="sources"><span class="src">NYC 311 · Socrata</span><span class="src">USGS Earthquakes</span><span class="src">World Bank + OWID</span><span class="src">Chinook · DuckDB</span><span class="src">NOAA GHCN-Daily</span><span class="src">NYC DOHMH Inspections</span></div>
   </div></div>
 <nav class="weeknav"><div class="wrap"><a class="navhome" href="index.html">← Course home</a><a href="curriculum.html">Curriculum</a><a href="phase-2.html">Phase 2 →</a><span class="navsep"></span><span class="nl">Weeks</span><a href="#w1">W1</a><a href="#w2">W2</a><a href="#w3">W3</a><a href="#w4">W4</a><a href="#w5">W5</a><a href="#w6">W6</a><a href="#w7">W7</a><a href="#w8">W8</a><a href="#w9">W9</a><a href="#w10">W10</a><a href="#w11">W11</a><a href="#w12">W12</a><a href="#w13">W13</a></div></nav>
+<div class="wk-toolbar wrap"><span class="tl">Each week is collapsed — click to open</span><button class="wk-toggle" data-act="expand" type="button">Expand all</button><button class="wk-toggle" data-act="collapse" type="button">Collapse all</button></div>
 <main class="wrap">
 
-  <article class="wk-card" id="w1">
-    <div class="wk-head">
+  <details class="wk-card" id="w1">
+    <summary class="wk-head">
       <span class="wk-num">W01</span>
-      <span class="wk-title">Dev environment, the command line &amp; Git</span>
+      <span class="wk-headmain"><span class="wk-title">Dev environment, the command line &amp; Git</span><span class="wk-teaser">On real teams, an un-versioned &quot;final_analysis_v3_ACTUAL.ipynb&quot; folder is how a company loses a week of work, ships a number nobody can reproduce, and can&#x27;t answer &quot;who changed this and why&quot; during an audit. The Git repo you stand up this week is the foundation every future pipeline, model, and dashboard gets committed into — reproducibility and traceability start here, not later.</span></span>
       <span class="wk-mod">M00 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag f">foundation</span><span class="gtag">G6</span></span>
+      <span class="wk-hrs">~7h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> On real teams, an un-versioned &quot;final_analysis_v3_ACTUAL.ipynb&quot; folder is how a company loses a week of work, ships a number nobody can reproduce, and can&#x27;t answer &quot;who changed this and why&quot; during an audit. The Git repo you stand up this week is the foundation every future pipeline, model, and dashboard gets committed into — reproducibility and traceability start here, not later.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> On real teams, an un-versioned &quot;final_analysis_v3_ACTUAL.ipynb&quot; folder is how a company loses a week of work, ships a number nobody can reproduce, and can&#x27;t answer &quot;who changed this and why&quot; during an audit. The Git repo you stand up this week is the foundation every future pipeline, model, and dashboard gets committed into — reproducibility and traceability start here, not later.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Move around a filesystem and run common shell commands with confidence</li><li>Initialize a Git repo; stage, commit, branch, push, and open a pull request</li><li>Create a reproducible Python environment and manage its dependencies</li><li>Structure a project repo with a README, .gitignore, and env manifest</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Terminal &amp; shell basics: paths, files, pipes</li><li>The Git model: working tree → stage → history</li><li>Branches, remotes, and the PR workflow</li><li>Environments &amp; dependency management (venv/conda)</li><li>Repo hygiene: structure, README, ignore rules</li></ul></div>
       <div class="blk full lab">
@@ -252,18 +277,22 @@ if __name__ == &quot;__main__&quot;:
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes nothing. The Git / PR / venv workflow established here is used in every subsequent week.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w2">
-    <div class="wk-head">
+  <details class="wk-card" id="w2">
+    <summary class="wk-head">
       <span class="wk-num">W02</span>
-      <span class="wk-title">The DE mental model &amp; the data lifecycle</span>
+      <span class="wk-headmain"><span class="wk-title">The DE mental model &amp; the data lifecycle</span><span class="wk-teaser">NYC agencies dispatch crews (potholes, downed trees, heat/hot-water complaints) off dashboards fed by 311. When a complaint type is quietly renamed or a request lands with a null borough/lat-long, those rows drop out of the filtered view and the crew never gets routed — the outage is invisible because the dashboard still renders. A stated grain and a one-page data contract are the cheapest insurance against that silent failure.</span></span>
       <span class="wk-mod">M01 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G9</span><span class="gtag">G10</span></span>
+      <span class="wk-hrs">~8h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> NYC agencies dispatch crews (potholes, downed trees, heat/hot-water complaints) off dashboards fed by 311. When a complaint type is quietly renamed or a request lands with a null borough/lat-long, those rows drop out of the filtered view and the crew never gets routed — the outage is invisible because the dashboard still renders. A stated grain and a one-page data contract are the cheapest insurance against that silent failure.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> NYC agencies dispatch crews (potholes, downed trees, heat/hot-water complaints) off dashboards fed by 311. When a complaint type is quietly renamed or a request lands with a null borough/lat-long, those rows drop out of the filtered view and the crew never gets routed — the outage is invisible because the dashboard still renders. A stated grain and a one-page data contract are the cheapest insurance against that silent failure.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>trace a real dataset end-to-end — source system → ingest → store → transform → consumer — naming what happens at each hop and where the data physically lives</li><li>reframe a raw dataset as a DATA PRODUCT by declaring its grain, owner, consumers, freshness/SLA, and quality expectations</li><li>write a one-page data contract (schema, grain, nullability, freshness, semantics, ownership) for a real public dataset</li><li>explain why operational (source) and analytical (consumer) systems keep separate copies and how data changes shape between them</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>what a data product is (grain, owner, consumers, contract) vs. the common trap of calling the pipeline itself &#x27;the product&#x27;</li><li>the data lifecycle: source → ingest → store → transform → serve → consume, with a light bronze/silver/gold intuition (no tooling yet)</li><li>operational vs. analytical systems (OLTP vs. OLAP intuition) and why copies of data exist at all</li><li>anatomy of a data contract: schema &amp; types, grain, freshness/SLA, nullability, business semantics, and named ownership</li><li>reading a source&#x27;s API docs / schema to infer the true grain and meaning of a row before you trust it</li></ul></div>
       <div class="blk full lab">
@@ -327,18 +356,22 @@ MERMAID
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W1 (filesystem, Git, repo hygiene) — the deliverable is authored in Markdown and merged via a PR into the existing course repo. Uses no Python yet (that&#x27;s W3), so the API is inspected via curl/browser, not scripted. The grain and contract vocabulary introduced here is the foundation later weeks build on directly: relational modeling (grain of a table), CDC/incremental (grain + change detection), and data quality/testing (contract expectations become tests).</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w3">
-    <div class="wk-head">
+  <details class="wk-card" id="w3">
+    <summary class="wk-head">
       <span class="wk-num">W03</span>
-      <span class="wk-title">Python I — control flow &amp; functions</span>
+      <span class="wk-headmain"><span class="wk-title">Python I — control flow &amp; functions</span><span class="wk-teaser">Ops and monitoring teams live or die by threshold alerting on live feeds: page someone at M5.0, stay quiet at M2.0. If a single blank or malformed record crashes the alerting job, the whole feed goes dark and a real event slips past unnoticed — a trust and safety failure. This week you build that alerting loop against a real seismic feed that changes every minute and ships dirty rows.</span></span>
       <span class="wk-mod">M02 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span></span>
+      <span class="wk-hrs">~8h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> Ops and monitoring teams live or die by threshold alerting on live feeds: page someone at M5.0, stay quiet at M2.0. If a single blank or malformed record crashes the alerting job, the whole feed goes dark and a real event slips past unnoticed — a trust and safety failure. This week you build that alerting loop against a real seismic feed that changes every minute and ships dirty rows.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> Ops and monitoring teams live or die by threshold alerting on live feeds: page someone at M5.0, stay quiet at M2.0. If a single blank or malformed record crashes the alerting job, the whole feed goes dark and a real event slips past unnoticed — a trust and safety failure. This week you build that alerting loop against a real seismic feed that changes every minute and ships dirty rows.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Declare Python&#x27;s core types (int/float/str/bool/None) and predict truthiness and coercion behavior before running the code</li><li>Direct program flow over a collection of records using if/elif/else, for/while, and break/continue to produce a correct summary</li><li>Decompose a task into small single-purpose functions with explicit parameters and return values, and explain local vs global scope</li><li>Write and run a procedural CLI script that reads an argument and processes a real public dataset top to bottom</li><li>Trace any line of your own script aloud and say what it does and why (return vs print, = vs ==)</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Types &amp; variables: int/float/str/bool/None, truthiness, and implicit vs explicit coercion (int(x), str(x))</li><li>Control flow: conditionals, boolean logic, for/while loops, break/continue, and guarding against bad rows</li><li>Functions: def, positional/default parameters, return vs print, and local vs global scope</li><li>Structuring a procedural script: a main() entry point, reading sys.argv, and clean top-to-bottom flow</li><li>Just enough data-in: reading a CSV with the stdlib csv module (deep file I/O &amp; error handling comes in W4)</li></ul></div>
       <div class="blk full lab">
@@ -438,18 +471,22 @@ if __name__ == &quot;__main__&quot;:
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W1 (Git branch/PR workflow, venv, repo hygiene) and W2 (DE mental model — records as rows, grain). Deliberately stays procedural: data structures, comprehensions, robust file I/O and error handling are W4 (Python II), which refactors these very functions; SQL modeling begins W5.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w4">
-    <div class="wk-head">
+  <details class="wk-card" id="w4">
+    <summary class="wk-head">
       <span class="wk-num">W04</span>
-      <span class="wk-title">Python II — data structures &amp; files</span>
+      <span class="wk-headmain"><span class="wk-title">Python II — data structures &amp; files</span><span class="wk-teaser">When a monitoring pipeline ingests a live seismic feed, one truncated or null-magnitude record can crash the whole run or silently vanish — and a dropped M5.8 event is a missed alert, an audit gap, and a &quot;why didn&#x27;t we catch this?&quot; postmortem. Routing bad records to a quarantine with a reason and timestamp (instead of crashing or dropping) is the single most-asked &quot;what happens when the data is bad?&quot; interview moment.</span></span>
       <span class="wk-mod">M02 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span><span class="gtag">G4</span></span>
+      <span class="wk-hrs">~9h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> When a monitoring pipeline ingests a live seismic feed, one truncated or null-magnitude record can crash the whole run or silently vanish — and a dropped M5.8 event is a missed alert, an audit gap, and a &quot;why didn&#x27;t we catch this?&quot; postmortem. Routing bad records to a quarantine with a reason and timestamp (instead of crashing or dropping) is the single most-asked &quot;what happens when the data is bad?&quot; interview moment.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> When a monitoring pipeline ingests a live seismic feed, one truncated or null-magnitude record can crash the whole run or silently vanish — and a dropped M5.8 event is a missed alert, an audit gap, and a &quot;why didn&#x27;t we catch this?&quot; postmortem. Routing bad records to a quarantine with a reason and timestamp (instead of crashing or dropping) is the single most-asked &quot;what happens when the data is bad?&quot; interview moment.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>choose the right built-in collection (list/tuple/set/dict) for a task and justify it by mutability, ordering, and membership cost</li><li>iterate over nested JSON with loops, enumerate/zip, and comprehensions to extract and reshape records</li><li>read and write CSV and JSON safely with context managers, converting types explicitly and handling missing/empty values</li><li>handle malformed records with targeted try/except so one bad row never crashes the run — route rejects to a quarantine log with a reason</li><li>dedupe records with a set and aggregate metrics into a dict, and explain why each structure fits</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>the four core collections and when to reach for each: list vs tuple (mutability/intent), set (membership &amp; dedupe, O(1) lookup), dict (keyed aggregation)</li><li>iteration patterns: for-loops, enumerate/zip, and list/dict/set comprehensions for reshaping data</li><li>file I/O with context managers: the csv module (DictReader/DictWriter) and the json module (load/loads/dump/dumps)</li><li>error handling: try/except/else/finally, catching specific exceptions, EAFP vs LBYL, and logging vs silently swallowing</li><li>type conversion &amp; missing data: None vs empty string, safe casting, and deciding reject-vs-default per field</li></ul></div>
       <div class="blk full lab">
@@ -543,18 +580,22 @@ if __name__ == &quot;__main__&quot;:
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W3 Python I (variables, functions, control flow, running scripts) and the course repo + venv and Git/PR workflow from W1. Later weeks build on it: W5 Python III refactors this script into tested, importable modules, and the clean+quarantine pattern seeds G4 data quality and the incremental bronze loads in later phases.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w5">
-    <div class="wk-head">
+  <details class="wk-card" id="w5">
+    <summary class="wk-head">
       <span class="wk-num">W05</span>
-      <span class="wk-title">Python III — modules, environments &amp; OOP basics</span>
+      <span class="wk-headmain"><span class="wk-title">Python III — modules, environments &amp; OOP basics</span><span class="wk-teaser">On a real team, the difference between &quot;a script that ran on my laptop once&quot; and code the company can deploy, test, and trust is whether it&#x27;s an installable, importable package — copy-pasted one-off scripts are how pipelines silently rot and break in production. A hiring manager skimming your GitHub decides in 30 seconds whether you look like an engineer or a tutorial-follower, and a clean `pip install -e .` + `python -m quakes` is the single clearest signal you cross that line.</span></span>
       <span class="wk-mod">M02 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G6</span></span>
+      <span class="wk-hrs">~9h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> On a real team, the difference between &quot;a script that ran on my laptop once&quot; and code the company can deploy, test, and trust is whether it&#x27;s an installable, importable package — copy-pasted one-off scripts are how pipelines silently rot and break in production. A hiring manager skimming your GitHub decides in 30 seconds whether you look like an engineer or a tutorial-follower, and a clean `pip install -e .` + `python -m quakes` is the single clearest signal you cross that line.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> On a real team, the difference between &quot;a script that ran on my laptop once&quot; and code the company can deploy, test, and trust is whether it&#x27;s an installable, importable package — copy-pasted one-off scripts are how pipelines silently rot and break in production. A hiring manager skimming your GitHub decides in 30 seconds whether you look like an engineer or a tutorial-follower, and a clean `pip install -e .` + `python -m quakes` is the single clearest signal you cross that line.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>organize code into an importable package (dirs with __init__, absolute imports, an `if __name__ == &quot;__main__&quot;` guard) and run it as both `python -m` and via imported functions</li><li>design one small class with a single responsibility — __init__/self, methods, a __repr__ — and articulate when a class beats a plain function or dict</li><li>split a script into modules by concern (fetch / parse / report) so each file does one job with no circular imports</li><li>build a fresh virtual env and install your own project editable (`pip install -e .`) so it imports by name anywhere</li><li>rebuild the whole environment from the manifest and prove the package still imports and runs end to end</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>modules &amp; packages: the import system, __init__.py, module vs package, absolute vs relative imports, and the `__name__ == &quot;__main__&quot;` guard</li><li>classes &amp; OOP basics: attributes vs methods, __init__/self, __repr__, and the decision rule for class vs function vs dict</li><li>packaging &amp; editable installs: src/ project layout, a minimal pyproject, `pip install -e .`, and running with `python -m pkg`</li><li>virtual envs revisited: why per-project isolation matters, pinning deps, and rebuilding cleanly from the manifest</li><li>structuring a small codebase: separation of concerns, module boundaries, and keeping data flow one-directional to avoid circular imports</li></ul></div>
       <div class="blk full lab">
@@ -667,18 +708,22 @@ if __name__ == &quot;__main__&quot;:
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W4 Python II (functions, error handling, file/JSON I/O — the scripts being refactored here) and W1&#x27;s Git + venv workflow. W6 (pandas) and later ETL modules import from this package layout and extend the module/class pattern rather than writing standalone scripts.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w6">
-    <div class="wk-head">
+  <details class="wk-card" id="w6">
+    <summary class="wk-head">
       <span class="wk-num">W06</span>
-      <span class="wk-title">pandas — DataFrames: select, clean, transform, group &amp; merge</span>
+      <span class="wk-headmain"><span class="wk-title">pandas — DataFrames: select, clean, transform, group &amp; merge</span><span class="wk-teaser">A city agency publishes a &quot;311 requests per 10,000 residents&quot; dashboard to decide where to send inspectors and budget. If the borough population join key isn&#x27;t unique, the merge silently multiplies request rows and one borough&#x27;s rate comes out 2–3x too high — inspectors get sent to the wrong place and the public dashboard misleads. The merge-validation check, not the chart, is the real deliverable.</span></span>
       <span class="wk-mod">M03 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G4</span><span class="gtag">G2</span></span>
+      <span class="wk-hrs">~10h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> A city agency publishes a &quot;311 requests per 10,000 residents&quot; dashboard to decide where to send inspectors and budget. If the borough population join key isn&#x27;t unique, the merge silently multiplies request rows and one borough&#x27;s rate comes out 2–3x too high — inspectors get sent to the wrong place and the public dashboard misleads. The merge-validation check, not the chart, is the real deliverable.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> A city agency publishes a &quot;311 requests per 10,000 residents&quot; dashboard to decide where to send inspectors and budget. If the borough population join key isn&#x27;t unique, the merge silently multiplies request rows and one borough&#x27;s rate comes out 2–3x too high — inspectors get sent to the wrong place and the public dashboard misleads. The merge-validation check, not the chart, is the real deliverable.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>load a messy real-world CSV into a DataFrame and profile it (dtypes, null counts, cardinality, duplicates) to write a cleaning plan before touching data</li><li>select and filter rows/columns with .loc and boolean masks, and coerce types correctly (datetimes, categoricals, numerics) without triggering chained-assignment bugs</li><li>clean systematically — impute vs drop missing values, de-duplicate, normalize categorical/string and timestamp columns — and justify each choice against downstream trust</li><li>aggregate with groupby to an explicitly stated grain, then merge to a reference table while validating join keys so rows don&#x27;t silently multiply</li><li>produce a reproducible cleaning notebook that runs top-to-bottom and ties every transformation decision to a documented output grain</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>the DataFrame/Series mental model: the index, dtypes, and why vectorized ops beat Python loops</li><li>selection &amp; filtering: .loc vs .iloc, boolean masks, and the copy-vs-view / SettingWithCopy trap</li><li>cleaning toolkit: missing data (fillna/dropna), duplicates, type coercion, and string/datetime normalization</li><li>transformation: derived columns, map/apply vs vectorized ops, and binning</li><li>split-apply-combine with groupby to a grain, plus merge/join semantics (how=, key uniqueness, row-count validation)</li></ul></div>
       <div class="blk full lab">
@@ -753,18 +798,22 @@ def assert_no_merge_inflation(left, merged, on):
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W5 Python (functions, comprehensions, file I/O, error handling) and W1 repo hygiene (venv, atomic commits) to keep the notebook reproducible and committed. W7 builds on this by pulling the same domain from a live API and reconciling it against this cleaned baseline; the groupby-to-a-grain habit seeds the G2 dimensional-modeling weeks.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w7">
-    <div class="wk-head">
+  <details class="wk-card" id="w7">
+    <summary class="wk-head">
       <span class="wk-num">W07</span>
-      <span class="wk-title">Python for data II — APIs &amp; reconciliation</span>
+      <span class="wk-headmain"><span class="wk-title">Python for data II — APIs &amp; reconciliation</span><span class="wk-teaser">Two &quot;authoritative&quot; population sources will disagree, and an inner join silently deletes exactly the rows where they diverge — the discrepancies a data engineer is paid to surface for finance, grants allocation, or regulatory reporting. When a per-capita metric is off because two feeds used different population denominators, someone signs off on wrong money; reconciliation with provenance is the control that catches it before the sign-off.</span></span>
       <span class="wk-mod">M03 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G4</span></span>
+      <span class="wk-hrs">~10h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> Two &quot;authoritative&quot; population sources will disagree, and an inner join silently deletes exactly the rows where they diverge — the discrepancies a data engineer is paid to surface for finance, grants allocation, or regulatory reporting. When a per-capita metric is off because two feeds used different population denominators, someone signs off on wrong money; reconciliation with provenance is the control that catches it before the sign-off.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> Two &quot;authoritative&quot; population sources will disagree, and an inner join silently deletes exactly the rows where they diverge — the discrepancies a data engineer is paid to surface for finance, grants allocation, or regulatory reporting. When a per-capita metric is off because two feeds used different population denominators, someone signs off on wrong money; reconciliation with provenance is the control that catches it before the sign-off.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>make HTTP GET requests from Python and parse JSON into tidy records, handling status codes, timeouts, and error responses</li><li>page through a paginated API to collect a complete result set while respecting rate limits with backoff/retry</li><li>reconcile two independent sources on a shared key: quantify matched, source-only, and value-discrepant rows against a stated tolerance</li><li>produce one clean reconciled table carrying provenance (source + as-of) plus a documented reconciliation rule you can defend</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>HTTP/REST basics: methods, status codes, headers, query params, JSON payloads — the request/response mental model</li><li>calling APIs from Python with requests: params, timeouts, raise_for_status, turning nested JSON into flat rows</li><li>pagination patterns (offset/limit, page/per_page, cursor) and rate limits: 429, Retry-After, and simple exponential backoff</li><li>reconciliation concepts: join keys, match vs source-only vs value-mismatch, numeric tolerance, and why provenance/as-of matter</li></ul></div>
       <div class="blk full lab">
@@ -857,18 +906,22 @@ if __name__ == &quot;__main__&quot;:
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W6 pandas (frames, merge/joins, dtypes, cleaning) and W1 Git/env hygiene. Produces the clean multi-source table that W8 SE hygiene refactors into tested, modular functions, and seeds later ingestion/CDC weeks — a paginated pull is the shape of an incremental source.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w8">
-    <div class="wk-head">
+  <details class="wk-card" id="w8">
+    <summary class="wk-head">
       <span class="wk-num">W08</span>
-      <span class="wk-title">Software engineering hygiene — typed, tested, packaged</span>
+      <span class="wk-headmain"><span class="wk-title">Software engineering hygiene — typed, tested, packaged</span><span class="wk-teaser">When a data component silently double-counts or drops records, the downstream number a director trusts in a board deck is wrong, and no one knows for days. A typed, tested, pip-installable reconciler with a documented contract is the artifact that lets an on-call engineer clone your repo, run one command, and trust the count in 30 seconds — the difference between a component a team can own and a script no one dares to touch.</span></span>
       <span class="wk-mod">M04 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G6</span><span class="gtag">G1</span><span class="gtag">G4</span></span>
+      <span class="wk-hrs">~11h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> When a data component silently double-counts or drops records, the downstream number a director trusts in a board deck is wrong, and no one knows for days. A typed, tested, pip-installable reconciler with a documented contract is the artifact that lets an on-call engineer clone your repo, run one command, and trust the count in 30 seconds — the difference between a component a team can own and a script no one dares to touch.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> When a data component silently double-counts or drops records, the downstream number a director trusts in a board deck is wrong, and no one knows for days. A typed, tested, pip-installable reconciler with a documented contract is the artifact that lets an on-call engineer clone your repo, run one command, and trust the count in 30 seconds — the difference between a component a team can own and a script no one dares to touch.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>annotate every function with type hints and pass a static type check (mypy/pyright) with zero errors</li><li>write pytest unit tests for the reconciliation logic — happy path plus edge cases (empty feed, duplicate ids, missing field, count mismatch) — using fixtures so tests run offline and deterministically</li><li>refactor a monolithic script into a clean src-layout package that separates pure logic from side-effecting I/O and the CLI</li><li>build and pip-install a wheel into a fresh venv that exposes a working console entry point</li><li>write docstrings that state each function&#x27;s contract (args/returns/raises) so the signature, docstring, and tests agree</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>type hints &amp; static checking: annotating params/returns, list[dict]/Optional/TypedDict &amp; dataclasses, running mypy or pyright, and why hints are checked statically not at runtime</li><li>docstrings as contracts: Google/NumPy style, documenting args/returns/raises, and keeping the docstring honest against the signature</li><li>unit testing with pytest: assert, arrange-act-assert, fixtures, @parametrize, and testing boundaries not just the happy path — tests as an executable spec</li><li>modular structure &amp; separation of concerns: pure functions vs I/O, why testability is a consequence of structure, the src layout</li><li>packaging: pyproject.toml, building a wheel, editable vs regular installs, and a console_scripts entry point</li></ul></div>
       <div class="blk full lab">
@@ -1032,18 +1085,22 @@ def test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -&gt
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W1 (Git, venv, repo hygiene) and W7 (the API-fetching reconciliation script and its data model). Later weeks build on it by treating typed, modular, pytest-covered packages as the baseline for all pipeline code — the seed for data-quality testing (G4) and for Git→DABs deployment (G6) in later phases.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w9">
-    <div class="wk-head">
+  <details class="wk-card" id="w9">
+    <summary class="wk-head">
       <span class="wk-num">W09</span>
-      <span class="wk-title">SQL I — joins &amp; filtering</span>
+      <span class="wk-headmain"><span class="wk-title">SQL I — joins &amp; filtering</span><span class="wk-teaser">When a revenue dashboard silently drops customers with no orders, or double-counts sales because an invoice fanned out across its line items, leadership makes decisions on wrong numbers and trust in the data team evaporates. Being able to read an ERD and predict exactly which rows an INNER vs LEFT join keeps, drops, or duplicates is the daily reasoning that keeps report totals correct.</span></span>
       <span class="wk-mod">M05 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G2</span></span>
+      <span class="wk-hrs">~9h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> When a revenue dashboard silently drops customers with no orders, or double-counts sales because an invoice fanned out across its line items, leadership makes decisions on wrong numbers and trust in the data team evaporates. Being able to read an ERD and predict exactly which rows an INNER vs LEFT join keeps, drops, or duplicates is the daily reasoning that keeps report totals correct.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> When a revenue dashboard silently drops customers with no orders, or double-counts sales because an invoice fanned out across its line items, leadership makes decisions on wrong numbers and trust in the data team evaporates. Being able to read an ERD and predict exactly which rows an INNER vs LEFT join keeps, drops, or duplicates is the daily reasoning that keeps report totals correct.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>write a SELECT that projects specific columns and filters rows with WHERE (=, IN, BETWEEN, LIKE, IS NULL) then ORDER BY / LIMIT to answer a stated business question</li><li>read an ERD, identify each table&#x27;s primary key and the foreign keys that connect two tables, and predict the join path BEFORE writing SQL</li><li>choose and justify the correct join type (INNER, LEFT, RIGHT, FULL OUTER, CROSS, self) for a given relationship and explain what each keeps or drops</li><li>state the grain of a join result and explain how a join fans out rows (one-to-many) or drops them (unmatched), and how NULLs behave in filters and join keys</li><li>prove a LEFT JOIN surfaces unmatched parent rows and recognize when a WHERE on the right table silently collapses it to an INNER JOIN</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>projection &amp; the SELECT/WHERE/ORDER BY/LIMIT skeleton; predicates: comparison, IN, BETWEEN, LIKE, IS NULL</li><li>keys as the contract of a relational model: primary vs foreign keys, and how a relationship encodes grain</li><li>join types and their set semantics: INNER, LEFT/RIGHT OUTER, FULL OUTER, CROSS, and self-joins — what each row set means</li><li>NULL &amp; three-valued logic: how NULLs disappear from filters, behave in join keys, and appear from unmatched outer rows</li><li>reading an ERD and planning a query: trace the join path before typing SQL</li></ul></div>
       <div class="blk full lab">
@@ -1117,18 +1174,22 @@ con.close()
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W8 software-engineering hygiene (working repo, venv, running scripts, atomic commits) and comfort at the CLI to load and query DuckDB locally. Introduces keys/grain and NULL/join semantics that W10 (SQL II — GROUP BY, subqueries, CTEs) and the relational-modeling weeks depend on directly; the join-path-before-SQL habit seeds G1 (defend your query) and G2 (modeling fundamentals).</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w10">
-    <div class="wk-head">
+  <details class="wk-card" id="w10">
+    <summary class="wk-head">
       <span class="wk-num">W10</span>
-      <span class="wk-title">SQL II — aggregation &amp; subqueries</span>
+      <span class="wk-headmain"><span class="wk-title">SQL II — aggregation &amp; subqueries</span><span class="wk-teaser">Every number you put in front of finance or a skeptical PM — &quot;revenue per country,&quot; &quot;active customers per genre&quot; — is an aggregation with a grain and a NULL-handling choice baked in. The day someone asks &quot;does this COUNT include the customers with no state on file?&quot; and you can&#x27;t answer, the whole report loses trust; a COUNT that silently drops NULLs understates a churn or coverage metric and can send money and headcount to the wrong place.</span></span>
       <span class="wk-mod">M05 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      <span class="wk-hrs">~8.5h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> Every number you put in front of finance or a skeptical PM — &quot;revenue per country,&quot; &quot;active customers per genre&quot; — is an aggregation with a grain and a NULL-handling choice baked in. The day someone asks &quot;does this COUNT include the customers with no state on file?&quot; and you can&#x27;t answer, the whole report loses trust; a COUNT that silently drops NULLs understates a churn or coverage metric and can send money and headcount to the wrong place.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> Every number you put in front of finance or a skeptical PM — &quot;revenue per country,&quot; &quot;active customers per genre&quot; — is an aggregation with a grain and a NULL-handling choice baked in. The day someone asks &quot;does this COUNT include the customers with no state on file?&quot; and you can&#x27;t answer, the whole report loses trust; a COUNT that silently drops NULLs understates a churn or coverage metric and can send money and headcount to the wrong place.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>summarize data with GROUP BY + aggregate functions (COUNT/SUM/AVG/MIN/MAX) and state the grain of every grouped result set</li><li>filter groups with HAVING and explain why it differs from WHERE (group filter vs row filter) using the logical order of evaluation</li><li>combine result sets with UNION / UNION ALL / INTERSECT / EXCEPT and pick the correct one for a given question</li><li>write scalar, IN/EXISTS, and derived-table (FROM) subqueries to answer questions a single flat query can&#x27;t</li><li>translate a plain-English analytical question into correct SQL and defend why the returned numbers are right</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>aggregate functions &amp; GROUP BY: the grain of a grouped result, NULL handling, and COUNT(*) vs COUNT(col) vs COUNT(DISTINCT)</li><li>WHERE vs HAVING and the logical order of evaluation (FROM -&gt; WHERE -&gt; GROUP BY -&gt; HAVING -&gt; SELECT -&gt; ORDER BY) — why you can&#x27;t filter an aggregate in WHERE</li><li>set operations: UNION vs UNION ALL, INTERSECT, EXCEPT, and the column-count / type-compatibility rules</li><li>subqueries: scalar subqueries, IN/NOT IN vs EXISTS/NOT EXISTS, derived tables in FROM, and correlated vs uncorrelated</li><li>reading results critically: sanity-checking totals against a known number and the NOT IN + NULL trap</li></ul></div>
       <div class="blk full lab">
@@ -1155,18 +1216,22 @@ con.close()
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W9 SQL I (SELECT/WHERE, single-table filtering, JOINs, ORDER BY) and the W1 Git workflow for committing the pack. W11 Advanced SQL I builds window functions and CTEs directly on top of this week&#x27;s aggregation, grouping, and subquery foundations — so grain-awareness and the logical evaluation order established here are prerequisites.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w11">
-    <div class="wk-head">
+  <details class="wk-card" id="w11">
+    <summary class="wk-head">
       <span class="wk-num">W11</span>
-      <span class="wk-title">Advanced SQL I — window functions &amp; CTEs</span>
+      <span class="wk-headmain"><span class="wk-title">Advanced SQL I — window functions &amp; CTEs</span><span class="wk-teaser">Climate, energy-load, and agriculture teams live on rolling-window and period-over-period math run on messy sensor feeds — a wrong 7-day average or a missed temperature swing feeds directly into demand forecasts, crop-loss claims, and grid-capacity decisions worth millions. The hard part is never the SQL; it is the -9999 missing readings and quality-control flags that silently poison a moving average if you don&#x27;t handle them before the window ever runs.</span></span>
       <span class="wk-mod">M06 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      <span class="wk-hrs">~10h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> Climate, energy-load, and agriculture teams live on rolling-window and period-over-period math run on messy sensor feeds — a wrong 7-day average or a missed temperature swing feeds directly into demand forecasts, crop-loss claims, and grid-capacity decisions worth millions. The hard part is never the SQL; it is the -9999 missing readings and quality-control flags that silently poison a moving average if you don&#x27;t handle them before the window ever runs.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> Climate, energy-load, and agriculture teams live on rolling-window and period-over-period math run on messy sensor feeds — a wrong 7-day average or a missed temperature swing feeds directly into demand forecasts, crop-loss claims, and grid-capacity decisions worth millions. The hard part is never the SQL; it is the -9999 missing readings and quality-control flags that silently poison a moving average if you don&#x27;t handle them before the window ever runs.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>choose correctly among row_number/rank/dense_rank for per-group top-N and explain how each handles ties</li><li>use lag/lead to compute period-over-period change and inter-event gaps without a self-join</li><li>compute running totals and moving averages with an explicit frame clause, and explain ROWS vs RANGE</li><li>refactor a nested subquery stack into named CTEs that a reviewer can read top-to-bottom</li><li>state when a window (PARTITION BY, keeps every row) is the right tool vs GROUP BY (collapses rows)</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>window function anatomy: OVER, PARTITION BY, ORDER BY, and why rows are not collapsed</li><li>ranking family — row_number vs rank vs dense_rank and how ties differ</li><li>offset functions — lag/lead for deltas, gaps, and prev/next comparisons</li><li>frame clauses — running totals &amp; moving averages with ROWS BETWEEN vs RANGE, and the default-frame trap</li><li>CTEs for layered, readable logic — naming steps, chaining, and when a CTE beats a subquery</li></ul></div>
       <div class="blk full lab">
@@ -1265,18 +1330,22 @@ UNION ALL SELECT &#x27;rejected&#x27;, count(*) FROM rejected_obs;
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W10 SQL II (joins, aggregation, GROUP BY/HAVING, subqueries) and a working DuckDB + Git/PR workflow from earlier weeks. W12 Advanced SQL II builds on these window/CTE foundations (recursive CTEs, more advanced windowing and query-shaping); this week deliberately stops at single-level window functions and non-recursive CTEs.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w12">
-    <div class="wk-head">
+  <details class="wk-card" id="w12">
+    <summary class="wk-head">
       <span class="wk-num">W12</span>
-      <span class="wk-title">Advanced SQL II — query plans &amp; tuning</span>
+      <span class="wk-headmain"><span class="wk-title">Advanced SQL II — query plans &amp; tuning</span><span class="wk-teaser">When a climate dashboard or a regulatory report times out on a multi-year weather query, the on-call data engineer is expected to open the query plan, name the operator that is burning the time, and defend exactly one index change on a whiteboard — including which index they refused to add. That &quot;read the plan and justify the index&quot; moment is a near-verbatim data-engineering interview task and a real cost/latency lever in production.</span></span>
       <span class="wk-mod">M06 · Phase 1 · bronze</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G7</span></span>
+      <span class="wk-hrs">~10h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> When a climate dashboard or a regulatory report times out on a multi-year weather query, the on-call data engineer is expected to open the query plan, name the operator that is burning the time, and defend exactly one index change on a whiteboard — including which index they refused to add. That &quot;read the plan and justify the index&quot; moment is a near-verbatim data-engineering interview task and a real cost/latency lever in production.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> When a climate dashboard or a regulatory report times out on a multi-year weather query, the on-call data engineer is expected to open the query plan, name the operator that is burning the time, and defend exactly one index change on a whiteboard — including which index they refused to add. That &quot;read the plan and justify the index&quot; moment is a near-verbatim data-engineering interview task and a real cost/latency lever in production.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>read an EXPLAIN / EXPLAIN ANALYZE plan top-to-bottom and name the driving cost (seq scan, sort, nested loop) and where estimated rows diverge from actual</li><li>define sargability and rewrite a non-sargable predicate (function-on-column, leading wildcard, implicit cast) so an index can be used</li><li>add the right index (single, composite with correct column order, or covering) and quantify the before/after runtime and I/O</li><li>reason about when an index does NOT help — low selectivity, tiny table, write cost — and defend that call</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>how a planner works: logical vs physical plan, cost model, and the table statistics it depends on</li><li>reading EXPLAIN vs EXPLAIN ANALYZE — estimated vs actual rows, BUFFERS, and per-node timing</li><li>scan &amp; join operators: seq scan, index scan, bitmap heap scan; nested loop vs hash join and when each wins</li><li>indexes in depth: B-tree, composite column order, covering (INCLUDE) indexes, and selectivity</li><li>sargability — the predicate patterns that silently disable an index and how to rewrite them</li></ul></div>
       <div class="blk full lab">
@@ -1360,18 +1429,22 @@ GROUP  BY station_id, element;
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W11 Advanced SQL I (window functions, CTEs, multi-join/subquery fluency) so learners can read and reason about the non-trivial query being tuned, plus a working local Postgres from earlier SQL weeks. Feeds W13 relational theory (keys/normalization inform which indexes make sense) and plants G7 seeds — physical operators, partitioning, and cost intuition reused when reading Spark plans in the lakehouse phase.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w13">
-    <div class="wk-head">
+  <details class="wk-card" id="w13">
+    <summary class="wk-head">
       <span class="wk-num">W13</span>
-      <span class="wk-title">Relational theory &amp; normalization — keys, FDs, 1NF→3NF</span>
+      <span class="wk-headmain"><span class="wk-title">Relational theory &amp; normalization — keys, FDs, 1NF→3NF</span><span class="wk-teaser">NYC&#x27;s restaurant-inspection feed repeats a venue&#x27;s name, address, borough, and cuisine on every single inspection and violation row — so when a restaurant changes its name or moves, you either update dozens of rows correctly or silently corrupt your data, and a brand-new venue with no inspection yet can&#x27;t even be recorded. Those are the exact update, delete, and insert anomalies that normalization exists to kill, and getting them wrong is how a public health dashboard shows a shuttered address as &quot;grade pending.&quot;</span></span>
       <span class="wk-mod">M07 · Phase 1 · bronze · Phase 1 capstone</span>
       <span class="wk-gaps"><span class="gtag">G2</span><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      <span class="wk-hrs">~11h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> NYC&#x27;s restaurant-inspection feed repeats a venue&#x27;s name, address, borough, and cuisine on every single inspection and violation row — so when a restaurant changes its name or moves, you either update dozens of rows correctly or silently corrupt your data, and a brand-new venue with no inspection yet can&#x27;t even be recorded. Those are the exact update, delete, and insert anomalies that normalization exists to kill, and getting them wrong is how a public health dashboard shows a shuttered address as &quot;grade pending.&quot;</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> NYC&#x27;s restaurant-inspection feed repeats a venue&#x27;s name, address, borough, and cuisine on every single inspection and violation row — so when a restaurant changes its name or moves, you either update dozens of rows correctly or silently corrupt your data, and a brand-new venue with no inspection yet can&#x27;t even be recorded. Those are the exact update, delete, and insert anomalies that normalization exists to kill, and getting them wrong is how a public health dashboard shows a shuttered address as &quot;grade pending.&quot;</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>identify candidate, primary &amp; foreign keys (natural vs surrogate) and write the functional dependencies that actually hold in a real flat dataset</li><li>decompose a denormalized table to 3NF, justifying each split by the specific normal-form rule (partial vs transitive dependency) it removes</li><li>enforce referential integrity with PK/FK constraints and prove that orphan/duplicate inserts are rejected</li><li>decide when to denormalize and articulate the read-vs-write / redundancy tradeoff in writing</li><li>assemble the Phase 1 portfolio: an ERD + normalized schema wrapping the SQL + Python analytics work into one defensible project</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>keys: super/candidate/primary/foreign, natural vs surrogate — and why every table needs a declared PK</li><li>functional dependencies: what X→Y means and how to detect them by profiling data</li><li>normal forms: 1NF (atomicity/no repeating groups), 2NF (no partial deps), 3NF (no transitive deps), with the decomposition procedure; a nod to BCNF</li><li>referential integrity: PK/FK constraints, orphan rows, and cascade/restrict behavior</li><li>denormalization: the update/insert/delete anomalies 3NF prevents vs the read-speed reasons to deliberately break it</li></ul></div>
       <div class="blk full lab">
@@ -1476,8 +1549,21 @@ CREATE OR REPLACE TABLE violation (
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Assumes W12 Advanced SQL II (joins, aggregation, window functions, CTEs) to write the split/validation queries, plus Python/pandas and Git/repo hygiene from M00. Deliberately stops at 3NF/BCNF and normalized OLTP-style modeling; W14 (Phase 2, dimensional modeling) builds directly on these keys and FDs by intentionally denormalizing into star-schema facts and dimensions.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 </main>
 <footer><div class="wrap"><div class="foot-note">
       <span>Launch · Phase 1 — 13 weekly lesson plans · deepened labs on real open data · method per the Gambill DE career videos.</span>
       <span class="mono">Gambill Data Engineer Track</span></div></div></footer>
+<script>
+(function(){
+  document.querySelectorAll('.wk-toggle').forEach(function(b){
+    b.addEventListener('click',function(){
+      var op=b.getAttribute('data-act')==='expand';
+      document.querySelectorAll('details.wk-card').forEach(function(d){d.open=op;});
+    });
+  });
+  function openHash(){var h=location.hash; if(!h) return; var t; try{t=document.querySelector(h);}catch(e){return;} if(t&&t.tagName==='DETAILS'){t.open=true; t.scrollIntoView();}}
+  window.addEventListener('hashchange',openHash); openHash();
+})();
+</script>

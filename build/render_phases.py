@@ -100,9 +100,50 @@ def navbar(items, weeknums):
     parts += [f'<a href="#w{n}">W{n}</a>' for n in weeknums]
     return '<nav class="weeknav"><div class="wrap">' + "".join(parts) + '</div></nav>'
 
+COLLAPSE_CSS = r'''
+  /* collapsible week cards */
+  details.wk-card { position: relative; }
+  details.wk-card > summary.wk-head { cursor: pointer; list-style: none; align-items: center; gap: 8px 14px; padding-right: 48px; }
+  details.wk-card > summary.wk-head::-webkit-details-marker { display: none; }
+  .wk-head::before { display: none !important; }
+  details.wk-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--bronze); border-radius: 8px 0 0 8px; }
+  .wk-headmain { display: flex; flex-direction: column; gap: 3px; flex: 1 1 320px; min-width: 0; }
+  .wk-headmain .wk-title { flex: 0 0 auto; }
+  .wk-teaser { font-size: 12.5px; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .wk-hrs { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--faint); white-space: nowrap; }
+  .wk-chev { position: absolute; right: 20px; top: 22px; transition: transform .18s ease; color: var(--muted); font-size: 11px; }
+  details.wk-card[open] > summary .wk-chev { transform: rotate(180deg); }
+  details.wk-card[open] > summary.wk-head { border-bottom: 1px solid var(--line); }
+  summary.wk-head:hover .wk-title { color: var(--accent-strong); }
+  summary.wk-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .wk-toolbar { display: flex; gap: 8px; justify-content: flex-end; align-items: center; padding-top: 18px; }
+  .wk-toolbar .tl { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); margin-right: auto; }
+  .wk-toggle { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; cursor: pointer; }
+  .wk-toggle:hover { border-color: var(--accent); color: var(--accent-strong); }
+'''
+
+TOOLBAR_HTML = ('<div class="wk-toolbar wrap"><span class="tl">Each week is collapsed — click to open</span>'
+                '<button class="wk-toggle" data-act="expand" type="button">Expand all</button>'
+                '<button class="wk-toggle" data-act="collapse" type="button">Collapse all</button></div>')
+
+TOGGLE_JS = '''<script>
+(function(){
+  document.querySelectorAll('.wk-toggle').forEach(function(b){
+    b.addEventListener('click',function(){
+      var op=b.getAttribute('data-act')==='expand';
+      document.querySelectorAll('details.wk-card').forEach(function(d){d.open=op;});
+    });
+  });
+  function openHash(){var h=location.hash; if(!h) return; var t; try{t=document.querySelector(h);}catch(e){return;} if(t&&t.tagName==='DETAILS'){t.open=true; t.scrollIntoView();}}
+  window.addEventListener('hashchange',openHash); openHash();
+})();
+</script>'''
+
 def page(title, extra_css, hero, nav, cards, footer):
-    return (f'<title>{title}</title>\n<style>\n{BASECSS}\n{extra_css}\n</style>\n'
-            f'{hero}\n{nav}\n<main class="wrap">\n{cards}\n</main>\n{footer}\n')
+    toolbar = TOOLBAR_HTML if MODE == "site" else ""
+    script = TOGGLE_JS if MODE == "site" else ""
+    return (f'<title>{title}</title>\n<style>\n{BASECSS}\n{COLLAPSE_CSS}\n{extra_css}\n</style>\n'
+            f'{hero}\n{nav}\n{toolbar}\n<main class="wrap">\n{cards}\n</main>\n{footer}\n{script}')
 
 # ---- Phase 1 (base + enhanced merge) ----------------------------------------
 META = {
@@ -143,16 +184,19 @@ def card_p1(n, base, enh):
     modline = f"{mod} · Phase 1 · bronze" + (" · Phase 1 capstone" if n == 13 else "")
     lh = x.get("labHours") or 5; ch = b.get("lessonHours") or 4
     return f'''
-  <article class="wk-card" id="w{n}">
-    <div class="wk-head">
+  <details class="wk-card" id="w{n}">
+    <summary class="wk-head">
       <span class="wk-num">W{n:02d}</span>
-      <span class="wk-title">{e(title)}</span>
+      <span class="wk-headmain"><span class="wk-title">{e(title)}</span><span class="wk-teaser">{e(x.get("businessFraming","") or x.get("labSummary",""))}</span></span>
       <span class="wk-mod">{e(modline)}</span>
       <span class="wk-gaps">{gap_chips(gaps)}</span>
+      <span class="wk-hrs">~{ch+lh}h</span>
       {howto_html(n)}
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> {e(x.get("businessFraming",""))}</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> {e(x.get("businessFraming",""))}</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul>{li(b.get("objectives",[]))}</ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~{ch}h</span></div><ul>{li(b.get("lessons",[]))}</ul></div>
       <div class="blk full lab">
@@ -179,7 +223,8 @@ def card_p1(n, base, enh):
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> {e(b.get("prereqs",""))}</div>
       </div>
     </div>
-  </article>'''
+    </div>
+  </details>'''
 
 def render_phase1():
     base = {wnum(w): w for w in json.load(open(f"{DATA}/phase1_base.json"))}
@@ -211,17 +256,20 @@ def card_generic(w, tier, capweeks):
     mirror = w.get("mirrorNote","")
     mirror_html = f'<div class="mirror"><span class="ml2">Adapt to your industry</span> {e(mirror)}</div>' if mirror else ""
     return f'''
-  <article class="wk-card" id="w{n}">
-    <div class="wk-head">
+  <details class="wk-card" id="w{n}">
+    <summary class="wk-head">
       <span class="wk-num">W{n:02d}</span>
-      <span class="wk-title">{title}</span>
+      <span class="wk-headmain"><span class="wk-title">{title}</span><span class="wk-teaser">{e(w.get("businessFraming","") or w.get("labSummary",""))}</span></span>
       <span class="wk-mod">{modline}</span>
       <span class="wk-gaps">{gap_chips(w.get("gaps"))}</span>
+      <span class="wk-hrs">~{ch+lh}h</span>
       {howto_html(n)}
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> {e(w.get("businessFraming",""))}</div>
-    {role_html}
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> {e(w.get("businessFraming",""))}</div>
+      {role_html}
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul>{li(w.get("objectives",[]))}</ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~{ch}h</span></div><ul>{li(w.get("lessons",[]))}</ul></div>
       <div class="blk full lab">
@@ -249,12 +297,13 @@ def card_generic(w, tier, capweeks):
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> {e(w.get("prereqs",""))}</div>
       </div>
     </div>
-  </article>'''
+    </div>
+  </details>'''
 
 TIER_CSS = {
- "silver": '.wk-head::before{background:var(--silver)}.wk-num{background:var(--silver)}.src.silver{color:var(--silver);background:var(--surface-2)}',
- "gold":   '.wk-head::before{background:var(--gold)}.wk-num{background:var(--gold)}.mirror .ml2{color:var(--gold)}.src.gold{color:var(--gold);background:var(--surface-2)}',
- "launch": '.wk-head::before{background:var(--accent)}.wk-num{background:var(--accent)}.mirror .ml2{color:var(--accent-strong)}.src.launch{color:var(--accent-strong);background:var(--accent-soft)}',
+ "silver": 'details.wk-card::before{background:var(--silver)}.wk-num{background:var(--silver)}.src.silver{color:var(--silver);background:var(--surface-2)}',
+ "gold":   'details.wk-card::before{background:var(--gold)}.wk-num{background:var(--gold)}.mirror .ml2{color:var(--gold)}.src.gold{color:var(--gold);background:var(--surface-2)}',
+ "launch": 'details.wk-card::before{background:var(--accent)}.wk-num{background:var(--accent)}.mirror .ml2{color:var(--accent-strong)}.src.launch{color:var(--accent-strong);background:var(--accent-soft)}',
 }
 
 NOTE2 = '''<div class="platform-note"><b>What you'll need:</b> this phase runs on <b>Databricks Free Edition</b> — a no-cost, fully-hosted account you create in minutes with an email or Google/Microsoft login; no AWS/Azure/GCP account or credit card required. It is serverless and includes Unity Catalog, Delta Lake, Lakeflow pipelines, Jobs, streaming, and the CLI under fair-use quotas. A few scale-out topics later need the 14-day full-platform trial or a paid/employer workspace &mdash; those are flagged where they appear (see Phase 3).</div>'''

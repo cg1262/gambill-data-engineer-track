@@ -82,13 +82,13 @@ def welcome_html(key):
     return f'<a class="welcome-btn" href="{e(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
 
 # ---------- BRIDGE ----------
-analyst_stages=[("Close the engineering gap","~5 wks",['M00','M01','M02','M03','M04']),
- ("Core data engineering","~8 wks",['M06','M07','M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25']),
- ("Platform & production","~6 wks",['M20','M21','M22','M23','M26','M28','M29','M30','M31']),
+analyst_stages=[("Close the engineering gap","~4 wks",['M00','M01','M02','M03','M04']),
+ ("Core data engineering","~7 wks",['M06','M07','M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25']),
+ ("Platform & production","~5 wks",['M20','M21','M22','M23','M26','M28','M29','M30','M31']),
  ("Launch","~4 wks",['M32','M12','M36','M37'])]
-swe_stages=[("Close the data gap","~5 wks",['M01','M05','M06','M07']),
- ("Model, pipeline & Spark","~8 wks",['M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25','M26']),
- ("Platform & production","~6 wks",['M20','M21','M22','M23','M28','M29','M30','M31']),
+swe_stages=[("Close the data gap","~4 wks",['M01','M05','M06','M07']),
+ ("Model, pipeline & Spark","~7 wks",['M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25','M26']),
+ ("Platform & production","~5 wks",['M20','M21','M22','M23','M28','M29','M30','M31']),
  ("Launch","~4 wks",['M32','M33','M36','M37'])]
 def stages_html(stages):
     return "".join(f'<div class="stage"><div class="st"><span>{e(n)}</span><span class="wks">{e(w)}</span></div><div class="chipwrap">{chips(ms)}</div></div>' for n,w,ms in stages)
@@ -125,7 +125,7 @@ bridge_body=f'''
   <div class="split">
     <div class="variant a">
       <h3>Analyst → DE</h3><div class="who">Strong SQL &amp; business sense; lighter on programming, distributed compute, and engineering practice.</div>
-      <div class="meta"><div><div class="mv tnum">~23 wks</div><div class="ml">Duration</div></div><div><div class="mv">Variant A</div><div class="ml">Route</div></div></div>
+      <div class="meta"><div><div class="mv tnum">~20 wks</div><div class="ml">Duration</div></div><div><div class="mv">Variant A</div><div class="ml">Route</div></div></div>
       <div class="haveskip">
         <div class="row"><span class="lab have">You have</span><span>SQL, aggregation, business framing, BI reporting instincts.</span></div>
         <div class="row"><span class="lab skip">Skip</span><span><b>M05</b> SQL fundamentals (proven in the diagnostic); <b>M06</b> becomes a quick review.</span></div>
@@ -134,7 +134,7 @@ bridge_body=f'''
     </div>
     <div class="variant s">
       <h3>SWE → DE</h3><div class="who">Strong Python, Git, CI/CD; lighter on data modeling, SQL depth, warehousing, and DQ discipline.</div>
-      <div class="meta"><div><div class="mv tnum">~23 wks</div><div class="ml">Duration</div></div><div><div class="mv">Variant S</div><div class="ml">Route</div></div></div>
+      <div class="meta"><div><div class="mv tnum">~20 wks</div><div class="ml">Duration</div></div><div><div class="mv">Variant S</div><div class="ml">Route</div></div></div>
       <div class="haveskip">
         <div class="row"><span class="lab have">You have</span><span>Python, Git/PRs, testing, CI/CD, packaging.</span></div>
         <div class="row"><span class="lab skip">Skip</span><span><b>M00</b> CLI/Git basics, <b>M02</b> Python fundamentals, <b>M27</b> Git deep — already owned.</span></div>

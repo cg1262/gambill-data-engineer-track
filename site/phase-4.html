@@ -166,7 +166,28 @@
     .framing, .project-role { margin-left: 18px; margin-right: 18px; }
   }
 
-.wk-head::before{background:var(--accent)}.wk-num{background:var(--accent)}.mirror .ml2{color:var(--accent-strong)}.src.launch{color:var(--accent-strong);background:var(--accent-soft)}
+
+  /* collapsible week cards */
+  details.wk-card { position: relative; }
+  details.wk-card > summary.wk-head { cursor: pointer; list-style: none; align-items: center; gap: 8px 14px; padding-right: 48px; }
+  details.wk-card > summary.wk-head::-webkit-details-marker { display: none; }
+  .wk-head::before { display: none !important; }
+  details.wk-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--bronze); border-radius: 8px 0 0 8px; }
+  .wk-headmain { display: flex; flex-direction: column; gap: 3px; flex: 1 1 320px; min-width: 0; }
+  .wk-headmain .wk-title { flex: 0 0 auto; }
+  .wk-teaser { font-size: 12.5px; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .wk-hrs { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--faint); white-space: nowrap; }
+  .wk-chev { position: absolute; right: 20px; top: 22px; transition: transform .18s ease; color: var(--muted); font-size: 11px; }
+  details.wk-card[open] > summary .wk-chev { transform: rotate(180deg); }
+  details.wk-card[open] > summary.wk-head { border-bottom: 1px solid var(--line); }
+  summary.wk-head:hover .wk-title { color: var(--accent-strong); }
+  summary.wk-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .wk-toolbar { display: flex; gap: 8px; justify-content: flex-end; align-items: center; padding-top: 18px; }
+  .wk-toolbar .tl { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); margin-right: auto; }
+  .wk-toggle { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; cursor: pointer; }
+  .wk-toggle:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+details.wk-card::before{background:var(--accent)}.wk-num{background:var(--accent)}.mirror .ml2{color:var(--accent-strong)}.src.launch{color:var(--accent-strong);background:var(--accent-soft)}
 </style>
 <div class="hero"><div class="wrap">
     <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 4 of 4</span>
@@ -176,19 +197,23 @@
     
   </div></div>
 <nav class="weeknav"><div class="wrap"><a class="navhome" href="index.html">← Course home</a><a href="curriculum.html">Curriculum</a><a href="phase-3.html">← Phase 3</a><span class="navsep"></span><span class="nl">Weeks</span><a href="#w44">W44</a><a href="#w45">W45</a><a href="#w46">W46</a><a href="#w47">W47</a><a href="#w48">W48</a></div></nav>
+<div class="wk-toolbar wrap"><span class="tl">Each week is collapsed — click to open</span><button class="wk-toggle" data-act="expand" type="button">Expand all</button><button class="wk-toggle" data-act="collapse" type="button">Collapse all</button></div>
 <main class="wrap">
 
-  <article class="wk-card" id="w44">
-    <div class="wk-head">
+  <details class="wk-card" id="w44">
+    <summary class="wk-head">
       <span class="wk-num">W44</span>
-      <span class="wk-title">Architecture decision-making — design &amp; defend your capstone</span>
+      <span class="wk-headmain"><span class="wk-title">Architecture decision-making — design &amp; defend your capstone</span><span class="wk-teaser">You are the founding data engineer for a company in your target industry. Leadership has funded exactly one data product and wants to know, before a single line of code is written, what it will be, who decides differently because of it, and why your architecture is the right bet — because rework after go-live is expensive and your job is on the line. This week you earn the right to build by designing something you can defend to a skeptical senior in 30 seconds.</span></span>
       <span class="wk-mod">M32 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G9</span><span class="gtag">G1</span></span>
+      <span class="wk-hrs">~10h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> You are the founding data engineer for a company in your target industry. Leadership has funded exactly one data product and wants to know, before a single line of code is written, what it will be, who decides differently because of it, and why your architecture is the right bet — because rework after go-live is expensive and your job is on the line. This week you earn the right to build by designing something you can defend to a skeptical senior in 30 seconds.</div>
-    <div class="project-role"><span class="pl">Launch · this week</span> Launch gate for the solo capstone: this is the design-before-code week where the learner locks their own industry, validates a real messy source, and commits the charter + 4-part architecture + 3 ADRs that every subsequent capstone-build week (W46+) executes against. Getting this right is what makes the later build fast and the final GitHub read as senior.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> You are the founding data engineer for a company in your target industry. Leadership has funded exactly one data product and wants to know, before a single line of code is written, what it will be, who decides differently because of it, and why your architecture is the right bet — because rework after go-live is expensive and your job is on the line. This week you earn the right to build by designing something you can defend to a skeptical senior in 30 seconds.</div>
+      <div class="project-role"><span class="pl">Launch · this week</span> Launch gate for the solo capstone: this is the design-before-code week where the learner locks their own industry, validates a real messy source, and commits the charter + 4-part architecture + 3 ADRs that every subsequent capstone-build week (W46+) executes against. Getting this right is what makes the later build fast and the final GitHub read as senior.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Write a one-page capstone project charter that names the problem, the decision-making persona, the data-product grain, and 3 measurable KPIs — such that a reviewer can restate the business problem in one sentence without reading the code.</li><li>Produce a 4-part architecture document (context/C4-lite, medallion data flow with grain per layer, governance &amp; security model, deployment/CI-CD topology) that a senior reviewer can trace end-to-end from source to golden record.</li><li>Author 3 Architecture Decision Records (ADRs) for pivotal choices (e.g., batch vs streaming, star vs Data Vault, exact vs fuzzy matching) that each state the context, the options considered, what was given up, and the revisit trigger.</li><li>Validate the chosen real public source by profiling it (volume, refresh cadence, messiness, licence/ToS) and defending in writing why it is rich enough to reach golden records.</li><li>Defend the design verbally in a trade-off shape (‘I chose X over Y because Z, which cost me A, and I would revisit via B’) tied to a named persona, not a tool.</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Design before code: why the charter comes first (‘slow on the front end, fast on the back end’). Grain, persona, and KPI as the three things that make a data product defensible. Recognition before evaluation — the 1–2 sentence business framing that opens every artifact. (0.75 hr)</li><li>The 4-part architecture doc as a senior signal: (1) context/C4-lite system diagram, (2) medallion data flow with the declared grain at bronze/silver/gold, (3) Unity Catalog governance &amp; security model, (4) DABs/CI-CD deployment topology. What a 30-second GitHub skim must reveal. (1.0 hr)</li><li>Architecture Decision Records: the Nygard format (context → decision → status → consequences). Writing the option you REJECTED as carefully as the one you chose; the ‘what I gave up’ and the ‘revisit trigger’ as interview gold. (1.0 hr)</li><li>The three pivotal capstone decisions in depth: batch vs micro-batch/streaming; dimensional star vs Data Vault vs one-big-table; exact vs fuzzy (blocking + similarity) entity matching for MDM. Cost, latency, and maintainability trade-offs of each. (0.75 hr)</li><li>Source selection &amp; feasibility: profiling a real public source for volume, refresh cadence, natural keys, duplication/messiness, and licence/ToS before you commit 6 weeks to it. Red flags that kill a capstone source. (0.5 hr)</li></ul></div>
       <div class="blk full lab">
@@ -252,19 +277,23 @@
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Completed Phases 1–3 (healthcare Project 1 productionized in W43), including its charter and architecture doc as reference exemplars. Working Databricks workspace with Unity Catalog and a DABs/CI-CD setup from Phase 3. A GitHub account and repo tooling. A chosen target industry (or the willingness to lock one this week) and access to at least one real public source from the learner-sources list. Comfort with git history hygiene and writing markdown docs.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w45">
-    <div class="wk-head">
+  <details class="wk-card" id="w45">
+    <summary class="wk-head">
       <span class="wk-num">W45</span>
-      <span class="wk-title">Elective deep-dive — Data Vault 2.0 OR AI-assisted DE (choose one)</span>
+      <span class="wk-headmain"><span class="wk-title">Elective deep-dive — Data Vault 2.0 OR AI-assisted DE (choose one)</span><span class="wk-teaser">Your capstone works, but every mature data platform eventually faces one of two pressures a hiring manager will probe: &#x27;How would you make this auditable and agile when the source systems multiply?&#x27; (Data Vault) or &#x27;Where would you responsibly put AI in this pipeline without it becoming a liability?&#x27; (AI-assisted DE). This week you add ONE of those capabilities to your toolkit and, ideally, to the capstone — chosen for a real reader, not for résumé decoration — so you can speak to it with judgment instead of hype.</span></span>
       <span class="wk-mod">M12 / M33 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G2</span></span>
+      <span class="wk-hrs">~16.5h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> Your capstone works, but every mature data platform eventually faces one of two pressures a hiring manager will probe: &#x27;How would you make this auditable and agile when the source systems multiply?&#x27; (Data Vault) or &#x27;Where would you responsibly put AI in this pipeline without it becoming a liability?&#x27; (AI-assisted DE). This week you add ONE of those capabilities to your toolkit and, ideally, to the capstone — chosen for a real reader, not for résumé decoration — so you can speak to it with judgment instead of hype.</div>
-    <div class="project-role"><span class="pl">Launch · this week</span> Adds exactly one advanced, interview-defensible capability to the toolkit and, where it fits, to the capstone. Just as important, it trains the senior instinct to SCOPE: the learner practices choosing one capability for a real reader and consciously declining the other — the anti-over-engineering muscle that W46 interview prep will draw on directly.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> Your capstone works, but every mature data platform eventually faces one of two pressures a hiring manager will probe: &#x27;How would you make this auditable and agile when the source systems multiply?&#x27; (Data Vault) or &#x27;Where would you responsibly put AI in this pipeline without it becoming a liability?&#x27; (AI-assisted DE). This week you add ONE of those capabilities to your toolkit and, ideally, to the capstone — chosen for a real reader, not for résumé decoration — so you can speak to it with judgment instead of hype.</div>
+      <div class="project-role"><span class="pl">Launch · this week</span> Adds exactly one advanced, interview-defensible capability to the toolkit and, where it fits, to the capstone. Just as important, it trains the senior instinct to SCOPE: the learner practices choosing one capability for a real reader and consciously declining the other — the anti-over-engineering muscle that W46 interview prep will draw on directly.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Given your capstone model, DECIDE between two advanced capabilities and write a 1-paragraph rationale tying the choice to a real reader (hiring manager, future maintainer) — not to novelty.</li><li>TRACK A: Model a subject area of your capstone as Data Vault 2.0 (hub / link / satellite), define hash keys and load-date/record-source columns, and explain in writing exactly WHEN Data Vault beats a star schema and what auditability/agility you buy for the added join cost.</li><li>TRACK B: Wire ONE narrowly-scoped LLM step into a Databricks pipeline (classify / extract / standardize) behind a deterministic contract, with a semantic/context layer, input+output guardrails, and a repeatable eval harness with a measured pass rate.</li><li>For EITHER track, produce an ADR that states the trade-off in interview-ready form: &#x27;I chose X over Y because Z, which cost me A, and I would revisit via B.&#x27;</li><li>Prove the human-in-the-loop: show at least one decision point where YOU overrode or bounded the tool, and record why over-engineering the other track would have been the wrong call this week.</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~7.5h</span></div><ul><li>Why an elective, and how to choose (0.5 hr): &#x27;add one advanced capability, not five.&#x27; Over-engineering is the trap this week is designed to expose. Read the two track summaries, then write your choice + reader-first rationale BEFORE any code (recognition before evaluation).</li><li>TRACK A concepts — Data Vault 2.0 core (2.0 hr): hubs (business keys), links (relationships/transactions), satellites (context + history), hash keys vs. sequence keys, load_date and record_source as first-class lineage, insert-only/idempotent loads. Where it sits relative to your medallion: raw vault in silver, business vault + star-schema marts in gold.</li><li>TRACK A concepts — when Data Vault beats a star (1.0 hr): many source systems, changing relationships, hard auditability/regulatory lineage, parallel loads. The cost: more joins, more objects, a mart layer still needed for consumers. Star schema remains right for a single stable source and BI-first grain. Decide with your capstone in hand.</li><li>TRACK B concepts — LLMs/agents in the pipeline (2.0 hr): the ONLY safe pattern is a narrow, bounded step behind a deterministic contract (typed output, allowed-value set). Semantic/context layer = the curated facts + schema + business glossary you feed the model so it answers about YOUR data, not the internet. Cost, latency, and non-determinism as engineering constraints.</li><li>TRACK B concepts — guardrails, evals, human-in-the-loop (1.5 hr): input validation + output schema enforcement + confidence/abstain path + quarantine on low confidence (same quarantine discipline as Phases 1-3). Build a labeled gold set, measure pass rate/precision, and log every call for audit. &#x27;The human in the loop&#x27; = you own the eval bar and the override.</li><li>Both tracks — interview framing (0.5 hr): how to tell this as a trade-off story (&#x27;why not what&#x27;), and why &#x27;I deliberately did NOT do X&#x27; is a senior signal on a 30-second skim.</li></ul></div>
       <div class="blk full lab">
@@ -367,19 +396,23 @@ def guarded_infer(row):
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> W44 capstone architecture doc complete (charter + 4-part architecture + ADR log) with a working silver model to build on. Databricks workspace with Unity Catalog and your capstone catalog/schema from Phase 3. For Track B: an available LLM endpoint (Databricks ai_query or an LLM API key). Comfort with the Phase 1-3 quarantine + idempotency patterns, which both tracks reuse.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w46">
-    <div class="wk-head">
+  <details class="wk-card" id="w46">
+    <summary class="wk-head">
       <span class="wk-num">W46</span>
-      <span class="wk-title">Interview prep I — technical (SQL, pipeline &amp; system design)</span>
+      <span class="wk-headmain"><span class="wk-title">Interview prep I — technical (SQL, pipeline &amp; system design)</span><span class="wk-teaser">A hiring manager has 45 minutes and six candidates who all say they &#x27;built a pipeline&#x27;; the person across the table has to be able to defend hiring you to THEIR boss the next morning. This week you make your judgment legible fast — so a stranger skimming your repo for 30 seconds and quizzing you for 45 minutes leaves able to repeat back your grain, your golden records, and one tradeoff you owned.</span></span>
       <span class="wk-mod">M36 / M35 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G10</span></span>
+      <span class="wk-hrs">~11.0h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> A hiring manager has 45 minutes and six candidates who all say they &#x27;built a pipeline&#x27;; the person across the table has to be able to defend hiring you to THEIR boss the next morning. This week you make your judgment legible fast — so a stranger skimming your repo for 30 seconds and quizzing you for 45 minutes leaves able to repeat back your grain, your golden records, and one tradeoff you owned.</div>
-    <div class="project-role"><span class="pl">Launch · this week</span> Converts the finished two-project portfolio from an artifact into interview performance. This is the first of two interview-prep weeks: it drills the technical rounds (SQL, pipeline/system-design, take-home grading) and hardens portfolio engineering (README, architecture doc, repo hygiene) so both projects survive a 30-second GitHub skim and a 45-minute technical loop — always narrated through the learner&#x27;s OWN capstone rather than generic problems.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> A hiring manager has 45 minutes and six candidates who all say they &#x27;built a pipeline&#x27;; the person across the table has to be able to defend hiring you to THEIR boss the next morning. This week you make your judgment legible fast — so a stranger skimming your repo for 30 seconds and quizzing you for 45 minutes leaves able to repeat back your grain, your golden records, and one tradeoff you owned.</div>
+      <div class="project-role"><span class="pl">Launch · this week</span> Converts the finished two-project portfolio from an artifact into interview performance. This is the first of two interview-prep weeks: it drills the technical rounds (SQL, pipeline/system-design, take-home grading) and hardens portfolio engineering (README, architecture doc, repo hygiene) so both projects survive a 30-second GitHub skim and a 45-minute technical loop — always narrated through the learner&#x27;s OWN capstone rather than generic problems.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Solve a 10-problem timed SQL set (window functions, dedup-to-grain, gap-and-island, as-of/temporal joins, anti-joins) under a 25-minute clock, narrating approach aloud, at &gt;=8/10 correctness with the grain named for every answer.</li><li>Whiteboard a batch + incremental medallion pipeline for a novel prompt in 20 minutes using a repeatable 6-box frame (grain -&gt; source/CDC -&gt; medallion -&gt; idempotency -&gt; quality/quarantine -&gt; serve/govern), anchored to your own capstone as the reference implementation.</li><li>Score a take-home submission (your own or a peer&#x27;s) against a written rubric and name the 3 highest-leverage gaps plus the fix for each.</li><li>Refactor your two-project README + architecture doc so a cold reviewer can state the grain, the two golden-record outputs, and the deployment story within a 30-second skim.</li><li>Deliver one 2-minute spoken system-design tradeoff in the &#x27;I chose X over Y because Z, which cost A, and I would revisit via B&#x27; shape, tied to a person (not a tool).</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4.5h</span></div><ul><li>The technical loop, decoded (0.5 hr): what the SQL, pipeline, and system-design rounds actually score — judgment, grain-thinking, and failure-awareness, not syntax recall. Walk the real rubric each interviewer fills in, and where a two-project portfolio lets you answer &#x27;have you done this?&#x27; with &#x27;yes, twice.&#x27;</li><li>SQL under a clock (1.25 hr): a pattern catalog you can recognize on sight — ROW_NUMBER dedup-to-grain, running/lag windows, gap-and-island, as-of and SCD-2 temporal joins, anti-joins for reconciliation. The narrate-while-you-type method: state the grain, restate the ask, name the pattern, then type.</li><li>The pipeline/system-design whiteboard (1.25 hr): the 6-box frame (grain -&gt; source &amp; CDC/incremental -&gt; bronze/silver/gold -&gt; idempotency &amp; reprocessing -&gt; tests/quarantine -&gt; serve &amp; Unity Catalog governance). How to drive the whiteboard from your capstone so every box has a real story instead of a diagram.</li><li>Take-home like a senior (0.75 hr): reading the hidden rubric behind a prompt, scoping to a defensible thin slice, writing the decision log/ADRs that prove a human made choices, and the README that makes a graded submission read senior in 30 seconds.</li><li>Portfolio engineering for the 30-second skim (0.75 hr): repo hygiene (structure, .gitignore, no secrets, meaningful commit history), README-as-architecture, ADRs, and the concrete diff between a tutorial repo and a data-product repo a reviewer trusts.</li></ul></div>
       <div class="blk full lab">
@@ -460,19 +493,23 @@ SCORECARD: list[dict] = []  # TODO: {id, set, solved, seconds, stall_note}
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> W45 elective complete and, critically, the capstone shipped through Phase 4&#x27;s build weeks: a working medallion pipeline with CDC/incremental + idempotency, MDM golden records, Unity Catalog governance, tests/quarantine, and DABs/CI-CD, both projects already in one GitHub repo. Comfort with window functions and SCD-2 from Phases 2–3. A way to record short audio/screen clips for self-review.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w47">
-    <div class="wk-head">
+  <details class="wk-card" id="w47">
+    <summary class="wk-head">
       <span class="wk-num">W47</span>
-      <span class="wk-title">Interview prep II — behavioral, storytelling &amp; the recorded walkthrough</span>
+      <span class="wk-headmain"><span class="wk-title">Interview prep II — behavioral, storytelling &amp; the recorded walkthrough</span><span class="wk-teaser">A hiring manager gives you eight minutes and a 30-second skim of your GitHub before deciding whether you interview like someone who has owned a data product or someone who has finished a tutorial. This week you turn the two things you actually built — the healthcare pricing-integrity pipeline and your own-industry capstone — into a story a busy human remembers and repeats to the panel after you leave the room.</span></span>
       <span class="wk-mod">M36 / M34 · Phase 4 · launch</span>
       <span class="wk-gaps"><span class="gtag">G10</span><span class="gtag">G1</span></span>
+      <span class="wk-hrs">~11h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> A hiring manager gives you eight minutes and a 30-second skim of your GitHub before deciding whether you interview like someone who has owned a data product or someone who has finished a tutorial. This week you turn the two things you actually built — the healthcare pricing-integrity pipeline and your own-industry capstone — into a story a busy human remembers and repeats to the panel after you leave the room.</div>
-    <div class="project-role"><span class="pl">Launch · this week</span> Launch role: this is the second of the interview-readiness weeks and it converts the two built projects into a portable, spoken asset. It does not add pipeline code; it produces the recorded walkthrough and the story bank the learner will use in real screens starting now, and it pressure-tests whether the capstone (built W48–50) is being designed to survive a 30-second skim and a live defense. Output feeds directly into applying while the capstone finishes.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> A hiring manager gives you eight minutes and a 30-second skim of your GitHub before deciding whether you interview like someone who has owned a data product or someone who has finished a tutorial. This week you turn the two things you actually built — the healthcare pricing-integrity pipeline and your own-industry capstone — into a story a busy human remembers and repeats to the panel after you leave the room.</div>
+      <div class="project-role"><span class="pl">Launch · this week</span> Launch role: this is the second of the interview-readiness weeks and it converts the two built projects into a portable, spoken asset. It does not add pipeline code; it produces the recorded walkthrough and the story bank the learner will use in real screens starting now, and it pressure-tests whether the capstone (built W48–50) is being designed to survive a 30-second skim and a live defense. Output feeds directly into applying while the capstone finishes.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Deliver a 5–8 minute recorded portfolio walkthrough (Project 1 healthcare → capstone industry) that lands the two-project story and ends on golden records, with every design choice tied to a named person or role, not a tool.</li><li>Reconstruct any decision from your two projects into the trade-off shape (&#x27;I chose X over Y because Z, which cost me A, and I would revisit via B&#x27;) and the failure-story shape (scene → what you SAW → diagnosis in order → fix + one lesson) on demand, without notes.</li><li>Answer &#x27;why not what&#x27; under pressure: given a component of your pipeline, state the business consequence of getting it wrong before naming the technology, in under 90 seconds.</li><li>Pass a timed AI-screen round (Micro1/HireVue format: fixed prompt, 30s think, 2–3 min answer, no re-record) on 4 of 5 standard behavioral prompts, scored against a rubric.</li><li>Defend your own architecture in a live hot seat: field three adversarial &#x27;why didn&#x27;t you just…&#x27; challenges and convert at least one into an explicit, costed trade-off rather than a defense.</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~4h</span></div><ul><li>Communication as the senior signal (0.75 hr): why interviewers screen for judgment, not syntax; the &#x27;why not what&#x27; reframe; the rule that every decision must resolve to a PERSON (the analyst who gets a wrong price, the on-call engineer paged at 3am, the compliance owner), never a tool. Watch: how a mid answer (&#x27;I used Auto Loader&#x27;) becomes a senior answer (&#x27;the finance analyst was reconciling stale prices, so I needed incremental ingest that couldn&#x27;t silently drop a file&#x27;).</li><li>The two answer shapes, drilled (1.0 hr): the FAILURE-STORY shape (set the scene → what you SAW in the data/logs → diagnosis IN ORDER → the fix + one lesson) and the TRADE-OFF shape (&#x27;I chose X over Y because Z, which cost me A, and I would revisit via B&#x27;). Why &#x27;too clean&#x27; and &#x27;too rehearsed&#x27; both read as junior; how a real cost (A) and a real revisit path (B) signal seniority. Mining your own ADRs and quarantine logs for material.</li><li>Behavioral frameworks and the AI-screen format (0.75 hr): STAR vs. the failure/trade-off shapes and when each wins; the mechanics of Micro1/HireVue/async video screens (fixed prompt, countdown, one take, no interviewer to read the room); pacing for a camera; the five evergreen prompts (conflict, ambiguity, failure, data-quality catch, a decision you&#x27;d redo).</li><li>Anatomy of a senior 5–8 minute walkthrough (1.0 hr): structure = 30s business framing → 60s architecture (the 4-part doc, grain, one ADR) → 3–4 min the demo path bronze→silver→gold→golden record, narrating ONE quality/idempotency decision live → 60s the second project as proof it&#x27;s a repeatable method, not a one-off → close on ownership. What a 30-second GitHub skim must already show before you speak. Recording hygiene: audio first, screen legible, no dead air.</li><li>Defend-your-design without getting defensive (0.5 hr): converting &#x27;why didn&#x27;t you just use a view / skip MDM / use Postgres&#x27; into a costed trade-off instead of a wall; the phrase &#x27;that&#x27;s the right question — here&#x27;s what it would have cost&#x27;; admitting the one thing you&#x27;d revisit as a strength, not a confession (&#x27;you do not need perfect decisions, you need explainable ones&#x27;).</li></ul></div>
       <div class="blk full lab">
@@ -555,19 +592,23 @@ prompts = [
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> Completed W46 (interview prep I): resume/LinkedIn/GitHub cleanup and the first pass at articulating the two-project story. A productionized Project 1 (healthcare) repo and a capstone repo far enough along to demo bronze→silver→gold→golden record and to show ADRs — even if the capstone build formally finishes W48–50, its architecture doc, charter, and at least a gold/MDM slice must exist to record against. A screen recorder (Loom or OBS) and a working mic/camera.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 
-  <article class="wk-card" id="w48">
-    <div class="wk-head">
+  <details class="wk-card" id="w48">
+    <summary class="wk-head">
       <span class="wk-num">W48</span>
-      <span class="wk-title">Capstone (W48-50) - ship &amp; defend your own end-to-end data product</span>
+      <span class="wk-headmain"><span class="wk-title">Capstone (W48-50) - ship &amp; defend your own end-to-end data product</span><span class="wk-teaser">You are the first data engineer a mid-sized organization in your chosen industry has ever hired. The head of operations has been making decisions off a spreadsheet that three people edit and nobody trusts, and they have asked you a single question they cannot currently answer reliably. Your job over the next three weeks is not to build &#x27;a pipeline&#x27; - it is to hand that leader one governed data product they can bet a decision on, and to be able to explain, to a skeptical stakeholder, why every part of it can be trusted.</span></span>
       <span class="wk-mod">M37 · Phase 4 · launch · capstone · W48–50</span>
       <span class="wk-gaps"><span class="gtag">G1</span><span class="gtag">G9</span><span class="gtag">G10</span></span>
+      <span class="wk-hrs">~33h</span>
       
-    </div>
-    <div class="framing"><span class="fl">Why this matters</span> You are the first data engineer a mid-sized organization in your chosen industry has ever hired. The head of operations has been making decisions off a spreadsheet that three people edit and nobody trusts, and they have asked you a single question they cannot currently answer reliably. Your job over the next three weeks is not to build &#x27;a pipeline&#x27; - it is to hand that leader one governed data product they can bet a decision on, and to be able to explain, to a skeptical stakeholder, why every part of it can be trusted.</div>
-    <div class="project-role"><span class="pl">Launch · this week</span> THE PROOF. This is the flagship interview piece - the learner&#x27;s own independent, governed medallion product on their chosen industry, built mostly solo with minimal scaffolding. Weeks 48-50 take the Week 44 charter all the way to golden records under Unity Catalog, deployed via DABs/CI-CD, with an idempotency/recovery proof and a recorded walkthrough. Combined with the productionized Project 1 (healthcare), it completes the two-project portfolio arc that ends on golden records and is defensible end to end.</div>
-    <div class="wk-grid">
+      <span class="wk-chev" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="wk-body">
+      <div class="framing"><span class="fl">Why this matters</span> You are the first data engineer a mid-sized organization in your chosen industry has ever hired. The head of operations has been making decisions off a spreadsheet that three people edit and nobody trusts, and they have asked you a single question they cannot currently answer reliably. Your job over the next three weeks is not to build &#x27;a pipeline&#x27; - it is to hand that leader one governed data product they can bet a decision on, and to be able to explain, to a skeptical stakeholder, why every part of it can be trusted.</div>
+      <div class="project-role"><span class="pl">Launch · this week</span> THE PROOF. This is the flagship interview piece - the learner&#x27;s own independent, governed medallion product on their chosen industry, built mostly solo with minimal scaffolding. Weeks 48-50 take the Week 44 charter all the way to golden records under Unity Catalog, deployed via DABs/CI-CD, with an idempotency/recovery proof and a recorded walkthrough. Combined with the productionized Project 1 (healthcare), it completes the two-project portfolio arc that ends on golden records and is defensible end to end.</div>
+      <div class="wk-grid">
       <div class="blk"><div class="bh">Objectives</div><ul><li>Ship an independent, governed medallion pipeline on your own industry - charter + 4-part architecture doc + at least 3 ADRs, bronze/silver/gold, CDC/incremental with proven idempotency, MDM golden records, Unity Catalog governance, tests + quarantine, and a DAB deployed through CI/CD - runnable end to end from a clean clone.</li><li>Prove idempotency and recoverability with evidence: re-run the same load twice and show gold row counts and golden-record keys are byte-for-byte stable, and replay one day of history to show the pipeline reconstructs the same state.</li><li>Defend every non-trivial decision in writing using the trade-off shape (&#x27;I chose X over Y because Z, which cost me A, and I would revisit via B&#x27;), tied to a named stakeholder rather than a tool.</li><li>Package the work so a reviewer reaches &#x27;this is senior&#x27; within a 30-second GitHub skim: README with grain, lineage diagram, run instructions, and a 5-8 minute recorded walkthrough that opens on the business question and ends on golden records.</li><li>Operate a real quality gate: define measurable data-quality expectations, route violations to a quarantine table with a written reason code, and demonstrate that a bad batch fails loudly without corrupting gold.</li></ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~3h</span></div><ul><li>Capstone scoping &amp; the &#x27;defensible slice&#x27; (0.75h): how to cut your own industry problem down to one grain and one business question you can actually ship in three weeks - narrow-and-complete beats broad-and-broken. Recognition-before-evaluation: write the business framing first, in the voice of the person who feels the pain.</li><li>The 30-second senior skim (0.5h): what a hiring reviewer looks for on a GitHub landing - README grain statement, architecture diagram, ADRs, run-from-clean-clone instructions, tests, CI badge. Reverse-engineering your repo layout from that skim.</li><li>Portfolio narrative: the two-project arc (0.5h): sequencing Project 1 (healthcare, productionized) and your capstone into one story that ends on golden records - what each project proves, and the failure-story you will tell about each in an interview (scene -&gt; what you SAW -&gt; diagnosis in order -&gt; fix + one lesson).</li><li>Harden-and-prove checklist (0.75h): the difference between &#x27;it ran once&#x27; and &#x27;it is recoverable&#x27; - idempotency proof, replay/backfill proof, quarantine proof, teardown-and-redeploy proof. Documentation as interview prep: every proof is a screenshot or logged assertion you can show.</li><li>The defense rehearsal (0.5h): anticipating the three hardest questions about your capstone (Why this grain? What happens on a duplicate/late/malformed record? How would this scale or break?) and pre-writing the trade-off-shaped answers.</li></ul></div>
       <div class="blk full lab">
@@ -638,8 +679,21 @@ def resolve_golden_records(silver_df: DataFrame) -&gt; DataFrame:
         <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> W44 charter + architecture doc for the capstone (design started); a chosen real messy source in the learner&#x27;s target industry (or a documented Faker source contract, or the Project 1 extension path); a working Databricks workspace with Unity Catalog enabled; Git/GitHub with CI (GitHub Actions) configured; and Phase 1-3 fluency in medallion modeling, Delta MERGE/CDC, MDM survivorship, tests/quarantine, and DAB deployment.</div>
       </div>
     </div>
-  </article>
+    </div>
+  </details>
 </main>
 <footer><div class="wrap"><div class="foot-note">
       <span>Launch · Phase 4 — Advanced & Launch (W44–50) · architecture, elective, interview prep, and the independent capstone.</span>
       <span class="mono">Gambill Data Engineer Track</span></div></div></footer>
+<script>
+(function(){
+  document.querySelectorAll('.wk-toggle').forEach(function(b){
+    b.addEventListener('click',function(){
+      var op=b.getAttribute('data-act')==='expand';
+      document.querySelectorAll('details.wk-card').forEach(function(d){d.open=op;});
+    });
+  });
+  function openHash(){var h=location.hash; if(!h) return; var t; try{t=document.querySelector(h);}catch(e){return;} if(t&&t.tagName==='DETAILS'){t.open=true; t.scrollIntoView();}}
+  window.addEventListener('hashchange',openHash); openHash();
+})();
+</script>
