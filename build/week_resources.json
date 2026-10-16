@@ -1,0 +1,806 @@
+{
+  "1": [
+    {
+      "title": "Introduction to Git",
+      "url": "https://datacamp.pxf.io/rE3n6B",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Introduction to Shell",
+      "url": "https://datacamp.pxf.io/AgVoJD",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "The Git & GitHub Bootcamp (Colt Steele)",
+      "url": "https://trk.udemy.com/enM4Wj",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "2": [
+    {
+      "title": "Understanding Data Engineering",
+      "url": "https://datacamp.pxf.io/GbBjzB",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Fundamentals of Data Engineering",
+      "url": "https://oreillymedia.pxf.io/KBLeVv",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Introduction to Data Engineering (DeepLearning.AI)",
+      "url": "https://imp.i384100.net/19EM09",
+      "partner": "Coursera",
+      "type": "Course"
+    }
+  ],
+  "3": [
+    {
+      "title": "Introduction to Python",
+      "url": "https://datacamp.pxf.io/Jk0rEN",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "The Complete Python Bootcamp From Zero to Hero (Jose Portilla)",
+      "url": "https://trk.udemy.com/aNm1vN",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Python for Everybody Specialization (U. Michigan)",
+      "url": "https://imp.i384100.net/YVGgEe",
+      "partner": "Coursera",
+      "type": "Specialization"
+    }
+  ],
+  "4": [
+    {
+      "title": "Intermediate Python",
+      "url": "https://datacamp.pxf.io/gRKbZ0",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Python Crash Course, 3rd Ed.",
+      "url": "https://oreillymedia.pxf.io/7Xrm4V",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "The Complete Python Bootcamp From Zero to Hero (Jose Portilla)",
+      "url": "https://trk.udemy.com/aNm1vN",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "5": [
+    {
+      "title": "Developing Python Packages",
+      "url": "https://datacamp.pxf.io/zz3aL7",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Introduction to Object-Oriented Programming in Python",
+      "url": "https://datacamp.pxf.io/E0Xaon",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Fluent Python, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/qW3n1q",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "6": [
+    {
+      "title": "Data Manipulation with pandas",
+      "url": "https://datacamp.pxf.io/bkz3A6",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Python for Data Analysis, 3rd Ed.",
+      "url": "https://oreillymedia.pxf.io/9VPWNY",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Analysis with Pandas and Python (Boris Paskhaver)",
+      "url": "https://trk.udemy.com/GbBjPn",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "7": [
+    {
+      "title": "Introduction to APIs in Python",
+      "url": "https://datacamp.pxf.io/2RqrxG",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Using Python to Access Web Data (U. Michigan)",
+      "url": "https://imp.i384100.net/MKxXGM",
+      "partner": "Coursera",
+      "type": "Course"
+    },
+    {
+      "title": "Joining Data with pandas",
+      "url": "https://datacamp.pxf.io/OYQR2G",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "8": [
+    {
+      "title": "Introduction to Testing in Python",
+      "url": "https://datacamp.pxf.io/R0jyxy",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Robust Python",
+      "url": "https://oreillymedia.pxf.io/jR3WPb",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Python Testing with pytest, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/Pz90oM",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "9": [
+    {
+      "title": "Joining Data in SQL",
+      "url": "https://datacamp.pxf.io/YVGg5q",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "The Complete SQL Bootcamp (Jose Portilla)",
+      "url": "https://trk.udemy.com/1GL5nD",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Learning SQL, 3rd Ed.",
+      "url": "https://oreillymedia.pxf.io/k43j5x",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "10": [
+    {
+      "title": "Intermediate SQL",
+      "url": "https://datacamp.pxf.io/7XrmAO",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "SQL for Data Science (UC Davis)",
+      "url": "https://imp.i384100.net/KBLea7",
+      "partner": "Coursera",
+      "type": "Course"
+    },
+    {
+      "title": "Learning SQL, 3rd Ed.",
+      "url": "https://oreillymedia.pxf.io/k43j5x",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "11": [
+    {
+      "title": "PostgreSQL Summary Stats and Window Functions",
+      "url": "https://datacamp.pxf.io/qW3nRO",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "SQL Cookbook, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/AgVorJ",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "12": [
+    {
+      "title": "Improving Query Performance in PostgreSQL",
+      "url": "https://datacamp.pxf.io/xJ39xO",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "PostgreSQL Query Optimization, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/gRKb9v",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "13": [
+    {
+      "title": "Database Design",
+      "url": "https://datacamp.pxf.io/rE3nvB",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Database Design for Mere Mortals (25th Anniversary Ed.)",
+      "url": "https://oreillymedia.pxf.io/X4Axgy",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "14": [
+    {
+      "title": "The Data Warehouse Toolkit, 3rd Ed. (Kimball)",
+      "url": "https://oreillymedia.pxf.io/oN3exe",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Warehouse Concepts, Design, and Data Integration (CU Boulder)",
+      "url": "https://imp.i384100.net/m43g97",
+      "partner": "Coursera",
+      "type": "Course"
+    },
+    {
+      "title": "Introduction to Data Modeling in Snowflake",
+      "url": "https://datacamp.pxf.io/jR3WEa",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "15": [
+    {
+      "title": "Data Warehousing Concepts",
+      "url": "https://datacamp.pxf.io/enM4oZ",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Star Schema: The Complete Reference",
+      "url": "https://oreillymedia.pxf.io/B5JXN0",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "The Data Warehouse Toolkit, 3rd Ed. (Kimball)",
+      "url": "https://oreillymedia.pxf.io/oN3exe",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "16": [
+    {
+      "title": "The Data Warehouse Toolkit, 3rd Ed. (Kimball)",
+      "url": "https://oreillymedia.pxf.io/oN3exe",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Star Schema: The Complete Reference",
+      "url": "https://oreillymedia.pxf.io/B5JXN0",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "17": [
+    {
+      "title": "Introduction to Databricks",
+      "url": "https://datacamp.pxf.io/L0qPv3",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Delta Lake: Up and Running",
+      "url": "https://oreillymedia.pxf.io/zz3aAx",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "18": [
+    {
+      "title": "Master Data Management (Loshin)",
+      "url": "https://oreillymedia.pxf.io/WOaDZO",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Cleaning Data in Python (record linkage chapter)",
+      "url": "https://datacamp.pxf.io/DWgVEG",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "19": [
+    {
+      "title": "Hands-On Entity Resolution",
+      "url": "https://oreillymedia.pxf.io/E0XaL9",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Cleaning Data in Python (record linkage chapter)",
+      "url": "https://datacamp.pxf.io/DWgVEG",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "20": [
+    {
+      "title": "ETL and ELT in Python",
+      "url": "https://datacamp.pxf.io/Pz90LM",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Fundamentals of Data Engineering",
+      "url": "https://oreillymedia.pxf.io/KBLeVv",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Designing Data-Intensive Applications, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/n431qR",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "21": [
+    {
+      "title": "Data Pipelines Pocket Reference",
+      "url": "https://oreillymedia.pxf.io/2RqroM",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "ETL and ELT in Python",
+      "url": "https://datacamp.pxf.io/Pz90LM",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "22": [
+    {
+      "title": "Databricks Certified Data Engineer Associate - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/VOeyz6",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Delta Lake: Up and Running",
+      "url": "https://oreillymedia.pxf.io/zz3aAx",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "23": [
+    {
+      "title": "Data Engineering Design Patterns",
+      "url": "https://oreillymedia.pxf.io/R0jyA2",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Databricks Certified Data Engineer Associate - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/VOeyz6",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "24": [
+    {
+      "title": "Data Engineering Design Patterns",
+      "url": "https://oreillymedia.pxf.io/R0jyA2",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Pipelines Pocket Reference",
+      "url": "https://oreillymedia.pxf.io/2RqroM",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "25": [
+    {
+      "title": "Introduction to PySpark",
+      "url": "https://datacamp.pxf.io/k43jnx",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "PySpark - Apache Spark Programming for Beginners (Prashant Kumar Pandey)",
+      "url": "https://trk.udemy.com/X4Ax0G",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Learning Spark, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/vD3n5W",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "26": [
+    {
+      "title": "Spark: The Definitive Guide",
+      "url": "https://oreillymedia.pxf.io/NGDK5P",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Cleaning Data with PySpark",
+      "url": "https://datacamp.pxf.io/aNm1Jq",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Introduction to Big Data with Spark and Hadoop (IBM)",
+      "url": "https://imp.i384100.net/qW3n5b",
+      "partner": "Coursera",
+      "type": "Course"
+    }
+  ],
+  "27": [
+    {
+      "title": "High Performance Spark, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/yZ3RaB",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Apache Spark - Beyond Basics and Cracking Job Interviews (Prashant Kumar Pandey)",
+      "url": "https://trk.udemy.com/oN3emo",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "28": [
+    {
+      "title": "Data Quality Fundamentals",
+      "url": "https://oreillymedia.pxf.io/MKxXPY",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Introduction to Data Quality",
+      "url": "https://datacamp.pxf.io/AgVozJ",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "29": [
+    {
+      "title": "Data Quality Fundamentals",
+      "url": "https://oreillymedia.pxf.io/MKxXPY",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Engineering Design Patterns",
+      "url": "https://oreillymedia.pxf.io/R0jyA2",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "30": [
+    {
+      "title": "Python Testing with pytest, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/Pz90oM",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Introduction to Testing in Python",
+      "url": "https://datacamp.pxf.io/R0jyxy",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "31": [
+    {
+      "title": "Delta Lake: The Definitive Guide",
+      "url": "https://oreillymedia.pxf.io/KBLerv",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Databricks Certified Data Engineer Professional - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/Jk0re2",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "32": [
+    {
+      "title": "Data Governance with Unity Catalog on Databricks",
+      "url": "https://oreillymedia.pxf.io/7XrmEV",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Databricks Certified Data Engineer Associate Study Guide",
+      "url": "https://oreillymedia.pxf.io/L0qPj3",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Databricks Certified Data Engineer Associate - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/VOeyz6",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "33": [
+    {
+      "title": "Databricks Certified Data Engineer Associate - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/VOeyz6",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Data Engineering with Databricks Cookbook",
+      "url": "https://oreillymedia.pxf.io/qW3nQq",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "34": [
+    {
+      "title": "Introduction to Apache Airflow in Python",
+      "url": "https://datacamp.pxf.io/gRKbzv",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Databricks Certified Data Engineer Professional - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/Jk0re2",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "35": [
+    {
+      "title": "Stream Processing with Apache Spark",
+      "url": "https://oreillymedia.pxf.io/QYrOa9",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Streaming Concepts",
+      "url": "https://datacamp.pxf.io/X4Ax6y",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Learning Spark, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/vD3n5W",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "36": [
+    {
+      "title": "Streaming Systems",
+      "url": "https://oreillymedia.pxf.io/rE3n9d",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Stream Processing with Apache Spark",
+      "url": "https://oreillymedia.pxf.io/QYrOa9",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "37": [
+    {
+      "title": "Data Observability for Data Engineering",
+      "url": "https://oreillymedia.pxf.io/jR3WNb",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Quality Fundamentals",
+      "url": "https://oreillymedia.pxf.io/MKxXPY",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "38": [
+    {
+      "title": "Head First Git",
+      "url": "https://oreillymedia.pxf.io/k43jqd",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Introduction to Git and GitHub (Google)",
+      "url": "https://imp.i384100.net/QYrOQ3",
+      "partner": "Coursera",
+      "type": "Course"
+    },
+    {
+      "title": "Intermediate Git",
+      "url": "https://datacamp.pxf.io/B5JXj0",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "39": [
+    {
+      "title": "GitHub Actions - The Complete Guide (Maximilian Schwarzmuller)",
+      "url": "https://trk.udemy.com/zz3aZ0",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Learning GitHub Actions",
+      "url": "https://oreillymedia.pxf.io/k43jyx",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Continuous Integration and Continuous Delivery (CI/CD) (IBM)",
+      "url": "https://imp.i384100.net/9VPW44",
+      "partner": "Coursera",
+      "type": "Course"
+    }
+  ],
+  "40": [
+    {
+      "title": "Databricks Certified Data Engineer Professional - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/Jk0re2",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Terraform: Up and Running, 3rd Ed.",
+      "url": "https://oreillymedia.pxf.io/L0qPjV",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "DevOps Concepts",
+      "url": "https://datacamp.pxf.io/zz3aWx",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "41": [
+    {
+      "title": "Data Governance: The Definitive Guide",
+      "url": "https://oreillymedia.pxf.io/DWgVY5",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Governance Concepts",
+      "url": "https://datacamp.pxf.io/E0Xak9",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "42": [
+    {
+      "title": "Understanding Microsoft Azure",
+      "url": "https://datacamp.pxf.io/6k9bvE",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "AWS Cloud Technology and Services",
+      "url": "https://datacamp.pxf.io/OYQRXK",
+      "partner": "DataCamp",
+      "type": "Course"
+    },
+    {
+      "title": "Azure Databricks & Spark for Data Engineers (Ramesh Retnasamy)",
+      "url": "https://trk.udemy.com/B5EMoW",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "43": [
+    {
+      "title": "Data Engineering Design Patterns",
+      "url": "https://oreillymedia.pxf.io/R0jyA2",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Databricks Certified Data Engineer Professional - Preparation (Derar Alhussein)",
+      "url": "https://trk.udemy.com/Jk0re2",
+      "partner": "Udemy",
+      "type": "Course"
+    }
+  ],
+  "44": [
+    {
+      "title": "Designing Data-Intensive Applications, 2nd Ed.",
+      "url": "https://oreillymedia.pxf.io/n431qR",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Fundamentals of Data Engineering",
+      "url": "https://oreillymedia.pxf.io/KBLeVv",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "45": [
+    {
+      "title": "Building a Scalable Data Warehouse with Data Vault 2.0",
+      "url": "https://oreillymedia.pxf.io/9VPWm4",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Data Vault: An Introduction (Michael Olschimke)",
+      "url": "https://trk.udemy.com/n431rV",
+      "partner": "Udemy",
+      "type": "Course"
+    },
+    {
+      "title": "Generative AI for Data Engineers Specialization (IBM)",
+      "url": "https://imp.i384100.net/LKL1P3",
+      "partner": "Coursera",
+      "type": "Specialization"
+    }
+  ],
+  "46": [
+    {
+      "title": "Cracking the Data Engineering Interview",
+      "url": "https://oreillymedia.pxf.io/rE3n9j",
+      "partner": "O'Reilly",
+      "type": "Book"
+    },
+    {
+      "title": "Practicing Coding Interview Questions in Python",
+      "url": "https://datacamp.pxf.io/2RqrOM",
+      "partner": "DataCamp",
+      "type": "Course"
+    }
+  ],
+  "47": [
+    {
+      "title": "Successful Interviewing",
+      "url": "https://imp.i384100.net/jR3WxM",
+      "partner": "Coursera",
+      "type": "Course"
+    },
+    {
+      "title": "Cracking the Data Engineering Interview",
+      "url": "https://oreillymedia.pxf.io/rE3n9j",
+      "partner": "O'Reilly",
+      "type": "Book"
+    }
+  ],
+  "48": [
+    {
+      "title": "Data Engineering Professional Certificate (DeepLearning.AI)",
+      "url": "https://imp.i384100.net/Z6grvq",
+      "partner": "Coursera",
+      "type": "Certificate"
+    },
+    {
+      "title": "Data Engineer in Python (career track)",
+      "url": "https://datacamp.pxf.io/VOa9aO",
+      "partner": "DataCamp",
+      "type": "Track"
+    }
+  ]
+}

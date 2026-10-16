@@ -165,8 +165,17 @@ RES = {
  ],
 }
 
+# Module-level "Go deeper" now holds ONLY Chris's OWN content (channel videos +
+# his free templates / repos). Third-party courses & books come from the
+# curated per-week affiliate workbook (build/week_resources.json), so drop any
+# scraped Amazon/DataCamp/Udemy/O'Reilly/Coursera links here to avoid conflicts.
+OWN = ("youtube.com", "youtu.be", "gambilldata.com", "gambilldataengineering.com", "github.com/cg1262")
+def _own(url): return any(h in (url or "") for h in OWN)
+RES = {m: [r for r in items if _own(r.get("url", ""))] for m, items in RES.items()}
+RES = {m: items for m, items in RES.items() if items}
+
 data = json.load(open(VJ))
-data["resources"] = RES  # replace with the approved, curated set
+data["resources"] = RES  # Chris's own content only
 json.dump(data, open(VJ, "w"), indent=2, ensure_ascii=False)
 total = sum(len(x) for x in RES.values())
-print(f"wrote {len(RES)} modules, {total} resource links into videos.json")
+print(f"wrote {len(RES)} modules, {total} own-content resource links into videos.json")

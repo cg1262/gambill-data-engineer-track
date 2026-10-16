@@ -128,6 +128,9 @@
   ul.refs li { padding-left: 17px; }
   ul.refs li::before { content: "\2197"; position: absolute; left: 0; top: 0; color: var(--blue-strong); font-size: 12px; background: none !important; width: auto !important; height: auto !important; border-radius: 0 !important; }
   ul.refs li a { font-size: 13px; }
+  .gd-grp { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin: 10px 0 5px; }
+  ul.refs.godeeper { margin-bottom: 4px; }
+  .rtag { font-family: var(--font-mono); font-size: 10px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; white-space: nowrap; }
 
   details.script { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
   details.script summary { cursor: pointer; padding: 10px 13px; font-size: 12.5px; color: var(--ink-2); list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }

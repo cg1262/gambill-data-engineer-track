@@ -9,6 +9,8 @@ BASECSS = open(os.path.join(HERE, "base.css")).read()
 VIDEOS = json.load(open(os.path.join(HERE, "videos.json")))
 WEEKLY = VIDEOS.get("weekly", {})
 RESOURCES = VIDEOS.get("resources", {})
+_wrp = os.path.join(HERE, "week_resources.json")
+WEEKRES = json.load(open(_wrp)) if os.path.exists(_wrp) else {}
 
 # ---- link maps ---------------------------------------------------------------
 ART = {
@@ -81,14 +83,27 @@ def howto_html(n):
     url = (WEEKLY.get(str(n), "") or "").strip()
     if not url: return ""
     return f'<a class="howto-link" href="{html.escape(url)}" target="_blank" rel="noopener">&#9654; How-to</a>'
-def godeeper_html(mod):
-    items = RESOURCES.get(mod_code(mod)) or []
-    if not items: return ""
-    rows = []
-    for r in items:
-        t, u = e(r.get("title", "")), r.get("url", "")
-        rows.append(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{t}</a></li>' if u else f'<li>{t}</li>')
-    return ('<div class="lab-sub">Go deeper</div>\n        <ul class="refs godeeper">' + "".join(rows) + '</ul>')
+def godeeper_html(mod, n=None):
+    vids = RESOURCES.get(mod_code(mod)) or []
+    courses = WEEKRES.get(str(n)) if n is not None else None
+    courses = courses or []
+    if not vids and not courses: return ""
+    out = ['<div class="lab-sub">Go deeper</div>']
+    if vids:
+        rows = []
+        for r in vids:
+            t, u = e(r.get("title", "")), r.get("url", "")
+            rows.append(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{t}</a></li>' if u else f'<li>{t}</li>')
+        out.append('<div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper">' + "".join(rows) + '</ul>')
+    if courses:
+        rows = []
+        for r in courses:
+            t, u = e(r.get("title", "")), r.get("url", "")
+            tag = e(" · ".join(x for x in (r.get("partner", ""), r.get("type", "")) if x))
+            tag_html = f' <span class="rtag">{tag}</span>' if tag else ""
+            rows.append(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{t}</a>{tag_html}</li>' if u else f'<li>{t}{tag_html}</li>')
+        out.append('<div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper">' + "".join(rows) + '</ul>')
+    return "\n        ".join(out)
 
 def navbar(items, weeknums):
     parts = []
@@ -244,7 +259,7 @@ def card_p1(n, base, enh):
           <div class="lab-sub">Reference material</div>
           <ul class="refs">{refs_html(x.get("referenceMaterials"))}</ul>
           {script_html(x.get("sampleScript"))}
-          {godeeper_html(mod)}
+          {godeeper_html(mod, n)}
         </div></div>
       </details>
       <details class="subsec">
@@ -324,7 +339,7 @@ def card_generic(w, tier, capweeks):
           <div class="lab-sub">Reference material</div>
           <ul class="refs">{refs_html(w.get("referenceMaterials"))}</ul>
           {script_html(w.get("sampleScript"))}
-          {godeeper_html(w.get("module",""))}
+          {godeeper_html(w.get("module",""), n)}
           {mirror_html}
         </div></div>
       </details>

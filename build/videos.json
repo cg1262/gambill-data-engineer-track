@@ -84,16 +84,6 @@
         "title": "The Last Day of the Month Is Why You Have This Job!",
         "url": "https://www.youtube.com/watch?v=-C015y7n1mQ",
         "why": "What a DE actually does"
-      },
-      {
-        "title": "Fundamentals of Data Engineering (book)",
-        "url": "https://amzn.to/4wmq0cb",
-        "why": "The field's core text"
-      },
-      {
-        "title": "Designing Data-Intensive Applications (book)",
-        "url": "https://amzn.to/45QIzci",
-        "why": "Systems thinking"
       }
     ],
     "M02": [
@@ -101,16 +91,6 @@
         "title": "The Most Expensive Python Mistakes You're Making",
         "url": "https://www.youtube.com/watch?v=Co24yhV_6rc",
         "why": "Python footguns"
-      },
-      {
-        "title": "Automate the Boring Stuff with Python (book)",
-        "url": "https://amzn.to/4fYPIKD",
-        "why": "Beginner Python"
-      },
-      {
-        "title": "DataCamp — Data Engineer in Python track (course)",
-        "url": "https://datacamp.pxf.io/m4EjNa",
-        "why": "Structured practice"
       },
       {
         "title": "Better-Python template (free)",
@@ -145,40 +125,6 @@
         "title": "$180k Data Engineers Don't Make These Python Mistakes",
         "url": "https://www.youtube.com/watch?v=D5bln7fqMZQ",
         "why": "Production hygiene"
-      },
-      {
-        "title": "The Pragmatic Programmer (book)",
-        "url": "https://amzn.to/47eXsaz",
-        "why": "Craft fundamentals"
-      }
-    ],
-    "M05": [
-      {
-        "title": "DataCamp — Associate Data Engineer in SQL track (course)",
-        "url": "https://datacamp.pxf.io/m4Gqbq",
-        "why": "SQL practice path"
-      },
-      {
-        "title": "The Complete SQL Bootcamp (course)",
-        "url": "https://trk.udemy.com/N9qkav",
-        "why": "Hands-on SQL"
-      },
-      {
-        "title": "SQL in 10 Minutes (book)",
-        "url": "https://amzn.to/4ajcv2E",
-        "why": "Fast reference"
-      }
-    ],
-    "M06": [
-      {
-        "title": "SQL Performance Explained (book)",
-        "url": "https://amzn.to/4lOy1QK",
-        "why": "Indexing & query plans"
-      },
-      {
-        "title": "SQL for Data Engineering (course)",
-        "url": "https://trk.udemy.com/aOdoyQ",
-        "why": "DE-flavored SQL"
       }
     ],
     "M07": [
@@ -186,16 +132,6 @@
         "title": "Data Warehouse Schemas Explained",
         "url": "https://www.youtube.com/watch?v=529MqZgvgug",
         "why": "Normalized vs star"
-      },
-      {
-        "title": "Database Design for Mere Mortals (book)",
-        "url": "https://amzn.to/3C4uLju",
-        "why": "Relational design"
-      },
-      {
-        "title": "The Data Warehouse Toolkit — Kimball (book)",
-        "url": "https://amzn.to/45Sd0yH",
-        "why": "The modeling bible"
       }
     ],
     "M08": [
@@ -208,11 +144,6 @@
         "title": "Data Warehouse Schemas Explained",
         "url": "https://www.youtube.com/watch?v=529MqZgvgug",
         "why": "Pick the right schema"
-      },
-      {
-        "title": "The Data Warehouse Toolkit — Kimball (book)",
-        "url": "https://amzn.to/45Sd0yH",
-        "why": "Dimensional modeling"
       }
     ],
     "M09": [
@@ -296,27 +227,12 @@
         "why": "When to reach for Spark"
       },
       {
-        "title": "Databricks & PySpark Zero to Expert (course)",
-        "url": "https://trk.udemy.com/RGeRR7",
-        "why": "Hands-on PySpark"
-      },
-      {
-        "title": "Taming Big Data with Apache Spark (course)",
-        "url": "https://trk.udemy.com/vPaNdO",
-        "why": "Spark fundamentals"
-      },
-      {
         "title": "PySpark-on-Databricks template (free)",
         "url": "https://www.gambilldataengineering.com/business-templates#pyspark-on-dbx",
         "why": "Starter"
       }
     ],
     "M18": [
-      {
-        "title": "Designing Data-Intensive Applications (book)",
-        "url": "https://amzn.to/45QIzci",
-        "why": "Partitioning & distributed internals"
-      },
       {
         "title": "Big Data Kills Pandas Performance | Use This Instead",
         "url": "https://www.youtube.com/watch?v=BYK7bp8MpSU",
@@ -340,11 +256,6 @@
         "title": "$180k Databricks Engineers Mastered This One Method",
         "url": "https://www.youtube.com/watch?v=EFtUY27bEng",
         "why": "Working method"
-      },
-      {
-        "title": "Databricks Certified DE Associate (course)",
-        "url": "https://trk.udemy.com/o4rnzY",
-        "why": "Cert prep"
       }
     ],
     "M22": [
@@ -362,11 +273,6 @@
         "title": "Hybrid Notebook/Script Architecture Map (free)",
         "url": "https://gambilldata.com/resources/hybrid-notebook-script-architecture-map/",
         "why": "Structure guide"
-      },
-      {
-        "title": "Hands-On Apache Airflow 3 (course)",
-        "url": "https://trk.udemy.com/3JNe1X",
-        "why": "Orchestration deep-dive"
       }
     ],
     "M23": [
@@ -374,11 +280,6 @@
         "title": "Build a Real-Time Streaming Project | Live Demo",
         "url": "https://www.youtube.com/watch?v=u8D-xQ_4Z4Y",
         "why": "Hands-on streaming"
-      },
-      {
-        "title": "DE Vol.2 AWS: Spark & Kafka (course)",
-        "url": "https://trk.udemy.com/194bRD",
-        "why": "Streaming at scale"
       }
     ],
     "M24": [
@@ -429,13 +330,6 @@
         "why": "The problem CI/CD solves"
       }
     ],
-    "M30": [
-      {
-        "title": "Data Governance (book)",
-        "url": "https://amzn.to/4myGcBZ",
-        "why": "Governance foundations"
-      }
-    ],
     "M31": [
       {
         "title": "Pick the Right Data Platform (Before It's Too Late)",
@@ -446,16 +340,6 @@
         "title": "Watch This Before Choosing a Data Platform",
         "url": "https://www.youtube.com/watch?v=ot4ptVx3AmI",
         "why": "Cloud trade-offs"
-      },
-      {
-        "title": "Microsoft Fabric Complete Guide (course)",
-        "url": "https://bit.ly/Fabric-Tutorial",
-        "why": "Cloud platform skills"
-      },
-      {
-        "title": "DP-700 Fabric Practice Test (course)",
-        "url": "https://bit.ly/DP-700-Practice",
-        "why": "Cert practice"
       }
     ],
     "M32": [
@@ -473,11 +357,6 @@
         "title": "The Question Every Engineer Should Ask Before Coding",
         "url": "https://www.youtube.com/watch?v=Hluh6OyQN2U",
         "why": "Decide before you build"
-      },
-      {
-        "title": "Designing Data-Intensive Applications (book)",
-        "url": "https://amzn.to/45QIzci",
-        "why": "Architecture reference"
       }
     ],
     "M12": [
@@ -490,11 +369,6 @@
         "title": "The Four Things Your AI Agent Needs Before Production",
         "url": "https://www.youtube.com/watch?v=bQrIYV5Ugmk",
         "why": "Production readiness"
-      },
-      {
-        "title": "2026 AI-Readiness Checklist (free)",
-        "url": "https://bit.ly/4lIJm6F",
-        "why": "Self-assessment"
       },
       {
         "title": "Senior-Engineer AI Architecture Checklist (free)",
@@ -512,21 +386,6 @@
         "title": "Your Portfolio Project Is Getting You Rejected!",
         "url": "https://www.youtube.com/watch?v=zwJWeyCPJLg",
         "why": "Portfolio credibility"
-      },
-      {
-        "title": "Storytelling With Data (book)",
-        "url": "https://amzn.to/4lH98pZ",
-        "why": "Communicate the work"
-      },
-      {
-        "title": "DataCamp — DE Certification (course)",
-        "url": "https://datacamp.pxf.io/QYbLeM",
-        "why": "Credential"
-      },
-      {
-        "title": "TopResume — resume review (service)",
-        "url": "https://topresume.sjv.io/4G1mJ0",
-        "why": "Resume help"
       }
     ],
     "M37": [

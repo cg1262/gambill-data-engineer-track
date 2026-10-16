@@ -130,6 +130,9 @@
   ul.refs li { padding-left: 17px; }
   ul.refs li::before { content: "\2197"; position: absolute; left: 0; top: 0; color: var(--blue-strong); font-size: 12px; background: none !important; width: auto !important; height: auto !important; border-radius: 0 !important; }
   ul.refs li a { font-size: 13px; }
+  .gd-grp { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin: 10px 0 5px; }
+  ul.refs.godeeper { margin-bottom: 4px; }
+  .rtag { font-family: var(--font-mono); font-size: 10px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; white-space: nowrap; }
 
   details.script { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
   details.script summary { cursor: pointer; padding: 10px 13px; font-size: 12.5px; color: var(--ink-2); list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
@@ -282,7 +285,8 @@ if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Also create a starter .gitignore ( .venv/  __pycache__/  *.pyc  .env  data/raw/*  data/processed/*  .DS_Store ) and a README skeleton with sections: Purpose, Setup (venv + pip install -r requirements.txt), Run (python src/check_env.py), Repo layout. Recommended tree: repo/ ├─ src/  ├─ data/raw/  data/processed/  ├─ notes/decisions.md  ├─ README.md  ├─ requirements.txt  └─ .gitignore. The scaffold intentionally leaves the version-gate and dependency-import logic as TODOs — the learner writes the real checks.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=CEGN-LbiX4Y" target="_blank" rel="noopener">If I Started Over As A Data Engineer</a></li><li><a href="https://www.youtube.com/watch?v=uCTVYf9FBQY" target="_blank" rel="noopener">The 2026 Data Engineer Roadmap</a></li><li><a href="https://gambilldata.com/resources/" target="_blank" rel="noopener">Free DE Checklist (template)</a></li><li><a href="https://www.gambilldataengineering.com/data-engineering-honeycomb" target="_blank" rel="noopener">DE Honeycomb roadmap (free)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=CEGN-LbiX4Y" target="_blank" rel="noopener">If I Started Over As A Data Engineer</a></li><li><a href="https://www.youtube.com/watch?v=uCTVYf9FBQY" target="_blank" rel="noopener">The 2026 Data Engineer Roadmap</a></li><li><a href="https://gambilldata.com/resources/" target="_blank" rel="noopener">Free DE Checklist (template)</a></li><li><a href="https://www.gambilldataengineering.com/data-engineering-honeycomb" target="_blank" rel="noopener">DE Honeycomb roadmap (free)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/rE3n6B" target="_blank" rel="noopener">Introduction to Git</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://datacamp.pxf.io/AgVoJD" target="_blank" rel="noopener">Introduction to Shell</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://trk.udemy.com/enM4Wj" target="_blank" rel="noopener">The Git &amp; GitHub Bootcamp (Colt Steele)</a> <span class="rtag">Udemy · Course</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -369,7 +373,8 @@ flowchart LR
 MERMAID
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands 50 rows and hands you a diagram stub. You must run the profiling queries, fill in the real counts/failure labels, add the quarantine path, and write the contract + why-note yourself. jq is optional but recommended (sudo apt install jq).</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li><li><a href="https://amzn.to/4wmq0cb" target="_blank" rel="noopener">Fundamentals of Data Engineering (book)</a></li><li><a href="https://amzn.to/45QIzci" target="_blank" rel="noopener">Designing Data-Intensive Applications (book)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=-C015y7n1mQ" target="_blank" rel="noopener">The Last Day of the Month Is Why You Have This Job!</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/GbBjzB" target="_blank" rel="noopener">Understanding Data Engineering</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/KBLeVv" target="_blank" rel="noopener">Fundamentals of Data Engineering</a> <span class="rtag">O&#x27;Reilly · Book</span></li><li><a href="https://imp.i384100.net/19EM09" target="_blank" rel="noopener">Introduction to Data Engineering (DeepLearning.AI)</a> <span class="rtag">Coursera · Course</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -492,7 +497,8 @@ if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only. It parses argv and stubs the fetch/read and the three functions with TODO markers. You write the real parse/classify/summarize logic, the quarantine of blank-magnitude rows, and the report output.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://amzn.to/4fYPIKD" target="_blank" rel="noopener">Automate the Boring Stuff with Python (book)</a></li><li><a href="https://datacamp.pxf.io/m4EjNa" target="_blank" rel="noopener">DataCamp — Data Engineer in Python track (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/Jk0rEN" target="_blank" rel="noopener">Introduction to Python</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://trk.udemy.com/aNm1vN" target="_blank" rel="noopener">The Complete Python Bootcamp From Zero to Hero (Jose Portilla)</a> <span class="rtag">Udemy · Course</span></li><li><a href="https://imp.i384100.net/YVGgEe" target="_blank" rel="noopener">Python for Everybody Specialization (U. Michigan)</a> <span class="rtag">Coursera · Specialization</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -609,7 +615,8 @@ if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw GeoJSON, iterates features, and gives you a quarantine-writer stub. The validation rules, dedupe set, per-region aggregation, and idempotent-rerun choice are yours to build where the TODOs are.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://amzn.to/4fYPIKD" target="_blank" rel="noopener">Automate the Boring Stuff with Python (book)</a></li><li><a href="https://datacamp.pxf.io/m4EjNa" target="_blank" rel="noopener">DataCamp — Data Engineer in Python track (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/gRKbZ0" target="_blank" rel="noopener">Intermediate Python</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/7Xrm4V" target="_blank" rel="noopener">Python Crash Course, 3rd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li><li><a href="https://trk.udemy.com/aNm1vN" target="_blank" rel="noopener">The Complete Python Bootcamp From Zero to Hero (Jose Portilla)</a> <span class="rtag">Udemy · Course</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -745,7 +752,8 @@ if __name__ == &quot;__main__&quot;:
     main()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Every function raises NotImplementedError on purpose — this is a skeleton, not a solution. Reuse your Week 3-4 logic to fill the TODOs. After building the tree, run: python -m venv .venv &amp;&amp; source .venv/bin/activate &amp;&amp; pip install -e . &amp;&amp; python -m quakes</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://amzn.to/4fYPIKD" target="_blank" rel="noopener">Automate the Boring Stuff with Python (book)</a></li><li><a href="https://datacamp.pxf.io/m4EjNa" target="_blank" rel="noopener">DataCamp — Data Engineer in Python track (course)</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=Co24yhV_6rc" target="_blank" rel="noopener">The Most Expensive Python Mistakes You&#x27;re Making</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#better-python" target="_blank" rel="noopener">Better-Python template (free)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/zz3aL7" target="_blank" rel="noopener">Developing Python Packages</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://datacamp.pxf.io/E0Xaon" target="_blank" rel="noopener">Introduction to Object-Oriented Programming in Python</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/qW3n1q" target="_blank" rel="noopener">Fluent Python, 2nd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -843,7 +851,8 @@ def assert_no_merge_inflation(left, merged, on):
 #             compute requests_per_10k, and export the parquet idempotently (overwrite). ---
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands one month of raw 311 data, gives you a profiling helper and a merge-validation assertion helper. The cleaning plan, quarantine logic, aggregation, normalization, and rate calc are yours to build at the TODO markers.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#dataframe-upgrade-roadmap" target="_blank" rel="noopener">DataFrame Upgrade Roadmap (free)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#dataframe-upgrade-roadmap" target="_blank" rel="noopener">DataFrame Upgrade Roadmap (free)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/bkz3A6" target="_blank" rel="noopener">Data Manipulation with pandas</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/9VPWNY" target="_blank" rel="noopener">Python for Data Analysis, 3rd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li><li><a href="https://trk.udemy.com/GbBjPn" target="_blank" rel="noopener">Data Analysis with Pandas and Python (Boris Paskhaver)</a> <span class="rtag">Udemy · Course</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -959,7 +968,8 @@ if __name__ == &quot;__main__&quot;:
     print(&quot;pages fetched:&quot;, len(pages))
 </code></pre><div class="sc-note"><span class="ml">Note</span> Starter scaffold only: paginate() has the backoff skeleton and reconcile() returns match classes. Normalization, tolerance comparison, quarantine, and the provenance write are yours to build (see TODOs).</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#dataframe-upgrade-roadmap" target="_blank" rel="noopener">DataFrame Upgrade Roadmap (free)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=BYK7bp8MpSU" target="_blank" rel="noopener">Big Data Kills Pandas Performance | Use This Instead</a></li><li><a href="https://www.youtube.com/watch?v=t3vfNTvRFaI" target="_blank" rel="noopener">PySpark vs Pandas - Which Gets You Hired?</a></li><li><a href="https://www.gambilldataengineering.com/business-templates#dataframe-upgrade-roadmap" target="_blank" rel="noopener">DataFrame Upgrade Roadmap (free)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/2RqrxG" target="_blank" rel="noopener">Introduction to APIs in Python</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://imp.i384100.net/MKxXGM" target="_blank" rel="noopener">Using Python to Access Web Data (U. Michigan)</a> <span class="rtag">Coursera · Course</span></li><li><a href="https://datacamp.pxf.io/OYQR2G" target="_blank" rel="noopener">Joining Data with pandas</a> <span class="rtag">DataCamp · Course</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -1146,7 +1156,8 @@ def test_duplicate_detection(fixture_name: str, expect_duplicate_ids: bool) -&gt
     raise NotImplementedError
 </code></pre><div class="sc-note"><span class="ml">Note</span> A src-layout scaffold with a pyproject entry point and ONE parametrized pytest example over a fixture. It defines the seams and types but leaves the real reconcile/dedupe/quarantine logic as TODOs — you build that. Create the files at the paths shown in each header comment.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=jPgM3yghV5Q" target="_blank" rel="noopener">Your Code Works Perfectly? That&#x27;s A Problem</a></li><li><a href="https://www.youtube.com/watch?v=D5bln7fqMZQ" target="_blank" rel="noopener">$180k Data Engineers Don&#x27;t Make These Python Mistakes</a></li><li><a href="https://amzn.to/47eXsaz" target="_blank" rel="noopener">The Pragmatic Programmer (book)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=jPgM3yghV5Q" target="_blank" rel="noopener">Your Code Works Perfectly? That&#x27;s A Problem</a></li><li><a href="https://www.youtube.com/watch?v=D5bln7fqMZQ" target="_blank" rel="noopener">$180k Data Engineers Don&#x27;t Make These Python Mistakes</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/R0jyxy" target="_blank" rel="noopener">Introduction to Testing in Python</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/jR3WPb" target="_blank" rel="noopener">Robust Python</a> <span class="rtag">O&#x27;Reilly · Book</span></li><li><a href="https://oreillymedia.pxf.io/Pz90oM" target="_blank" rel="noopener">Python Testing with pytest, 2nd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -1243,7 +1254,7 @@ print(con.execute(&quot;SELECT name FROM (SHOW ALL TABLES) WHERE database = &#x2
 con.close()
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the data via ATTACH and prints the table list. It writes zero business queries — every JOIN, filter, and the INNER-vs-LEFT delta note are the learner&#x27;s work at the TODO markers.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/m4Gqbq" target="_blank" rel="noopener">DataCamp — Associate Data Engineer in SQL track (course)</a></li><li><a href="https://trk.udemy.com/N9qkav" target="_blank" rel="noopener">The Complete SQL Bootcamp (course)</a></li><li><a href="https://amzn.to/4ajcv2E" target="_blank" rel="noopener">SQL in 10 Minutes (book)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/YVGg5q" target="_blank" rel="noopener">Joining Data in SQL</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://trk.udemy.com/1GL5nD" target="_blank" rel="noopener">The Complete SQL Bootcamp (Jose Portilla)</a> <span class="rtag">Udemy · Course</span></li><li><a href="https://oreillymedia.pxf.io/k43j5x" target="_blank" rel="noopener">Learning SQL, 3rd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -1293,7 +1304,7 @@ con.close()
           <ul class="refs"><li><a href="https://duckdb.org/docs/stable/sql/functions/aggregates" target="_blank" rel="noopener">DuckDB — Aggregate functions (COUNT, SUM, and NULL handling)</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/groupby" target="_blank" rel="noopener">DuckDB — GROUP BY and HAVING clauses</a></li><li><a href="https://duckdb.org/docs/stable/sql/query_syntax/setops" target="_blank" rel="noopener">DuckDB — Set operations (UNION / EXCEPT / INTERSECT)</a></li><li><a href="https://www.postgresql.org/docs/current/functions-subquery.html" target="_blank" rel="noopener">PostgreSQL — Subquery expressions (IN / NOT IN / EXISTS and the NULL pitfall)</a></li></ul>
           
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/m4Gqbq" target="_blank" rel="noopener">DataCamp — Associate Data Engineer in SQL track (course)</a></li><li><a href="https://trk.udemy.com/N9qkav" target="_blank" rel="noopener">The Complete SQL Bootcamp (course)</a></li><li><a href="https://amzn.to/4ajcv2E" target="_blank" rel="noopener">SQL in 10 Minutes (book)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/7XrmAO" target="_blank" rel="noopener">Intermediate SQL</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://imp.i384100.net/KBLea7" target="_blank" rel="noopener">SQL for Data Science (UC Davis)</a> <span class="rtag">Coursera · Course</span></li><li><a href="https://oreillymedia.pxf.io/k43j5x" target="_blank" rel="noopener">Learning SQL, 3rd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -1415,7 +1426,7 @@ UNION ALL SELECT &#x27;rejected&#x27;, count(*) FROM rejected_obs;
 -- Q4 running cumulative PRCP within each station partition
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it stages raw rows and stubs the normalize/quarantine split. You write the QC filters, the unit scaling, idempotent reruns, and all four single-query named-CTE analyses. Verify the by_year column order and the -9999 sentinel against GHCND_documentation.pdf before trusting any number.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://amzn.to/4lOy1QK" target="_blank" rel="noopener">SQL Performance Explained (book)</a></li><li><a href="https://trk.udemy.com/aOdoyQ" target="_blank" rel="noopener">SQL for Data Engineering (course)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/qW3nRO" target="_blank" rel="noopener">PostgreSQL Summary Stats and Window Functions</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/AgVorJ" target="_blank" rel="noopener">SQL Cookbook, 2nd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -1522,7 +1533,7 @@ GROUP  BY station_id, element;
 -- TODO(e): in tuning.md, name ONE index you deliberately did NOT add and why.
 </code></pre><div class="sc-note"><span class="ml">Note</span> Scaffold only: it lands the raw data and hands you the slow query. You write the baseline capture, the sargable rewrite, the single composed index, and the before/after plan proof. Do not replace the provided query until you have saved its baseline plan.</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://amzn.to/4lOy1QK" target="_blank" rel="noopener">SQL Performance Explained (book)</a></li><li><a href="https://trk.udemy.com/aOdoyQ" target="_blank" rel="noopener">SQL for Data Engineering (course)</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/xJ39xO" target="_blank" rel="noopener">Improving Query Performance in PostgreSQL</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/gRKb9v" target="_blank" rel="noopener">PostgreSQL Query Optimization, 2nd Ed.</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
@@ -1650,7 +1661,8 @@ CREATE OR REPLACE TABLE violation (
 -- INSERT INTO restaurant (camis) VALUES (&#x27;&lt;an-existing-camis&gt;&#x27;);   -- dup PK reject
 </code></pre><div class="sc-note"><span class="ml">Note</span> A DuckDB DDL + split SKELETON, not a solution. It creates staging + the target 3NF tables with PK/FK constraints and stubs the INSERT...SELECT split. You must: derive a stable inspection_id, choose DISTINCT/anti-join logic that makes reruns idempotent, add the rejected_rows quarantine, and pick your one justified denormalization. Run with: duckdb nyc.duckdb &lt; build_normalized.sql</div></details>
           <div class="lab-sub">Go deeper</div>
-        <ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=529MqZgvgug" target="_blank" rel="noopener">Data Warehouse Schemas Explained</a></li><li><a href="https://amzn.to/3C4uLju" target="_blank" rel="noopener">Database Design for Mere Mortals (book)</a></li><li><a href="https://amzn.to/45Sd0yH" target="_blank" rel="noopener">The Data Warehouse Toolkit — Kimball (book)</a></li></ul>
+        <div class="gd-grp">From Gambill Data — videos &amp; templates</div><ul class="refs godeeper"><li><a href="https://www.youtube.com/watch?v=529MqZgvgug" target="_blank" rel="noopener">Data Warehouse Schemas Explained</a></li></ul>
+        <div class="gd-grp">Courses &amp; books</div><ul class="refs godeeper"><li><a href="https://datacamp.pxf.io/rE3nvB" target="_blank" rel="noopener">Database Design</a> <span class="rtag">DataCamp · Course</span></li><li><a href="https://oreillymedia.pxf.io/X4Axgy" target="_blank" rel="noopener">Database Design for Mere Mortals (25th Anniversary Ed.)</a> <span class="rtag">O&#x27;Reilly · Book</span></li></ul>
         </div></div>
       </details>
       <details class="subsec">
