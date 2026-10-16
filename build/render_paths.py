@@ -61,8 +61,30 @@ def chip(m):
     return (f'<a class="mchip" href="{L[key]}#{anch}">'
             f'<b>{m}</b> {e(MOD[m])} <span class="wk">{wkref(m)}</span></a>')
 def chips(ms): return "".join(chip(m) for m in ms)
+def chip_row(m):
+    key, anch = MW[m]
+    return (f'<a class="mrow" href="{L[key]}#{anch}">'
+            f'<span class="mrow-code">{m}</span><span class="mrow-name">{e(MOD[m])}</span>'
+            f'<span class="mrow-wk">{wkref(m)}</span></a>')
 
-CSS=open(os.path.join(HERE,"paths.css")).read()
+STAGE_EXP_CSS = r'''
+details.stage-exp{border:1px solid var(--line);border-radius:var(--radius);margin-top:10px;overflow:hidden;background:var(--surface)}
+details.stage-exp>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:10px 13px;font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong)}
+details.stage-exp>summary::-webkit-details-marker{display:none}
+details.stage-exp>summary:hover{color:var(--accent)}
+.stage-exp .st-name{min-width:0}
+.stage-exp .wks{margin-left:auto;color:var(--faint);font-weight:600;white-space:nowrap}
+.stage-exp .st-chev{color:var(--muted);font-size:10px;transition:transform .18s ease;flex:none}
+details.stage-exp[open]>summary .st-chev{transform:rotate(180deg)}
+.stage-mods{margin:0;padding:4px 0 8px;list-style:none;border-top:1px solid var(--line)}
+.stage-mods li{margin:0}
+a.mrow{display:flex;align-items:baseline;gap:10px;padding:7px 13px;text-decoration:none;color:var(--ink-2);font-size:13px;line-height:1.35}
+a.mrow:hover{background:var(--surface-2);color:var(--accent-strong);text-decoration:none}
+a.mrow .mrow-code{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-strong);flex:none;width:34px}
+a.mrow .mrow-name{flex:1 1 auto}
+a.mrow .mrow-wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);flex:none;white-space:nowrap}
+'''
+CSS=open(os.path.join(HERE,"paths.css")).read() + STAGE_EXP_CSS
 
 def page(title, body): return f'<title>{title}</title>\n<style>{CSS}</style>\n{body}'
 
@@ -91,7 +113,14 @@ swe_stages=[("Close the data gap","~4 wks",['M01','M05','M06','M07']),
  ("Platform & production","~5 wks",['M20','M21','M22','M23','M28','M29','M30','M31']),
  ("Launch","~4 wks",['M32','M33','M36','M37'])]
 def stages_html(stages):
-    return "".join(f'<div class="stage"><div class="st"><span>{e(n)}</span><span class="wks">{e(w)}</span></div><div class="chipwrap">{chips(ms)}</div></div>' for n,w,ms in stages)
+    out=[]
+    for i,(n,w,ms) in enumerate(stages):
+        opn=' open' if i==0 else ''
+        items="".join(f'<li>{chip_row(m)}</li>' for m in ms)
+        out.append(f'<details class="stage-exp"{opn}><summary><span class="st-name">{e(n)}</span>'
+                   f'<span class="wks">{e(w)}</span><span class="st-chev">&#9662;</span></summary>'
+                   f'<ul class="stage-mods">{items}</ul></details>')
+    return "".join(out)
 
 def backlinks(active):
     # Course home first, then curriculum + the four phases; same-tab.

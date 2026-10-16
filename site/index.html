@@ -81,6 +81,22 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
 .hcard h4{font-size:1rem;font-weight:710;margin-top:12px}.hcard p{font-size:13px;color:var(--muted);margin-top:6px}
 footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 @media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
+
+details.stage-exp{border:1px solid var(--line);border-radius:var(--radius);margin-top:10px;overflow:hidden;background:var(--surface)}
+details.stage-exp>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:10px 13px;font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong)}
+details.stage-exp>summary::-webkit-details-marker{display:none}
+details.stage-exp>summary:hover{color:var(--accent)}
+.stage-exp .st-name{min-width:0}
+.stage-exp .wks{margin-left:auto;color:var(--faint);font-weight:600;white-space:nowrap}
+.stage-exp .st-chev{color:var(--muted);font-size:10px;transition:transform .18s ease;flex:none}
+details.stage-exp[open]>summary .st-chev{transform:rotate(180deg)}
+.stage-mods{margin:0;padding:4px 0 8px;list-style:none;border-top:1px solid var(--line)}
+.stage-mods li{margin:0}
+a.mrow{display:flex;align-items:baseline;gap:10px;padding:7px 13px;text-decoration:none;color:var(--ink-2);font-size:13px;line-height:1.35}
+a.mrow:hover{background:var(--surface-2);color:var(--accent-strong);text-decoration:none}
+a.mrow .mrow-code{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-strong);flex:none;width:34px}
+a.mrow .mrow-name{flex:1 1 auto}
+a.mrow .mrow-wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);flex:none;white-space:nowrap}
 </style>
 
 <div class="hero"><div class="wrap">
