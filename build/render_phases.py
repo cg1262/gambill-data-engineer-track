@@ -139,10 +139,43 @@ TOGGLE_JS = '''<script>
 })();
 </script>'''
 
+SUBSEC_CSS = r'''
+  .wk-grid.top { margin-top: 14px; }
+  details.subsec { border-top: 1px solid var(--line); }
+  details.subsec > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; padding: 13px 22px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent-strong); }
+  details.subsec > summary::-webkit-details-marker { display: none; }
+  details.subsec > summary:hover { background: var(--surface-2); }
+  details.subsec > summary .ss-hrs { color: var(--faint); font-weight: 600; }
+  details.subsec > summary .ss-chev { margin-left: auto; color: var(--muted); font-size: 11px; transition: transform .18s ease; }
+  details.subsec[open] > summary .ss-chev { transform: rotate(180deg); }
+  details.subsec[open] > summary { border-bottom: 1px solid var(--line); }
+  .subsec-body > .blk { border-right: none; border-bottom: 1px solid var(--line); }
+  .subsec-body > .blk:last-child { border-bottom: none; }
+  .accept ul.pass-list { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .accept ul.pass-list li { font-size: 12.5px; color: var(--muted); padding-left: 19px; position: relative; line-height: 1.45; }
+  .accept ul.pass-list li::before { content: "\2713"; position: absolute; left: 0; top: 1px; color: var(--good); font-weight: 700; }
+'''
+
+def bullets(text):
+    """Split an acceptance paragraph into digestible <li> items."""
+    t = (text or "").strip()
+    t = re.sub(r'^(Pass|Accepted|Verified|Complete|Done)\s+when[:\s]*', '', t, flags=re.I)
+    parts = [p.strip() for p in t.split(';') if p.strip()]
+    out = []
+    for p in parts:
+        p = re.sub(r'^\(?\d+\)?[.)]\s*', '', p)   # strip leading (1) / 1) / 1.
+        p = re.sub(r'^\(\d+\)\s*', '', p)          # strip leading (1)
+        p = re.sub(r'^and\s+', '', p, flags=re.I)
+        if p:
+            out.append(p[0].upper() + p[1:] if p[:1].islower() else p)
+    if not out and t:
+        out = [t]
+    return "".join(f"<li>{e(x)}</li>" for x in out)
+
 def page(title, extra_css, hero, nav, cards, footer):
     toolbar = TOOLBAR_HTML if MODE == "site" else ""
     script = TOGGLE_JS if MODE == "site" else ""
-    return (f'<title>{title}</title>\n<style>\n{BASECSS}\n{COLLAPSE_CSS}\n{extra_css}\n</style>\n'
+    return (f'<title>{title}</title>\n<style>\n{BASECSS}\n{COLLAPSE_CSS}\n{SUBSEC_CSS}\n{extra_css}\n</style>\n'
             f'{hero}\n{nav}\n{toolbar}\n<main class="wrap">\n{cards}\n</main>\n{footer}\n{script}')
 
 # ---- Phase 1 (base + enhanced merge) ----------------------------------------
@@ -196,33 +229,40 @@ def card_p1(n, base, enh):
     </summary>
     <div class="wk-body">
       <div class="framing"><span class="fl">Why this matters</span> {e(x.get("businessFraming",""))}</div>
-      <div class="wk-grid">
+      <div class="wk-grid top">
       <div class="blk"><div class="bh">Objectives</div><ul>{li(b.get("objectives",[]))}</ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~{ch}h</span></div><ul>{li(b.get("lessons",[]))}</ul></div>
-      <div class="blk full lab">
-        <div class="bh">Hands-on lab <span class="hrs">· ~{lh}h</span></div>
-        <p>{e(x.get("labSummary",""))}</p>
-        <div class="lab-sub">Step by step</div>
-        <ol class="steps">{li(x.get("labSteps",[]))}</ol>
-        <div class="lab-sub">Data</div>
-        <div class="ds-list">{datasets_html(x.get("datasets"))}</div>
-        <div class="lab-sub">Reference material</div>
-        <ul class="refs">{refs_html(x.get("referenceMaterials"))}</ul>
-        {script_html(x.get("sampleScript"))}
-        {godeeper_html(mod)}
       </div>
-      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
-        <div class="deliver">{e(x.get("deliverable",""))}</div>
-        <div class="accept"><b>Pass when</b> {e(x.get("acceptance",""))}</div></div>
-      <div class="blk live"><div class="bh">Live session focus</div>
-        <p><b>Recap</b> {e(b.get("liveRecap",""))}</p>
-        <p><b>Misconception</b> {e(b.get("liveMisconception",""))}</p>
-        <p class="hot"><b>Hot seat</b> "{e((b.get("liveHotSeat","") or "").strip(chr(34)))}"</p></div>
-      <div class="blk full foot">
-        <div class="pf"><span class="fl2">Portfolio</span> {e(b.get("portfolio",""))}</div>
-        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> {e(b.get("prereqs",""))}</div>
-      </div>
-    </div>
+      <details class="subsec">
+        <summary>Hands-on lab <span class="ss-hrs">· ~{lh}h</span><span class="ss-chev" aria-hidden="true">&#9662;</span></summary>
+        <div class="subsec-body"><div class="blk lab">
+          <p>{e(x.get("labSummary",""))}</p>
+          <div class="lab-sub">Step by step</div>
+          <ol class="steps">{li(x.get("labSteps",[]))}</ol>
+          <div class="lab-sub">Data</div>
+          <div class="ds-list">{datasets_html(x.get("datasets"))}</div>
+          <div class="lab-sub">Reference material</div>
+          <ul class="refs">{refs_html(x.get("referenceMaterials"))}</ul>
+          {script_html(x.get("sampleScript"))}
+          {godeeper_html(mod)}
+        </div></div>
+      </details>
+      <details class="subsec">
+        <summary>Deliverable, acceptance &amp; live session<span class="ss-chev" aria-hidden="true">&#9662;</span></summary>
+        <div class="subsec-body">
+          <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+            <div class="deliver">{e(x.get("deliverable",""))}</div>
+            <div class="accept"><b>Pass when</b><ul class="pass-list">{bullets(x.get("acceptance",""))}</ul></div></div>
+          <div class="blk live"><div class="bh">Live session focus</div>
+            <p><b>Recap</b> {e(b.get("liveRecap",""))}</p>
+            <p><b>Misconception</b> {e(b.get("liveMisconception",""))}</p>
+            <p class="hot"><b>Hot seat</b> "{e((b.get("liveHotSeat","") or "").strip(chr(34)))}"</p></div>
+          <div class="blk foot">
+            <div class="pf"><span class="fl2">Portfolio</span> {e(b.get("portfolio",""))}</div>
+            <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> {e(b.get("prereqs",""))}</div>
+          </div>
+        </div>
+      </details>
     </div>
   </details>'''
 
@@ -269,34 +309,41 @@ def card_generic(w, tier, capweeks):
     <div class="wk-body">
       <div class="framing"><span class="fl">Why this matters</span> {e(w.get("businessFraming",""))}</div>
       {role_html}
-      <div class="wk-grid">
+      <div class="wk-grid top">
       <div class="blk"><div class="bh">Objectives</div><ul>{li(w.get("objectives",[]))}</ul></div>
       <div class="blk"><div class="bh">Concept lessons <span class="hrs">· ~{ch}h</span></div><ul>{li(w.get("lessons",[]))}</ul></div>
-      <div class="blk full lab">
-        <div class="bh">Hands-on lab <span class="hrs">· ~{lh}h</span></div>
-        <p>{e(w.get("labSummary",""))}</p>
-        <div class="lab-sub">Step by step</div>
-        <ol class="steps">{li(w.get("labSteps",[]))}</ol>
-        <div class="lab-sub">Data</div>
-        <div class="ds-list">{datasets_html(w.get("datasets"))}</div>
-        <div class="lab-sub">Reference material</div>
-        <ul class="refs">{refs_html(w.get("referenceMaterials"))}</ul>
-        {script_html(w.get("sampleScript"))}
-        {godeeper_html(w.get("module",""))}
-        {mirror_html}
       </div>
-      <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
-        <div class="deliver">{e(w.get("deliverable",""))}</div>
-        <div class="accept"><b>Pass when</b> {e(w.get("acceptance",""))}</div></div>
-      <div class="blk live"><div class="bh">Live session focus</div>
-        <p><b>Recap</b> {e(w.get("liveRecap",""))}</p>
-        <p><b>Misconception</b> {e(w.get("liveMisconception",""))}</p>
-        <p class="hot"><b>Hot seat</b> "{e((w.get("liveHotSeat","") or "").strip(chr(34)))}"</p></div>
-      <div class="blk full foot">
-        <div class="pf"><span class="fl2">Portfolio</span> {e(w.get("portfolio",""))}</div>
-        <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> {e(w.get("prereqs",""))}</div>
-      </div>
-    </div>
+      <details class="subsec">
+        <summary>Hands-on lab <span class="ss-hrs">· ~{lh}h</span><span class="ss-chev" aria-hidden="true">&#9662;</span></summary>
+        <div class="subsec-body"><div class="blk lab">
+          <p>{e(w.get("labSummary",""))}</p>
+          <div class="lab-sub">Step by step</div>
+          <ol class="steps">{li(w.get("labSteps",[]))}</ol>
+          <div class="lab-sub">Data</div>
+          <div class="ds-list">{datasets_html(w.get("datasets"))}</div>
+          <div class="lab-sub">Reference material</div>
+          <ul class="refs">{refs_html(w.get("referenceMaterials"))}</ul>
+          {script_html(w.get("sampleScript"))}
+          {godeeper_html(w.get("module",""))}
+          {mirror_html}
+        </div></div>
+      </details>
+      <details class="subsec">
+        <summary>Deliverable, acceptance &amp; live session<span class="ss-chev" aria-hidden="true">&#9662;</span></summary>
+        <div class="subsec-body">
+          <div class="blk"><div class="bh">Deliverable &amp; acceptance</div>
+            <div class="deliver">{e(w.get("deliverable",""))}</div>
+            <div class="accept"><b>Pass when</b><ul class="pass-list">{bullets(w.get("acceptance",""))}</ul></div></div>
+          <div class="blk live"><div class="bh">Live session focus</div>
+            <p><b>Recap</b> {e(w.get("liveRecap",""))}</p>
+            <p><b>Misconception</b> {e(w.get("liveMisconception",""))}</p>
+            <p class="hot"><b>Hot seat</b> "{e((w.get("liveHotSeat","") or "").strip(chr(34)))}"</p></div>
+          <div class="blk foot">
+            <div class="pf"><span class="fl2">Portfolio</span> {e(w.get("portfolio",""))}</div>
+            <div class="pf"><span class="fl2">Prereqs &amp; carry-forward</span> {e(w.get("prereqs",""))}</div>
+          </div>
+        </div>
+      </details>
     </div>
   </details>'''
 
