@@ -1,0 +1,188 @@
+{
+  "generated": "static diagnostic endpoint",
+  "count": 26,
+  "customers": [
+    {
+      "customer_id": 1010,
+      "name": "Maria Alvarez",
+      "region": "West",
+      "lifetime_value": 1370,
+      "status": "active"
+    },
+    {
+      "customer_id": 1011,
+      "name": "John Okafor",
+      "region": "North",
+      "lifetime_value": 1407,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1012,
+      "name": "Wei Kim",
+      "region": "South",
+      "lifetime_value": 1944,
+      "status": "active"
+    },
+    {
+      "customer_id": 1013,
+      "name": "Amara Reed",
+      "region": "East",
+      "lifetime_value": 1481,
+      "status": "active"
+    },
+    {
+      "customer_id": 1014,
+      "name": "Luca Mensah",
+      "region": "West",
+      "lifetime_value": 1518,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1015,
+      "name": "Priya Rahman",
+      "region": "North",
+      "lifetime_value": 1555,
+      "status": "active"
+    },
+    {
+      "customer_id": 1016,
+      "name": "Noah Ivanov",
+      "region": "South",
+      "lifetime_value": 1592,
+      "status": "active"
+    },
+    {
+      "customer_id": 1017,
+      "name": "Zara Petrov",
+      "region": "East",
+      "lifetime_value": 1629,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1018,
+      "name": "Omar Cruz",
+      "region": "West",
+      "lifetime_value": 2166,
+      "status": "active"
+    },
+    {
+      "customer_id": 1019,
+      "name": "Elena Zhang",
+      "region": "North",
+      "lifetime_value": 1703,
+      "status": "active"
+    },
+    {
+      "customer_id": 1020,
+      "name": "Hiro Patel",
+      "region": "South",
+      "lifetime_value": 1740,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1021,
+      "name": "Sofia Novak",
+      "region": "East",
+      "lifetime_value": 1777,
+      "status": "active"
+    },
+    {
+      "customer_id": 1022,
+      "name": "Kwame Moreau",
+      "region": "West",
+      "lifetime_value": 2314,
+      "status": "active"
+    },
+    {
+      "customer_id": 1023,
+      "name": "Ingrid Costa",
+      "region": "North",
+      "lifetime_value": 1851,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1024,
+      "name": "Diego Sato",
+      "region": "South",
+      "lifetime_value": 1888,
+      "status": "active"
+    },
+    {
+      "customer_id": 1025,
+      "name": "Fatima Aziz",
+      "region": "East",
+      "lifetime_value": 1925,
+      "status": "active"
+    },
+    {
+      "customer_id": 1026,
+      "name": "Sean Berg",
+      "region": "West",
+      "lifetime_value": 1962,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1027,
+      "name": "Yuki Smith",
+      "region": "North",
+      "lifetime_value": 1999,
+      "status": "active"
+    },
+    {
+      "customer_id": 1028,
+      "name": "Pavel Rossi",
+      "region": "South",
+      "lifetime_value": 2036,
+      "status": "active"
+    },
+    {
+      "customer_id": 1029,
+      "name": "Rosa Haddad",
+      "region": "East",
+      "lifetime_value": 2073,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1030,
+      "name": "Tariq Tanaka",
+      "region": "West",
+      "lifetime_value": 2110,
+      "status": "active"
+    },
+    {
+      "customer_id": 1031,
+      "name": "Nadia Larsen",
+      "region": "North",
+      "lifetime_value": 2147,
+      "status": "active"
+    },
+    {
+      "customer_id": 1032,
+      "name": "Ethan Walsh",
+      "region": "South",
+      "lifetime_value": 2184,
+      "status": "churned"
+    },
+    {
+      "customer_id": 1033,
+      "name": "Lena Diaz",
+      "region": "East",
+      "lifetime_value": 2221,
+      "status": "active"
+    },
+    {
+      "customer_id": 1034,
+      "name": "Mateo Brown",
+      "region": "West",
+      "lifetime_value": 2258,
+      "status": "active"
+    },
+    {
+      "customer_id": 1035,
+      "name": "Maria Alvarez",
+      "region": "North",
+      "lifetime_value": 2295,
+      "status": "churned"
+    }
+  ]
+}

@@ -82,6 +82,17 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
 footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 @media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
 
+/* Bridge placement-diagnostic — four tasks with dataset links */
+.diag ol.tasks{display:flex;flex-direction:column;gap:14px}
+.diag ol.tasks>li{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.task-q{font-weight:600;color:var(--ink)}
+.task-res{margin-top:6px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.task-res .trl{font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-strong);margin-right:5px}
+.task-res a{color:var(--blue-strong);word-break:break-word}
+.gitlinks{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:top}
+.gitlinks a{display:inline-block;font-size:11.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:3px 8px;text-decoration:none}
+.gitlinks a:hover{border-color:var(--accent);color:var(--accent-strong);text-decoration:none}
+
 details.stage-exp{border:1px solid var(--line);border-radius:var(--radius);margin-top:10px;overflow:hidden;background:var(--surface)}
 details.stage-exp>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:10px 13px;font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong)}
 details.stage-exp>summary::-webkit-details-marker{display:none}
@@ -110,11 +121,15 @@ a.mrow .mrow-wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);f
 <section><div class="wrap">
   <div class="sec-head"><span class="eyebrow">Before week 1</span><h2>Placement diagnostic</h2>
   <p>~30 minutes. Four short tasks decide which variant you enter, because an analyst and an SWE arrive with mirror-image strengths.</p></div>
-  <div class="diag"><h3>Four tasks</h3><ol>
-    <li>Write a query with a window function and explain what it computes. <span class="mono">→ tests SQL depth</span></li>
-    <li>Given a messy CSV and an API, write a small Python script that loads and reconciles them. <span class="mono">→ tests Python / engineering</span></li>
-    <li>Model a simple business process into facts &amp; dimensions and justify the grain. <span class="mono">→ tests modeling</span></li>
-    <li>Walk through how you would branch, PR, test, and deploy a change. <span class="mono">→ tests dev workflow</span></li>
+  <div class="diag"><h3>Four tasks</h3><ol class="tasks">
+    <li><div class="task-q">Write a query with a window function and explain what it computes. <span class="mono">→ tests SQL depth</span></div>
+      <div class="task-res"><span class="trl">Dataset</span> <a href="https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic/task1_sales.csv" target="_blank" rel="noopener">task1_sales.csv</a> — regional sales by rep by month. Rank reps within each region, or build a running monthly revenue total; there's a deliberate tie in East / 2024-01 so <span class="mono">RANK</span> vs <span class="mono">ROW_NUMBER</span> vs <span class="mono">DENSE_RANK</span> actually diverge.</div></li>
+    <li><div class="task-q">Given a messy CSV and an API, write a small Python script that loads and reconciles them. <span class="mono">→ tests Python / engineering</span></div>
+      <div class="task-res"><span class="trl">CSV</span> <a href="https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic/task2_customers.csv" target="_blank" rel="noopener">task2_customers.csv</a> &nbsp;·&nbsp; <span class="trl">API</span> <a href="https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic/task2_customers_api.json" target="_blank" rel="noopener">task2_customers_api.json</a> — reconcile on <span class="mono">customer_id</span>. The CSV is messy (duplicate ids, mixed date formats, blank fields, money as <span class="mono">$1,234</span>); the JSON endpoint is clean. Expect matched / CSV-only / API-only / value-mismatch records.</div></li>
+    <li><div class="task-q">Model a simple business process into facts &amp; dimensions and justify the grain. <span class="mono">→ tests modeling</span></div>
+      <div class="task-res"><span class="trl">Dataset</span> <a href="https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic/task3_orders.csv" target="_blank" rel="noopener">task3_orders.csv</a> — a wide, denormalized order-line file. Design a star schema (one fact + customer / product / date dimensions) and state the grain in one sentence.</div></li>
+    <li><div class="task-q">Walk through how you would branch, PR, test, and deploy a change. <span class="mono">→ tests dev workflow</span></div>
+      <div class="task-res"><span class="trl">Learn Git</span> <span class="gitlinks"><a href="https://trk.udemy.com/enM4Wj" target="_blank" rel="noopener">Udemy — The Git &amp; GitHub Bootcamp (Colt Steele)</a><a href="https://imp.i384100.net/QYrOQ3" target="_blank" rel="noopener">Coursera — Introduction to Git and GitHub (Google)</a><a href="https://datacamp.pxf.io/jR3WL0" target="_blank" rel="noopener">DataCamp — Introduction to Git</a><a href="https://oreillymedia.pxf.io/k43jqd" target="_blank" rel="noopener">O&#x27;Reilly — Head First Git</a></span></div></li>
   </ol></div>
 </div></section>
 <section><div class="wrap">

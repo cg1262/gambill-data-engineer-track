@@ -1,0 +1,28 @@
+customer_id,name,signup_date,region,lifetime_value,email
+1001,Maria Alvarez,"Jun 3, 2023",,1037.00,maria.alvarez@example.com
+1002,John Okafor,2023-07-04,East,1074,john.okafor@example.com
+1003,Wei Kim,08/05/2023,West,"$1,111",wei.kim@example.com
+1004,Amara Reed  ,"Sep 6, 2023",North,1148.00,amara.reed@example.com
+1005,Luca Mensah,2023-10-07,South,1185,
+1006,Priya Rahman,11/08/2023,East,"$1,222",priya.rahman@example.com
+1007,Noah Ivanov,"Dec 9, 2023",West,1259.00,noah.ivanov@example.com
+1008,Zara Petrov  ,2023-01-10,,1296,zara.petrov@example.com
+1009,Omar Cruz,02/11/2023,South,"$1,333",omar.cruz@example.com
+1010,Elena Zhang,"Mar 12, 2023",East,1370.00,
+1011,Hiro Patel,2023-04-13,West,1407,hiro.patel@example.com
+1012,Sofia Novak  ,05/14/2023,North,"$1,444",sofia.novak@example.com
+1013,Kwame Moreau,"Jun 15, 2023",South,1481.00,kwame.moreau@example.com
+1014,Ingrid Costa,2023-07-16,East,1518,ingrid.costa@example.com
+1015,Diego Sato,08/17/2023,,"$1,555",
+1016,Fatima Aziz  ,"Sep 18, 2023",North,1592.00,fatima.aziz@example.com
+1017,Sean Berg,2023-10-19,South,1629,sean.berg@example.com
+1018,Yuki Smith,11/20/2023,East,"$1,666",yuki.smith@example.com
+1019,Pavel Rossi,"Dec 21, 2023",West,1703.00,pavel.rossi@example.com
+1020,Rosa Haddad  ,2023-01-22,North,1740,
+1021,Tariq Tanaka,02/23/2023,South,"$1,777",tariq.tanaka@example.com
+1022,Nadia Larsen,"Mar 24, 2023",,1814.00,nadia.larsen@example.com
+1023,Ethan Walsh,2023-04-25,West,1851,ethan.walsh@example.com
+1024,Lena Diaz  ,05/26/2023,North,"$1,888",lena.diaz@example.com
+1025,Mateo Brown,"Jun 27, 2023",South,1925.00,
+1007,Noah Ivanov-Jr,"Dec 9, 2023",West,1259.00,noah.ivanov@example.com
+1013,Kwame Moreau,"Jun 15, 2023",South,1481.00,

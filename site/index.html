@@ -82,6 +82,17 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
 footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 @media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
 
+/* Bridge placement-diagnostic — four tasks with dataset links */
+.diag ol.tasks{display:flex;flex-direction:column;gap:14px}
+.diag ol.tasks>li{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.task-q{font-weight:600;color:var(--ink)}
+.task-res{margin-top:6px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.task-res .trl{font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-strong);margin-right:5px}
+.task-res a{color:var(--blue-strong);word-break:break-word}
+.gitlinks{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:top}
+.gitlinks a{display:inline-block;font-size:11.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:3px 8px;text-decoration:none}
+.gitlinks a:hover{border-color:var(--accent);color:var(--accent-strong);text-decoration:none}
+
 details.stage-exp{border:1px solid var(--line);border-radius:var(--radius);margin-top:10px;overflow:hidden;background:var(--surface)}
 details.stage-exp>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:10px 13px;font-family:var(--font-mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong)}
 details.stage-exp>summary::-webkit-details-marker{display:none}

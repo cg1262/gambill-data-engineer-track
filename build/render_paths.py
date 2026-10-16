@@ -105,6 +105,29 @@ def welcome_html(key):
                 f'allowfullscreen></iframe></div>')
     return f'<a class="welcome-btn" href="{e(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
 
+# ---------- placement-diagnostic datasets + git-training links ----------
+DIAG_BASE = "https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic"
+GIT_LINKS = [
+    ("Udemy — The Git & GitHub Bootcamp (Colt Steele)", "https://trk.udemy.com/enM4Wj"),
+    ("Coursera — Introduction to Git and GitHub (Google)", "https://imp.i384100.net/QYrOQ3"),
+    ("DataCamp — Introduction to Git", "https://datacamp.pxf.io/jR3WL0"),
+    ("O'Reilly — Head First Git", "https://oreillymedia.pxf.io/k43jqd"),
+]
+def gitlinks_html():
+    return "".join(f'<a href="{u}" target="_blank" rel="noopener">{e(n)}</a>' for n, u in GIT_LINKS)
+def dl(fname, label):
+    return f'<a href="{DIAG_BASE}/{fname}" target="_blank" rel="noopener">{e(label)}</a>'
+DIAG_TASKS = f'''<div class="diag"><h3>Four tasks</h3><ol class="tasks">
+    <li><div class="task-q">Write a query with a window function and explain what it computes. <span class="mono">→ tests SQL depth</span></div>
+      <div class="task-res"><span class="trl">Dataset</span> {dl("task1_sales.csv","task1_sales.csv")} — regional sales by rep by month. Rank reps within each region, or build a running monthly revenue total; there's a deliberate tie in East / 2024-01 so <span class="mono">RANK</span> vs <span class="mono">ROW_NUMBER</span> vs <span class="mono">DENSE_RANK</span> actually diverge.</div></li>
+    <li><div class="task-q">Given a messy CSV and an API, write a small Python script that loads and reconciles them. <span class="mono">→ tests Python / engineering</span></div>
+      <div class="task-res"><span class="trl">CSV</span> {dl("task2_customers.csv","task2_customers.csv")} &nbsp;·&nbsp; <span class="trl">API</span> {dl("task2_customers_api.json","task2_customers_api.json")} — reconcile on <span class="mono">customer_id</span>. The CSV is messy (duplicate ids, mixed date formats, blank fields, money as <span class="mono">$1,234</span>); the JSON endpoint is clean. Expect matched / CSV-only / API-only / value-mismatch records.</div></li>
+    <li><div class="task-q">Model a simple business process into facts &amp; dimensions and justify the grain. <span class="mono">→ tests modeling</span></div>
+      <div class="task-res"><span class="trl">Dataset</span> {dl("task3_orders.csv","task3_orders.csv")} — a wide, denormalized order-line file. Design a star schema (one fact + customer / product / date dimensions) and state the grain in one sentence.</div></li>
+    <li><div class="task-q">Walk through how you would branch, PR, test, and deploy a change. <span class="mono">→ tests dev workflow</span></div>
+      <div class="task-res"><span class="trl">Learn Git</span> <span class="gitlinks">{gitlinks_html()}</span></div></li>
+  </ol></div>'''
+
 # ---------- BRIDGE ----------
 analyst_stages=[("Close the engineering gap","~4 wks",['M00','M01','M02','M03','M04']),
  ("Core data engineering","~7 wks",['M06','M07','M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25']),
@@ -144,12 +167,7 @@ bridge_body=f'''
 <section><div class="wrap">
   <div class="sec-head"><span class="eyebrow">Before week 1</span><h2>Placement diagnostic</h2>
   <p>~30 minutes. Four short tasks decide which variant you enter, because an analyst and an SWE arrive with mirror-image strengths.</p></div>
-  <div class="diag"><h3>Four tasks</h3><ol>
-    <li>Write a query with a window function and explain what it computes. <span class="mono">→ tests SQL depth</span></li>
-    <li>Given a messy CSV and an API, write a small Python script that loads and reconciles them. <span class="mono">→ tests Python / engineering</span></li>
-    <li>Model a simple business process into facts &amp; dimensions and justify the grain. <span class="mono">→ tests modeling</span></li>
-    <li>Walk through how you would branch, PR, test, and deploy a change. <span class="mono">→ tests dev workflow</span></li>
-  </ol></div>
+  {DIAG_TASKS}
 </div></section>
 <section><div class="wrap">
   <div class="sec-head"><span class="eyebrow">Two variants</span><h2>Your track</h2>
