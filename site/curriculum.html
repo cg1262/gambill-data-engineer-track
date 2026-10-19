@@ -82,6 +82,17 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
 footer{padding:40px 0 60px}.foot-note{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 @media (max-width:860px){.split,.paths,.phases,.how{grid-template-columns:1fr}.diag.cols ol{columns:1}}
 
+/* Bridge placement-diagnostic — four tasks with dataset links */
+.diag ol.tasks{display:flex;flex-direction:column;gap:14px}
+.diag ol.tasks>li{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.task-q{font-weight:600;color:var(--ink)}
+.task-res{margin-top:6px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.task-res .trl{font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-strong);margin-right:5px}
+.task-res a{color:var(--blue-strong);word-break:break-word}
+.gitlinks{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:top}
+.gitlinks a{display:inline-block;font-size:11.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:3px 8px;text-decoration:none}
+.gitlinks a:hover{border-color:var(--accent);color:var(--accent-strong);text-decoration:none}
+
 
 .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
 table.cat{width:100%;border-collapse:collapse;min-width:720px;font-size:13.5px}
@@ -147,7 +158,7 @@ table.skel .tc{font-weight:600;color:var(--ink)}
     <div class="pcard launch"><span class="k">Path 01 — Launch</span><h3>Ground up</h3><div class="for">No data experience (maybe Excel)</div>
       <p>The full ~50-week course across four phases, ending on a governed capstone.</p><a class="go" href="phase-1.html">Start at Phase 1 →</a></div>
     <div class="pcard bridge"><span class="k">Path 02 — Bridge</span><h3>Cross over</h3><div class="for">Analysts &amp; software engineers</div>
-      <p>A 3–5 month crossover; a diagnostic routes you to the analyst or SWE variant.</p><a class="go" href="bridge.html">See the Bridge path →</a></div>
+      <p>About five months, less if the diagnostic lets you skip more; it routes you to the analyst or SWE variant.</p><a class="go" href="bridge.html">See the Bridge path →</a></div>
     <div class="pcard sharpen"><span class="k">Path 03 — Sharpen</span><h3>Fill the gaps</h3><div class="for">Working data engineers</div>
       <p>A self-diagnostic against the ten gaps, plus eight pre-built bundles.</p><a class="go" href="sharpen.html">See the Sharpen path →</a></div>
   </div>

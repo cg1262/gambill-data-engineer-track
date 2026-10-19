@@ -79,6 +79,17 @@ def wnum(w):
 MODCODE_RE = re.compile(r"M\d{2}")
 def mod_code(s):
     m = MODCODE_RE.search(str(s or "")); return m.group(0) if m else ""
+YT_RE = re.compile(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|embed/))([A-Za-z0-9_-]{6,})")
+def welcome_html(key):
+    """Path welcome video (same slot the hub/Bridge/Sharpen heroes use): iframe on the site, link-out in the artifact."""
+    url = (VIDEOS.get("welcome", {}).get(key, "") or "").strip()
+    if not url: return ""
+    m = YT_RE.search(url)
+    src = f"https://www.youtube.com/embed/{m.group(1)}" if m else url
+    if MODE == "site":
+        return (f'<div class="video-embed"><iframe src="{html.escape(src)}" title="Welcome video" loading="lazy" frameborder="0" '
+                f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>')
+    return f'<a class="welcome-btn" href="{html.escape(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
 def howto_html(n):
     url = (WEEKLY.get(str(n), "") or "").strip()
     if not url: return ""
@@ -289,7 +300,8 @@ def render_phase1():
     hero = f'''<div class="hero"><div class="wrap">
     <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 1 of 4</span>
     <h1>Foundations, <span class="thin">week by week.</span></h1>
-    <p class="lede">All 13 weeks of Phase 1 (Foundations · bronze depth), with deepened labs — a business framing, step-by-step instructions, linked real datasets, reference docs, and a starter scaffold where the setup earns one. Every lab runs on free, open, deliberately-messy public data; nothing is client data, and no canned tutorial sets.</p>
+    <p class="lede">All 13 weeks of Phase 1 (Foundations · bronze depth), with deepened labs — a business framing, step-by-step instructions, linked real datasets, reference docs, and a starter scaffold where the setup earns one. Plan on 8–12 hours a week, most of it in the lab. Every lab runs on free, open, deliberately-messy public data; nothing is client data, and no canned tutorial sets.</p>
+    {welcome_html("launch")}
     <div class="sources"><span class="src">NYC 311 · Socrata</span><span class="src">USGS Earthquakes</span><span class="src">World Bank + OWID</span><span class="src">Chinook · DuckDB</span><span class="src">NOAA GHCN-Daily</span><span class="src">NYC DOHMH Inspections</span></div>
   </div></div>'''
     footer = '''<footer><div class="wrap"><div class="foot-note">

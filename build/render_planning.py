@@ -206,7 +206,7 @@ curriculum_body = f'''
     <div class="pcard launch"><span class="k">Path 01 — Launch</span><h3>Ground up</h3><div class="for">No data experience (maybe Excel)</div>
       <p>The full ~50-week course across four phases, ending on a governed capstone.</p><a class="go" href="phase-1.html">Start at Phase 1 →</a></div>
     <div class="pcard bridge"><span class="k">Path 02 — Bridge</span><h3>Cross over</h3><div class="for">Analysts &amp; software engineers</div>
-      <p>A 3–5 month crossover; a diagnostic routes you to the analyst or SWE variant.</p><a class="go" href="bridge.html">See the Bridge path →</a></div>
+      <p>About five months, less if the diagnostic lets you skip more; it routes you to the analyst or SWE variant.</p><a class="go" href="bridge.html">See the Bridge path →</a></div>
     <div class="pcard sharpen"><span class="k">Path 03 — Sharpen</span><h3>Fill the gaps</h3><div class="for">Working data engineers</div>
       <p>A self-diagnostic against the ten gaps, plus eight pre-built bundles.</p><a class="go" href="sharpen.html">See the Sharpen path →</a></div>
   </div>
