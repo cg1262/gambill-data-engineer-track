@@ -1,0 +1,83 @@
+WEBVTT
+
+00:00.371 --> 00:03.706
+You can already write code or
+you already live in the data.
+
+00:04.071 --> 00:05.893
+You just don't carry the title yet.
+
+00:06.332 --> 00:09.321
+I'm not gonna make you sit through
+things that you already own.
+
+00:10.128 --> 00:13.256
+Bridge is for analysts and
+software engineers that are
+
+00:13.256 --> 00:14.589
+crossing over into engineering.
+
+00:14.943 --> 00:17.843
+It opens with a thirty-minute
+placement diagnostic.
+
+00:18.068 --> 00:22.470
+Four short tasks, a window function
+query with a tie that's planted in
+
+00:22.477 --> 00:25.860
+the data so that I could see whether
+you know the difference between rank
+
+00:25.860 --> 00:32.472
+and row number, a messy CSV reconciled
+against a clean API, a wide order file
+
+00:32.504 --> 00:37.988
+turned into a star schema with grain
+stated in just one sentence, and how
+
+00:37.988 --> 00:40.468
+you'd branch, test, and deploy a change.
+
+00:41.043 --> 00:44.792
+That routes you to the analyst
+track or the SWE track.
+
+00:45.117 --> 00:50.277
+Analyst, the gap is usually
+engineering rigor: Git, Python, CI/CD.
+
+00:50.783 --> 00:54.665
+Engineers, it's usually SQL
+depth and data modeling.
+
+00:55.030 --> 00:58.388
+You skip what you know, and
+you go deep on what you don't.
+
+00:58.884 --> 01:04.007
+About three to five months, and faster
+if the diagnostic lets you skip more.
+
+01:04.885 --> 01:10.940
+Both tracks converge on the same lakehouse
+core and the same capstone, a portfolio
+
+01:10.943 --> 01:13.042
+project that ends in golden records.
+
+01:13.256 --> 01:16.860
+And every week, you're gonna be
+defending your decisions on the hot
+
+01:16.860 --> 01:21.648
+seat because knowing it and being able
+to defend it are two different things.
+
+01:22.107 --> 01:23.321
+Take the diagnostic.
+
+01:23.492 --> 01:24.765
+Let's find your gaps

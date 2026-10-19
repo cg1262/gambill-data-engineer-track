@@ -62,11 +62,11 @@ def chip(m):
     return (f'<a class="mchip" href="{L[key]}#{anch}">'
             f'<b>{m}</b> {e(MOD[m])} <span class="wk">{wkref(m)}</span></a>')
 def chips(ms): return "".join(chip(m) for m in ms)
-def chip_row(m):
+def chip_row(m, wk=None):
     key, anch = MW[m]
     return (f'<a class="mrow" href="{L[key]}#{anch}">'
             f'<span class="mrow-code">{m}</span><span class="mrow-name">{e(MOD[m])}</span>'
-            f'<span class="mrow-wk">{wkref(m)}</span></a>')
+            f'<span class="mrow-wk">{wk or wkref(m)}</span></a>')
 
 STAGE_EXP_CSS = r'''
 details.stage-exp{border:1px solid var(--line);border-radius:var(--radius);margin-top:10px;overflow:hidden;background:var(--surface)}
@@ -90,20 +90,9 @@ CSS=open(os.path.join(HERE,"paths.css")).read() + STAGE_EXP_CSS
 
 def page(title, body): return f'<title>{title}</title>\n<style>{CSS}</style>\n{body}'
 
-# ---- welcome video (site: responsive iframe; artifact: link-out button) ------
-YT_RE = re.compile(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|embed/))([A-Za-z0-9_-]{6,})")
-def yt_embed(url):
-    m = YT_RE.search((url or "").strip())
-    return f"https://www.youtube.com/embed/{m.group(1)}" if m else (url or "").strip()
-def welcome_html(key):
-    url = (VIDEOS.get("welcome", {}).get(key, "") or "").strip()
-    if not url: return ""
-    if MODE == "site":
-        return (f'<div class="video-embed"><iframe src="{e(yt_embed(url))}" title="Welcome video" '
-                f'loading="lazy" frameborder="0" '
-                f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
-                f'allowfullscreen></iframe></div>')
-    return f'<a class="welcome-btn" href="{e(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
+# ---- welcome video: shared helper (local MP4 or YouTube; see welcome.py) ----
+import welcome as _welcome
+def welcome_html(key): return _welcome.welcome_html(VIDEOS, key, MODE, OUTDIR)
 
 # ---------- placement-diagnostic datasets + git-training links ----------
 DIAG_BASE = "https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic"
@@ -137,11 +126,12 @@ swe_stages=[("Close the data gap","~4 wks",['M01','M05','M06','M07']),
  ("Model, pipeline & Spark","~7 wks",['M08','M09','M10','M11','M13','M14','M15','M16','M17','M18','M24','M25','M26']),
  ("Platform & production","~5 wks",['M20','M21','M22','M23','M28','M29','M30','M31']),
  ("Launch","~4 wks",['M32','M33','M36','M37'])]
+BRIDGE_WK={'M37':'Bridge W18–20'}  # Bridge runs ~20 weeks; the capstone is its last three, not Launch's W48–50
 def stages_html(stages):
     out=[]
     for i,(n,w,ms) in enumerate(stages):
         opn=' open' if i==0 else ''
-        items="".join(f'<li>{chip_row(m)}</li>' for m in ms)
+        items="".join(f'<li>{chip_row(m, BRIDGE_WK.get(m))}</li>' for m in ms)
         out.append(f'<details class="stage-exp"{opn}><summary><span class="st-name">{e(n)}</span>'
                    f'<span class="wks">{e(w)}</span><span class="cnt">{len(ms)} modules</span>'
                    f'<span class="st-chev">&#9662;</span></summary>'
@@ -159,8 +149,8 @@ def backlinks(active):
 bridge_body=f'''
 <div class="hero"><div class="wrap">
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 02 — Bridge</span>
-  <h1>Cross over into DE. <span class="thin">3–5 months.</span></h1>
-  <p class="lede">Bridge is for people who already work with data — <b>analysts</b> and <b>software engineers</b> — who want to become data engineers. You skip what you already own and go deep on the rest, so it is faster than starting from zero. A short placement diagnostic routes you to the right variant; both converge on the same lakehouse core and capstone.</p>
+  <h1>Cross over into DE. <span class="thin">About five months.</span></h1>
+  <p class="lede">Bridge is for people who already work with data — <b>analysts</b> and <b>software engineers</b> — who want to become data engineers. You skip what you already own and go deep on the rest. Plan on about five months; the more the diagnostic lets you skip, the shorter it gets. A short placement diagnostic routes you to the right variant; both converge on the same lakehouse core and capstone.</p>
   {welcome_html("bridge")}
   {backlinks("bridge")}
 </div></div>
@@ -171,7 +161,7 @@ bridge_body=f'''
 </div></section>
 <section><div class="wrap">
   <div class="sec-head"><span class="eyebrow">Two variants</span><h2>Your track</h2>
-  <p>Each module below links to its real lesson week in the Launch phase pages — the content is identical, you just take a different route through it. Chips show the module and the week it lives in.</p></div>
+  <p>Each module below links to its real lesson week in the Launch phase pages — the content is identical, you just take a different route through it. Chips show the module and the Launch lesson week it lives in; the capstone is numbered for Bridge, your final three weeks.</p></div>
   <div class="split">
     <div class="variant a">
       <h3>Analyst → DE</h3><div class="who">Strong SQL &amp; business sense; lighter on programming, distributed compute, and engineering practice.</div>
@@ -226,7 +216,7 @@ sharpen_body=f'''
 <div class="hero"><div class="wrap">
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 03 — Sharpen</span>
   <h1>Close the gaps. <span class="thin">On your schedule.</span></h1>
-  <p class="lede">Sharpen is for working data engineers who "missed things along the way." Start with the self-diagnostic against the ten recurring gaps, then take individual modules or a pre-built bundle. Every unit stands alone and links straight to its lesson — no need to have done the earlier modules.</p>
+  <p class="lede">Sharpen is for working data engineers who "missed things along the way." Start with the self-diagnostic against the ten recurring gaps, then take individual modules or a pre-built bundle. Every unit stands alone and links straight to its lesson — no need to have done the earlier modules. The weekly live review is optional: bring anything you want to pressure-test.</p>
   {welcome_html("sharpen")}
   {backlinks("sharpen")}
 </div></div>
@@ -263,21 +253,21 @@ landing_body=f'''
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineering</span>
   <h1>The Data Engineer Track. <span class="thin">Zero to hired.</span></h1>
   <p class="lede">A modular curriculum that takes you from no data experience to a job-ready data engineer — self-paced, with a weekly live review and a portfolio built on real, messy public data. Three ways in depending on where you start. The spine throughout: data engineering is not "writing pipelines," it is designing reliable <b>data products</b> you can defend in an interview.</p>
+  {welcome_html("launch")}
   <div class="backlinks">
     <a href="{L["cur"]}">Curriculum architecture</a>
     <a href="{L["build"]}">Weekly build plan</a>
   </div>
-  {welcome_html("launch")}
 </div></div>
 <section><div class="wrap">
   <div class="sec-head"><span class="eyebrow">Choose your path</span><h2>Three ways in</h2>
   <p>One shared module catalog, sequenced for where you are today.</p></div>
   <div class="paths">
     <div class="pcard launch"><span class="k">Path 01 — Launch</span><h3>Ground up</h3><div class="for">No data experience (maybe Excel)</div>
-      <p>The full ~50-week course across four phases, ending on a governed capstone. This is where all the weekly lessons live.</p>
+      <p>The full ~50-week course across four phases at 8–12 hours a week, ending on a governed capstone. This is where all the weekly lessons live.</p>
       <a class="go" href="{L["p1"]}">Start at Phase 1 →</a></div>
     <div class="pcard bridge"><span class="k">Path 02 — Bridge</span><h3>Cross over</h3><div class="for">Analysts &amp; software engineers</div>
-      <p>A 3–5 month crossover. A placement diagnostic routes you to the analyst or SWE variant; skip what you own, go deep on the rest.</p>
+      <p>About five months, less if the diagnostic lets you skip more. A placement diagnostic routes you to the analyst or SWE variant; skip what you own, go deep on the rest.</p>
       <a class="go" href="{L["bridge"]}">See the Bridge path →</a></div>
     <div class="pcard sharpen"><span class="k">Path 03 — Sharpen</span><h3>Fill the gaps</h3><div class="for">Working data engineers</div>
       <p>A self-diagnostic against the ten gaps, plus eight pre-built bundles. Every unit stands alone and links straight to its lesson.</p>

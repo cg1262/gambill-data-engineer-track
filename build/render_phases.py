@@ -79,6 +79,8 @@ def wnum(w):
 MODCODE_RE = re.compile(r"M\d{2}")
 def mod_code(s):
     m = MODCODE_RE.search(str(s or "")); return m.group(0) if m else ""
+import welcome as _welcome
+def welcome_html(key): return _welcome.welcome_html(VIDEOS, key, MODE, OUTDIR)
 def howto_html(n):
     url = (WEEKLY.get(str(n), "") or "").strip()
     if not url: return ""
@@ -289,7 +291,8 @@ def render_phase1():
     hero = f'''<div class="hero"><div class="wrap">
     <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 1 of 4</span>
     <h1>Foundations, <span class="thin">week by week.</span></h1>
-    <p class="lede">All 13 weeks of Phase 1 (Foundations · bronze depth), with deepened labs — a business framing, step-by-step instructions, linked real datasets, reference docs, and a starter scaffold where the setup earns one. Every lab runs on free, open, deliberately-messy public data; nothing is client data, and no canned tutorial sets.</p>
+    <p class="lede">All 13 weeks of Phase 1 (Foundations · bronze depth), with deepened labs — a business framing, step-by-step instructions, linked real datasets, reference docs, and a starter scaffold where the setup earns one. Plan on 8–12 hours a week, most of it in the lab. Every lab runs on free, open, deliberately-messy public data; nothing is client data, and no canned tutorial sets.</p>
+    {welcome_html("launch")}
     <div class="sources"><span class="src">NYC 311 · Socrata</span><span class="src">USGS Earthquakes</span><span class="src">World Bank + OWID</span><span class="src">Chinook · DuckDB</span><span class="src">NOAA GHCN-Daily</span><span class="src">NYC DOHMH Inspections</span></div>
   </div></div>'''
     footer = '''<footer><div class="wrap"><div class="foot-note">
