@@ -1,8 +1,8 @@
 {
   "welcome": {
-    "launch": "",
-    "bridge": "",
-    "sharpen": ""
+    "launch": "video/launch.mp4",
+    "bridge": "video/bridge.mp4",
+    "sharpen": "video/sharpen.mp4"
   },
   "weekly": {
     "1": "",

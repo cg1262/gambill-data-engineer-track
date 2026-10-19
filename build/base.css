@@ -64,7 +64,7 @@
   .lede { font-size: clamp(1rem, 2vw, 1.16rem); color: var(--ink-2); max-width: 66ch; margin-top: 18px; line-height: 1.5; }
   .sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
   .video-embed { position: relative; width: 100%; max-width: 720px; aspect-ratio: 16/9; margin-top: 22px; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-2); }
-  .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-embed iframe, .video-embed video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
   .welcome-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; font-family: var(--font-mono); font-size: 12.5px; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid transparent; border-radius: 20px; padding: 8px 16px; text-decoration: none; }
   .src { font-family: var(--font-mono); font-size: 11.5px; color: var(--blue-strong); background: var(--blue-soft); border: 1px solid var(--line); border-radius: 20px; padding: 4px 11px; }
 

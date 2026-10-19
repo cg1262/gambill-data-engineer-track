@@ -66,7 +66,7 @@
   .lede { font-size: clamp(1rem, 2vw, 1.16rem); color: var(--ink-2); max-width: 66ch; margin-top: 18px; line-height: 1.5; }
   .sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
   .video-embed { position: relative; width: 100%; max-width: 720px; aspect-ratio: 16/9; margin-top: 22px; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-2); }
-  .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-embed iframe, .video-embed video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
   .welcome-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; font-family: var(--font-mono); font-size: 12.5px; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid transparent; border-radius: 20px; padding: 8px 16px; text-decoration: none; }
   .src { font-family: var(--font-mono); font-size: 11.5px; color: var(--blue-strong); background: var(--blue-soft); border: 1px solid var(--line); border-radius: 20px; padding: 4px 11px; }
 
@@ -215,7 +215,7 @@
     <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Launch · Phase 1 of 4</span>
     <h1>Foundations, <span class="thin">week by week.</span></h1>
     <p class="lede">All 13 weeks of Phase 1 (Foundations · bronze depth), with deepened labs — a business framing, step-by-step instructions, linked real datasets, reference docs, and a starter scaffold where the setup earns one. Plan on 8–12 hours a week, most of it in the lab. Every lab runs on free, open, deliberately-messy public data; nothing is client data, and no canned tutorial sets.</p>
-    
+    <div class="video-embed"><video controls preload="metadata" playsinline poster="video/launch-poster.jpg"><source src="video/launch.mp4" type="video/mp4"><track kind="captions" src="video/launch.vtt" srclang="en" label="English" default><a href="video/launch.mp4">Download the welcome video</a></video></div>
     <div class="sources"><span class="src">NYC 311 · Socrata</span><span class="src">USGS Earthquakes</span><span class="src">World Bank + OWID</span><span class="src">Chinook · DuckDB</span><span class="src">NOAA GHCN-Daily</span><span class="src">NYC DOHMH Inspections</span></div>
   </div></div>
 <nav class="weeknav"><div class="wrap"><a class="navhome" href="index.html">← Course home</a><a href="curriculum.html">Curriculum</a><a href="phase-2.html">Phase 2 →</a><span class="navsep"></span><span class="nl">Weeks</span><a href="#w1">W1</a><a href="#w2">W2</a><a href="#w3">W3</a><a href="#w4">W4</a><a href="#w5">W5</a><a href="#w6">W6</a><a href="#w7">W7</a><a href="#w8">W8</a><a href="#w9">W9</a><a href="#w10">W10</a><a href="#w11">W11</a><a href="#w12">W12</a><a href="#w13">W13</a></div></nav>

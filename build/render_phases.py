@@ -79,17 +79,8 @@ def wnum(w):
 MODCODE_RE = re.compile(r"M\d{2}")
 def mod_code(s):
     m = MODCODE_RE.search(str(s or "")); return m.group(0) if m else ""
-YT_RE = re.compile(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|embed/))([A-Za-z0-9_-]{6,})")
-def welcome_html(key):
-    """Path welcome video (same slot the hub/Bridge/Sharpen heroes use): iframe on the site, link-out in the artifact."""
-    url = (VIDEOS.get("welcome", {}).get(key, "") or "").strip()
-    if not url: return ""
-    m = YT_RE.search(url)
-    src = f"https://www.youtube.com/embed/{m.group(1)}" if m else url
-    if MODE == "site":
-        return (f'<div class="video-embed"><iframe src="{html.escape(src)}" title="Welcome video" loading="lazy" frameborder="0" '
-                f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>')
-    return f'<a class="welcome-btn" href="{html.escape(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
+import welcome as _welcome
+def welcome_html(key): return _welcome.welcome_html(VIDEOS, key, MODE, OUTDIR)
 def howto_html(n):
     url = (WEEKLY.get(str(n), "") or "").strip()
     if not url: return ""

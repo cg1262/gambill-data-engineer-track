@@ -22,7 +22,7 @@ h1 .thin{color:var(--muted);font-weight:300}
 .backlinks a:hover{border-color:var(--accent);color:var(--accent-strong)}
 .backlinks a.home{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent;font-weight:700}
 .video-embed{position:relative;width:100%;max-width:720px;aspect-ratio:16/9;margin-top:22px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface-2)}
-.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-embed iframe,.video-embed video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 .welcome-btn{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-family:var(--font-mono);font-size:12.5px;font-weight:700;color:var(--accent-strong);background:var(--accent-soft);border:1px solid transparent;border-radius:20px;padding:8px 16px;text-decoration:none}
 .welcome-btn:hover{border-color:var(--accent);text-decoration:none}
 section{padding:52px 0;border-bottom:1px solid var(--line)}
@@ -115,7 +115,7 @@ a.mrow .mrow-wk{font-family:var(--font-mono);font-size:10px;color:var(--faint);f
   <span class="eyebrow hero-tag"><span class="dot"></span>Gambill Data Engineer Track · Path 03 — Sharpen</span>
   <h1>Close the gaps. <span class="thin">On your schedule.</span></h1>
   <p class="lede">Sharpen is for working data engineers who "missed things along the way." Start with the self-diagnostic against the ten recurring gaps, then take individual modules or a pre-built bundle. Every unit stands alone and links straight to its lesson — no need to have done the earlier modules. The weekly live review is optional: bring anything you want to pressure-test.</p>
-  
+  <div class="video-embed"><video controls preload="metadata" playsinline poster="video/sharpen-poster.jpg"><source src="video/sharpen.mp4" type="video/mp4"><track kind="captions" src="video/sharpen.vtt" srclang="en" label="English" default><a href="video/sharpen.mp4">Download the welcome video</a></video></div>
   <div class="backlinks"><a class="home" href="index.html">Course home</a><a href="curriculum.html">Curriculum overview</a><a href="phase-1.html">Phase 1</a><a href="phase-2.html">Phase 2</a><a href="phase-3.html">Phase 3</a><a href="phase-4.html">Phase 4</a></div>
 </div></div>
 <section><div class="wrap">

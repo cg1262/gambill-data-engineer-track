@@ -1,0 +1,82 @@
+WEBVTT
+
+00:00.241 --> 00:03.746
+You're already doing this job,
+shipping pipelines, on-call, the
+
+00:03.747 --> 00:08.250
+works, but a few things slip past you
+along the way, and you know exactly
+
+00:08.253 --> 00:09.602
+the feeling that I'm talking about.
+
+00:10.099 --> 00:12.899
+Sharpen is targeted, no starting over.
+
+00:13.063 --> 00:18.126
+It opens with a self-diagnostic against
+ten gaps that trip up working engineers.
+
+00:18.505 --> 00:22.140
+Rate yourself one to five on
+questions like, "Is overwrite
+
+00:22.212 --> 00:23.524
+ever your bronze strategy?
+
+00:24.031 --> 00:26.702
+Can you read a Spark UI and act on it?
+
+00:27.034 --> 00:32.311
+Do manual workspace changes survive in
+your deployment?" Then eight pre-built
+
+00:32.331 --> 00:34.855
+bundles, and every unit stands alone.
+
+00:35.258 --> 00:39.243
+Want incremental and CDC so that you
+could kill that full refresh habit?
+
+00:39.585 --> 00:40.575
+Go out and take that.
+
+00:40.899 --> 00:43.674
+Want data quality testing
+and observability with
+
+00:43.712 --> 00:45.643
+quarantine and reconciliation?
+
+00:46.072 --> 00:46.895
+Go take that.
+
+00:47.222 --> 00:51.152
+Want modeling depth with
+MDM and entity resolution?
+
+00:51.503 --> 00:52.361
+Then go take that.
+
+00:52.713 --> 00:54.076
+Nothing that you don't need.
+
+00:54.447 --> 00:58.587
+The weekly live review is there if
+you want to pressure test anything
+
+00:58.812 --> 01:03.740
+because saying a decision out loud is
+how you find out whether you actually
+
+01:03.741 --> 01:05.310
+are understanding what's going on.
+
+01:05.854 --> 01:10.453
+You get to come out sharper where it
+counts with work that you could point to.
+
+01:11.142 --> 01:14.636
+Go run the diagnostic, see
+what's missing, and let's fix it.

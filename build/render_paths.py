@@ -90,20 +90,9 @@ CSS=open(os.path.join(HERE,"paths.css")).read() + STAGE_EXP_CSS
 
 def page(title, body): return f'<title>{title}</title>\n<style>{CSS}</style>\n{body}'
 
-# ---- welcome video (site: responsive iframe; artifact: link-out button) ------
-YT_RE = re.compile(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|embed/))([A-Za-z0-9_-]{6,})")
-def yt_embed(url):
-    m = YT_RE.search((url or "").strip())
-    return f"https://www.youtube.com/embed/{m.group(1)}" if m else (url or "").strip()
-def welcome_html(key):
-    url = (VIDEOS.get("welcome", {}).get(key, "") or "").strip()
-    if not url: return ""
-    if MODE == "site":
-        return (f'<div class="video-embed"><iframe src="{e(yt_embed(url))}" title="Welcome video" '
-                f'loading="lazy" frameborder="0" '
-                f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
-                f'allowfullscreen></iframe></div>')
-    return f'<a class="welcome-btn" href="{e(url)}" target="_blank" rel="noopener">&#9654; Watch welcome</a>'
+# ---- welcome video: shared helper (local MP4 or YouTube; see welcome.py) ----
+import welcome as _welcome
+def welcome_html(key): return _welcome.welcome_html(VIDEOS, key, MODE, OUTDIR)
 
 # ---------- placement-diagnostic datasets + git-training links ----------
 DIAG_BASE = "https://cg1262.github.io/gambill-data-engineer-track/site/diagnostic"
