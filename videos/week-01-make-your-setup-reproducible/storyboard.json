@@ -1,0 +1,558 @@
+{
+  "source_script": "scripts/lessons/phase-1/week-01-environment-and-git.md",
+  "voice": "generic en_US-ljspeech-medium; no voice cloning",
+  "speech_engine": "1.12.40",
+  "sample_rate": 22050,
+  "duration_seconds": 161.33655328798187,
+  "sections": [
+    "THE PROBLEM",
+    "LOCATION",
+    "ENVIRONMENT",
+    "IGNORE RULES",
+    "GIT STATES",
+    "REVIEW",
+    "FRESH CLONE",
+    "YOUR EVIDENCE"
+  ],
+  "segments": [
+    {
+      "scene": 0,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-00-00.png",
+      "start": 0.0,
+      "speech_start": 0.65,
+      "end": 2.0083673469387757,
+      "duration": 2.0083673469387757,
+      "caption": "Your script works.",
+      "spoken": "Your script works."
+    },
+    {
+      "scene": 0,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-00-01.png",
+      "start": 2.0083673469387757,
+      "speech_start": 2.1383673469387756,
+      "end": 6.084444444444445,
+      "duration": 4.076077097505669,
+      "caption": "Then somebody clones the repository and gets an import error.",
+      "spoken": "Then somebody clones the repository and gets an import error."
+    },
+    {
+      "scene": 0,
+      "sentence": 2,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-00-02.png",
+      "start": 6.084444444444445,
+      "speech_start": 6.214444444444445,
+      "end": 9.20981859410431,
+      "duration": 3.125374149659864,
+      "caption": "You send them three extra commands in a message.",
+      "spoken": "You send them three extra commands in a message."
+    },
+    {
+      "scene": 0,
+      "sentence": 3,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-00-03.png",
+      "start": 9.20981859410431,
+      "speech_start": 9.33981859410431,
+      "end": 13.240181405895694,
+      "duration": 4.030362811791385,
+      "caption": "A week later, somebody else needs the same three commands.",
+      "spoken": "A week later, somebody else needs the same three commands."
+    },
+    {
+      "scene": 0,
+      "sentence": 4,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-00-04.png",
+      "start": 13.240181405895694,
+      "speech_start": 13.370181405895694,
+      "end": 18.477845804988664,
+      "duration": 5.237664399092971,
+      "caption": "That is a setup problem you can fix before the project gets complicated.",
+      "spoken": "That is a setup problem you can fix before the project gets complicated."
+    },
+    {
+      "scene": 1,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-01-00.png",
+      "start": 18.477845804988664,
+      "speech_start": 19.127845804988663,
+      "end": 21.728480725623584,
+      "duration": 3.250634920634919,
+      "caption": "Start with a terminal inside your project.",
+      "spoken": "Start with a terminal inside your project."
+    },
+    {
+      "scene": 1,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-01-01.png",
+      "start": 21.728480725623584,
+      "speech_start": 21.858480725623583,
+      "end": 28.071451247165534,
+      "duration": 6.34297052154195,
+      "caption": "Run pwd to check where you are, then git status to see what Git knows about this directory.",
+      "spoken": "Run P W D to check where you are, then git status to see what Git knows about this directory."
+    },
+    {
+      "scene": 1,
+      "sentence": 2,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-01-02.png",
+      "start": 28.071451247165534,
+      "speech_start": 28.201451247165533,
+      "end": 31.045895691609978,
+      "duration": 2.974444444444444,
+      "caption": "Relative paths start from your current directory.",
+      "spoken": "Relative paths start from your current directory."
+    },
+    {
+      "scene": 1,
+      "sentence": 3,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-01-03.png",
+      "start": 31.045895691609978,
+      "speech_start": 31.175895691609977,
+      "end": 35.99417233560091,
+      "duration": 4.94827664399093,
+      "caption": "If a command cannot find a file, check that location before changing the code.",
+      "spoken": "If a command cannot find a file, check that location before changing the code."
+    },
+    {
+      "scene": 2,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-02-00.png",
+      "start": 35.99417233560091,
+      "speech_start": 36.644172335600906,
+      "end": 43.44471655328798,
+      "duration": 7.450544217687074,
+      "caption": "Create a virtual environment with python -m venv .venv.",
+      "spoken": "Create a virtual environment with python, dash m, v e n v, dot v e n v."
+    },
+    {
+      "scene": 2,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-02-01.png",
+      "start": 43.44471655328798,
+      "speech_start": 43.574716553287985,
+      "end": 50.607233560090705,
+      "duration": 7.162517006802723,
+      "caption": "On macOS or Linux, activate it with source .venv/bin/activate.",
+      "spoken": "On macOS or Linux, activate it with source, dot v e n v, slash bin slash activate."
+    },
+    {
+      "scene": 2,
+      "sentence": 2,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-02-02.png",
+      "start": 50.607233560090705,
+      "speech_start": 50.73723356009071,
+      "end": 57.14104308390023,
+      "duration": 6.5338095238095235,
+      "caption": "On Windows PowerShell, use the activation script under .venv/Scripts.",
+      "spoken": "On Windows PowerShell, use the activation script under dot v e n v, slash scripts."
+    },
+    {
+      "scene": 2,
+      "sentence": 3,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-02-03.png",
+      "start": 57.14104308390023,
+      "speech_start": 57.27104308390023,
+      "end": 61.48546485260771,
+      "duration": 4.344421768707484,
+      "caption": "Now python -m pip points at the installer for that interpreter.",
+      "spoken": "Now python dash m pip points at the installer for that interpreter."
+    },
+    {
+      "scene": 2,
+      "sentence": 4,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-02-04.png",
+      "start": 61.48546485260771,
+      "speech_start": 61.615464852607715,
+      "end": 67.07183673469389,
+      "duration": 5.586371882086176,
+      "caption": "Install your one dependency, then capture the versions in requirements.txt.",
+      "spoken": "Install your one dependency, then capture the versions in requirements dot t x t."
+    },
+    {
+      "scene": 2,
+      "sentence": 5,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-02-05.png",
+      "start": 67.07183673469389,
+      "speech_start": 67.20183673469388,
+      "end": 70.8125396825397,
+      "duration": 3.7407029478458043,
+      "caption": "This gives the next person something specific to install.",
+      "spoken": "This gives the next person something specific to install."
+    },
+    {
+      "scene": 3,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-03-00.png",
+      "start": 70.8125396825397,
+      "speech_start": 71.4625396825397,
+      "end": 78.44975056689344,
+      "duration": 7.637210884353749,
+      "caption": "Before staging anything, add the environment directory, local secrets, and raw data to .gitignore.",
+      "spoken": "Before staging anything, add the environment directory, local secrets, and raw data to dot git ignore."
+    },
+    {
+      "scene": 3,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-03-01.png",
+      "start": 78.44975056689344,
+      "speech_start": 78.57975056689344,
+      "end": 82.44587301587303,
+      "duration": 3.996122448979591,
+      "caption": "An ignore rule keeps an untracked file out of future staging.",
+      "spoken": "An ignore rule keeps an untracked file out of future staging."
+    },
+    {
+      "scene": 3,
+      "sentence": 2,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-03-02.png",
+      "start": 82.44587301587303,
+      "speech_start": 82.57587301587303,
+      "end": 85.28099773242631,
+      "duration": 2.835124716553281,
+      "caption": "It does not remove something you already committed.",
+      "spoken": "It does not remove something you already committed."
+    },
+    {
+      "scene": 3,
+      "sentence": 3,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-03-03.png",
+      "start": 85.28099773242631,
+      "speech_start": 85.41099773242631,
+      "end": 90.23566893424037,
+      "duration": 4.954671201814051,
+      "caption": "Think of it as the guest list at the door; it cannot erase yesterday's attendance record.",
+      "spoken": "Think of it as the guest list at the door; it cannot erase yesterday's attendance record."
+    },
+    {
+      "scene": 4,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-04-00.png",
+      "start": 90.23566893424037,
+      "speech_start": 90.88566893424037,
+      "end": 92.98707482993198,
+      "duration": 2.7514058956916188,
+      "caption": "Now watch the three Git states.",
+      "spoken": "Now watch the three Git states."
+    },
+    {
+      "scene": 4,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-04-01.png",
+      "start": 92.98707482993198,
+      "speech_start": 93.11707482993198,
+      "end": 95.75598639455782,
+      "duration": 2.7689115646258387,
+      "caption": "Edit a file: that changes your working tree.",
+      "spoken": "Edit a file: that changes your working tree."
+    },
+    {
+      "scene": 4,
+      "sentence": 2,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-04-02.png",
+      "start": 95.75598639455782,
+      "speech_start": 95.88598639455782,
+      "end": 99.77197278911564,
+      "duration": 4.015986394557814,
+      "caption": "Run git add: that selects its current contents for your next commit.",
+      "spoken": "Run git add: that selects its current contents for your next commit."
+    },
+    {
+      "scene": 4,
+      "sentence": 3,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-04-03.png",
+      "start": 99.77197278911564,
+      "speech_start": 99.90197278911563,
+      "end": 103.55349206349204,
+      "duration": 3.7815192743764072,
+      "caption": "Run git commit: that records the staged snapshot locally.",
+      "spoken": "Run git commit: that records the staged snapshot locally."
+    },
+    {
+      "scene": 4,
+      "sentence": 4,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-04-04.png",
+      "start": 103.55349206349204,
+      "speech_start": 103.68349206349204,
+      "end": 106.04031746031744,
+      "duration": 2.4868253968253953,
+      "caption": "A push transfers commits to a remote.",
+      "spoken": "A push transfers commits to a remote."
+    },
+    {
+      "scene": 4,
+      "sentence": 5,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-04-05.png",
+      "start": 106.04031746031744,
+      "speech_start": 106.17031746031743,
+      "end": 111.95566893424034,
+      "duration": 5.915351473922897,
+      "caption": "Check git diff and git diff --staged so you know exactly which snapshot you are recording.",
+      "spoken": "Check git diff and git diff, dash dash staged so you know exactly which snapshot you are recording."
+    },
+    {
+      "scene": 5,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-05-00.png",
+      "start": 111.95566893424034,
+      "speech_start": 112.60566893424034,
+      "end": 115.09038548752832,
+      "duration": 3.134716553287987,
+      "caption": "For the lab, keep your baseline small.",
+      "spoken": "For the lab, keep your baseline small."
+    },
+    {
+      "scene": 5,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-05-01.png",
+      "start": 115.09038548752832,
+      "speech_start": 115.22038548752832,
+      "end": 124.15648526077095,
+      "duration": 9.066099773242627,
+      "caption": "Make a feature branch, add the environment check, README, and decision note in separate meaningful commits, and review the pull request before merging.",
+      "spoken": "Make a feature branch, add the environment check, read me, and decision note in separate meaningful commits, and review the pull request before merging."
+    },
+    {
+      "scene": 5,
+      "sentence": 2,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-05-02.png",
+      "start": 124.15648526077095,
+      "speech_start": 124.28648526077095,
+      "end": 129.75219954648523,
+      "duration": 5.59571428571428,
+      "caption": "Follow the course's three-commit exercise without stretching one change into artificial commits.",
+      "spoken": "Follow the course's three-commit exercise without stretching one change into artificial commits."
+    },
+    {
+      "scene": 6,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-06-00.png",
+      "start": 129.75219954648523,
+      "speech_start": 130.40219954648524,
+      "end": 140.64464852607708,
+      "duration": 10.892448979591848,
+      "caption": "Then do the part that proves the README works: use a fresh clone, create and activate a new environment, install from the requirements file, and run the check.",
+      "spoken": "Then do the part that proves the read me works: use a fresh clone, create and activate a new environment, install from the requirements file, and run the check."
+    },
+    {
+      "scene": 6,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-06-01.png",
+      "start": 140.64464852607708,
+      "speech_start": 140.77464852607707,
+      "end": 144.72185941043082,
+      "duration": 4.077210884353747,
+      "caption": "Do not rely on the environment you already repaired by hand.",
+      "spoken": "Do not rely on the environment you already repaired by hand."
+    },
+    {
+      "scene": 7,
+      "sentence": 0,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-07-00.png",
+      "start": 144.72185941043082,
+      "speech_start": 145.37185941043083,
+      "end": 149.55145124716552,
+      "duration": 4.829591836734693,
+      "caption": "Your evidence is a successful clean setup and a reviewable history.",
+      "spoken": "Your evidence is a successful clean setup and a reviewable history."
+    },
+    {
+      "scene": 7,
+      "sentence": 1,
+      "frame": "/tmp/gambill-week01-production/render/frames/scene-07-01.png",
+      "start": 149.55145124716552,
+      "speech_start": 149.6814512471655,
+      "end": 161.3372789115646,
+      "duration": 11.78582766439909,
+      "caption": "Before you move on, explain which files belong in Git, which stay local, and where somebody would find the exact commands to reproduce your result.",
+      "spoken": "Before you move on, explain which files belong in Git, which stay local, and where somebody would find the exact commands to reproduce your result."
+    }
+  ],
+  "captions": [
+    {
+      "start": 0.65,
+      "end": 2.0083673469387757,
+      "text": "Your script works."
+    },
+    {
+      "start": 2.1383673469387756,
+      "end": 6.084444444444445,
+      "text": "Then somebody clones the repository and gets an import error."
+    },
+    {
+      "start": 6.214444444444445,
+      "end": 9.20981859410431,
+      "text": "You send them three extra commands in a message."
+    },
+    {
+      "start": 9.33981859410431,
+      "end": 13.240181405895694,
+      "text": "A week later, somebody else needs the same three commands."
+    },
+    {
+      "start": 13.370181405895694,
+      "end": 18.477845804988664,
+      "text": "That is a setup problem you can fix before the project gets complicated."
+    },
+    {
+      "start": 19.127845804988663,
+      "end": 21.728480725623584,
+      "text": "Start with a terminal inside your project."
+    },
+    {
+      "start": 21.858480725623583,
+      "end": 28.071451247165534,
+      "text": "Run pwd to check where you are, then git status to see what Git knows about this directory."
+    },
+    {
+      "start": 28.201451247165533,
+      "end": 31.045895691609978,
+      "text": "Relative paths start from your current directory."
+    },
+    {
+      "start": 31.175895691609977,
+      "end": 35.99417233560091,
+      "text": "If a command cannot find a file, check that location before changing the code."
+    },
+    {
+      "start": 36.644172335600906,
+      "end": 43.44471655328798,
+      "text": "Create a virtual environment with python -m venv .venv."
+    },
+    {
+      "start": 43.574716553287985,
+      "end": 50.607233560090705,
+      "text": "On macOS or Linux, activate it with source .venv/bin/activate."
+    },
+    {
+      "start": 50.73723356009071,
+      "end": 57.14104308390023,
+      "text": "On Windows PowerShell, use the activation script under .venv/Scripts."
+    },
+    {
+      "start": 57.27104308390023,
+      "end": 61.48546485260771,
+      "text": "Now python -m pip points at the installer for that interpreter."
+    },
+    {
+      "start": 61.615464852607715,
+      "end": 67.07183673469389,
+      "text": "Install your one dependency, then capture the versions in requirements.txt."
+    },
+    {
+      "start": 67.20183673469388,
+      "end": 70.8125396825397,
+      "text": "This gives the next person something specific to install."
+    },
+    {
+      "start": 71.4625396825397,
+      "end": 77.65738644598734,
+      "text": "Before staging anything, add the environment directory, local secrets, and raw data to"
+    },
+    {
+      "start": 77.65738644598734,
+      "end": 78.44975056689344,
+      "text": ".gitignore."
+    },
+    {
+      "start": 78.57975056689344,
+      "end": 82.44587301587303,
+      "text": "An ignore rule keeps an untracked file out of future staging."
+    },
+    {
+      "start": 82.57587301587303,
+      "end": 85.28099773242631,
+      "text": "It does not remove something you already committed."
+    },
+    {
+      "start": 85.41099773242631,
+      "end": 90.23566893424037,
+      "text": "Think of it as the guest list at the door; it cannot erase yesterday's attendance record."
+    },
+    {
+      "start": 90.88566893424037,
+      "end": 92.98707482993198,
+      "text": "Now watch the three Git states."
+    },
+    {
+      "start": 93.11707482993198,
+      "end": 95.75598639455782,
+      "text": "Edit a file: that changes your working tree."
+    },
+    {
+      "start": 95.88598639455782,
+      "end": 99.77197278911564,
+      "text": "Run git add: that selects its current contents for your next commit."
+    },
+    {
+      "start": 99.90197278911563,
+      "end": 103.55349206349204,
+      "text": "Run git commit: that records the staged snapshot locally."
+    },
+    {
+      "start": 103.68349206349204,
+      "end": 106.04031746031744,
+      "text": "A push transfers commits to a remote."
+    },
+    {
+      "start": 106.17031746031743,
+      "end": 111.95566893424034,
+      "text": "Check git diff and git diff --staged so you know exactly which snapshot you are recording."
+    },
+    {
+      "start": 112.60566893424034,
+      "end": 115.09038548752832,
+      "text": "For the lab, keep your baseline small."
+    },
+    {
+      "start": 115.22038548752832,
+      "end": 120.40332335600904,
+      "text": "Make a feature branch, add the environment check, README, and decision note in separate"
+    },
+    {
+      "start": 120.40332335600904,
+      "end": 124.15648526077095,
+      "text": "meaningful commits, and review the pull request before merging."
+    },
+    {
+      "start": 124.28648526077095,
+      "end": 129.2919288697935,
+      "text": "Follow the course's three-commit exercise without stretching one change into artificial"
+    },
+    {
+      "start": 129.2919288697935,
+      "end": 129.75219954648523,
+      "text": "commits."
+    },
+    {
+      "start": 130.40219954648524,
+      "end": 136.3013315537185,
+      "text": "Then do the part that proves the README works: use a fresh clone, create and activate a new"
+    },
+    {
+      "start": 136.3013315537185,
+      "end": 140.64464852607708,
+      "text": "environment, install from the requirements file, and run the check."
+    },
+    {
+      "start": 140.77464852607707,
+      "end": 144.72185941043082,
+      "text": "Do not rely on the environment you already repaired by hand."
+    },
+    {
+      "start": 145.37185941043083,
+      "end": 149.55145124716552,
+      "text": "Your evidence is a successful clean setup and a reviewable history."
+    },
+    {
+      "start": 149.6814512471655,
+      "end": 154.95186438045536,
+      "text": "Before you move on, explain which files belong in Git, which stay local, and where somebody"
+    },
+    {
+      "start": 154.95186438045536,
+      "end": 158.1372789115646,
+      "text": "would find the exact commands to reproduce your result."
+    }
+  ]
+}

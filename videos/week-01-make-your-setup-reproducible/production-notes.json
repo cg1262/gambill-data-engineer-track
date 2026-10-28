@@ -1,0 +1,29 @@
+{
+  "source_script": "scripts/lessons/phase-1/week-01-environment-and-git.md",
+  "source_script_sha256": "8faf93020f9bc445f295b62158060bfd3a352c8bcd96577d06f84361d881f679",
+  "narration": "Generic synthetic US English voice; no Chris Gambill voice or likeness cloning",
+  "voice_model": "vits-piper-en_US-ljspeech-medium",
+  "voice_model_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-en_US-ljspeech-medium.tar.bz2",
+  "voice_model_sha256": "8ceba58a4b540d4e7e7e24ad079cf0d92762a4fd334e059f12940787c6c37b3d",
+  "dataset": "LJ Speech, public domain, https://keithito.com/LJ-Speech-Dataset/",
+  "engine": "sherpa-onnx==1.12.40",
+  "video": "1920x1080, 24 fps, H.264, AAC stereo, burned-in English captions",
+  "duration_seconds": 161.33655328798187,
+  "demo_validation": {
+    "fresh_clone": "local isolated demonstration repository",
+    "python": "3.12.14",
+    "requests": "2.32.5",
+    "result": "environment OK",
+    "venv_ignored": true
+  },
+  "illustrations": "Directory paths and clone URL are illustrative. The displayed environment check output was verified in a local fresh clone. PR review is a diagram; no GitHub PR is claimed.",
+  "output_sha256": "24e318064e7536c716fb438c9cecc410d0bc916fcaa7749e12406118fc388c1a",
+  "checks": {
+    "full_decode": "passed",
+    "video": "H.264 1920x1080 at 24 fps",
+    "audio": "AAC stereo 48 kHz; narration present without clipping",
+    "caption_text": "matches full spoken script",
+    "caption_sequence": "ordered, nonoverlapping, within duration",
+    "frame_review": "rendered frame and all eight storyboard sections inspected"
+  }
+}
